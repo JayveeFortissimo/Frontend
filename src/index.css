@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: "Roboto", system-ui;
+    font-weight: 500;
+    font-style: normal;
+}
+.c1,.c2{
+    display: none;
+}
+
+.P1:hover .c1{
+    display: block;
+}
+.P2:hover .c2{
+    display: block;
+}
+
+/*/Homepage typewriter*/
+.bg{
+    background-color: rgb(44, 43, 43);
+}
+
+
+.reserved {
+    background-color: red;
+    color: white;
+  }
+  
+
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .animate-slideIn {
+    animation: slideIn 0.3s ease-out;
+  }
+
+
+
+  .main-image {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px;
+    height: 40rem;
+  }
+  
+  .large-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    transform-origin: center; /* Center the zoom */
+  }
+  
+  .main-image:hover .large-image {
+    transform: scale(1.2); /* Zoom the image to 120% */
+  }
+  
+  .main-image {
+    cursor: zoom-in;
+  }
+  
+
+  
+  .gallery {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:5rem
+  }
+  
+  .main-image {
+    margin-bottom: 10px; /* Space between the main image and thumbnails */
+  }
+  
+  .large-image {
+    width: 100%; /* Ensure the main image takes up the available width */
+    max-width: 600px; /* Limit the max width for the main image */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Space between thumbnails */
+  }
+  
+  .thumbnail img {
+    width: 100px; /* Set fixed width for thumbnails */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  
+  .thumbnail.active img {
+    border: 2px solid blue; /* Highlight active thumbnail */
+  }
+  
+  .thumbnail img:hover {
+    transform: scale(1.1); /* Slightly enlarge thumbnail on hover */
+  }
+  
+
+  @media (max-width: 768px) { /* Mobile view */
+
+   
+    .gallery {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .thumbnails {
+      display: none; /* Hide thumbnails in mobile */
+    }
+  
+    .main-image {
+      width: 100%;
+      max-width: 100%; /* Full width for mobile */
+      display: none;
+    }
+  
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 10px;
+      margin-top: 10px;
+    }
+  
+    .carousel img {
+      width: 100%;
+      max-width: 100%; /* Adjust image width in carousel */
+      scroll-snap-align: start;
+    }
+  }
+
+
+
+  .carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .carousel img {
+    width: 100%;
+    max-width: 100%;
+    scroll-snap-align: center;
+  }
+  
+  .carousel-buttons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  .carousel-buttons button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+  
+  .carousel-buttons button:hover {
+    opacity: 1;
+  }
+  
