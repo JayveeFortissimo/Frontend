@@ -1,6 +1,5 @@
   import { useState, useEffect } from "react";
 
-
   const MostPicked = () =>{
 
     const [mostPicked, setMostPicked] = useState([]);

@@ -144,7 +144,7 @@ const BackgroundPattern = () => (
 const HomePage = () => {
 
     const navigate = useNavigate();
-    const {mostPicked} = MostPicked();
+    const { mostPicked } = MostPicked();
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
