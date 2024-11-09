@@ -189,7 +189,7 @@ const HomePage = () => {
             }}
             className="mb-8"
           >
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-800">
+            <h2 className="text-3xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-800">
               Cristobal Collections
             </h2>
             <p className="text-2xl md:text-3xl mb-8 text-gray-800">
