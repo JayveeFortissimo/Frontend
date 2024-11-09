@@ -6,7 +6,7 @@ const MostPicked = () => {
   useEffect(() => {
     async function fetchMostPicked() {
       try {
-        const response = await fetch('https://backend-production-024f.up.railway.app/MostPicked', {
+        const response = await fetch('https://frontend-3g30f0t4c-jayveefortissimos-projects.vercel.app/MostPicked', {
           method: "GET",
           headers: {
             'Content-Type': 'application/json'
