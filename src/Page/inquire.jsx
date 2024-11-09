@@ -160,7 +160,7 @@ export const sendEmail = async ({ request }) => {
   };
 
   try {
-    const response = await fetch(`http://localhost:8000/email`, {
+    const response = await fetch(`https://backend-production-024f.up.railway.app/email`, {
       method: "POST",
       body: JSON.stringify(send),
       headers: {

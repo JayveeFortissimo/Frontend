@@ -51,7 +51,7 @@ const toCart = () =>{
   
           try{
         
-            const response = await fetch(`http://localhost:8000/toCart`,{
+            const response = await fetch(`https://backend-production-024f.up.railway.app/toCart`,{
               method:"POST",
               body:JSON.stringify(allDatas),
               headers:{
@@ -82,7 +82,7 @@ useEffect(()=>{
   const cartsRetrived = async() =>{
     try{
 
-      const response = await fetch(`http://localhost:8000/getCartUser/${user_ID.id}`,{
+      const response = await fetch(`https://backend-production-024f.up.railway.app/getCartUser/${user_ID.id}`,{
         method:'GET',
         headers:{
           'Content-Type':'application/json'
@@ -107,7 +107,7 @@ async function quantityChange(id,newQuantity,Subtotal) {
 
   try{
 
-    const response = await fetch(`http://localhost:8000/change_Quantity/${id}`,{
+    const response = await fetch(`https://backend-production-024f.up.railway.app/change_Quantity/${id}`,{
       method:"POST",
       body:JSON.stringify({
       quantity:newQuantity,
@@ -190,7 +190,7 @@ const removeItems = async(id) =>{
 
 
   try{
-    const response = await fetch(`http://localhost:8000/removeItems/${id}`,{
+    const response = await fetch(`https://backend-production-024f.up.railway.app/removeItems/${id}`,{
       method:"DELETE",
       headers:{
         'Content-Type':'application/json'
@@ -215,7 +215,7 @@ const removeItems = async(id) =>{
         console.log("LOGIN FIRSTTT")
       }else{
         try{
-          const response = await fetch(`http://localhost:8000/Total/${user_ID.id}`,{
+          const response = await fetch(`https://backend-production-024f.up.railway.app/Total/${user_ID.id}`,{
             method:"GET",
             headers:{
               'Content-Type':'application/json'

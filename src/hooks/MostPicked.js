@@ -10,7 +10,7 @@
       async function Mostpicked(){
 
         try{
-           const response = await fetch(`http://localhost:8000/MostPicked`,{
+           const response = await fetch(`https://backend-production-024f.up.railway.app/MostPicked`,{
             method:"GET",
             headers:{
               'Content-Type':'application/json'

@@ -15,7 +15,7 @@ const Material = () => {
     
       e.preventDefault();
       try{
-        const response = await fetch(`http://localhost:8000/MaterialEdit/${id}`,{
+        const response = await fetch(`https://backend-production-024f.up.railway.app/MaterialEdit/${id}`,{
           method:"put",
           headers:{
               'Content-Type':'application/json'
@@ -39,7 +39,7 @@ const Material = () => {
         e.preventDefault();
 
         try{
-        const response = await fetch(`http://localhost:8000/MaterialDelete/${id}`,{
+        const response = await fetch(`https://backend-production-024f.up.railway.app/MaterialDelete/${id}`,{
           method:"delete",
           headers:{
               'Content-Type':'application/json'

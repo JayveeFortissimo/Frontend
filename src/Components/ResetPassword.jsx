@@ -36,7 +36,7 @@ const ResetPassword = ({   setResetpass }) => {
     }
 
     try{
-   const resposnse = await fetch(`http://localhost:8000/resetPassword`,{
+   const resposnse = await fetch(`https://backend-production-024f.up.railway.app/resetPassword`,{
     method:"put",
     headers:{
         'Content-Type':'application/json'

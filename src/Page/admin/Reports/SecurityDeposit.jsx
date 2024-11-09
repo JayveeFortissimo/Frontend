@@ -13,7 +13,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
  const code = useRef("");
 console.log(DashInfo)
  useEffect(() => {
-      const socket = io('http://localhost:8000');
+      const socket = io('https://backend-production-024f.up.railway.app');
 
         setAlldatas(DashInfo);
 
@@ -60,7 +60,7 @@ console.log(DashInfo)
 
     if(condition === "perfect"){
       try{
-        const response = await fetch(`http://localhost:8000/processSecurity`,{
+        const response = await fetch(`https://backend-production-024f.up.railway.app/processSecurity`,{
           method:"PUT",
           headers:{
             'Content-Type':'application/json'

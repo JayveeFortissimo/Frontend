@@ -19,7 +19,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
 
   const sendSMSNotification = async (to, message) => {
     try {
-      const response = await fetch('http://localhost:8000/send-sms', {
+      const response = await fetch('https://backend-production-024f.up.railway.app/send-sms', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
 
 
       try {
-        const response = await fetch(`http://localhost:8000/itemPickuped/${productINFO.approvedID}`, {
+        const response = await fetch(`https://backend-production-024f.up.railway.app/itemPickuped/${productINFO.approvedID}`, {
           method: "PUT",
           body: JSON.stringify({
             Pickuped: pickuped,

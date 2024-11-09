@@ -25,7 +25,7 @@ const AdminProfile = () =>{
 
             async function YourProfile() {
                   try{
-                      const response = await fetch(`http://localhost:8000/AdminProfile/${ADID.id}`,{
+                      const response = await fetch(`https://backend-production-024f.up.railway.app/AdminProfile/${ADID.id}`,{
                         method:"GET",
                         headers:{
                             authorization: "Bearer" + ADID.token
@@ -51,7 +51,7 @@ const AdminProfile = () =>{
           if (!ADID || !ADID.id) return toast.error("User ID is not available");
   
           try {
-              const response = await fetch(`http://localhost:8000/user_can_Edit/${ADID.id}`, {
+              const response = await fetch(`https://backend-production-024f.up.railway.app/user_can_Edit/${ADID.id}`, {
                   method: "PUT",
                   body: JSON.stringify(userPro),
                   headers: {

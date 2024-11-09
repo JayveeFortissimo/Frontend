@@ -42,7 +42,7 @@ const SearchBar = () => {
     <div className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
       <div className="relative overflow-hidden">
         <img
-          src={`http://localhost:8000/uploads/${product.image}`}
+          src={`https://backend-production-024f.up.railway.app/uploads/${product.image}`}
           alt={product.product_Name}
           className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-300"
         />
@@ -137,7 +137,7 @@ export default SearchBar;
 // API function with error handling
 export const itemSearch = async () => {
   try {
-    const response = await fetch("http://localhost:8000/Items", {
+    const response = await fetch("https://backend-production-024f.up.railway.app/Items", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

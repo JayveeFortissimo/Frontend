@@ -149,7 +149,7 @@ const Dashboard = () => {
   const [notifications, setNotifications] = useState(false);
 
   useEffect(() =>{
-    const socket = io('http://localhost:8000');
+    const socket = io('https://backend-production-024f.up.railway.app');
 
     socket.on('connect', () => {
       console.log('Connected to Socket.IO server');
@@ -312,7 +312,7 @@ export const Dash = async() => {
 
     const responses = await Promise.all(
       endpoints.map(endpoint => 
-        fetch(`http://localhost:8000/${endpoint}`, {
+        fetch(`https://backend-production-024f.up.railway.app/${endpoint}`, {
           method: 'get',
           headers: {
             'Content-Type': 'application/json'

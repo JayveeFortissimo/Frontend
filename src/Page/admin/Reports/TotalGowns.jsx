@@ -202,7 +202,7 @@ const TotalGowns = ({ setTotalReserve, DashInfo }) => {
                   {/* Image Section */}
                   <div className="aspect-square w-full overflow-hidden relative">
                     <img
-                      src={`http://localhost:8000/uploads/${item.image}`}
+                      src={`https://backend-production-024f.up.railway.app/uploads/${item.image}`}
                       alt={item.product_Name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />

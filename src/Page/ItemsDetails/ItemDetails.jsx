@@ -108,7 +108,7 @@ console.log(itemsDetails)
   };
 
 
-  const fullImages = itemsDetails[0].images.map(img => `${'http://localhost:8000/uploads/'}${img}`);
+  const fullImages = itemsDetails[0].images.map(img => `${'https://backend-production-024f.up.railway.app/uploads/'}${img}`);
 console.log(fullImages)
   const [selectedImage, setSelectedImage] = useState(fullImages[0]);
 
@@ -406,7 +406,7 @@ export default ItemDetails;
 export const itemsInfos = async ({ params }) => {
   const id = params.Items_ID;
   try {
-    const response = await fetch(`http://localhost:8000/weddingItems/${id}`);
+    const response = await fetch(`https://backend-production-024f.up.railway.app/weddingItems/${id}`);
     if (!response.ok) {
       throw new Error('Failed to fetch item details');
     }

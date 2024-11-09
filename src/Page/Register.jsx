@@ -30,7 +30,7 @@ export const regista = async({request, params}) =>{
   }else{
     try{
 
-      const response = await fetch(`http://localhost:8000/register`,{
+      const response = await fetch(`https://backend-production-024f.up.railway.app/register`,{
         method:"POST",
         body:JSON.stringify(Alldatas),
         headers:{

@@ -68,7 +68,7 @@ const Fitting = ({ setOpenFitting }) => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/Appointment`, {
+      const response = await fetch(`https://backend-production-024f.up.railway.app/Appointment`, {
         method: 'POST',
         body: JSON.stringify({
           date: new Date(Date.UTC(new Date(startDate).getFullYear(), new Date(startDate).getMonth(), new Date(startDate).getDate())).toISOString().split('T')[0],

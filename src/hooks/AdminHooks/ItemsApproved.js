@@ -6,7 +6,7 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
 
 
      useEffect(() => {
-        const socket = io('http://localhost:8000'); 
+        const socket = io('https://backend-production-024f.up.railway.app'); 
         socket.on('deleteItem', (data) => {
             const filtered = alldatas.filter(pros => pros.id !== data.id);
             setAlldata(filtered);
@@ -22,7 +22,7 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
 //! FOR SMS Message
   const sendSMSNotification = async (to, message) => {
     try {
-        const response = await fetch('http://localhost:8000/send-sms', {
+        const response = await fetch('https://backend-production-024f.up.railway.app/send-sms', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
   
       try{
 
-          const response = await fetch(`http://localhost:8000/removeIncheck/${pro.id}`,{
+          const response = await fetch(`https://backend-production-024f.up.railway.app/removeIncheck/${pro.id}`,{
                method:"delete",
                headers:{
                   'Content-Type':'application/json'
@@ -73,7 +73,7 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
       //sendSMSNotification(`+639604099126`, 'Your gown reservation has been confirmed!');
       try{
 
-          const response = await fetch(`http://localhost:8000/ItemsApproved`,{
+          const response = await fetch(`https://backend-production-024f.up.railway.app/ItemsApproved`,{
                method:"POST",
 
                body:JSON.stringify({
@@ -115,7 +115,7 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
     DELETE(e,pro)
     try{
 
-        const response = await fetch(`http://localhost:8000/cancelled`,{
+        const response = await fetch(`https://backend-production-024f.up.railway.app/cancelled`,{
            method:"POST",
            body:JSON.stringify({
                picture:pro.picture,

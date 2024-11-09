@@ -81,7 +81,7 @@ const referralLink = userProfile.length > 0
   
 
   useEffect(() => {
-    const socket = io('http://localhost:8000');
+    const socket = io('https://backend-production-024f.up.railway.app');
     socket.on('notification', (data) => {
       setHaveNotif(true);
       if (data.user_ID === ID.id) {
@@ -331,7 +331,7 @@ export const Logout = async () => {
   }
 
   try {
-    const response = await fetch("http://localhost:8000/logOut", {
+    const response = await fetch("https://backend-production-024f.up.railway.app/logOut", {
       method: "delete",
       body: JSON.stringify({
         ids: parseInt(ID.id)
