@@ -215,11 +215,12 @@ const HomePage = () => {
     
 
 {/* Featured Gowns */}
+{/* Featured Gowns */}
 <section className="py-20 px-4 bg-gray-50">
   <h3 className="text-3xl font-bold text-center mb-12">MOST PICKED ITEMS</h3>
   <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-    {mostPicked.map((gown, index) =>{
-      return (
+    {Array.isArray(mostPicked) && mostPicked.length > 0 ? (
+      mostPicked.map((gown, index) => (
         <motion.div
           key={index}
           initial={{ opacity: 0, y: 20 }}
@@ -238,8 +239,13 @@ const HomePage = () => {
             </div>
           </div>
         </motion.div>
-      )
-    })}
+      ))
+    ) : (
+      // Loading state or no items message
+      <div className="col-span-3 text-center py-10">
+        <p className="text-gray-500">Loading most picked items...</p>
+      </div>
+    )}
   </div>
 </section>
 
