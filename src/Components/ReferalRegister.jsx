@@ -203,7 +203,15 @@ export const registas = async ({ request, params }) => {
         referralCodeUsed: data.get("referral"),
     };
 
-    try {
+    if(Alldatas.password !== confirmation){
+      toast.error("Password and Confirm are not Matched");
+      return null;
+    }else if (Alldatas.password.length < 6 || !/^[a-zA-Z0-9]+$/.test(Alldatas.password)) {
+      toast.error("Password must be at least 6 characters long and contain only alphanumeric characters.");
+      return null;
+    }else{
+
+      try {
         const response = await fetch(`https://backend-production-024f.up.railway.app/register`, {
             method: "POST",
             body: JSON.stringify(Alldatas),
@@ -232,4 +240,9 @@ export const registas = async ({ request, params }) => {
         toast.error("An error occurred while registering. Please try again.");
         return null;
     }
+
+
+    }
+
+    
 };

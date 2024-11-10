@@ -27,6 +27,9 @@ export const regista = async({request, params}) =>{
   if(Alldatas.password !== confirmation){
     toast.error("Password and Confirm are not Matched");
     return null;
+  }else if (Alldatas.password.length < 6 || !/^[a-zA-Z0-9]+$/.test(Alldatas.password)) {
+    toast.error("Password must be at least 6 characters long and contain only alphanumeric characters.");
+    return null;
   }else{
     try{
 
