@@ -14,6 +14,7 @@ import PaymentStatus from './Reports/PaymentStatus';
 import io from 'socket.io-client';
 import jsPDF from 'jspdf';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { IoIosToday } from "react-icons/io";
 
 const Dashboard = () => {
   const DashInfo = useLoaderData();
@@ -93,6 +94,15 @@ const Dashboard = () => {
   };
 
   const cardData = [
+
+    {
+      title: "Todays Rented",
+      value: DashInfo.data3.totalReservations,
+      icon: <IoIosToday  size={24}/>,
+      gradient: "from-red-500 to-blue-600",
+      onClick: () => cosnole.log("Hello hahah")
+    },
+
     {
       title: "Rented Gowns",
       value: DashInfo.data3.totalReservations,
