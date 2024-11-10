@@ -91,11 +91,11 @@ const Dashboard = () => {
     doc.setFontSize(12);
     doc.setFont(undefined, 'normal');
     doc.text(`Date Generated: ${getCurrentDate()}`, 15, 40);
-    doc.text(`Date Generated: ${profile[0].name}`, 15, 43);
+    doc.text(`Admin Name: ${profile[0].name}`, 15, 45);
     
     // Divider
     doc.setLineWidth(0.5);
-    doc.line(15, 45, pageWidth - 15, 45);
+    doc.line(15, 49, pageWidth - 15, 49);
   
     // Summary Section
     doc.setFontSize(16);

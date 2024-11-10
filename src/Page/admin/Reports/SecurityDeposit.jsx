@@ -35,9 +35,6 @@ console.log(DashInfo)
 
         });
 
-
-        
-
         return () => {
           socket.off("securityUpdated");
         };
