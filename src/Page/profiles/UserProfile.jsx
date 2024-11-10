@@ -37,7 +37,6 @@ const UserProfile = () => {
   const [refferal,setRefferal] = useState(false);
   const [rewards,setRewards] = useState(false);
   const [referalRewards, setReferalsRewards] = useState(false);
-  const Loading = useNavigation();
   const dispatch = useDispatch();
  
 
@@ -187,12 +186,13 @@ const referralLink = userProfile.length > 0
                 
               </div>
               <div className="h-6 w-px bg-gray-200" />
+              {/*May BABAGUHIN AKO D@2   */}
               <Form method="post">
                 <button
                   type="submit"
                   className="px-4 py-[0.3rem] bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/50"
                 >
-                  {Loading.state === "submitting" ? "Loading..." : "Logout"}
+                  Logout
                 </button>
               </Form>
             </div>
