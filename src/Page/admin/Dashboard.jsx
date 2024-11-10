@@ -15,11 +15,14 @@ import io from 'socket.io-client';
 import jsPDF from 'jspdf';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { IoIosToday } from "react-icons/io";
+import AdminProfile from '../../hooks/AdminHooks/AdminProfile';
 
 const Dashboard = () => {
   const DashInfo = useLoaderData();
   const [filteredData, setFilteredData] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState('All Months');
+   //ADMIN PROFILE
+   const {profile} = AdminProfile();
 
     const [rentalE,setRentalE] = useState(DashInfo.data5);
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
@@ -88,6 +91,7 @@ const Dashboard = () => {
     doc.setFontSize(12);
     doc.setFont(undefined, 'normal');
     doc.text(`Date Generated: ${getCurrentDate()}`, 15, 40);
+    doc.text(`Date Generated: ${profile[0].name}`, 15, 43);
     
     // Divider
     doc.setLineWidth(0.5);
