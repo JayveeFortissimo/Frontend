@@ -203,7 +203,7 @@ export const registas = async ({ request, params }) => {
         referralCodeUsed: data.get("referral"),
     };
 
-    if(Alldatas.password !== confirmation){
+    if(Alldatas.password !== data){
       toast.error("Password and Confirm are not Matched");
       return null;
     }else if (Alldatas.password.length < 6 || !/^[a-zA-Z0-9]+$/.test(Alldatas.password)) {
