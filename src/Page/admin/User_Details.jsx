@@ -1,16 +1,16 @@
-import React from 'react';
+import { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Sidebars } from '../../Store/Side.js';
-import { FiArrowLeft, FiUser, FiMapPin, FiPhone, FiMail } from 'react-icons/fi';
+import { FiArrowLeft, FiUser, FiMapPin, FiPhone, FiMail, FiMenu, FiX } from 'react-icons/fi';
 import ReserveOrders from './Modal/ReserveOrders.jsx';
 import History from './Modal/History.jsx';
 import To_Return from './Modal/To_Return.jsx';
 import FHistory from './Modal/FHistory.jsx';
 import Cancelled from './Modal/Cancelled.jsx';
 
-
 const UserDetails = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const userID = useLoaderData();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,11 +32,54 @@ const UserDetails = () => {
     { id: 'History', label: 'Approved' },
     { id: 'Return', label: 'To Return' },
     { id: 'FinalH', label: 'Completed' },
-    {id: 'Cancelled', label: 'Cancelled'}
+    { id: 'Cancelled', label: 'Cancelled' }
   ];
+
+  const handleTabClick = (tabId) => {
+    dispatch(Sidebars.Activity(tabId));
+    setIsSidebarOpen(false); // Close sidebar after selection on mobile
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-4 md:p-6 w-full">
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-lg bg-gray-800 text-blue-400 hover:bg-gray-700 transition-colors duration-300"
+      >
+        {isSidebarOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+      </button>
+
+      {/* Mobile Sidebar */}
+      <div className={`fixed inset-y-0 left-0 z-40 w-64 bg-gray-900 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
+        <div className="p-6 space-y-4">
+          <h2 className="text-xl font-bold text-blue-400 mb-6">Navigation</h2>
+          <div className="flex flex-col space-y-2">
+            {tabs.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => handleTabClick(tab.id)}
+                className={`px-4 py-3 rounded-md text-sm font-medium transition-all duration-300 text-left
+                  ${isReserveOrders === tab.id
+                    ? 'bg-blue-500/20 text-blue-400 shadow-lg shadow-blue-500/20 border border-blue-500/30'
+                    : 'text-gray-400 hover:text-blue-400 hover:bg-gray-800/80'
+                  }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       <div className="max-w-7xl mx-auto">
         {userID.data1.map(pro => (
           <div key={pro.id} className="backdrop-blur-lg bg-gray-900/60 rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
@@ -81,7 +124,7 @@ const UserDetails = () => {
                       <p className="font-medium text-white">{pro.contact}</p>
                     </div>
                   </div>
-                  <div className="hidden lg:flex items-center gap-3 p-4 rounded-lg bg-gray-800/30 hover:bg-gray-800/50 transition-colors duration-300">
+                  <div className="flex items-center gap-3 p-4 rounded-lg bg-gray-800/30 hover:bg-gray-800/50 transition-colors duration-300">
                     <FiMail className="text-blue-400 text-xl" />
                     <div>
                       <p className="text-sm text-gray-400">Email</p>
@@ -92,10 +135,10 @@ const UserDetails = () => {
               </div>
             </div>
 
-            {/* Navigation Tabs */}
-            <div className="px-6">
+            {/* Desktop Navigation Tabs */}
+            <div className="hidden md:block px-6">
               <div className="bg-gray-800/50 backdrop-blur-md rounded-lg p-1">
-                <nav className="flex space-x-2">
+                <nav className="flex flex-wrap gap-2">
                   {tabs.map(tab => (
                     <button
                       key={tab.id}
@@ -125,6 +168,8 @@ const UserDetails = () => {
 };
 
 export default UserDetails;
+
+
 
 // Loader function remains unchanged
 export const userFullDetails = async ({ params }) => {
