@@ -77,75 +77,139 @@ useEffect(() => {
 
     const generatePDF = () => {
       const doc = new jsPDF();
-      let yPosition = 10;
-    
-      // Title
-      doc.setFontSize(20);
-      doc.text('General Total Reservations Report', 10, yPosition);
+      const pageWidth = doc.internal.pageSize.width;
       
-      // Summary section
+      // Helper functions
+      const centerText = (text, y) => {
+        const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+        const x = (pageWidth - textWidth) / 2;
+        doc.text(text, x, y);
+      };
+    
+      const getCurrentDate = () => {
+        return new Date().toLocaleDateString('en-US', { 
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
+        });
+      };
+    
+      const addPageIfNeeded = (neededSpace) => {
+        if (yPosition + neededSpace > doc.internal.pageSize.height - 20) {
+          doc.addPage();
+          yPosition = 20;
+          // Add header to new page
+          doc.setFontSize(12);
+          doc.text(`Generated on: ${getCurrentDate()}`, pageWidth - 80, 10);
+          return true;
+        }
+        return false;
+      };
+    
+      let yPosition = 20;
+    
+      // Header
+      doc.setFontSize(24);
+      doc.setFont(undefined, 'bold');
+      centerText('Gown Rental System', yPosition);
+      
       yPosition += 10;
-      doc.setFontSize(14);
-      doc.text('Summary:', 10, yPosition);
+      doc.setFontSize(18);
+      centerText('Cancelled Reservations Report', yPosition);
     
-      // Separator
-      yPosition += 5;
+      // Date
+      yPosition += 10;
       doc.setFontSize(12);
-      doc.text('---------------------------------', 10, yPosition);
-      
-      // Separate DashInfo by status
+      doc.setFont(undefined, 'normal');
+      doc.text(`Generated on: ${getCurrentDate()}`, pageWidth - 80, yPosition);
+    
+      // Divider
+      yPosition += 10;
+      doc.setLineWidth(0.5);
+      doc.line(15, yPosition, pageWidth - 15, yPosition);
+    
+      // Separate items by status
       const approvedItems = DashInfo.cancelledDetails.filter(item => item.status === "APPROVED BY ADMIN");
       const waitingForRefundItems = DashInfo.cancelledDetails.filter(item => item.status === "WAITING FOR REFUND");
     
-      // Print Approved Items
-      if (approvedItems.length > 0) {
-        yPosition += 10;
-        doc.setFontSize(14);
-        doc.text('Approved by Admin:', 10, yPosition);
-    
-        approvedItems.forEach(item => {
-          yPosition += 10;
-          doc.setFontSize(12);
-          doc.text(`Name: ${item.Name}`, 10, yPosition);
-          yPosition += 5;
-          doc.text(`Price: ${item.Price}`, 10, yPosition);
-          doc.text(`Status: ${item.status}`, 100, yPosition);
-          yPosition += 5;
-          doc.text(`Code: ${item.code}`, 10, yPosition);
-          yPosition += 5;
-          doc.text(`Subtotal: ${item.sub_Total}`, 10, yPosition);
-          yPosition += 5;
-          doc.text('---------------------------------', 10, yPosition);
-        });
-      }
-    
-      // Print Waiting for Refund Items
-      if (waitingForRefundItems.length > 0) {
-        yPosition += 10;
-        doc.setFontSize(14);
-        doc.text('Waiting for Refund:', 10, yPosition);
-    
-        waitingForRefundItems.forEach(item => {
-          yPosition += 10;
-          doc.setFontSize(12);
-          doc.text(`Name: ${item.Name}`, 10, yPosition);
-          yPosition += 5;
-          doc.text(`Price: ${item.Price}`, 10, yPosition);
-          doc.text(`Status: ${item.status}`, 100, yPosition);
-          yPosition += 5;
-          doc.text(`Code: ${item.code}`, 10, yPosition);
-          yPosition += 5;
-          doc.text(`Subtotal: ${item.sub_Total}`, 10, yPosition);
-          yPosition += 5;
-          doc.text('---------------------------------', 10, yPosition);
-        });
-      }
-    
-      // End of report
+      // Summary section
+      yPosition += 15;
+      doc.setFontSize(16);
+      doc.setFont(undefined, 'bold');
+      doc.text('Summary', 15, yPosition);
+      
       yPosition += 10;
-      doc.text('End of Report', 10, yPosition);
+      doc.setFontSize(12);
+      doc.setFont(undefined, 'normal');
+      doc.text(`Total Cancelled Reservations: ${DashInfo.cancelledDetails.length}`, 20, yPosition);
+      yPosition += 7;
+      doc.text(`Approved by Admin: ${approvedItems.length}`, 20, yPosition);
+      yPosition += 7;
+      doc.text(`Waiting for Refund: ${waitingForRefundItems.length}`, 20, yPosition);
     
-      doc.save('reservation-report.pdf');
+      // Function to print items
+      const printItems = (items, sectionTitle) => {
+        addPageIfNeeded(20);
+        yPosition += 15;
+        
+        // Section header
+        doc.setFontSize(16);
+        doc.setFont(undefined, 'bold');
+        doc.text(sectionTitle, 15, yPosition);
+        
+        items.forEach((item, index) => {
+          addPageIfNeeded(50);
+          yPosition += 15;
+          
+          // Item card
+          doc.setDrawColor(200, 200, 200);
+          doc.setLineWidth(0.1);
+          doc.rect(15, yPosition - 5, pageWidth - 30, 35);
+          
+          // Item details
+          doc.setFontSize(12);
+          doc.setFont(undefined, 'bold');
+          doc.text(`Customer: ${item.Name}`, 20, yPosition);
+          doc.setFont(undefined, 'normal');
+          
+          // Left column
+          doc.text(`Code: ${item.code}`, 20, yPosition + 8);
+          doc.text(`Price: ₱${item.Price.toLocaleString()}`, 20, yPosition + 16);
+          
+          // Right column
+          doc.text(`Status: ${item.status}`, pageWidth/2, yPosition + 8);
+          doc.text(`Subtotal: ₱${item.sub_Total.toLocaleString()}`, pageWidth/2, yPosition + 16);
+          
+          yPosition += 30;
+        });
+      };
+    
+      // Print sections
+      if (approvedItems.length > 0) {
+        printItems(approvedItems, 'Approved Cancellations');
+      }
+    
+      if (waitingForRefundItems.length > 0) {
+        printItems(waitingForRefundItems, 'Pending Refunds');
+      }
+    
+      // Footer for each page
+      const pageCount = doc.internal.getNumberOfPages();
+      for(let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        
+        // Footer line
+        doc.setLineWidth(0.5);
+        doc.line(15, doc.internal.pageSize.height - 20, pageWidth - 15, doc.internal.pageSize.height - 20);
+        
+        // Footer text
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'normal');
+        doc.text('Gown Rental Management System', 15, doc.internal.pageSize.height - 10);
+        doc.text(`Page ${i} of ${pageCount}`, pageWidth - 40, doc.internal.pageSize.height - 10);
+      }
+    
+      doc.save('Cancelled_Reservations_Report.pdf');
     };
   
 

@@ -57,40 +57,147 @@ const Dashboard = () => {
 
   const generatePDF = () => {
     const doc = new jsPDF();
-    doc.setFontSize(20);
-    doc.text('General Reservation Report', 10, 10);
-    doc.setFontSize(14);
-    doc.text('Summary:', 10, 20);
+    const pageWidth = doc.internal.pageSize.width;
+    
+    // Helper function for centering text
+    const centerText = (text, y) => {
+      const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+      const x = (pageWidth - textWidth) / 2;
+      doc.text(text, x, y);
+    };
+  
+    // Helper function for current date
+    const getCurrentDate = () => {
+      const now = new Date();
+      return now.toLocaleDateString('en-US', { 
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    };
+  
+    // Header
+    doc.setFontSize(24);
+    doc.setFont(undefined, 'bold');
+    centerText('Gown Rental System', 20);
+  
+    doc.setFontSize(16);
+    centerText('General Reservation Report', 30);
+  
+    // Date and Time
     doc.setFontSize(12);
-    doc.text('---------------------------------', 10, 25);
-    doc.text(`Total Gowns Rented: ${DashInfo.data3.totalReservations}`, 10, 35);
-    doc.text(`Available Gowns: ${DashInfo.data1.SumAll.totalQuantity}`, 10, 40);
-    doc.text(`Number of Users: ${DashInfo.data4.totalUser}`, 10, 45);
-
-    DashInfo.data7.forEach(pro =>{
-           
+    doc.setFont(undefined, 'normal');
+    doc.text(`Date Generated: ${getCurrentDate()}`, 15, 40);
+    
+    // Divider
+    doc.setLineWidth(0.5);
+    doc.line(15, 45, pageWidth - 15, 45);
+  
+    // Summary Section
+    doc.setFontSize(16);
+    doc.setFont(undefined, 'bold');
+    doc.text('Summary Overview', 15, 60);
+  
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'normal');
+    const summaryData = [
+      `Total Gowns Rented: ${DashInfo.data3.totalReservations}`,
+      `Available Gowns: ${DashInfo.data1.SumAll.totalQuantity}`,
+      `Number of Users: ${DashInfo.data4.totalUser}`
+    ];
+  
+    let yPos = 70;
+    summaryData.forEach(item => {
+      doc.text(item, 20, yPos);
+      yPos += 8;
+    });
+  
+    // Monthly Statistics
+    doc.setFontSize(16);
+    doc.setFont(undefined, 'bold');
+    doc.text('Monthly Statistics', 15, yPos + 10);
+    
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'normal');
+    yPos += 20;
+  
+    DashInfo.data7.forEach(pro => {
       const datnow = new Date();
       const monthName = datnow.toLocaleString('default', { month: 'long' });
-      if(pro.Date === monthName){
-        doc.text(`Total Reservations This Month: ${pro.total_count}`, 10, 50);
+      if(pro.Date === monthName) {
+        doc.text(`Total Reservations (${monthName}): ${pro.total_count}`, 20, yPos);
+        yPos += 8;
       }
-      })
-   
-    doc.text(`Total Canceled Reservations: ${DashInfo.data6.totalCancelled}`, 10, 55);
-    doc.text(`Rental Income (Current Month): ₱${DashInfo.data5.AllTotal}`, 10, 60);
-    doc.text(`All-Time Income: ₱${DashInfo.data5.AllTotal}`, 10, 65);
-    //doc.text('Today\'s Returns: [Dynamic Value]', 10, 70);
-    doc.text('Recent User Reser:', 10, 80);
-    DashInfo.data2.reservations.forEach((reservation, index) => {
-      doc.text(`- ${reservation.Name}}`, 10, 85 + (index * 5));
     });
-    doc.text('Canceled Reservations:', 10, 170);
-    DashInfo.data6.cancelledDetails.forEach((cancel, index) => {
-      doc.text(`- ${cancel.Name}, Price: ₱${cancel.Price}, Start Date: ${new Date(cancel.start_Date).toLocaleDateString()}`, 10, 180 + (index * 5));
+  
+    // Financial Information
+    doc.text(`Total Canceled Reservations: ${DashInfo.data6.totalCancelled}`, 20, yPos);
+    yPos += 8;
+    doc.text(`Current Month Revenue: ₱${DashInfo.data5.AllTotal.toLocaleString()}`, 20, yPos);
+    yPos += 8;
+    doc.text(`All-Time Revenue: ₱${DashInfo.data5.AllTotal.toLocaleString()}`, 20, yPos);
+    
+    // Recent Reservations
+    yPos += 20;
+    doc.setFontSize(16);
+    doc.setFont(undefined, 'bold');
+    doc.text('Recent Reservations', 15, yPos);
+  
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'normal');
+    yPos += 10;
+    DashInfo.data2.reservations.forEach((reservation) => {
+      if (yPos > 250) {
+        doc.addPage();
+        yPos = 20;
+      }
+      doc.text(`• ${reservation.Name}`, 20, yPos);
+      yPos += 8;
     });
-    doc.text('---------------------------------', 10, 190);
-    doc.text('End of Report', 10, 200);
-    doc.save('reservation-report.pdf');
+  
+    // Canceled Reservations
+    if (yPos > 220) {
+      doc.addPage();
+      yPos = 20;
+    }
+    
+    yPos += 10;
+    doc.setFontSize(16);
+    doc.setFont(undefined, 'bold');
+    doc.text('Canceled Reservations', 15, yPos);
+  
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'normal');
+    yPos += 10;
+    DashInfo.data6.cancelledDetails.forEach((cancel) => {
+      if (yPos > 250) {
+        doc.addPage();
+        yPos = 20;
+      }
+      const cancelText = `• ${cancel.Name} - ₱${cancel.Price.toLocaleString()} (${new Date(cancel.start_Date).toLocaleDateString()})`;
+      doc.text(cancelText, 20, yPos);
+      yPos += 8;
+    });
+  
+    // Footer
+    const pageCount = doc.internal.getNumberOfPages();
+    for(let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      
+      // Footer line
+      doc.setLineWidth(0.5);
+      doc.line(15, 280, pageWidth - 15, 280);
+  
+      // Company name
+      doc.setFontSize(10);
+      doc.setFont(undefined, 'normal');
+      doc.text('Gown Rental Management System', 15, 287);
+  
+      // Page numbers
+      doc.text(`Page ${i} of ${pageCount}`, pageWidth - 40, 287);
+    }
+  
+    doc.save('Gown_Rental_Report.pdf');
   };
 
   const cardData = [
@@ -100,7 +207,7 @@ const Dashboard = () => {
       value: DashInfo.data3.totalReservations,
       icon: <IoIosToday  size={24}/>,
       gradient: "from-red-500 to-blue-600",
-      onClick: () => cosnole.log("Hello hahah")
+      onClick: () => console.log("Hello hahah")
     },
 
     {

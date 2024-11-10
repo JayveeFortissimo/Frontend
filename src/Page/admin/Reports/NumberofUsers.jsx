@@ -21,71 +21,156 @@ const NumberofUsers = ({ setTotalReserve, DashInfo }) => {
 
   const generatePDF = () => {
     const doc = new jsPDF();
-    let yPosition = 10;
-    
-    // Title
-    doc.setFontSize(20);
-    doc.text('General Total Reservations Report', 10, yPosition);
-    
-    // Summary section
-    yPosition += 10;
-    doc.setFontSize(14);
-    doc.text('Summary:', 10, yPosition);
-    
-    yPosition += 5;
-    doc.setFontSize(12);
-    doc.text('---------------------------------', 10, yPosition);
-    
-    // Calculate total users
-    const totalUsers = filteredUsers.length;
-    yPosition += 10;
-    doc.text(`Total Users: ${totalUsers}`, 10, yPosition);
-    
-    // User Details
-    filteredUsers.forEach((user, index) => {
-      yPosition += 15;
-      
-      // Add new page if content exceeds page height
-      if (yPosition >= 280) {
+    const pageWidth = doc.internal.pageSize.width;
+    const pageHeight = doc.internal.pageSize.height;
+  
+    // Helper functions
+    const centerText = (text, y) => {
+      const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+      const x = (pageWidth - textWidth) / 2;
+      doc.text(text, x, y);
+    };
+  
+    const getCurrentDate = () => {
+      return new Date().toLocaleDateString('en-US', { 
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    };
+  
+    const addPageIfNeeded = (neededSpace) => {
+      if (yPosition + neededSpace > pageHeight - 20) {
         doc.addPage();
         yPosition = 20;
+        // Add header to new page
+        doc.setFontSize(10);
+        doc.text(`Generated: ${getCurrentDate()}`, pageWidth - 80, 10);
+        return true;
       }
-      
+      return false;
+    };
+  
+    let yPosition = 20;
+  
+    // Header
+    doc.setFontSize(24);
+    doc.setFont(undefined, 'bold');
+    centerText('Gown Rental System', yPosition);
+    
+    yPosition += 10;
+    doc.setFontSize(18);
+    centerText('User Management Report', yPosition);
+  
+    // Date
+    yPosition += 10;
+    doc.setFontSize(10);
+    doc.setFont(undefined, 'normal');
+    doc.text(`Generated: ${getCurrentDate()}`, pageWidth - 80, yPosition);
+  
+    // Divider
+    yPosition += 5;
+    doc.setLineWidth(0.5);
+    doc.line(15, yPosition, pageWidth - 15, yPosition);
+  
+    // Summary section
+    yPosition += 15;
+    doc.setFontSize(16);
+    doc.setFont(undefined, 'bold');
+    doc.text('Summary Statistics', 15, yPosition);
+    
+    yPosition += 10;
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'normal');
+    
+    // Calculate statistics
+    const activeUsers = filteredUsers.filter(user => user.status === 0).length;
+    const inactiveUsers = filteredUsers.filter(user => user.status === 1).length;
+  
+    // Display statistics
+    const statistics = [
+      `Total Registered Users: ${filteredUsers.length}`,
+      `Active Users: ${activeUsers}`,
+      `Inactive Users: ${inactiveUsers}`,
+    ];
+  
+    statistics.forEach(stat => {
+      doc.text(stat, 20, yPosition);
+      yPosition += 7;
+    });
+  
+    // User Details Section
+    addPageIfNeeded(20);
+    yPosition += 15;
+    doc.setFontSize(16);
+    doc.setFont(undefined, 'bold');
+    doc.text('Detailed User Information', 15, yPosition);
+  
+    // User listing
+    filteredUsers.forEach((user, index) => {
+      addPageIfNeeded(65); // Approximate height needed for each user card
+      yPosition += 15;
+  
+      // User card background
+      doc.setFillColor(248, 250, 252); // Light gray background
+      doc.setDrawColor(229, 231, 235); // Border color
+      doc.roundedRect(15, yPosition - 5, pageWidth - 30, 55, 3, 3, 'FD');
+  
       // User header
+      doc.setFontSize(14);
       doc.setFont(undefined, 'bold');
-      doc.text(`User ${index + 1}: ${user.name}`, 10, yPosition);
+      doc.text(`${user.name}`, 20, yPosition);
+      
+      // Status indicator
+      const userStatus = user.status === 0 ? 'Active' : 'Inactive';
+      const statusColor = user.status === 0 ? [34, 197, 94] : [239, 68, 68]; // Green for active, red for inactive
+      doc.setTextColor(...statusColor);
+      doc.setFontSize(10);
+      doc.text(userStatus, pageWidth - 45, yPosition);
+      doc.setTextColor(0, 0, 0); // Reset text color
+  
+      // User details in two columns
+      doc.setFontSize(11);
       doc.setFont(undefined, 'normal');
       
-      // User details
-      yPosition += 7;
+      // Left column
+      yPosition += 10;
       doc.text(`ID: ${user.id}`, 20, yPosition);
-      
-      yPosition += 7;
+      yPosition += 8;
       doc.text(`Email: ${user.email}`, 20, yPosition);
-      
-      yPosition += 7;
+      yPosition += 8;
       doc.text(`Contact: ${user.contact}`, 20, yPosition);
+  
+      // Right column
+      const rightColumnX = pageWidth / 2;
+      yPosition -= 16;
+      doc.text(`Address: ${user.address}`, rightColumnX, yPosition);
+      yPosition += 8;
+      doc.text(`Referral Code: ${user.referral_code}`, rightColumnX, yPosition);
+      yPosition += 8;
       
-      yPosition += 7;
-      doc.text(`Address: ${user.address}`, 20, yPosition);
-      
-      yPosition += 7;
-      doc.text(`Referral Code: ${user.referral_code}`, 20, yPosition);
-      
-      yPosition += 7;
-      const userStatus = user.status === 0 ? 'Active' : 'Inactive';
-      doc.text(`Status: ${userStatus}`, 20, yPosition);
-      
-      // Separator between users
-      yPosition += 7;
-      doc.text('---------------------------------', 10, yPosition);
+      yPosition += 10; // Space after the card
     });
-    
-    // End of report
-    yPosition += 10;
-    doc.text('End of Report', 10, yPosition);
-    
-    doc.save('reservation-report.pdf');
+  
+    // Footer for each page
+    const pageCount = doc.internal.getNumberOfPages();
+    for(let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      
+      // Footer line
+      doc.setLineWidth(0.5);
+      doc.line(15, pageHeight - 20, pageWidth - 15, pageHeight - 20);
+      
+      // Footer text
+      doc.setFontSize(10);
+      doc.setFont(undefined, 'normal');
+      doc.text('Gown Rental Management System', 15, pageHeight - 10);
+      doc.text(`Page ${i} of ${pageCount}`, pageWidth - 40, pageHeight - 10);
+    }
+  
+    doc.save('User_Management_Report.pdf');
   };
 
 
