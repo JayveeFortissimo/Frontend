@@ -148,6 +148,7 @@ const ReferalRegister = () => {
                 id="confirm-password"
                 type={showPassword ? "text" : "password"}
                 required
+                name="confirm"
                 className="block w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-black placeholder-gray-400 backdrop-blur-sm focus:border-gray-500 focus:ring-2 focus:ring-gray-500 focus:ring-opacity-20 transition-all duration-200 pr-12"
                 placeholder="Confirm your password"
               />
