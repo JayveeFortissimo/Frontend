@@ -152,7 +152,7 @@ const HomePage = () => {
     <div className="min-h-screen bg-white text-gray-800">
 
 {/* Hero Section */}
-<section className="relative h-[80rem] overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white">
+<section className="relative h-[50rem] overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white">
       <GridBackground />
       <ParticlesEffect />
       <FloatingLines />
