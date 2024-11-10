@@ -11,6 +11,14 @@ export const items = async () => {
   try {
     const userId = JSON.parse(localStorage.getItem('ID')); // Get userId from local storage
 
+    if (!userId) {
+      console.error("User ID not found in localStorage.");
+      return { error: "User ID is missing." };
+    }
+
+    console.log("Sending request to /Items with userId:", userId);
+
+
     const response = await fetch(`https://backend-production-024f.up.railway.app/Items`, {
       method: "POST", // Change to POST to send userId in the request body
       headers: {
