@@ -2,6 +2,8 @@ import { VscChromeClose, VscCheck } from "react-icons/vsc";
 import { useState, useEffect } from "react";
 import { FaBox, FaUser, FaCalendarAlt } from "react-icons/fa";
 import { TbRulerMeasure } from "react-icons/tb";
+import { Sidebars } from "../../../Store/Side.js";
+import { useSelector, useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 
 const PickUp = ({ setPickUp, productINFO }) => {
@@ -62,7 +64,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
         });
 
         if (!response.ok) return toast.error("NOT PICKED UP");
-
+        dispatch(Sidebars.Activity('Return'))
         setPickUp(false);
         return toast.success("USER PICKED UP ITEMS");
       } catch (error) {
