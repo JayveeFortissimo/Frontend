@@ -9,7 +9,8 @@ import toast from 'react-hot-toast';
 const PickUp = ({ setPickUp, productINFO }) => {
 
   const [pickuped, setPickuped] = useState('');
-
+  
+  const dispatch = useDispatch();
   useEffect(() => {
     if (pickuped === "ITEM PICKED UP ALREADY") {
         //sendSMSNotification(`+639604099126`, 'YOU PICKUPED THE ITEMS ALREADY!');
