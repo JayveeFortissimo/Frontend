@@ -151,7 +151,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
 
               <div className="flex items-center gap-5">
               <p>Customize</p>
-              <input type="checkbox" onChange={() => setIsCustomize(pro = !pro)}/>
+              <input type="checkbox" onChange={() => setIsCustomize(pro => !pro)}/>
               </div>
                 
 
