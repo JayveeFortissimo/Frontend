@@ -18,6 +18,7 @@ const ReserveOrders = ({ userID }) => {
 
   useEffect(() => {
     const socket = io('https://backend-production-024f.up.railway.app');
+    setOrders(userID.data2.result);
     
     socket.on('connect', () => {
       console.log('Connected to WebSocket');
@@ -25,7 +26,6 @@ const ReserveOrders = ({ userID }) => {
 
     socket.on('newCheckOut', (data) => {
       setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
-      setOrders(userID.data2.result);
     });
 
 
@@ -42,8 +42,8 @@ const ReserveOrders = ({ userID }) => {
 
   }, [userID]);
 
-  useEffect(() => {
-  
+   useEffect(() => {
+   
   }, []);
 
   const formatDate = (dateString) => {
