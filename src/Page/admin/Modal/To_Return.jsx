@@ -8,7 +8,7 @@ import Scanner from "./Scanner.jsx";
 
 const ToReturn = ({ userID }) => {
   const [openConfirmation, setOpenConfirmation] = useState(false);
- // const ItemID = useRef(0);
+ const ItemID = useRef(0);
   const savedEvent = useRef(null);
   const { toReturn, setToReturn } = History(userID.data1[0].id);
   const [openScanner, setOpenScanner] = useState(false);
