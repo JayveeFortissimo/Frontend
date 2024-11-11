@@ -153,8 +153,9 @@ const PickUp = ({ setPickUp, productINFO }) => {
            </div>
 
            {
-            isClicked ? (<input type="number"  className="h-[2rem] w-[6rem] border rounded"/>): undefined
+            isClicked && (<input type="number"  className="h-[2rem] w-[6rem] border rounded"/>)
            }
+
 
             </div>
 
