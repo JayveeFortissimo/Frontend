@@ -16,9 +16,7 @@ import { useDispatch } from 'react-redux';
 const ReserveOrders = ({ userID }) => {
   const [orders, setOrders] = useState([]);
   const dispatch = useDispatch();
-  useEffect(() => {
-    setOrders(userID.data2.result);
-  }, []);
+  
 
   const { PushToApprove, DeclineReserve } = Items_Approved(orders, setOrders, userID);
 
@@ -29,10 +27,15 @@ const ReserveOrders = ({ userID }) => {
       console.log('Connected to WebSocket');
     });
 
+
+    setOrders(userID.data2.result);
+    
+    /*
     socket.on('newCheckOut', (data) => {
+      //Socket
       setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
     });
-
+   */
 
     socket.on('deleteItem', (data) => {
       setOrders(prevOrders => prevOrders.filter(order => order.id !== data.id));
@@ -46,7 +49,7 @@ const ReserveOrders = ({ userID }) => {
     };
 
 
-  }, [userID]);
+  }, []);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
