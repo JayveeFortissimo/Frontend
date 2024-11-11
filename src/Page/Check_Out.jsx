@@ -34,14 +34,15 @@ const Check_Out = () => {
     const [onUse,setOnuse] = useState(true);
  
     const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
-
-    const TotalsAll = displayDiscount ? (parseInt(total) + 200) * 0.95 : parseInt(total) + 200;
+   const allGownSecurity = allOrders.length;
+   console.log(allGownSecurity)
+    const TotalsAll = displayDiscount ? (parseInt(total) + (200 * allGownSecurity)) * 0.95 : parseInt(total) + (200 * allGownSecurity);
     const OriginalValue = parseInt(total) + 200;
 
-  const [isRadio, setRadio] = useState(false);
-  const [isradio, setIsRadio ]  = useState(false);
+    const [isRadio, setRadio] = useState(false);
+    const [isradio, setIsRadio ]  = useState(false);
 
-   isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
+    isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
 
     return (
         <>
