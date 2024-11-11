@@ -218,7 +218,7 @@ const DownpaymentInstore = async (e,total) => {
   
       if (data && data.data) {
          window.location.href = data.data.attributes.checkout_url;
-            CheckOUtss(e, selectedOptions === "downpayment"? "Gcash|DownPayment": "Gcash|FullPaid",sameCode, total);
+            CheckOUtss(e, selectedOptions === "downpayment"? "Gcash|DownPayment": "Gcash|FullPaid", sameCode, total);
             deleted(e)
       } else {
     toast.error('Failed to create payment link.');
