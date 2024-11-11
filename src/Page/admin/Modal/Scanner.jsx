@@ -87,7 +87,7 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
   useEffect(() => {
     const html5QrcodeScanner = new Html5QrcodeScanner(
       qrCodeRegionId,
-      { fps: 10, qrbox: { width: 250, height: 250 } },
+      { fps: 10, qrbox: { width: 270, height: 250 } },
       false
     );
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
