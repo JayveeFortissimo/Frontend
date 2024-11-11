@@ -13,10 +13,6 @@ import io from 'socket.io-client';
 
 const ReserveOrders = ({ userID }) => {
   const [orders, setOrders] = useState([]);
-  
-  useEffect(() => {
-    setOrders(userID.data2.result);
-  }, [userID]);
 
   const { PushToApprove, DeclineReserve } = Items_Approved(orders, setOrders, userID);
 
@@ -37,12 +33,16 @@ const ReserveOrders = ({ userID }) => {
   });
 
     return () => {
-      socket.disconnect();
       socket.off('deleteItem');
       socket.off('newCheckOut');
+      socket.disconnect();
     };
 
 
+  }, [userID]);
+
+  useEffect(() => {
+    setOrders(userID.data2.result);
   }, []);
 
   const formatDate = (dateString) => {
