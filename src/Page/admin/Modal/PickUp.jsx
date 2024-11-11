@@ -1,5 +1,5 @@
 import { VscChromeClose, VscCheck } from "react-icons/vsc";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaBox, FaUser, FaCalendarAlt } from "react-icons/fa";
 import { TbRulerMeasure } from "react-icons/tb";
 import { Sidebars } from "../../../Store/Side.js";
@@ -9,9 +9,10 @@ import toast from 'react-hot-toast';
 const PickUp = ({ setPickUp, productINFO }) => {
 
   const [pickuped, setPickuped] = useState('');
-
   const dispatch = useDispatch();
-  
+    
+ const isCostomize = useRef(false);
+
   useEffect(() => {
     if (pickuped === "ITEM PICKED UP ALREADY") {
         //sendSMSNotification(`+639604099126`, 'YOU PICKUPED THE ITEMS ALREADY!');
@@ -142,6 +143,12 @@ const PickUp = ({ setPickUp, productINFO }) => {
                 <p className="text-sm text-gray-500">Customer</p>
                 <p className="font-medium">{productINFO.customerName.toUpperCase()}</p>
               </div>
+            </div>
+
+
+
+            <div className="mt-2 mb-2">
+                 <p>Customize????</p>
             </div>
 
 
