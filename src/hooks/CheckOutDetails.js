@@ -217,7 +217,11 @@ const DownpaymentInstore = async (e,total) => {
       const data = await response.json();
   
       if (data && data.data) {
-         window.location.href = data.data.attributes.checkout_url;
+        
+        window.location.href = data.paymentLink;
+        // Store the redirect URLs in state or localStorage
+        localStorage.setItem('successRedirect', data.successRedirect);
+        localStorage.setItem('failedRedirect', data.failedRedirect);
             CheckOUtss(e, selectedOptions === "downpayment"? "Gcash|DownPayment": "Gcash|FullPaid", sameCode, total);
             deleted(e)
       } else {
