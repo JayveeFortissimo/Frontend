@@ -210,14 +210,18 @@ const Dashboard = () => {
 
   let NumberTodays = 0; // Initialize NumberTodays to 0
 
-  const Datenow = new Date();
-  const todayDateString = Datenow.toISOString().split('T')[0]; // Get today's date in "yyyy-mm-dd" format
-  
-  DashInfo.data3.reservations.forEach(pro => {
-      if (pro.Today === todayDateString) {
-       NumberTodays =  DashInfo.data3.reservations.length
-      }
-  });
+  const currentDate = new Date();
+const todayDateString = currentDate.toISOString().split('T')[0]; // Get today's date in "yyyy-mm-dd" format
+
+DashInfo.data3.reservations.forEach(pro => {
+    // Assuming pro.Today is in "yyyy/mm/dd" format based on your example
+    const proDateParts = pro.Today.split('/');
+    const proDate = new Date(proDateParts[0], proDateParts[1] - 1, proDateParts[2]); // Month is zero-indexed in JavaScript Dates
+
+    if (proDate.toISOString().split('T')[0] === todayDateString) {
+        NumberTodays++;
+    }
+});
 
   const cardData = [
 
