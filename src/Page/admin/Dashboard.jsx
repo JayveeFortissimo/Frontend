@@ -206,11 +206,23 @@ const Dashboard = () => {
     doc.save('Gown_Rental_Report.pdf');
   };
 
+
+
+  let NumberTodays;
+  const Datenow = new Date();
+
+  DashInfo.data3.totalReservations.forEach(pro => {
+      if(pro.Today === Datenow){
+        NumberTodays = DashInfo.data3.totalReservations.length
+      }
+  })
+
+
   const cardData = [
 
     {
       title: "Todays Rented",
-      value: "adsasds",
+      value:  parseInt(NumberTodays),
       icon: <IoIosToday  size={24}/>,
       gradient: "from-red-500 to-blue-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, ReservesTodays: true }))
