@@ -44,7 +44,10 @@ const ConfirmReturn = ({ setOpenConfirmation, Info, setToReturn, toReturn }) => 
               Cancel
             </button>
             <button 
-              onClick={(e) => PushHistory(e, Info)}
+              onClick={(e) =>{
+                PushHistory(e, Info);
+                setOpenConfirmation(false);
+              }}
               className="px-4 py-2 rounded-lg text-sm font-medium text-white
                 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-900
                 transform active:scale-[0.98] transition-all
