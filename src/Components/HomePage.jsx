@@ -289,6 +289,7 @@ const HomePage = () => {
             <p className="text-lg text-gray-600">
              This is not required but this is for the assurance of the size of yours
             </p>
+            <p>(In cart section after add products)</p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
