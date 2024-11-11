@@ -53,6 +53,35 @@ const Fitting = ({ setOpenFitting }) => {
     }
   };
 
+
+ ///!WAIT PA HERE
+  useEffect(() =>{
+
+  async function Appoints(){
+    try{
+      const response = await fetch(`https://backend-production-024f.up.railway.app/profile/${ID.id}`,{
+          method:"GET",
+          headers:{
+            authorization: "Bearer " + ID.token
+          }
+      });
+  
+      const data = await response.json();
+  
+      if(!response.ok) return console.log("Data Cannot Retrive");
+  
+    setInfo(pro => ({...pro,fname:data[0].name, email: data[0].email,contact: data[0].contact}))
+       
+    }catch(error){
+      console.log(error);
+    }
+  };
+
+  Appoints()
+
+  },[ID.id]);
+
+
   const HandleChange = (type, value) => {
     setInfo(prev => ({
       ...prev,
@@ -92,6 +121,9 @@ const Fitting = ({ setOpenFitting }) => {
       toast.error("An error occurred while submitting the appointment");
     }
   };
+
+
+
 
   const TimeSlot = ({ value, label, disabled }) => (
     <label className={`
@@ -146,7 +178,7 @@ const Fitting = ({ setOpenFitting }) => {
           {/* Content */}
           <div className="mt-6">
             <form onSubmit={HandleSubmits} className="space-y-6">
-              {!next ? (
+       
                 <>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -186,8 +218,8 @@ const Fitting = ({ setOpenFitting }) => {
 
                   <div className="p-4 bg-gray-50 rounded-lg">
                     <h3 className="font-medium text-gray-900 mb-1">Store Location</h3>
-                    <p className="text-gray-600">JP Rizal poblacion, Santa Maria, Bulacan</p>
-                    <p className="text-gray-600">09604099126</p>
+                    <p className="text-gray-600 text-[0.9rem]">JP Rizal poblacion, Santa Maria, Bulacan</p>
+                    <p className="text-gray-600 text-[0.9rem]">09604099126</p>
                   </div>
 
                   <button
@@ -199,42 +231,10 @@ const Fitting = ({ setOpenFitting }) => {
                       ${times ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}
                     `}
                   >
-                    Continue
+                    Submit
                   </button>
                 </>
-              ) : (
-                <div className="space-y-4">
-                  <input
-                    type="text"
-                    placeholder="Full Name"
-                    onChange={e => HandleChange('fname', e.target.value)}
-                    className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  />
-                  
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    onChange={e => HandleChange('email', e.target.value)}
-                    className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  />
-                  
-                  <input
-                    type="tel"
-                    placeholder="Contact Number"
-                    onChange={e => HandleChange('contact', e.target.value)}
-                    className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                  />
-
-                
-
-                  <button
-                    type="submit"
-                    className="w-full p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
-                  >
-                    Confirm Appointment
-                  </button>
-                </div>
-              )}
+              
             </form>
           </div>
         </div>
