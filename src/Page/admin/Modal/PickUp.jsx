@@ -150,7 +150,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
             <div className="mt-2 mb-2">
                  <p>Customize????</p>
             </div>
-
+ ccczczx
 
             <div>
              
