@@ -12,7 +12,8 @@ const PickUp = ({ setPickUp, productINFO }) => {
   const dispatch = useDispatch();
   const [isCustomize, setIsCustomize] = useState(false);
   const [money, setMoney] = useState(0);
-  console.log(money)
+
+
   useEffect(() => {
     if (pickuped === "ITEM PICKED UP ALREADY") {
         //sendSMSNotification(`+639604099126`, 'YOU PICKUPED THE ITEMS ALREADY!');
@@ -47,7 +48,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
     
      const OriginalVAlue = productINFO.subTotal;
      const code = productINFO.code
-    const total = OriginalVAlue / 0.3;
+    const total =  money > 0? (OriginalVAlue + money) / 0.3    :  OriginalVAlue / 0.3;
 
     if (pickuped === '') {
       toast.error("Have problem");
