@@ -149,7 +149,12 @@ const PickUp = ({ setPickUp, productINFO }) => {
 
             <div className="mt-2 mb-2">
                  <p>Customize????</p>
-                 <input type="checkbox"  />
+                 <input type="checkbox" onClick={isCostomize.current = true} />
+            </div>
+
+
+            <div className="mt-2 mb-2">
+             {isCostomize.current && <input type="number" className="h-[2rem] w-[5rem] border rounded" />}
             </div>
 
             <div>
