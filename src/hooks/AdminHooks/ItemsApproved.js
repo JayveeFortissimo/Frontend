@@ -66,11 +66,13 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
   }
 
   const PushToApprove = async(e,pro) =>{
-   
     e.preventDefault();
 
+    const DateNows = new Date();
       DELETE(e,pro);
       //sendSMSNotification(`+639604099126`, 'Your gown reservation has been confirmed!');
+
+
       try{
 
           const response = await fetch(`https://backend-production-024f.up.railway.app/ItemsApproved`,{
@@ -92,7 +94,7 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
                 size:pro.size,
                 subTotal:pro.subTotal,
                 code:pro.code,
-                Today:pro.Today
+                Today: new Date(Date.UTC(DateNows.getFullYear(), DateNows.getMonth(), DateNows.getDate())).toISOString().split('T')[0]
                }),
                headers:{
                   'Content-Type':'application/json'
