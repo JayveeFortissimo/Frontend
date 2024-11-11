@@ -5,7 +5,6 @@ import { BsCalendarDate, BsCalendarCheck } from "react-icons/bs";
 import { FaQrcode } from "react-icons/fa";
 import ConfirmReturn from "./ConfirmReturn.jsx";
 import Scanner from "./Scanner.jsx";
-import ReturnITEMS from '../../../hooks/AdminHooks/UserReturned.js';
 
 const ToReturn = ({ userID }) => {
   const [openConfirmation, setOpenConfirmation] = useState(false);
@@ -25,15 +24,6 @@ const ToReturn = ({ userID }) => {
     penalty: 0,
     returnID: 0
   });
-
-
-
-  useEffect(() => {
-    // Call PushHistory whenever info is updated
-    if (info.returnID !== 0) { // Ensure returnID is set before pushing
-      PushHistory(savedEvent.current,info);
-    }
-  }, [info]);
 
 
   const EmptyState = () => (
