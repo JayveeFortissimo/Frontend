@@ -17,6 +17,10 @@ const ReserveOrders = ({ userID }) => {
   const [orders, setOrders] = useState([]);
   const dispatch = useDispatch();
   
+  useEffect(() => {
+    //This is my data from database
+    setOrders(userID.data2.result);
+  }, []);
 
   const { PushToApprove, DeclineReserve } = Items_Approved(orders, setOrders, userID);
 
@@ -27,15 +31,12 @@ const ReserveOrders = ({ userID }) => {
       console.log('Connected to WebSocket');
     });
 
-
-    setOrders(userID.data2.result);
-    
-    /*
     socket.on('newCheckOut', (data) => {
       //Socket
       setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
+      dispatch(Sidebars.Activity('Reserve'));
     });
-   */
+   
 
     socket.on('deleteItem', (data) => {
       setOrders(prevOrders => prevOrders.filter(order => order.id !== data.id));
