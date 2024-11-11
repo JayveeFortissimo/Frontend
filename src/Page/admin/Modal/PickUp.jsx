@@ -152,10 +152,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
            <input type="text" name="Customize" onChange={setIsclicked(pro => !pro)} />
            </div>
 
-           {
-            isClicked && (<input type="number"  className="h-[2rem] w-[6rem] border rounded"/>)
-           }
-
+        Hello
 
             </div>
 
