@@ -44,9 +44,6 @@ const ReviewPage = () => {
 
   const stats = [
     { label: 'Total Reviews', value: testimonials.length, icon: FiMessageSquare },
-    { label: 'Average Rating', value: '4.8/5', icon: FiStar },
-    { label: 'Satisfied Customers', value: '98%', icon: FiUser },
-    { label: 'Quality Score', value: '9.5/10', icon: FiAward },
   ];
 
   return (
