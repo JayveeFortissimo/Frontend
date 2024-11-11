@@ -1,6 +1,5 @@
 import { toast } from 'react-hot-toast';
-import { Sidebars } from '../../Store/Side.js';
-import { useDispatch } from 'react-redux';
+
 
 const Items_Approved = (userID) =>{
 
@@ -104,7 +103,7 @@ const Items_Approved = (userID) =>{
 
           if(!response.ok) return toast.error("Have A server problem");
            toast.success("Items Approved!");
-           dispatch(Sidebars.Activity('History'))
+       
 
       }catch(error){
           console.log(error);
@@ -142,7 +141,7 @@ const Items_Approved = (userID) =>{
         });
 
         if(!response.ok) return console.log("Failed to Cancelled");
-        dispatch(Sidebars.Activity('Cancelled'))
+       
         
          }catch(error){
              console.log(error);
