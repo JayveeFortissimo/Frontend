@@ -43,7 +43,7 @@ const userReturnedItems = (setToReturn, toReturn) => {
     const PushHistory = async (e, pro) => {
         e.preventDefault();
 
-        console.log(pro.ID)
+        console.log("IDS" , pro.ID)
         Remove(pro.returnID);
 
         toast.success("USER RETURNED THE ITEMS");
@@ -55,7 +55,8 @@ const userReturnedItems = (setToReturn, toReturn) => {
             return_Date: pro.return_Date,
             status: pro.status,
             user_ID: pro.user_ID,
-            penalty: pro.penalty
+            penalty: pro.penalty,
+            quantity:pro.quantity
         };
 
         try {
