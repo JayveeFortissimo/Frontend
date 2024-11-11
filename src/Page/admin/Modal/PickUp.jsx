@@ -147,16 +147,22 @@ const PickUp = ({ setPickUp, productINFO }) => {
 
 
 
-            <div className="mt-2 mb-2 flex gap-6">
-                 <p>Customize</p>
-                 <input type="checkbox" onClick={isCostomize.current = true} />
-            </div>
+            <div className="mt-2 mb-2 ">
 
+              <div className="flex gap-6">
+              <p>Customize</p>
+              <input type="checkbox" onClick={isCostomize.current = true} />
+              </div>
+                
 
-            <div className="mt-2 mb-2">
+              <div className="mt-1 mb-1">
              {isCostomize.current && <input type="number" className="h-[2rem] w-[5rem] border rounded" />}
             </div>
 
+            </div>
+
+
+         
             <div>
              
             <button
