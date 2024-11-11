@@ -149,9 +149,9 @@ const PickUp = ({ setPickUp, productINFO }) => {
 
             <div className="mt-2 mb-2 ">
 
-              <div className="flex gap-6">
+              <div className="flex items-center gap-5">
               <p>Customize</p>
-              <input type="checkbox" onClick={isCostomize.current = true} />
+              <input type="checkbox" onChange={() => isCostomize.current = true}/>
               </div>
                 
 
