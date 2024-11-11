@@ -1,9 +1,10 @@
 import { toast } from 'react-hot-toast';
+import io from 'socket.io-client';
+import { useEffect } from 'react';
+
+const Items_Approved = (alldatas,setAlldata,userID) =>{
 
 
-const Items_Approved = (userID) =>{
-
-/*
      useEffect(() => {
         const socket = io('https://backend-production-024f.up.railway.app'); 
         socket.on('deleteItem', (data) => {
@@ -18,7 +19,7 @@ const Items_Approved = (userID) =>{
         };
     }, [alldatas, setAlldata]);
 
-    */
+    
 
 //! FOR SMS Message
   const sendSMSNotification = async (to, message) => {
@@ -46,6 +47,8 @@ const Items_Approved = (userID) =>{
   const DELETE = async(e,pro) =>{
 
     e.preventDefault()
+    const filtered = alldatas.filter(pros => pros.id !== pro.id);
+    setAlldata(filtered);
   
       try{
 
@@ -69,6 +72,7 @@ const Items_Approved = (userID) =>{
 
       DELETE(e,pro);
       //sendSMSNotification(`+639604099126`, 'Your gown reservation has been confirmed!');
+
 
       const DateNows = new Date();
       
