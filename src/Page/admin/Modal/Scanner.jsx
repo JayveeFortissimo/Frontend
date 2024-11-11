@@ -70,7 +70,7 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
         });
         setOpenScanner(false);
         //!OPTIONAL THIS ONE BAGUHIN MO SYA
-        window.location.reload();
+        //window.location.reload();
       }
 
     } catch (err) {

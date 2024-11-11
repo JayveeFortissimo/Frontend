@@ -7,8 +7,6 @@ import toast from 'react-hot-toast';
 const PickUp = ({ setPickUp, productINFO }) => {
 
   const [pickuped, setPickuped] = useState('');
-   console.log("Helo",productINFO.subTotal);
-  console.log(productINFO.code);
 
   useEffect(() => {
     if (pickuped === "ITEM PICKED UP ALREADY") {
