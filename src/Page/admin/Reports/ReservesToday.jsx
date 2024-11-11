@@ -176,7 +176,7 @@ const ReservesToday = ({ setTotalReserve, DashInfo }) => {
         {/* Header */}
         <div className="flex flex-col gap-4 p-6 border-b border-gray-200/50">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Total Reservations</h2>
+            <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Todays Reserve</h2>
             <button
               onClick={() => setTotalReserve(prev => ({ ...prev, 
                 ReservesTodays: false }))}
