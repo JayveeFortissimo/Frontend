@@ -97,7 +97,8 @@ const History = () => {
   const generateQRCode = async (id, text) => {
     if (qrRefs.current[id]) {
       const options = {
-        width:300,
+        width: 400,
+        height: 400,
         margin: 0,
         color: {
           dark: '#000000',
