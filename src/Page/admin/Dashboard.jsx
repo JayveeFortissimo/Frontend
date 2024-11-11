@@ -11,6 +11,7 @@ import TotalGowns from './Reports/TotalGowns';
 import SecurityDeposit from './Reports/SecurityDeposit';
 import HavePenaltys from './Reports/Cacelled';
 import PaymentStatus from './Reports/PaymentStatus';
+import ReservesToday from './Reports/ReservesToday';
 import io from 'socket.io-client';
 import jsPDF from 'jspdf';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -55,7 +56,8 @@ const Dashboard = () => {
     HavePenaltys: false,
     Notifs: false,
     PaymentStatus:false,
-    PaymentMethods:false
+    PaymentMethods:false,
+    ReservesTodays:false
   });
 
   const generatePDF = () => {
@@ -211,7 +213,7 @@ const Dashboard = () => {
       value: "adsasds",
       icon: <IoIosToday  size={24}/>,
       gradient: "from-red-500 to-blue-600",
-      onClick: () => console.log("Hello hahah")
+      onClick: () => setTotalReserve(prev => ({ ...prev, ReservesTodays: true }))
     },
 
     {
@@ -289,7 +291,7 @@ const Dashboard = () => {
 
   return (
     <>
-
+          {openTotalReserve.ReservesTodays &&  <ReservesToday setTotalReserve={setTotalReserve} DashInfo={DashInfo.data3.reservations}/>}
       {openTotalReserve.PaymentStatus && <PaymentStatus setTotalReserve={setTotalReserve} DashInfo ={DashInfo.data8} />}
       {openTotalReserve.Notifs && <Notif setTotalReserve={setTotalReserve} setNotifications={setNotifications}/>}
       {openTotalReserve.TotalReserves && <TotalReservations setTotalReserve={setTotalReserve} DashInfo={DashInfo.data3.reservations} />}
