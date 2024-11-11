@@ -216,7 +216,7 @@ const DownpaymentInstore = async (e,total) => {
       });
       const data = await response.json();
   
-      if (data && data.data) {
+      if (data && data.paymentLink) {
         
         window.location.href = data.paymentLink;
         // Store the redirect URLs in state or localStorage
