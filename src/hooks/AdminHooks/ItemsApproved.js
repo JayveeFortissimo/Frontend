@@ -68,11 +68,12 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
   const PushToApprove = async(e,pro) =>{
     e.preventDefault();
 
-    const DateNows = new Date();
       DELETE(e,pro);
       //sendSMSNotification(`+639604099126`, 'Your gown reservation has been confirmed!');
 
 
+      const DateNows = new Date();
+      
       try{
 
           const response = await fetch(`https://backend-production-024f.up.railway.app/ItemsApproved`,{
