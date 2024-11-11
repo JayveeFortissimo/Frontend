@@ -149,10 +149,13 @@ const PickUp = ({ setPickUp, productINFO }) => {
             <div className="mt-2 mb-3">
            <div>
             <p>Customize? </p>
-           <input type="text" name="Customize" onChange={setIsclicked(pro => !pro)} />
+           <input type="radio" name="Customize" onChange={setIsclicked(pro => !pro)} />
            </div>
 
-        Hello
+           {
+            isClicked && (<input type="number"  className="h-[2rem] w-[6rem] border rounded"/>)
+           }
+
 
             </div>
 
