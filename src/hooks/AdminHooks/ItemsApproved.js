@@ -70,7 +70,6 @@ const Items_Approved = (userID) =>{
       DELETE(e,pro);
       //sendSMSNotification(`+639604099126`, 'Your gown reservation has been confirmed!');
 
-
       const DateNows = new Date();
       
       try{

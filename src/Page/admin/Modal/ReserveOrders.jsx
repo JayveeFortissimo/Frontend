@@ -12,14 +12,13 @@ import Items_Approved from '../../../hooks/AdminHooks/ItemsApproved.js';
 import io from 'socket.io-client';
 
 const ReserveOrders = ({ userID }) => {
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState(userID.data2.result);
 
-  const { PushToApprove, DeclineReserve } = Items_Approved(orders, setOrders, userID);
+  const { PushToApprove, DeclineReserve } = Items_Approved(orders);
 
   useEffect(() => {
     const socket = io('https://backend-production-024f.up.railway.app');
-    setOrders(userID.data2.result);
-    
+
     socket.on('connect', () => {
       console.log('Connected to WebSocket');
     });
@@ -40,11 +39,9 @@ const ReserveOrders = ({ userID }) => {
     };
 
 
-  }, [userID]);
-
-   useEffect(() => {
-   
   }, []);
+
+ 
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
