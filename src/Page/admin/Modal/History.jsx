@@ -79,7 +79,7 @@ const History = () => {
     } else if (status === "No Show") {
       Icon = PiWarning;
       colorClasses = "bg-red-500/20 text-red-400 border border-red-500/30";
-      //DELETE
+      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11111DELETE
       setTimeout(() => {
         deletedItems(id);
         window.location.reload();
@@ -97,7 +97,7 @@ const History = () => {
   const generateQRCode = async (id, text) => {
     if (qrRefs.current[id]) {
       const options = {
-        width: 200,
+        width: 250,
         margin: 0,
         color: {
           dark: '#000000',
@@ -185,7 +185,6 @@ const History = () => {
             const istodayPickuped = dateOfNow.toDateString() === returnDate.toDateString();
             const PickupedStatus = handleGracePeriodCheck(startDate, pro.Pickuped);
 
-            console.log(pro)
             return (
               <div 
                 key={pro.id}
