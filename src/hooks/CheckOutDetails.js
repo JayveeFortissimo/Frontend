@@ -109,7 +109,6 @@ async function Payments(e,payment,Type,sameCode){
       code:sameCode,
       Today: new Date(Date.UTC(DateNows.getFullYear(), DateNows.getMonth(), DateNows.getDate())).toISOString().split('T')[0]
      }));
-
        
           try{
 

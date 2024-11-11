@@ -91,7 +91,8 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
                 quantity:pro.quantity,
                 size:pro.size,
                 subTotal:pro.subTotal,
-                code:pro.code
+                code:pro.code,
+                Today:pro.Today
                }),
                headers:{
                   'Content-Type':'application/json'

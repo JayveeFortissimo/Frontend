@@ -5,6 +5,6 @@ const ReservesToday = () => {
         HAHAHHAAHAHA
     </div>
   )
-}
+}                           
 
 export default ReservesToday;
