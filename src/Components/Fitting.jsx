@@ -140,6 +140,7 @@ const Fitting = ({ setOpenFitting }) => {
       flex items-center p-3 border rounded-lg cursor-pointer transition-all duration-200
       ${formData.times === value && !disabled ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}
       ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-blue-200'}
+      w-full sm:w-auto
     `}>
       <input
         type="radio"
@@ -150,20 +151,23 @@ const Fitting = ({ setOpenFitting }) => {
         disabled={disabled}
         className="hidden"
       />
-      <span className={`${formData.times === value && !disabled ? 'text-blue-700' : 'text-gray-700'}`}>
+      <span className={`
+        ${formData.times === value && !disabled ? 'text-blue-700' : 'text-gray-700'}
+        text-sm sm:text-base w-full text-center
+      `}>
         {label}
       </span>
     </label>
   );
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 flex items-center justify-center z-50 p-2 sm:p-4">
       <div className="fixed inset-0 bg-black/20 backdrop-blur-sm" onClick={() => setOpenFitting(false)} />
       
-      <div className="relative w-full max-w-2xl bg-white rounded-xl shadow-xl">
-        <div className="p-6">
-          <div className="flex items-center justify-between pb-4 border-b">
-            <h2 className="text-xl font-semibold">Schedule Fitting Appointment</h2>
+      <div className="relative w-full max-w-2xl bg-white rounded-xl shadow-xl overflow-y-auto max-h-[90vh]">
+        <div className="p-4 sm:p-6">
+          <div className="flex items-center justify-between pb-4 border-b sticky top-0 bg-white z-10">
+            <h2 className="text-lg sm:text-xl font-semibold">Schedule Fitting Appointment</h2>
             <button
               onClick={() => setOpenFitting(false)}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -172,50 +176,50 @@ const Fitting = ({ setOpenFitting }) => {
             </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="mt-6 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+          <form onSubmit={handleSubmit} className="mt-4 sm:mt-6 space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
                   Full Name
                 </label>
                 <input
                   type="text"
                   value={formData.fname}
                   onChange={e => handleChange('fname', e.target.value)}
-                  className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full p-2.5 sm:p-3 text-sm sm:text-base border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter your full name"
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
                   Contact Number
                 </label>
                 <input
                   type="tel"
                   value={formData.contact}
                   onChange={e => handleChange('contact', e.target.value)}
-                  className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full p-2.5 sm:p-3 text-sm sm:text-base border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter your contact number"
                 />
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
                 Email Address
               </label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={e => handleChange('email', e.target.value)}
-                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full p-2.5 sm:p-3 text-sm sm:text-base border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter your email address"
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
                 Preferred Date
               </label>
               <DatePicker
@@ -223,15 +227,15 @@ const Fitting = ({ setOpenFitting }) => {
                 onChange={date => handleChange('startDate', date)}
                 minDate={new Date()}
                 dateFormat="MMMM d, yyyy"
-                className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full p-2.5 sm:p-3 text-sm sm:text-base border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
                 Preferred Time
               </label>
-              <div className="space-y-3">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
                 <TimeSlot 
                   value="morning" 
                   label="Morning (9AM - 12PM)"
@@ -250,17 +254,17 @@ const Fitting = ({ setOpenFitting }) => {
               </div>
             </div>
 
-            <div className="p-4 bg-gray-50 rounded-lg">
-              <h3 className="font-medium text-gray-900 mb-1">Store Location</h3>
-              <p className="text-gray-600 text-[0.9rem]">JP Rizal poblacion, Santa Maria, Bulacan</p>
-              <p className="text-gray-600 text-[0.9rem]">09604099126</p>
+            <div className="p-3 sm:p-4 bg-gray-50 rounded-lg space-y-1">
+              <h3 className="font-medium text-gray-900 text-sm sm:text-base">Store Location</h3>
+              <p className="text-gray-600 text-xs sm:text-sm">JP Rizal poblacion, Santa Maria, Bulacan</p>
+              <p className="text-gray-600 text-xs sm:text-sm">09604099126</p>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
               className={`
-                w-full p-3 rounded-lg font-medium transition-colors
+                w-full p-2.5 sm:p-3 rounded-lg font-medium transition-colors text-sm sm:text-base
                 ${isSubmitting ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white'}
               `}
             >
