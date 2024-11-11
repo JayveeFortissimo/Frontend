@@ -9,7 +9,6 @@ import toast from 'react-hot-toast';
 const PickUp = ({ setPickUp, productINFO }) => {
 
   const [pickuped, setPickuped] = useState('');
-  const [isClicked, setIsclicked] = useState(false);
 
   const dispatch = useDispatch();
   
@@ -145,19 +144,6 @@ const PickUp = ({ setPickUp, productINFO }) => {
               </div>
             </div>
 
-
-            <div className="mt-2 mb-3">
-           <div>
-            <p>Customize? </p>
-           <input type="radio" name="Customize" onChange={setIsclicked(pro => !pro)} />
-           </div>
-
-           {
-            isClicked && (<input type="number"  className="h-[2rem] w-[6rem] border rounded"/>)
-           }
-
-
-            </div>
 
             <div>
              
