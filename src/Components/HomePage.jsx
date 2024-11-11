@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import { BsArrowRight, BsInstagram, BsPinterest, BsFacebook } from 'react-icons/bs';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useRouteLoaderData} from 'react-router-dom';
 import MostPicked from '../hooks/MostPicked.js';
+import toast from 'react-hot-toast';
 
 const GridBackground = () => (
   <div className="absolute inset-0 overflow-hidden">
@@ -142,7 +143,8 @@ const BackgroundPattern = () => (
   </div>
 );
 const HomePage = () => {
-
+    const isLogin = useRouteLoaderData('root');
+    
     const navigate = useNavigate();
     const { mostPicked } = MostPicked();
 
@@ -293,6 +295,9 @@ const HomePage = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={()=>{
+                !isLogin? navigate('/login'): toast.success("Please Add item first")
+              }}
               className="px-8 py-3 bg-black hover:bg-gray-900 text-white rounded-full transition-colors inline-flex items-center space-x-2"
             >
               <span>Schedule Appointment</span>
