@@ -34,8 +34,9 @@ const Check_Out = () => {
     const [onUse,setOnuse] = useState(true);
  
     const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
-   const allGownSecurity = allOrders.length;
-   console.log(allGownSecurity)
+    //length ng gowns in array
+    const allGownSecurity = allOrders.length;
+
     const TotalsAll = displayDiscount ? (parseInt(total) + (200 * allGownSecurity)) * 0.95 : parseInt(total) + (200 * allGownSecurity);
     const OriginalValue = parseInt(total) + 200;
 
@@ -50,11 +51,11 @@ const Check_Out = () => {
         {allPoints.totalReferred >= 5 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio} setIsRadio={setIsRadio}/>}
 
 
-            {isdown && <DownpaymentG setDown={setDown} Gcash={Gcash} total={total}/>}
+            {isdown && <DownpaymentG setDown={setDown} Gcash={Gcash} total={total} allGownSecurity={allGownSecurity}/>}
             
-            {gcash && <ConfirmGcash setGcash={setGcash} total={total} setDown={setDown}/>}
+            {gcash && <ConfirmGcash setGcash={setGcash} total={total} setDown={setDown} allGownSecurity={allGownSecurity}/>}
             
-            {downPay && <DownPayment setDownpayment={setDownpayment} DownpaymentInstore={DownpaymentInstore} total={total} />}
+            {downPay && <DownPayment setDownpayment={setDownpayment} DownpaymentInstore={DownpaymentInstore} total={total} allGownSecurity={allGownSecurity} />}
             
             <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">

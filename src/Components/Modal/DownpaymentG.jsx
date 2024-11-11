@@ -4,16 +4,16 @@ import { AiOutlineCreditCard, AiOutlineClose } from 'react-icons/ai';
 import Referalpoints from '../../hooks/Referalpoints.js';
 
 
-const DownpaymentG = ({ setDown, Gcash, total }) => {
+const DownpaymentG = ({ setDown, Gcash, total, allGownSecurity }) => {
   
   const { Refresh } = Referalpoints();
   const [selectedOption, setSelectedOption] = useState(null);
   const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
  
   const Totals =  selectedOption === "downpayment"? 
-                  displayDiscount? ((parseInt(total) + 200) * 0.30) * 0.95 : (parseInt(total) + 200) * 0.30
+                  displayDiscount? ((parseInt(total) + (200 * allGownSecurity)) * 0.30) * 0.95 : (parseInt(total) + (200 * allGownSecurity)) * 0.30
                   :
-                   displayDiscount?    ((parseInt(total) + 200)*0.95)   :   (parseInt(total) + 200)
+                   displayDiscount?    ((parseInt(total) + (200 * allGownSecurity))*0.95)   :   (parseInt(total) + (200 * allGownSecurity))
 
    
 

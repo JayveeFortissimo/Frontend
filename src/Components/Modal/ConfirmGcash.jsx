@@ -2,9 +2,9 @@ import { VscChromeClose } from "react-icons/vsc";
 import { FaWallet } from "react-icons/fa";
 import { HiArrowRight } from "react-icons/hi";
 
-const ConfirmGcash = ({ setGcash, total, setDown }) => {
+const ConfirmGcash = ({ setGcash, total, setDown, allGownSecurity }) => {
   const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
-  const TotalsAll =  displayDiscount? (parseInt(total) + 200) * 0.95: parseInt(total)+ 200;
+  const TotalsAll =  displayDiscount? (parseInt(total) + (200 * allGownSecurity)) * 0.95: parseInt(total)+ (200 * allGownSecurity);
 
   return (
 

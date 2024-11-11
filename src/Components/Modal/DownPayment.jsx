@@ -4,10 +4,10 @@ import { BsCashStack } from "react-icons/bs";
 import { HiArrowRight } from "react-icons/hi";
 import Referalpoints from '../../hooks/Referalpoints.js';
 
-const DownPayment = ({ setDownpayment, DownpaymentInstore, total }) => {
+const DownPayment = ({ setDownpayment, DownpaymentInstore, total, allGownSecurity }) => {
   
   const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
-  const downpaymentAmount = (parseInt(total) + 200) * 0.30;
+  const downpaymentAmount = (parseInt(total) + (200 * allGownSecurity)) * 0.30;
 
   const TotalsAll =  displayDiscount? downpaymentAmount * 0.95 : downpaymentAmount;
 
