@@ -31,7 +31,18 @@ const ReserveOrders = ({ userID }) => {
       setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
     });
 
-    return () => socket.disconnect();
+
+    socket.on('deleteItem', (data) => {
+      setOrders(prevOrders => prevOrders.filter(order => order.id !== data.id));
+  });
+
+    return () => {
+      socket.disconnect();
+      socket.off('deleteItem');
+      socket.off('newCheckOut');
+    };
+
+
   }, []);
 
   const formatDate = (dateString) => {

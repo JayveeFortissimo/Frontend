@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 const Items_Approved = (alldatas,setAlldata,userID) =>{
 
-
+/*
      useEffect(() => {
         const socket = io('https://backend-production-024f.up.railway.app'); 
         socket.on('deleteItem', (data) => {
@@ -18,6 +18,8 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
             socket.off('deleteItem');
         };
     }, [alldatas, setAlldata]);
+
+    */
 
 //! FOR SMS Message
   const sendSMSNotification = async (to, message) => {

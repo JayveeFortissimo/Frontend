@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { FaBox, FaUser, FaCalendarAlt } from "react-icons/fa";
 import { TbRulerMeasure } from "react-icons/tb";
 import { Sidebars } from "../../../Store/Side.js";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 
 const PickUp = ({ setPickUp, productINFO }) => {
@@ -11,6 +11,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
   const [pickuped, setPickuped] = useState('');
   
   const dispatch = useDispatch();
+  
   useEffect(() => {
     if (pickuped === "ITEM PICKED UP ALREADY") {
         //sendSMSNotification(`+639604099126`, 'YOU PICKUPED THE ITEMS ALREADY!');
