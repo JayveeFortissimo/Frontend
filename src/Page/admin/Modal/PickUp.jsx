@@ -149,8 +149,8 @@ const PickUp = ({ setPickUp, productINFO }) => {
 
             <div className="mt-2 mb-2">
                  <p>Customize????</p>
+                 <input type="checkbox"  />
             </div>
- ccczczx
 
             <div>
              
