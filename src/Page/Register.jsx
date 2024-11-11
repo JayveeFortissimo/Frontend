@@ -43,13 +43,20 @@ export const regista = async({request, params}) =>{
   
       const data = await response.json();
   
-     localStorage.setItem("SID",data.id)
-  
+             
       if(!response.ok){
         console.log("Cannot Submit");
         return null;
       };
+
+      if (!data || typeof data.id === 'undefined') {
+        throw new Error("Invalid response data: No ID returned");
+    }
+
+    if(data.message === "Account already exists") return toast.error("ACCOUNT ALREADY EXIST");
   
+      console.log(data.id)
+      localStorage.setItem("SID",data.id);
       toast.success("Register Successfully");
      
       return redirect('/sizing_Form');

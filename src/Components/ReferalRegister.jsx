@@ -233,6 +233,9 @@ export const registas = async ({ request, params }) => {
             throw new Error("Invalid response data: No ID returned");
         }
 
+        if(responseData.message === "Account already exists") return toast.error("ACCOUNT ALREADY EXIST");
+  
+
         localStorage.setItem("SID", responseData.id);
         toast.success("Registered Successfully");
         return redirect('/sizing_Form');
