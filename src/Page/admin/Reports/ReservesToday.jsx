@@ -63,7 +63,7 @@ const ReservesToday = ({ setTotalReserve, DashInfo }) => {
     // Title
     doc.setTextColor(255, 255, 255); // White text
     doc.setFontSize(16);
-    addCenteredText('General Total Reservations Report', 10);
+    addCenteredText('General Total Todays Reserve Report', 10);
     
     // Reset text color to black
     doc.setTextColor(0, 0, 0);
