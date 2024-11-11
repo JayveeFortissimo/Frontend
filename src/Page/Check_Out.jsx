@@ -50,7 +50,6 @@ const Check_Out = () => {
 
         {allPoints.totalReferred >= 5 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio} setIsRadio={setIsRadio}/>}
 
-
             {isdown && <DownpaymentG setDown={setDown} Gcash={Gcash} total={total} allGownSecurity={allGownSecurity}/>}
             
             {gcash && <ConfirmGcash setGcash={setGcash} total={total} setDown={setDown} allGownSecurity={allGownSecurity}/>}

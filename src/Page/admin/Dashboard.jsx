@@ -208,7 +208,7 @@ const Dashboard = () => {
 
     {
       title: "Todays Rented",
-      value: DashInfo.data3.totalReservations,
+      value: "adsasds",
       icon: <IoIosToday  size={24}/>,
       gradient: "from-red-500 to-blue-600",
       onClick: () => console.log("Hello hahah")

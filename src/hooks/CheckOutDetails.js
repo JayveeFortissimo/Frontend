@@ -89,6 +89,8 @@ async function Payments(e,payment,Type,sameCode){
   //For CheckOut Processes push on the database Table Check_out
  async function CheckOUtss(e, payment, sameCode, totals){
     e.preventDefault();
+
+    const DateNows = new Date();
   
     const Datas =  allOrders.map(pro =>({
       picture:pro.picture,
@@ -104,7 +106,8 @@ async function Payments(e,payment,Type,sameCode){
       status:"Waiting for approval",
       PD:payment,
       item_id:pro.product_ID,
-      code:sameCode
+      code:sameCode,
+      Today: new Date(Date.UTC(DateNows.getFullYear(), DateNows.getMonth(), DateNows.getDate())).toISOString().split('T')[0]
      }));
 
        
