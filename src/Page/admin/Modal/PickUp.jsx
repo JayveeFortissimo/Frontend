@@ -10,9 +10,9 @@ const PickUp = ({ setPickUp, productINFO }) => {
 
   const [pickuped, setPickuped] = useState('');
   const dispatch = useDispatch();
-    
   const [isCustomize, setIsCustomize] = useState(false);
-
+  const [money, setMoney] = useState(0);
+  console.log(money)
   useEffect(() => {
     if (pickuped === "ITEM PICKED UP ALREADY") {
         //sendSMSNotification(`+639604099126`, 'YOU PICKUPED THE ITEMS ALREADY!');
@@ -156,7 +156,10 @@ const PickUp = ({ setPickUp, productINFO }) => {
                 
 
               <div className="mt-1 mb-1">
-             {isCustomize && <input type="number" className="h-[2rem] w-[13rem] border px-2 border-black rounded" />}
+             {isCustomize && <input type="number" 
+             className="h-[2rem] w-[13rem] border px-2 border-black rounded" 
+             onChange={e => setMoney(e.target.value)}
+             />}
             </div>
 
             </div>
