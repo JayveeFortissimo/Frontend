@@ -4,8 +4,36 @@ import jsPDF from "jspdf";
 import AdminProfile from '../../../hooks/AdminHooks/AdminProfile.js';
 
 
-
 const ReservesToday = () => {
+
+    const [searchQuery, setSearchQuery] = useState('');
+    const {profile} = AdminProfile();
+    // Group reservations by CustomerID
+    const groupedReservations = useMemo(() => {
+      return DashInfo.reduce((acc, reservation) => {
+        if (!acc[reservation.CustomerID]) {
+          acc[reservation.CustomerID] = {
+            customerInfo: {
+              name: reservation.name,
+              id: reservation.CustomerID,
+            },
+            reservations: []
+          };
+        }
+        acc[reservation.CustomerID].reservations.push(reservation);
+        return acc;
+      }, {});
+    }, [DashInfo]);
+  
+    // Filter customers based on search query
+    const filteredCustomers = useMemo(() => {
+      return Object.values(groupedReservations).filter(userData =>
+        userData.customerInfo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        userData.customerInfo.id.toString().includes(searchQuery)
+      );
+    }, [groupedReservations, searchQuery]);
+
+    
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           {/* Backdrop with stronger blur effect */}
