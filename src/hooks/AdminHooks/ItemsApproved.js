@@ -1,25 +1,9 @@
 import { toast } from 'react-hot-toast';
-import io from 'socket.io-client';
-import { useEffect } from 'react';
 
 const Items_Approved = (alldatas,setAlldata,userID) =>{
 
 
-     useEffect(() => {
-        const socket = io('https://backend-production-024f.up.railway.app'); 
-        socket.on('deleteItem', (data) => {
-            const filtered = alldatas.filter(pros => pros.id !== data.id);
-            setAlldata(filtered);
-            toast.success('Item deleted successfully via WebSocket!');
-        });
 
-        // Clean up socket connection
-        return () => {
-            socket.off('deleteItem');
-        };
-    }, [alldatas, setAlldata]);
-
-    
 
 //! FOR SMS Message
   const sendSMSNotification = async (to, message) => {
@@ -47,8 +31,6 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
   const DELETE = async(e,pro) =>{
 
     e.preventDefault()
-    const filtered = alldatas.filter(pros => pros.id !== pro.id);
-    setAlldata(filtered);
   
       try{
 
