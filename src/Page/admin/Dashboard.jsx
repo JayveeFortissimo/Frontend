@@ -211,7 +211,7 @@ const Dashboard = () => {
   let NumberTodays;
   const Datenow = new Date();
 
-  DashInfo.data3.totalReservations.forEach(pro => {
+  DashInfo.data3.reservations.forEach(pro => {
       if(pro.Today === Datenow){
         NumberTodays = DashInfo.data3.totalReservations.length
       }
