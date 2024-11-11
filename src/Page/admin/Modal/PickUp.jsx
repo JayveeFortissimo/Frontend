@@ -11,7 +11,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
   const [pickuped, setPickuped] = useState('');
   const dispatch = useDispatch();
     
- const isCostomize = useRef(false);
+  const [isCustomize, setIsCustomize] = useState(false);
 
   useEffect(() => {
     if (pickuped === "ITEM PICKED UP ALREADY") {
@@ -151,12 +151,12 @@ const PickUp = ({ setPickUp, productINFO }) => {
 
               <div className="flex items-center gap-5">
               <p>Customize</p>
-              <input type="checkbox" onChange={() => isCostomize.current = true}/>
+              <input type="checkbox" onChange={() => setIsCustomize(pro = !pro)}/>
               </div>
                 
 
               <div className="mt-1 mb-1">
-             {isCostomize.current && <input type="number" className="h-[2rem] w-[5rem] border rounded" />}
+             {isCustomize.current && <input type="number" className="h-[2rem] w-[5rem] border rounded" />}
             </div>
 
             </div>
