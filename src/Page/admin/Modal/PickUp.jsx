@@ -50,7 +50,6 @@ const PickUp = ({ setPickUp, productINFO }) => {
       toast.error("Have problem");
     } else {
 
-
       try {
         const response = await fetch(`https://backend-production-024f.up.railway.app/itemPickuped/${productINFO.approvedID}`, {
           method: "PUT",
@@ -65,6 +64,8 @@ const PickUp = ({ setPickUp, productINFO }) => {
         });
 
         if (!response.ok) return toast.error("NOT PICKED UP");
+
+        setPickUp(false);
         return toast.success("USER PICKED UP ITEMS");
       } catch (error) {
         console.log(error);
