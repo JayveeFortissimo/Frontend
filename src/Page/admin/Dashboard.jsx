@@ -210,7 +210,7 @@ const Dashboard = () => {
 
 
 
-  consol.log(DashInfo.data9.totalReservations)
+  console.log(DashInfo.data9.totalReservations)
 
   const cardData = [
 
