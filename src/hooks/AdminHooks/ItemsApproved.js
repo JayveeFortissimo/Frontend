@@ -1,8 +1,7 @@
 import { toast } from 'react-hot-toast';
-import io from 'socket.io-client';
-import { useEffect } from 'react';
 
-const Items_Approved = (alldatas,setAlldata,userID) =>{
+
+const Items_Approved = (userID) =>{
 
 /*
      useEffect(() => {
@@ -47,8 +46,6 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
   const DELETE = async(e,pro) =>{
 
     e.preventDefault()
-    const filtered = alldatas.filter(pros => pros.id !== pro.id);
-    setAlldata(filtered);
   
       try{
 
