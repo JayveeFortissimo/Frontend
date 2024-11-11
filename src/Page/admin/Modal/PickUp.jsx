@@ -149,7 +149,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
             <div className="mt-2 mb-3">
            <div>
             <p>Customize? </p>
-           <input type="text" name="Customize" onChange={setIsclicked(false)} />
+           <input type="text" name="Customize" onChange={setIsclicked(pro => !pro)} />
            </div>
 
            {
