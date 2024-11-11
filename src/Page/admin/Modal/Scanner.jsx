@@ -123,7 +123,7 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
               <div
                 id={qrCodeRegionId}
                 className="overflow-hidden rounded-2xl border-2 border-blue-500/30 bg-gray-800/50"
-                style={{ width: "70%", maxWidth: "300px", margin: "auto" }}
+                style={{ width: "90%", maxWidth: "300px", margin: "auto" }}
               />
             </div>
 
