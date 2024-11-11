@@ -4,7 +4,7 @@ import jsPDF from "jspdf";
 import AdminProfile from '../../../hooks/AdminHooks/AdminProfile.js';
 
 
-const ReservesToday = () => {
+const ReservesToday = ({ setTotalReserve, DashInfo }) => {
 
     const [searchQuery, setSearchQuery] = useState('');
     const {profile} = AdminProfile();
