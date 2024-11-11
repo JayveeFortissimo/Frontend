@@ -215,7 +215,7 @@ const Dashboard = () => {
   
   DashInfo.data3.reservations.forEach(pro => {
       if (pro.Today === todayDateString) {
-          NumberTodays++; // Increment NumberTodays when pro.Today matches today's date
+       NumberTodays =  DashInfo.data3.reservations.length
       }
   });
 
