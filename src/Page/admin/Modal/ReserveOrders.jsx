@@ -25,6 +25,7 @@ const ReserveOrders = ({ userID }) => {
 
     socket.on('newCheckOut', (data) => {
       setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
+      setOrders(userID.data2.result);
     });
 
 
@@ -42,7 +43,7 @@ const ReserveOrders = ({ userID }) => {
   }, [userID]);
 
   useEffect(() => {
-    setOrders(userID.data2.result);
+  
   }, []);
 
   const formatDate = (dateString) => {
