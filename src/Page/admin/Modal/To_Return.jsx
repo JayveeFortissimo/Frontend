@@ -9,12 +9,11 @@ import ReturnITEMS from '../../../hooks/AdminHooks/UserReturned.js';
 
 const ToReturn = ({ userID }) => {
   const [openConfirmation, setOpenConfirmation] = useState(false);
-  const ItemID = useRef(0);
+ // const ItemID = useRef(0);
   const savedEvent = useRef(null);
   const { toReturn, setToReturn } = History(userID.data1[0].id);
   const [openScanner, setOpenScanner] = useState(false);
 
-  const { PushHistory } = ReturnITEMS(setToReturn, toReturn);
 
   const [info, setInfo] = useState({
     product_Name: "",
@@ -26,6 +25,7 @@ const ToReturn = ({ userID }) => {
     penalty: 0,
     returnID: 0
   });
+
 
 
   useEffect(() => {
@@ -140,9 +140,7 @@ const ToReturn = ({ userID }) => {
 
 
           <button  
-           onClick={(e)=>{
-            ItemID.current = item.id; // Update the current item ID
-            savedEvent.current = e
+           onClick={()=>{
             setInfo({
               product_Name: item.product_Name,
               picture: item.picture,
@@ -151,9 +149,9 @@ const ToReturn = ({ userID }) => {
               status: item.status,
               user_ID: userID.data1[0].id,
               penalty: totalPenalty,
-              returnID: ItemID.current // Set returnID to the current item ID
+              returnID: item.id// Set returnID to the current item ID
             });
-         
+            setOpenConfirmation(true);
            }}
           className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 border border-blue-500/30 hover:border-purple-500/30 text-blue-400 hover:text-purple-400 transition-all duration-300">
           Order complete
