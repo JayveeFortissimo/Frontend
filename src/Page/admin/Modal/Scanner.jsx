@@ -104,7 +104,7 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
   return (
     <div className="font-sans">
       <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex justify-center py-3">
-        <div className="mt-16 relative h-[45rem] overflow-auto w-full max-w-md bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white rounded-3xl shadow-2xl border border-gray-700/50">
+        <div className="mt-16 relative h-[50rem] overflow-auto w-full max-w-md bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white rounded-3xl shadow-2xl border border-gray-700/50">
           <div className="relative p-6 border-b border-gray-700/50">
             <h2 className="text-2xl font-bold text-center flex items-center justify-center gap-3">
               <RiQrScanLine className="text-blue-400" />
