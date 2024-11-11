@@ -213,7 +213,7 @@ const Dashboard = () => {
 
   DashInfo.data3.reservations.forEach(pro => {
       if(pro.Today === Datenow){
-        NumberTodays = DashInfo.data3.totalReservations.length
+        NumberTodays = DashInfo.data3.reservations.length
       }
   })
 
