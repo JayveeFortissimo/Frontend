@@ -208,21 +208,22 @@ const Dashboard = () => {
 
 
 
-  let NumberTodays;
+  let NumberTodays = 0; // Initialize NumberTodays to 0
+
   const Datenow = new Date();
-
+  const todayDateString = Datenow.toISOString().split('T')[0]; // Get today's date in "yyyy-mm-dd" format
+  
   DashInfo.data3.reservations.forEach(pro => {
-      if(pro.Today === Datenow){
-        NumberTodays = DashInfo.data3.reservations.length
+      if (pro.Today === todayDateString) {
+          NumberTodays++; // Increment NumberTodays when pro.Today matches today's date
       }
-  })
-
+  });
 
   const cardData = [
 
     {
       title: "Todays Rented",
-      value:  parseInt(NumberTodays),
+      value: NumberTodays,
       icon: <IoIosToday  size={24}/>,
       gradient: "from-red-500 to-blue-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, ReservesTodays: true }))
