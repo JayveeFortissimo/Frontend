@@ -28,7 +28,9 @@ const Dashboard = () => {
     const [rentalE,setRentalE] = useState(DashInfo.data5);
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
     const [securityDeposit, setSecurityDeposit] = useState(DashInfo.data2);
-    console.log(securityDeposit);
+ 
+
+
   const filterData = (month) => {
     let filtered;
     if (month === 'All Months') {
@@ -208,7 +210,7 @@ const Dashboard = () => {
 
 
 
-  
+  consol.log(DashInfo.data9.totalReservations)
 
   const cardData = [
 
