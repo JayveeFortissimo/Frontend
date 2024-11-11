@@ -208,26 +208,13 @@ const Dashboard = () => {
 
 
 
-  let NumberTodays = 0; // Initialize NumberTodays to 0
-
-  const currentDate = new Date();
-const todayDateString = currentDate.toISOString().split('T')[0]; // Get today's date in "yyyy-mm-dd" format
-
-DashInfo.data3.reservations.forEach(pro => {
-    // Assuming pro.Today is in "yyyy/mm/dd" format based on your example
-    const proDateParts = pro.Today.split('/');
-    const proDate = new Date(proDateParts[0], proDateParts[1] - 1, proDateParts[2]); // Month is zero-indexed in JavaScript Dates
-
-    if (proDate.toISOString().split('T')[0] === todayDateString) {
-        NumberTodays++;
-    }
-});
+  
 
   const cardData = [
 
     {
       title: "Todays Rented",
-      value: NumberTodays,
+      value: "Waits",
       icon: <IoIosToday  size={24}/>,
       gradient: "from-red-500 to-blue-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, ReservesTodays: true }))
