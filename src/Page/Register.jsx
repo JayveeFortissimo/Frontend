@@ -44,11 +44,11 @@ export const regista = async({request, params}) =>{
       const data = await response.json();
   
              
-      if(!response.ok){
-        console.log("Cannot Submit");
+      if (!response.ok) {
+        console.log("Cannot Submit:", data.message || "Unknown error");
+        toast.error("Registration failed: " + (data.message || "Unknown error"));
         return null;
-      };
-
+    }
       if (!data || typeof data.id === 'undefined') {
         throw new Error("Invalid response data: No ID returned");
     }
