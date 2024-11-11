@@ -156,7 +156,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
                 
 
               <div className="mt-1 mb-1">
-             {isCustomize && <input type="number" className="h-[2rem] w-[10rem] border rounded" />}
+             {isCustomize && <input type="number" className="h-[2rem] w-[13rem] border px-2 border-black rounded" />}
             </div>
 
             </div>
