@@ -48,7 +48,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
     
      const OriginalVAlue = productINFO.subTotal;
      const code = productINFO.code
-    const total =  money > 0? (OriginalVAlue + parseInt(money)) / 0.3    :  OriginalVAlue / 0.3;
+    const total =  parseInt(money) > 0? (OriginalVAlue + parseInt(money)) / 0.3    :  OriginalVAlue / 0.3;
 
     if (pickuped === '') {
       toast.error("Have problem");
