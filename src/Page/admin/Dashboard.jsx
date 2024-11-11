@@ -214,7 +214,7 @@ const Dashboard = () => {
 
     {
       title: "Todays Rented",
-      value: "Waits",
+      value:  DashInfo.data9.totalReservations,
       icon: <IoIosToday  size={24}/>,
       gradient: "from-red-500 to-blue-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, ReservesTodays: true }))
@@ -295,7 +295,7 @@ const Dashboard = () => {
 
   return (
     <>
-          {openTotalReserve.ReservesTodays &&  <ReservesToday setTotalReserve={setTotalReserve} DashInfo={DashInfo.data3.reservations}/>}
+          {openTotalReserve.ReservesTodays &&  <ReservesToday setTotalReserve={setTotalReserve} DashInfo={DashInfo.data9.reservations}/>}
       {openTotalReserve.PaymentStatus && <PaymentStatus setTotalReserve={setTotalReserve} DashInfo ={DashInfo.data8} />}
       {openTotalReserve.Notifs && <Notif setTotalReserve={setTotalReserve} setNotifications={setNotifications}/>}
       {openTotalReserve.TotalReserves && <TotalReservations setTotalReserve={setTotalReserve} DashInfo={DashInfo.data3.reservations} />}
@@ -434,7 +434,8 @@ export const Dash = async() => {
       'totalIncome',
       'AllCancelled',
       'AllTrends',
-      'PaymentStatus'
+      'PaymentStatus',
+      'Today'
     ];
 
     const responses = await Promise.all(
@@ -456,7 +457,8 @@ export const Dash = async() => {
       RentalIncome,
       AllCacelled,
       TrendsAll,
-      PaymentStatus
+      PaymentStatus,
+      Today
     ] = await Promise.all(responses.map(response => response.json()));
 
     return {
@@ -467,7 +469,8 @@ export const Dash = async() => {
       data5: RentalIncome,
       data6: AllCacelled,
       data7: TrendsAll,
-      data8: PaymentStatus
+      data8: PaymentStatus,
+      data9: Today
     };
   } catch (error) {
     console.log(error);
