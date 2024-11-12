@@ -5,8 +5,9 @@ import AdminProfile from '../../../hooks/AdminHooks/AdminProfile.js';
 
 const ReservesToday = ({ setTotalReserve, DashInfo }) => {
   const [searchQuery, setSearchQuery] = useState('');
+
   const {profile} = AdminProfile();
-  // Group reservations by CustomerID
+ 
   const groupedReservations = useMemo(() => {
     return DashInfo.reduce((acc, reservation) => {
       if (!acc[reservation.CustomerID]) {
