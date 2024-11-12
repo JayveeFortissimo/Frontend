@@ -291,7 +291,7 @@ const Dashboard = () => {
     socket.on('Today', (element) => {
       setReserveToday({
           totalReservations: element.totalReservations,
-          reservations: element.reservations
+       //   reservations: element.reservations
       });
   });
     return () => {
