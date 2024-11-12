@@ -28,8 +28,9 @@ const Dashboard = () => {
     const [rentalE,setRentalE] = useState(DashInfo.data5);
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
     const [securityDeposit, setSecurityDeposit] = useState(DashInfo.data2);
-    const [reserveToday,setReserveToday] = useState();
+    const [reserveToday,setReserveToday] = useState(DashInfo.data9);
  
+
     console.log(DashInfo)
 
   const filterData = (month) => {
@@ -214,7 +215,7 @@ const Dashboard = () => {
 
     {
       title: "Todays Rented",
-      value:  DashInfo.data9.totalReservations,
+      value:  reserveToday.totalReservations,
       icon: <IoIosToday  size={24}/>,
       gradient: "from-red-500 to-blue-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, ReservesTodays: true }))
@@ -227,6 +228,7 @@ const Dashboard = () => {
       gradient: "from-blue-500 to-blue-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, TotalReserves: true }))
     },
+
     {
       title: "Available Gowns",
       value: DashInfo.data1.SumAll.totalQuantity,
@@ -286,6 +288,17 @@ const Dashboard = () => {
          setNotifications(true);
     });
 
+
+    socket.on('Today', (element)=>{
+     setReserveToday(pro =>{
+      return{
+        ...pro,
+        totalReservations: element.totalReservations,
+        reservations: element.reservations
+      }
+     })
+    })
+
     return () => {
       socket.disconnect();
     };
@@ -295,7 +308,7 @@ const Dashboard = () => {
 
   return (
     <>
-          {openTotalReserve.ReservesTodays &&  <ReservesToday setTotalReserve={setTotalReserve} DashInfo={DashInfo.data9.reservations}/>}
+      {openTotalReserve.ReservesTodays &&  <ReservesToday setTotalReserve={setTotalReserve} DashInfo={reserveToday.reservations}/>}
       {openTotalReserve.PaymentStatus && <PaymentStatus setTotalReserve={setTotalReserve} DashInfo ={DashInfo.data8} />}
       {openTotalReserve.Notifs && <Notif setTotalReserve={setTotalReserve} setNotifications={setNotifications}/>}
       {openTotalReserve.TotalReserves && <TotalReservations setTotalReserve={setTotalReserve} DashInfo={DashInfo.data3.reservations} />}
