@@ -209,9 +209,6 @@ const Dashboard = () => {
   };
 
 
-
-  console.log(DashInfo.data9.totalReservations)
-
   const cardData = [
 
     {
