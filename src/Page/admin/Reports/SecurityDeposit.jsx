@@ -9,31 +9,31 @@ import io from 'socket.io-client';
 const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
   const [selectedDeposit, setSelectedDeposit] = useState(null);
   const [showReturnModal, setShowReturnModal] = useState(false);
- const [allDatas,setAlldatas] = useState([]);
- const code = useRef("");
-console.log(DashInfo)
- useEffect(() => {
-      const socket = io('https://backend-production-024f.up.railway.app');
+  const [allDatas,setAlldatas] = useState([]);
+  const code = useRef("");
 
-        setAlldatas(DashInfo);
+    useEffect(() => {
+          const socket = io('https://backend-production-024f.up.railway.app');
 
-        socket.on("securityUpdated", (updatedData) => {
-          setAlldatas((prevData) =>
-            prevData.map((item) =>
-              item.Code === updatedData.code ? { ...item, Security: updatedData.Security } : item
-            )
-          );
+            setAlldatas(DashInfo);
 
-          setSecurityDeposit(pre =>(
-            {
-              ...pre,
-              TotalIncomes: pre.TotalIncomes - 200
-            }
-          ))
-          toast.success("Security updated successfully!");
+            socket.on("securityUpdated", (updatedData) => {
+              setAlldatas((prevData) =>
+                prevData.map((item) =>
+                  item.Code === updatedData.code ? { ...item, Security: updatedData.Security } : item
+                )
+              );
+
+              setSecurityDeposit(pre =>(
+                {
+                  ...pre,
+                  TotalIncomes: pre.TotalIncomes - 200
+                }
+              ))
+              toast.success("Security updated successfully!");
 
 
-        });
+            });
 
         return () => {
           socket.off("securityUpdated");
@@ -179,7 +179,7 @@ console.log(DashInfo)
             <div className="relative bg-slate-800 p-6 rounded-xl max-w-md w-full mx-4">
               <h3 className="text-xl font-bold text-white mb-4">Process Gown Return</h3>
               <p className="text-slate-300 mb-6">
-                Please verify the condition of the gown "{selectedDeposit.product_Name}"
+                User Item is Back already?
               </p>
               
               <div className="space-y-3">
