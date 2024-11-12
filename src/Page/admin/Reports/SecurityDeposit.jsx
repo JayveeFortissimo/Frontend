@@ -190,6 +190,8 @@ console.log(DashInfo)
                   <span>Perfect Condition</span>
                   <FaCheckCircle />
                 </button>
+                {
+              /*
                 
                 <button
                   onClick={(e) => confirmReturn(e,'damaged')}
@@ -198,6 +200,8 @@ console.log(DashInfo)
                   <span>Damaged - Deduct Deposit</span>
                   <MdWarning />
                 </button>
+*/
+                }
               </div>
 
               <button
