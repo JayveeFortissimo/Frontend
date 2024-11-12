@@ -9,7 +9,7 @@ const deleteItems = (allData,setData) =>{
         
         const filtered = allData.filter(pro => pro.id !== id);
 
-         setData(filtered)
+         setData(filtered);
 
         try{
 
