@@ -100,7 +100,7 @@ async function Payments(e,payment,Type,sameCode){
       return_Date:new Date(Date.UTC(new Date(pro.return_Date).getFullYear(), new Date(pro.return_Date).getMonth(), new Date(pro.return_Date).getDate())).toISOString().split('T')[0],
       price:pro.price,
       quantity:pro.quantity,
-      subTotal:payment === "IN STORE" || "Gcash|DownPayment"? pro.subTotal * 0.30 : pro.subTotal,
+      subTotal:payment === "IN STORE" || "Gcash|DownPayment"? (pro.subTotal + 200) * 0.30 : pro.subTotal + 200,
       user_ID:pro.user_ID,
       payment_Method:payment,
       status:"Waiting for approval",
