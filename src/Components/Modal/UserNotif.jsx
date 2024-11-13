@@ -7,12 +7,8 @@ const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
     return new Date(dateStr);
   };
 
-  // Sort notifications by date (oldest first)
-  const sortedNotifications = [...allNotif].sort((a, b) => {
-    const dateA = parseDate(a.date);
-    const dateB = parseDate(b.date);
-    return dateB - dateA;
-  });
+  // Reverse notifications to show the latest added on top
+  const sortedNotifications = [...allNotif].reverse();
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
@@ -57,7 +53,7 @@ const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
             ) : (
               <div className="space-y-2">
                 {sortedNotifications.map((notif, index) => {
-                  const isNewest = index === sortedNotifications.length - 1;
+                  const isNewest = index === 0; // Latest notification is now at the top
                   return (
                     <div
                       key={notif.id || index}
