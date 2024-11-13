@@ -31,7 +31,7 @@ const Dashboard = () => {
     const [securityDeposit, setSecurityDeposit] = useState(DashInfo.data2);
    
 
-    const [reserveToday, setReserveToday] = useState(null);
+    const [reserveToday, setReserveToday] = useState(DashInfo.data9);
 
 
 
