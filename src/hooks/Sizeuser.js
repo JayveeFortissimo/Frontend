@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 const SizeUser = (navigate) =>{
 
-    const ID = JSON.parse(localStorage.getItem("SID"));
+    const ID = JSON.parse(localStorage.getItem("ID"));
 
     const [measurements, setMeasurements] = useState({
         bust:'',
@@ -12,7 +12,7 @@ const SizeUser = (navigate) =>{
         hips:'',
         height:'',
         weight:'',
-        user_ID:ID
+        user_ID:ID.id
       });
 
 
@@ -42,8 +42,13 @@ const SizeUser = (navigate) =>{
 
             toast.success("Size Submited")
             setMeasurements(pro => ({...pro,bust:'',weight:'',waist:'',hips:'',height:''}));
-            localStorage.clear("SID");
-            navigate('/login')
+            //Dat hindi na to Clear
+           // localStorage.clear("SID");
+
+            ///Dat Deretso to sa may Profile pageee
+            navigate('/profile');
+
+           // navigate('/login')
 
         }catch(error){
             console.log(error);
@@ -64,7 +69,7 @@ const SizeUser = (navigate) =>{
                     hips:0,
                     height:0,
                     weight:0,
-                    user_ID:ID
+                    user_ID:ID.id
                 }),
                 headers:{
                     'Content-Type':'application/json'
@@ -77,9 +82,11 @@ const SizeUser = (navigate) =>{
 
             setMeasurements(pro => ({...pro,bust:'',weight:'',waist:'',hips:'',height:''}));
 
-            localStorage.clear("SID");
+           // localStorage.clear("SID");
 
-            navigate('/login')
+           // navigate('/login');
+
+           navigate('/profile')
 
         }catch(error){
             console.log(error);

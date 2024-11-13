@@ -55,8 +55,9 @@ export const regista = async({request, params}) =>{
 
     if(data.message === "Account already exists") return toast.error("ACCOUNT ALREADY EXIST");
   
-      console.log(data.id)
+      console.log(data.id);
       localStorage.setItem("SID",data.id);
+
       toast.success("Register Successfully");
      
       return redirect('/sizing_Form');
