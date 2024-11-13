@@ -252,7 +252,7 @@ console.log(fullImages)
                               : 'border-gray-200 hover:border-emerald-600 text-gray-700 hover:shadow-md'
                             }
                              ${
-                              size.quantity <= 0? "bg-red-600 text-white":undefined
+                              size.quantity <= 0? "bg-gray-600 text-white":undefined
                              }
                             `}
                         >
