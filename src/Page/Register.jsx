@@ -56,7 +56,7 @@ export const regista = async({request, params}) =>{
     if(data.message === "Account already exists") return toast.error("ACCOUNT ALREADY EXIST");
   
       console.log(data.id);
-      localStorage.setItem("ID",data.id);
+      localStorage.setItem("ID",JSON.stringify(data.id));
 
       toast.success("Register Successfully");
      
