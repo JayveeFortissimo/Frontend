@@ -29,9 +29,43 @@ const Dashboard = () => {
     const [rentalE,setRentalE] = useState(DashInfo.data5);
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
     const [securityDeposit, setSecurityDeposit] = useState(DashInfo.data2);
-   
-
     const [reserveToday, setReserveToday] = useState(DashInfo.data9);
+  
+
+    const [notifications, setNotifications] = useState(false);
+
+    //!this is from another for notification
+    useEffect(() =>{
+      const socket = io('https://backend-production-024f.up.railway.app');
+  
+      socket.on('connect', () => {
+        console.log('Connected to Socket.IO server');
+      });
+  
+      socket.on('bellsDash', () => {
+           setNotifications(true);
+      });
+
+
+      Dash().then(data => {
+        setReserveToday(data.data9);  // assuming Today data is in data9
+      });
+
+
+      socket.on('today', (data) => {
+        console.log('Real-time data received:', data);
+        setMetrics(data);
+      });
+  
+
+
+  
+      return () => {
+        socket.disconnect();
+      };
+  
+    },[]);
+  
 
 
 
@@ -277,31 +311,7 @@ const Dashboard = () => {
 
   ];
 
-  const [notifications, setNotifications] = useState(false);
-
-  //!this is from another for notification
-  useEffect(() =>{
-    const socket = io('https://backend-production-024f.up.railway.app');
-
-    socket.on('connect', () => {
-      console.log('Connected to Socket.IO server');
-    });
-
-    socket.on('bellsDash', () => {
-         setNotifications(true);
-    });
-
-
-    socket.on('today', (element) => {
-      setReserveToday(pro =>({...pro, totalReservations:element.totalReservations }))
- });
-
-    return () => {
-      socket.disconnect();
-    };
-
-  },[]);
-
+ 
 
 
   return (
