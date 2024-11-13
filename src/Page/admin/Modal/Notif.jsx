@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { VscBell, VscChromeClose } from "react-icons/vsc";
 import { IoRadioButtonOn } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 
 const Notif = ({ setTotalReserve, setNotifications }) => {
   const [allMessage, setAllMessage] = useState([]);
   const [newNotification, setNewNotification] = useState(false);
-
+   const navigate = useNavigate();
   // Helper function to convert date string to Date object
   const parseDate = (dateStr) => {
     if (!dateStr) return new Date(0); // fallback for invalid dates
@@ -109,6 +110,8 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
                     hover:translate-x-1 hover:shadow-lg
                     ${isNewest && newNotification ? 'animate-pulse border-blue-500/50' : ''}
                   `}
+
+                  onClick={() => navigate(`/admin/Orders/${notification.id}`)}
                 >
                   <div className="flex items-start gap-3">
                     <IoRadioButtonOn 
