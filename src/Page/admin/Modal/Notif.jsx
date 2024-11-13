@@ -7,19 +7,20 @@ import io from 'socket.io-client';
 const Notif = ({ setTotalReserve, setNotifications }) => {
   const [allMessage, setAllMessage] = useState([]);
   const [newNotification, setNewNotification] = useState(false);
-   const navigate = useNavigate();
+  const navigate = useNavigate();
+
   // Helper function to convert date string to Date object
   const parseDate = (dateStr) => {
     if (!dateStr) return new Date(0); // fallback for invalid dates
     return new Date(dateStr);
   };
 
-  // Sort notifications by date
+  // Sort notifications by date in descending order (newest first)
   const sortNotifications = (notifications) => {
     return [...notifications].sort((a, b) => {
       const dateA = parseDate(a.dates);
       const dateB = parseDate(b.dates);
-      return dateB - dateA; // Sort in descending order (newest first)
+      return dateB - dateA;
     });
   };
 
@@ -56,7 +57,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
         name: data.name,
         id: Date.now()
       };
-      
+
       setNotifications(true);
       // Add new notification and resort the list
       setAllMessage(prev => sortNotifications([newNotif, ...prev]));
@@ -76,7 +77,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
   return (
     <div className="fixed inset-0 flex justify-center items-center z-50">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-      
+
       <div className="relative bg-gradient-to-br from-slate-900 to-slate-800 w-full max-w-md h-[32rem] rounded-xl shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-md p-4 flex justify-between items-center border-b border-white/10">
@@ -105,22 +106,21 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
                   key={notification.id || index}
                   className={`
                     bg-gradient-to-r from-slate-800 to-slate-700
-                    p-4 rounded-lg border border-white/5
+                    p-4 rounded-lg border ${isNewest && newNotification ? 'border-blue-500/50' : 'border-white/5'}
                     transform transition-all duration-300
                     hover:translate-x-1 hover:shadow-lg
                     cursor-pointer
-                    ${isNewest && newNotification ? 'animate-pulse border-blue-500/50' : ''}
+                    ${isNewest && newNotification ? 'animate-pulse' : ''}
                   `}
-
                   onClick={() => {
                     notification.message === "USER BOOKED FITING APPOINTMENT"
-                    ?navigate(`/admin/Orders/${notification.user_ID}`)
-                    :navigate(`/admin/appointment`)
+                      ? navigate(`/admin/appointment`)
+                      : navigate(`/admin/Orders/${notification.user_ID}`);
                   }}
                 >
                   <div className="flex items-start gap-3">
-                    <IoRadioButtonOn 
-                      className={`mt-1 ${isNewest && newNotification ? 'text-blue-400 animate-ping' : 'text-blue-500/50'}`} 
+                    <IoRadioButtonOn
+                      className={`mt-1 ${isNewest && newNotification ? 'text-blue-400 animate-ping' : 'text-blue-500/50'}`}
                       size={16}
                     />
                     <div className="flex-1">
