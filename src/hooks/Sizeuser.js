@@ -42,13 +42,10 @@ const SizeUser = (navigate) =>{
 
             toast.success("Size Submited")
             setMeasurements(pro => ({...pro,bust:'',weight:'',waist:'',hips:'',height:''}));
-            //Dat hindi na to Clear
-           // localStorage.clear("SID");
-
-            ///Dat Deretso to sa may Profile pageee
+           
+            localStorage.removeItem("SID");
+    
             navigate('/profile');
-
-           // navigate('/login')
 
         }catch(error){
             console.log(error);
@@ -82,9 +79,7 @@ const SizeUser = (navigate) =>{
 
             setMeasurements(pro => ({...pro,bust:'',weight:'',waist:'',hips:'',height:''}));
 
-           // localStorage.clear("SID");
-
-           // navigate('/login');
+            localStorage.removeItem("SID");
 
            navigate('/profile')
 

@@ -57,7 +57,7 @@ export const regista = async({request, params}) =>{
   
       console.log(data.id);
       localStorage.setItem("ID",JSON.stringify(data.id));
-
+      localStorage.setItem("SID",JSON.stringify("SIZE FORMAT"));
       toast.success("Register Successfully");
      
       return redirect('/sizing_Form');

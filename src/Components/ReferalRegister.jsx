@@ -237,6 +237,7 @@ export const registas = async ({ request, params }) => {
   
 
         localStorage.setItem("ID", JSON.stringify(responseData.id));
+        localStorage.setItem("SID",JSON.stringify("SIZE FORMAT"));
         toast.success("Registered Successfully");
         return redirect('/sizing_Form');
     } catch (error) {

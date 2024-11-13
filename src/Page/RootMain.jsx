@@ -7,7 +7,7 @@ import Footer from "./Footer";
 
 const RootMain = ({RootMain = 'div'}) => {
 
-   const SID = localStorage.getItem("ID");
+   const SID = localStorage.getItem("SID");
   const openCloseSide = useSelector(state => state.Side.browseRefine);
   const [searchParams] = useSearchParams();
   const referralCode = searchParams.get('ref'); 
