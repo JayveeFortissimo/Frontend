@@ -30,10 +30,7 @@ const Dashboard = () => {
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
     const [securityDeposit, setSecurityDeposit] = useState(DashInfo.data2);
 
-    const [reserveToday, setReserveToday] = useState({
-      totalReservations: 0,
-      reservations: []
-  });
+    const [reserveToday, setReserveToday] = useState(DashInfo.data9);
   
 
     const [notifications, setNotifications] = useState(false);
@@ -48,21 +45,9 @@ const Dashboard = () => {
 
  //?! WAIT LANG D2 AHHH baka lagyan mo ng array yung sa may metrics
       
-      async function fetchData() {
-        const data = await Dash();
-        setReserveToday(data.data9); // Assuming `Today` data is in `data9`
-    }
-         fetchData();
-  
       socket.on('bellsDash', () => {
            setNotifications(true);
       });
-
-      socket.on('today', (data) => {
-        console.log('Real-time data received:', data);
-        setReserveToday(data)
-      });
-  
   
       return () => {
         socket.disconnect();
