@@ -81,13 +81,13 @@ const HistoryItem = ({ pro }) => {
           {/* Payment and Status */}
           <div className="flex flex-wrap gap-4 mt-2">
             <div className="flex items-center gap-2">
-              <span className="text-gray-400">Payment:</span>
+              
               <span className="px-3 py-1 rounded-full bg-gray-700/50 text-gray-300 text-sm border border-gray-600/50">
                 {pro.payment_Method}
               </span>
             </div>
             <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-sm border border-emerald-500/30">
-              {pro.status}
+              
             </span>
           </div>
         </div>
