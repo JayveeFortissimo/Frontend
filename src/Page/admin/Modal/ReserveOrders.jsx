@@ -10,12 +10,9 @@ import {
 } from "react-icons/pi";
 import Items_Approved from '../../../hooks/AdminHooks/ItemsApproved.js';
 import io from 'socket.io-client';
-import { Sidebars } from "../../../Store/Side.js";
-import { useDispatch } from 'react-redux';
 
 const ReserveOrders = ({ userID }) => {
   const [orders, setOrders] = useState([]);
-  const dispatch = useDispatch();
   
   useEffect(() => {
     //This is my data from database
@@ -34,13 +31,13 @@ const ReserveOrders = ({ userID }) => {
     socket.on('newCheckOut', (data) => {
       //Socket
       setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
-      dispatch(Sidebars.Activity('Reserve'));
+     
     });
    
 
     socket.on('deleteItem', (data) => {
       setOrders(prevOrders => prevOrders.filter(order => order.id !== data.id));
-      dispatch(Sidebars.Activity('History'));
+    
   });
 
     return () => {
