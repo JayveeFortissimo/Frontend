@@ -295,14 +295,13 @@ const Dashboard = () => {
 
 
     socket.on('Today', (data) => {
-      console.log(data);
-
-      // Directly update reserveToday with totalReservations and reservations from the socket event
+      console.log('Today event received:', data);
       setReserveToday({
         totalReservations: data.totalReservations,
         reservations: data.reservations,
       });
     });
+  
 
     return () => {
       socket.disconnect();
