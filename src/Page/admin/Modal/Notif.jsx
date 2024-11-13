@@ -4,8 +4,7 @@ import { IoRadioButtonOn } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 
-const Notif = ({ setTotalReserve, setNotifications }) => {
-  const [allMessage, setAllMessage] = useState([]);
+const Notif = ({ setTotalReserve, setNotifications, allNotif }) => {
   const [newNotification, setNewNotification] = useState(false);
   const navigate = useNavigate();
 
@@ -17,33 +16,13 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
   };
 
   // Sort notifications by date in descending order (newest first)
-  const sortNotifications = (notifications) => {
-    return [...notifications].sort((a, b) => {
-      const dateA = parseDate(a.dates);
-      const dateB = parseDate(b.dates);
-      return dateB - dateA;
-    });
-  };
+  const sortedNotifications = [...allNotif].sort((a, b) => {
+    const dateA = parseDate(a.dates);
+    const dateB = parseDate(b.dates);
+    return dateB - dateA;
+  });
 
   useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        const response = await fetch(`https://backend-production-024f.up.railway.app/AdminNotif`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-        const data = await response.json();
-        // Sort notifications before setting state
-        setAllMessage(sortNotifications(data));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchNotifications();
-
     const socket = io('https://backend-production-024f.up.railway.app');
 
     socket.on('connect', () => {
@@ -60,8 +39,8 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
       };
 
       setNotifications(true);
-      // Add new notification and resort the list
-      setAllMessage(prev => sortNotifications([newNotif, ...prev]));
+      // Add new notification and sort the list
+      setAllNotif([newNotif, ...allNotif]);
       setNewNotification(true);
       setTimeout(() => setNewNotification(false), 3000);
     });
@@ -73,7 +52,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
     return () => {
       socket.disconnect();
     };
-  }, [setNotifications]);
+  }, [setNotifications, allNotif, setAllNotif]);
 
   return (
     <div className="fixed inset-0 flex justify-center items-center z-50">
@@ -100,7 +79,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
         {/* Notification List */}
         <div className="mt-16 p-4 h-[calc(100%-4rem)] overflow-auto">
           <div className="space-y-3">
-            {allMessage.map((notification, index) => {
+            {sortedNotifications.map((notification, index) => {
               const isNewest = index === 0;
               return (
                 <div
