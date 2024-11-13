@@ -41,16 +41,18 @@ const Dashboard = () => {
       socket.on('connect', () => {
         console.log('Connected to Socket.IO server');
       });
+
+
+      
+      async function fetchData() {
+        const data = await Dash();
+        setReserveToday(data.data9); // Assuming `Today` data is in `data9`
+    }
+         fetchData();
   
       socket.on('bellsDash', () => {
            setNotifications(true);
       });
-
-
-      Dash().then(data => {
-        setReserveToday(data.data9);  // assuming Today data is in data9
-      });
-
 
       socket.on('today', (data) => {
         console.log('Real-time data received:', data);
