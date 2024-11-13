@@ -13,12 +13,12 @@ const DetailCheck = (allOrders) =>{
    
      const SecurityDeposit = 200;
 
-  const now = new Date();
+      const now = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const DATEOFNOW = now.toLocaleDateString('en-US', options);
+      const dateNow = DATEOFNOW;
 
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  const DATEOFNOW = now.toLocaleDateString('en-US', options);
-
-  const dateNow = DATEOFNOW;
+      const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
 
 
     useEffect(()=>{
@@ -86,7 +86,7 @@ async function Payments(e,payment,Type,sameCode){
 }
 
 
-  //For CheckOut Processes push on              //!WAit pa d2 sa my totals ng lahat s may payment na to
+ 
  async function CheckOUtss(e, payment, sameCode, totals){
     e.preventDefault();
 
@@ -100,7 +100,7 @@ async function Payments(e,payment,Type,sameCode){
       return_Date:new Date(Date.UTC(new Date(pro.return_Date).getFullYear(), new Date(pro.return_Date).getMonth(), new Date(pro.return_Date).getDate())).toISOString().split('T')[0],
       price:pro.price,
       quantity:pro.quantity,
-      subTotal:payment === "IN STORE" || payment === "Gcash|DownPayment"? (pro.subTotal + 200) * 0.30 : pro.subTotal + 200,
+      subTotal: displayDiscount?  payment === "IN STORE" || payment === "Gcash|DownPayment"? ((pro.subTotal + 200) * 0.30) * 0.95  : (pro.subTotal + 200)* 0.95  : payment === "IN STORE" || payment === "Gcash|DownPayment"? (pro.subTotal + 200) * 0.30 : pro.subTotal + 200,
       user_ID:pro.user_ID,
       payment_Method:payment,
       status:"Waiting for approval",
