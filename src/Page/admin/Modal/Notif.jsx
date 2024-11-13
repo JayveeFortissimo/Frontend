@@ -12,7 +12,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
   // Helper function to convert date string to Date object
   const parseDate = (dateStr) => {
     if (!dateStr) return new Date(0); // fallback for invalid dates
-    return new Date(dateStr);
+    return new Date(Date.parse(dateStr));
   };
 
   // Sort notifications by date in descending order (newest first)
