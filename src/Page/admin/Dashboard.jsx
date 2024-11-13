@@ -277,6 +277,7 @@ const Dashboard = () => {
 
   const [notifications, setNotifications] = useState(false);
 
+  //!this is from another for notification
   useEffect(() =>{
     const socket = io('https://backend-production-024f.up.railway.app');
 
@@ -288,6 +289,10 @@ const Dashboard = () => {
          setNotifications(true);
     });
 
+
+    socket.on('Today', (data) => {
+      setReserveToday(data)
+    });
 
     return () => {
       socket.disconnect();
