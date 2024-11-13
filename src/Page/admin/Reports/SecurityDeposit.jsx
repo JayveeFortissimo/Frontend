@@ -138,8 +138,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-slate-400">Return Date</span>
-                      
+                  {reservation.Datenow}
                   </div>
                   
                   

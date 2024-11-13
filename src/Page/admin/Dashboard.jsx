@@ -29,7 +29,7 @@ const Dashboard = () => {
     const [rentalE,setRentalE] = useState(DashInfo.data5);
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
     const [securityDeposit, setSecurityDeposit] = useState(DashInfo.data2);
-    
+
     const [reserveToday, setReserveToday] = useState({
       totalReservations: 0,
       reservations: []
@@ -63,8 +63,6 @@ const Dashboard = () => {
         setReserveToday(data)
       });
   
-
-
   
       return () => {
         socket.disconnect();
