@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 
 const Notif = ({ setTotalReserve, setNotifications }) => {
   const [allMessage, setAllMessage] = useState([]);
-  const [newNotification, setNewNotification] = useState(false);
+  const [newNotificationId, setNewNotificationId] = useState(null);  // Track new notification ID for highlighting
   const navigate = useNavigate();
 
   // Helper function to parse date string into Date object
@@ -16,9 +16,9 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
     return new Date(`${month} ${day}, ${year}`);
   };
 
-  // Sort notifications by date in descending order (newest first)
+  // Sort notifications by date in ascending order
   const sortNotifications = (notifications) => {
-    return [...notifications].sort((a, b) => parseDate(b.dates) - parseDate(a.dates));
+    return [...notifications].sort((a, b) => parseDate(a.dates) - parseDate(b.dates));
   };
 
   useEffect(() => {
@@ -48,13 +48,13 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
         dates: data.date,
         user_ID: data.user_ID,
         name: data.name,
-        id: Date.now()
+        id: Date.now()  // Use unique ID for each notification
       };
 
       setNotifications(true);
-      setAllMessage(prev => sortNotifications([newNotif, ...prev]));
-      setNewNotification(true);
-      setTimeout(() => setNewNotification(false), 3000);
+      setAllMessage(prev => sortNotifications([...prev, newNotif]));
+      setNewNotificationId(newNotif.id);  // Set ID for the newest notification
+      setTimeout(() => setNewNotificationId(null), 3000);  // Remove highlight after 3 seconds
     });
 
     socket.on('disconnect', () => {
@@ -89,19 +89,18 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
         {/* Notification List */}
         <div className="mt-16 p-4 h-[calc(100%-4rem)] overflow-auto">
           <div className="space-y-3">
-            {allMessage.map((notification, index) => {
-              const isNewest = index === 0;
+            {allMessage.map((notification) => {
+              const isNewest = notification.id === newNotificationId; // Check if this is the newest notification
               return (
                 <div
-                  key={notification.id || index}
+                  key={notification.id}
                   className={`
                     bg-gradient-to-r from-slate-800 to-slate-700
                     p-4 rounded-lg border 
-                    ${isNewest && newNotification ? 'border-blue-500/50' : 'border-white/5'}
+                    ${isNewest ? 'border-blue-500/50 animate-pulse' : 'border-white/5'}
                     transform transition-all duration-300
                     hover:translate-x-1 hover:shadow-lg
                     cursor-pointer
-                    ${isNewest && newNotification ? 'animate-pulse' : ''}
                   `}
                   onClick={() => {
                     notification.message === "USER BOOKED FITTING APPOINTMENT"
@@ -111,7 +110,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
                 >
                   <div className="flex items-start gap-3">
                     <IoRadioButtonOn
-                      className={`mt-1 ${isNewest && newNotification ? 'text-blue-400 animate-ping' : 'text-blue-500/50'}`}
+                      className={`mt-1 ${isNewest ? 'text-blue-400 animate-ping' : 'text-blue-500/50'}`}
                       size={16}
                     />
                     <div className="flex-1">
@@ -129,7 +128,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
                   </div>
                 </div>
               );
-            })}
+            }).reverse()} {/* Reverse order to have latest on top */}
           </div>
         </div>
       </div>
