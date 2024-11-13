@@ -9,20 +9,16 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
   const [newNotification, setNewNotification] = useState(false);
   const navigate = useNavigate();
 
-  // Helper function to convert date string to Date object
+  // Helper function to parse date string into Date object
   const parseDate = (dateStr) => {
-    if (!dateStr) return new Date(0); // fallback for invalid dates
+    if (!dateStr) return new Date(0); // Fallback for invalid dates
     const [month, day, year] = dateStr.split(', ');
     return new Date(`${month} ${day}, ${year}`);
   };
 
   // Sort notifications by date in descending order (newest first)
   const sortNotifications = (notifications) => {
-    return [...notifications].sort((a, b) => {
-      const dateA = parseDate(a.dates);
-      const dateB = parseDate(b.dates);
-      return dateB - dateA;
-    });
+    return [...notifications].sort((a, b) => parseDate(b.dates) - parseDate(a.dates));
   };
 
   useEffect(() => {
@@ -30,12 +26,9 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
       try {
         const response = await fetch(`https://backend-production-024f.up.railway.app/AdminNotif`, {
           method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
+          headers: { 'Content-Type': 'application/json' }
         });
         const data = await response.json();
-        // Sort notifications before setting state
         setAllMessage(sortNotifications(data));
       } catch (error) {
         console.log(error);
@@ -45,7 +38,6 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
     fetchNotifications();
 
     const socket = io('https://backend-production-024f.up.railway.app');
-
     socket.on('connect', () => {
       console.log('Connected to Socket.IO server');
     });
@@ -60,7 +52,6 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
       };
 
       setNotifications(true);
-      // Add new notification and resort the list
       setAllMessage(prev => sortNotifications([newNotif, ...prev]));
       setNewNotification(true);
       setTimeout(() => setNewNotification(false), 3000);
@@ -70,9 +61,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
       console.log('Disconnected from Socket.IO server');
     });
 
-    return () => {
-      socket.disconnect();
-    };
+    return () => socket.disconnect();
   }, [setNotifications]);
 
   return (
@@ -107,14 +96,15 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
                   key={notification.id || index}
                   className={`
                     bg-gradient-to-r from-slate-800 to-slate-700
-                    p-4 rounded-lg border ${isNewest && newNotification ? 'border-blue-500/50' : 'border-white/5'}
+                    p-4 rounded-lg border 
+                    ${isNewest && newNotification ? 'border-blue-500/50' : 'border-white/5'}
                     transform transition-all duration-300
                     hover:translate-x-1 hover:shadow-lg
                     cursor-pointer
                     ${isNewest && newNotification ? 'animate-pulse' : ''}
                   `}
                   onClick={() => {
-                    notification.message === "USER BOOKED FITING APPOINTMENT"
+                    notification.message === "USER BOOKED FITTING APPOINTMENT"
                       ? navigate(`/admin/appointment`)
                       : navigate(`/admin/Orders/${notification.user_ID}`);
                   }}
@@ -129,16 +119,10 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
                         {notification.message}
                       </p>
                       <div className="mt-1 flex justify-between items-center text-sm">
-                        <span className="text-white/50">
-                          {notification.dates}
-                        </span>
-                        <div className="flex flex-row gap-4">
-                          <span className="text-blue-400/80 text-xs">
-                            {notification.name}
-                          </span>
-                          <span className="text-blue-400/80 text-xs">
-                            ID: {notification.user_ID}
-                          </span>
+                        <span className="text-white/50">{notification.dates}</span>
+                        <div className="flex gap-4">
+                          <span className="text-blue-400/80 text-xs">{notification.name}</span>
+                          <span className="text-blue-400/80 text-xs">ID: {notification.user_ID}</span>
                         </div>
                       </div>
                     </div>
