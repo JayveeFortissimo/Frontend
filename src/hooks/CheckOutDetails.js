@@ -57,7 +57,7 @@ const DetailCheck = (allOrders) =>{
       return word;
     }
 
-//FOR PAYMENTS
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!FOR PAYMENTS D2 ko lallagay Final total
 async function Payments(e,payment,Type,sameCode){
    e.preventDefault();
   try{
@@ -86,7 +86,7 @@ async function Payments(e,payment,Type,sameCode){
 }
 
 
-  //For CheckOut Processes push on the database Table Check_out
+  //For CheckOut Processes push on              //!WAit pa d2 sa my totals ng lahat s may payment na to
  async function CheckOUtss(e, payment, sameCode, totals){
     e.preventDefault();
 
@@ -100,7 +100,7 @@ async function Payments(e,payment,Type,sameCode){
       return_Date:new Date(Date.UTC(new Date(pro.return_Date).getFullYear(), new Date(pro.return_Date).getMonth(), new Date(pro.return_Date).getDate())).toISOString().split('T')[0],
       price:pro.price,
       quantity:pro.quantity,
-      subTotal:totals,
+      subTotal:payment === "IN STORE" || "Gcash|DownPayment"? pro.subTotal * 0.30 : pro.subTotal,
       user_ID:pro.user_ID,
       payment_Method:payment,
       status:"Waiting for approval",
@@ -179,9 +179,9 @@ const DownpaymentInstore = async (e,total) => {
       const data = await response.json();
   
       if (data && data.data) {
-      window.location.href = data.data.attributes.checkout_url;
-            CheckOUtss(e, "IN STORE", sameCode, totals);
-            deleted(e)
+       window.location.href = data.data.attributes.checkout_url;
+       CheckOUtss(e, "IN STORE", sameCode, totals);
+       deleted(e)
       } else {
     toast.error('Failed to create payment link.');
       }
