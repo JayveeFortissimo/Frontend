@@ -297,10 +297,6 @@ const Dashboard = () => {
 
   },[]);
 
-  
-  useEffect(()=>{
-    setReserveToday(DashInfo.data9)
-  },[notifications])
 
 
   return (
