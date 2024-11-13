@@ -4,7 +4,8 @@ import { IoRadioButtonOn } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 
-const Notif = ({ setTotalReserve, setNotifications, allNotif }) => {
+const Notif = ({ setTotalReserve, setNotifications }) => {
+  const [allMessage, setAllMessage] = useState([]);
   const [newNotification, setNewNotification] = useState(false);
   const navigate = useNavigate();
 
@@ -16,11 +17,13 @@ const Notif = ({ setTotalReserve, setNotifications, allNotif }) => {
   };
 
   // Sort notifications by date in descending order (newest first)
-  const sortedNotifications = [...allNotif].sort((a, b) => {
-    const dateA = parseDate(a.dates);
-    const dateB = parseDate(b.dates);
-    return dateB - dateA;
-  });
+  const sortNotifications = (notifications) => {
+    return [...notifications].sort((a, b) => {
+      const dateA = parseDate(a.dates);
+      const dateB = parseDate(b.dates);
+      return dateB - dateA;
+    });
+  };
 
   useEffect(() => {
     const socket = io('https://backend-production-024f.up.railway.app');
@@ -40,7 +43,7 @@ const Notif = ({ setTotalReserve, setNotifications, allNotif }) => {
 
       setNotifications(true);
       // Add new notification and sort the list
-      setAllNotif([newNotif, ...allNotif]);
+      setAllMessage(prev => sortNotifications([newNotif, ...prev]));
       setNewNotification(true);
       setTimeout(() => setNewNotification(false), 3000);
     });
@@ -52,7 +55,7 @@ const Notif = ({ setTotalReserve, setNotifications, allNotif }) => {
     return () => {
       socket.disconnect();
     };
-  }, [setNotifications, allNotif, setAllNotif]);
+  }, [setNotifications]);
 
   return (
     <div className="fixed inset-0 flex justify-center items-center z-50">
@@ -79,7 +82,7 @@ const Notif = ({ setTotalReserve, setNotifications, allNotif }) => {
         {/* Notification List */}
         <div className="mt-16 p-4 h-[calc(100%-4rem)] overflow-auto">
           <div className="space-y-3">
-            {sortedNotifications.map((notification, index) => {
+            {sortNotifications(allMessage).map((notification, index) => {
               const isNewest = index === 0;
               return (
                 <div
