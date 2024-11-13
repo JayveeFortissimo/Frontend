@@ -48,7 +48,7 @@ const Check_Out = () => {
     return (
         <>
 
-        {allPoints.totalReferred >= 5 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio} setIsRadio={setIsRadio}/>}
+        {allPoints.totalReferred >= 10 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio} setIsRadio={setIsRadio}/>}
 
             {isdown && <DownpaymentG setDown={setDown} Gcash={Gcash} total={total} allGownSecurity={allGownSecurity}/>}
             
@@ -219,7 +219,7 @@ const Check_Out = () => {
                                         </div>
 
 
-                                        <span className="text-sm font-medium"><span className='text-[0.6rem]'>(5 points need for 5% Discount)</span></span>
+                                        <span className="text-sm font-medium"><span className='text-[0.6rem]'>(10 points need for 5% Discount)</span></span>
 
                                         <div className="flex justify-between">
                                             <span className="text-base font-medium">Total Payment</span>

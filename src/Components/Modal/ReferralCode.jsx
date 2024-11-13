@@ -94,7 +94,7 @@ const ReferralCode = ({referralLink, setRefferal}) => {
                 <div className="flex justify-center">
                   <div className="bg-gradient-to-r from-violet-500/20 to-indigo-500/20 rounded-xl p-6 mt-4 backdrop-blur-xl">
                     <span className="text-4xl font-bold text-white">5% Discount</span>
-                    <p className="text-gray-300 mt-2">For 5 referrals</p>
+                    <p className="text-gray-300 mt-2">For 10 referrals</p>
                   </div>
                 </div>
               </div>
