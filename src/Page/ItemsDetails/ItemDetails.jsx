@@ -196,9 +196,6 @@ console.log(fullImages)
   </div>
 </div>
 
-
-
-
                   <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent pointer-events-none" />
                 </div>
               </div>
@@ -301,6 +298,11 @@ console.log(fullImages)
                   </div>
                 </div>
               ))}
+
+
+              <div className="mt-5">
+                   <p>{pro.description}</p>
+              </div>
 
               {/* Date Selection */}
               <div className="space-y-6">
