@@ -177,13 +177,10 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
               >
                 Process Return
               </button>
-        
-              </div>
-            );
-          })}
-        </div>
 
-        {validDeposits.length === 0 && (
+
+
+              {validDeposits.length === 0 && (
           <div className="text-center py-20">
             <p className="text-slate-400">No active security deposits</p>
           </div>
@@ -230,6 +227,17 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
             </div>
           </div>
         )}
+
+        
+              </div>
+            );
+
+
+            
+          })}
+        </div>
+
+       
       </div>
     </div>
   );
