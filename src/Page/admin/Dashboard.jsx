@@ -291,6 +291,11 @@ const Dashboard = () => {
          setNotifications(true);
     });
 
+
+    socket.on('today', (element) => {
+      setReserveToday(pro =>({...pro, totalReservations:element.totalReservations }))
+ });
+
     return () => {
       socket.disconnect();
     };
