@@ -103,7 +103,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
                     cursor-pointer
                   `}
                   onClick={() => {
-                    notification.message === "USER BOOKED FITTING APPOINTMENT"
+                    notification.message === "USER BOOKED FITING APPOINTMENT"
                       ? navigate(`/admin/appointment`)
                       : navigate(`/admin/Orders/${notification.user_ID}`);
                   }}
