@@ -36,7 +36,6 @@ const Dashboard = () => {
       reservations: DashInfo.data9?.reservations || [],
     });
 
-    console.log(DashInfo)
 
   const filterData = (month) => {
     let filtered;
