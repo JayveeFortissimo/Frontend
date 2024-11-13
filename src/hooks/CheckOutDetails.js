@@ -66,7 +66,7 @@ async function Payments(e,payment,Type,sameCode){
       body:JSON.stringify({
         DATENOW:dateNow,
          payment: payment,
-         Security:SecurityDeposit,
+         Security:SecurityDeposit * allOrders.length,
           Type:Type,
            user_ID:ID.id,
            code:sameCode
