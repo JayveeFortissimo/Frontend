@@ -115,7 +115,6 @@ const faqItems = [
   {
     question: 'What If I Damage The Item?',
     answer: [
-      'Cristobal Collection covers minor wear and tear. Each rental piece is inspected thoroughly to ensure that it arrives in good condition and is checked again upon return.',
       'In the event that the rental is damaged or badly stained, we will assess the damage and inform you of any additional charges including Security deposit needed for repairs.',
     ],
   },
