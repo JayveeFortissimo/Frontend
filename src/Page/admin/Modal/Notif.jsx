@@ -111,7 +111,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
                     ${isNewest && newNotification ? 'animate-pulse border-blue-500/50' : ''}
                   `}
 
-                  onClick={() => navigate(`/admin/Orders/${notification.id}`)}
+                  onClick={() => navigate(`/admin/Orders/${notification.user_ID}`)}
                 >
                   <div className="flex items-start gap-3">
                     <IoRadioButtonOn 
