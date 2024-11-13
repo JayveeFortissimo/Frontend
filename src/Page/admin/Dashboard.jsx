@@ -31,10 +31,8 @@ const Dashboard = () => {
     const [securityDeposit, setSecurityDeposit] = useState(DashInfo.data2);
    
 
-    const [reserveToday, setReserveToday] = useState({
-      totalReservations: DashInfo.data9?.totalReservations || 0,
-      reservations: DashInfo.data9?.reservations || [],
-    });
+    const [reserveToday, setReserveToday] = useState(null);
+
 
 
   const filterData = (month) => {
@@ -293,21 +291,16 @@ const Dashboard = () => {
          setNotifications(true);
     });
 
-
-    socket.on('Today', (data) => {
-      console.log('Today event received:', data);
-      setReserveToday({
-        totalReservations: data.totalReservations,
-        reservations: data.reservations,
-      });
-    });
-  
-
     return () => {
       socket.disconnect();
     };
 
   },[]);
+
+  
+  useEffect(()=>{
+    setReserveToday(DashInfo.data9)
+  },[notifications])
 
 
   return (
