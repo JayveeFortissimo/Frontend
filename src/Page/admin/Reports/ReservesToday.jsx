@@ -264,6 +264,10 @@ const ReservesToday = ({ setTotalReserve, DashInfo }) => {
                             {reservation.status}
                           </span>
                         </div>
+
+                      <div className='mt-3'>
+                       <img src={`https://backend-production-024f.up.railway.app/uploads/${reservation.picture}`} alt="" />
+                      </div>
                         
                         <div className="space-y-1 text-xs">
                           <div className="flex justify-between">
