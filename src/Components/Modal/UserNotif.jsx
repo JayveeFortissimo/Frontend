@@ -1,7 +1,11 @@
 import { VscChromeClose, VscBell } from "react-icons/vsc";
+import { Sidebars } from '../../Store/Side.js';
+import { useDispatch } from 'react-redux';
 
 const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
   // Helper function to parse dates
+  const dispatch = useDispatch();
+
   const parseDate = (dateStr) => {
     if (!dateStr) return new Date(0);
     return new Date(dateStr);
@@ -63,6 +67,16 @@ const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
                           : 'border-gray-100 hover:bg-gray-50'
                         }
                         transition-colors duration-200`}
+                        
+                        onClick={()=>{
+                          if(notif === "YOUR ITEM IS APPROVED"){
+                            dispatch(Sidebars.Activity('History'))
+                          }else if(notif === "YOUR ITEM IS CANCELLED"){
+                            dispatch(Sidebars.Activity('Cancelled'))
+                          }else if(notif === "YOUR ITEM IS COMPLETED"){
+                            dispatch(Sidebars.Activity('FinalH'))
+                          }
+                        }}
                     >
                       <div className="flex items-start sm:items-center justify-between gap-3">
                         <div className="flex-1 min-w-0">
