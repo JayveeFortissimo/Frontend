@@ -54,7 +54,7 @@ const Dashboard = () => {
 
       socket.on('today', (data) => {
         console.log('Real-time data received:', data);
-        setMetrics(data);
+        setReserveToday(data)
       });
   
 
