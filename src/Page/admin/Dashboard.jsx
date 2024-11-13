@@ -291,7 +291,13 @@ const Dashboard = () => {
 
 
     socket.on('Today', (data) => {
-      setReserveToday(data)
+      console.log(data)
+      setReserveToday(pro =>{
+        return{
+          ...pro,
+          data
+        }
+      })
     });
 
     return () => {
