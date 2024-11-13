@@ -108,10 +108,15 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
                     p-4 rounded-lg border border-white/5
                     transform transition-all duration-300
                     hover:translate-x-1 hover:shadow-lg
+                    cursor-pointer
                     ${isNewest && newNotification ? 'animate-pulse border-blue-500/50' : ''}
                   `}
 
-                  onClick={() => navigate(`/admin/Orders/${notification.user_ID}`)}
+                  onClick={() => {
+                    notification.message === "USER BOOKED FITING APPOINTMENT"
+                    ?navigate(`/admin/Orders/${notification.user_ID}`)
+                    :navigate(`/admin/appointment`)
+                  }}
                 >
                   <div className="flex items-start gap-3">
                     <IoRadioButtonOn 
