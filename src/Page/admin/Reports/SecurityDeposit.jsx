@@ -139,7 +139,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-400">Return Date</span>
-                 
+                      
                   </div>
                   
                   
@@ -160,7 +160,6 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
                 Process Return
               </button>
         
-
               </div>
             );
           })}
@@ -187,20 +186,20 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
                   onClick={(e) => confirmReturn(e,'perfect')}
                   className="w-full flex items-center justify-between p-3 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400"
                 >
-                  <span>User Back Items??</span>
+                  <span>Nodamage?</span>
                   <FaCheckCircle />
                 </button>
                 {
-              /*
+              
                 
                 <button
                   onClick={(e) => confirmReturn(e,'damaged')}
                   className="w-full flex items-center justify-between p-3 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400"
                 >
-                  <span>Damaged - Deduct Deposit</span>
+                  <span>Damaged - No Deposit</span>
                   <MdWarning />
                 </button>
-*/
+
                 }
               </div>
 
