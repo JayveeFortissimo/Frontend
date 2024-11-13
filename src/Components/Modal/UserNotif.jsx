@@ -61,19 +61,19 @@ const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
                   return (
                     <div
                       key={notif.id || index}
-                      className={`p-3 sm:p-4 rounded-lg border
+                      className={`p-3 sm:p-4 rounded-lg border 
                         ${isNewest
                           ? 'border-blue-100 bg-blue-50/50 hover:bg-blue-50'
                           : 'border-gray-100 hover:bg-gray-50'
                         }
-                        transition-colors duration-200`}
+                        transition-colors duration-200 cursor-pointer`}
                         
                         onClick={()=>{
-                          if(notif === "YOUR ITEM IS APPROVED"){
+                          if(notif.message === "YOUR ITEM IS APPROVED"){
                             dispatch(Sidebars.Activity('History'))
-                          }else if(notif === "YOUR ITEM IS CANCELLED"){
+                          }else if(notif.message === "YOUR ITEM IS CANCELLED"){
                             dispatch(Sidebars.Activity('Cancelled'))
-                          }else if(notif === "YOUR ITEM IS COMPLETED"){
+                          }else if(notif.message === "YOUR ITEM IS COMPLETED"){
                             dispatch(Sidebars.Activity('FinalH'))
                           }
                         }}
