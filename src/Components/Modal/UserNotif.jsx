@@ -7,11 +7,11 @@ const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
     return new Date(dateStr);
   };
 
-  // Sort notifications by date (newest first)
+  // Sort notifications by date (oldest first)
   const sortedNotifications = [...allNotif].sort((a, b) => {
     const dateA = parseDate(a.date);
     const dateB = parseDate(b.date);
-    return dateB - dateA;
+    return dateA - dateB;
   });
 
   return (
@@ -57,7 +57,7 @@ const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
             ) : (
               <div className="space-y-2">
                 {sortedNotifications.map((notif, index) => {
-                  const isNewest = index === 0;
+                  const isNewest = index === sortedNotifications.length - 1;
                   return (
                     <div
                       key={notif.id || index}
