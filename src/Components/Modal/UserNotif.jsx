@@ -11,7 +11,7 @@ const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
   const sortedNotifications = [...allNotif].sort((a, b) => {
     const dateA = parseDate(a.date);
     const dateB = parseDate(b.date);
-    return dateA - dateB;
+    return dateB - dateA;
   });
 
   return (
