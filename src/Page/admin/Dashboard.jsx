@@ -19,6 +19,7 @@ import { IoIosToday } from "react-icons/io";
 import AdminProfile from '../../hooks/AdminHooks/AdminProfile';
 
 const Dashboard = () => {
+  //From loader
   const DashInfo = useLoaderData();
   const [filteredData, setFilteredData] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState('All Months');
@@ -291,13 +292,13 @@ const Dashboard = () => {
 
 
     socket.on('Today', (data) => {
-      console.log(data)
-      setReserveToday(pro =>{
-        return{
-          ...pro,
-          data
-        }
-      })
+      console.log(data);
+
+      // Directly update reserveToday with totalReservations and reservations from the socket event
+      setReserveToday({
+        totalReservations: data.totalReservations,
+        reservations: data.reservations,
+      });
     });
 
     return () => {
