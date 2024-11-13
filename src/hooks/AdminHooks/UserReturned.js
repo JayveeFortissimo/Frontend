@@ -51,8 +51,8 @@ const userReturnedItems = (setToReturn, toReturn) => {
         const dataPenalty = {
             product_Name: pro.product_Name,
             picture: pro.picture,
-            start_Date: pro.start_Date,
-            return_Date: pro.return_Date,
+            start_Date: new Date(Date.UTC(new Date(pro.start_Date).getFullYear(), new Date(pro.start_Date).getMonth(), new Date(pro.start_Date).getDate())).toISOString().split('T')[0],
+            return_Date: new Date(Date.UTC(new Date(pro.return_Date).getFullYear(), new Date(pro.return_Date).getMonth(), new Date(pro.return_Date).getDate())).toISOString().split('T')[0],
             status: pro.status,
             user_ID: pro.user_ID,
             penalty: pro.penalty,
@@ -152,8 +152,8 @@ const userReturnedItems = (setToReturn, toReturn) => {
         const dataPenalty = {
             product_Name: pro.product_Name,
             picture: pro.picture,
-            start_Date: pro.start_Date,
-            return_Date: pro.return_Date,
+            start_Date: new Date(Date.UTC(new Date(pro.start_Date).getFullYear(), new Date(pro.start_Date).getMonth(), new Date(pro.start_Date).getDate())).toISOString().split('T')[0],
+            return_Date: new Date(Date.UTC(new Date(pro.return_Date).getFullYear(), new Date(pro.return_Date).getMonth(), new Date(pro.return_Date).getDate())).toISOString().split('T')[0],
             status: "NO QRCODE",
             user_ID: pro.user_ID,
             penalty: 1000,
