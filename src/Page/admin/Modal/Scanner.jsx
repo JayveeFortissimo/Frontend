@@ -3,11 +3,14 @@ import { Html5QrcodeScanner } from 'html5-qrcode';
 import { FaTimesCircle } from 'react-icons/fa';
 import { RiQrScanLine } from 'react-icons/ri';
 import { IoMdClose } from 'react-icons/io';
+import { Sidebars } from "../../../Store/Side.js";
+import { useDispatch } from 'react-redux';
 import ReturnITEMS from '../../../hooks/AdminHooks/UserReturned.js';
 
 const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
  
   const { pushAutoMatically } = ReturnITEMS( toReturn , setToReturn);
+   const dispatch = useDispatch();
 
   const qrCodeRegionId = "qr-reader";
   const [qrCodeData, setQrCodeData] = useState(null);
@@ -70,6 +73,7 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
         });
         setOpenScanner(false);
         //!OPTIONAL THIS ONE BAGUHIN MO SYA
+        dispatch(Sidebars.Activity('FinalH'));
         //window.location.reload();
       }
 
