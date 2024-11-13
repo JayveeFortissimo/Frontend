@@ -50,9 +50,14 @@ const HistoryItem = ({ pro }) => {
                   ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' 
                   : 'bg-red-500/20 text-red-400 border border-red-500/30'
               }`}>
-                {pro.penalty === 0 
-                  ? 'RETURNED ON TIME ✓' 
-                  : 'NOT RETURNED ON TIME ✗'}
+
+                {
+                  pro.status === "NO QRCODE"? "NO QRCODE": 
+                  pro.penalty === 0 
+                    ? 'RETURNED ON TIME' 
+                    : 'NOT RETURNED ON TIME '
+                }
+              
               </div>
             </div>
 
