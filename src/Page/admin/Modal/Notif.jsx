@@ -26,6 +26,24 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
   };
 
   useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await fetch(`https://backend-production-024f.up.railway.app/AdminNotif`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await response.json();
+        // Sort notifications before setting state
+        setAllMessage(sortNotifications(data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchNotifications();
+
     const socket = io('https://backend-production-024f.up.railway.app');
 
     socket.on('connect', () => {
@@ -42,7 +60,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
       };
 
       setNotifications(true);
-      // Add new notification and sort the list
+      // Add new notification and resort the list
       setAllMessage(prev => sortNotifications([newNotif, ...prev]));
       setNewNotification(true);
       setTimeout(() => setNewNotification(false), 3000);
@@ -82,7 +100,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
         {/* Notification List */}
         <div className="mt-16 p-4 h-[calc(100%-4rem)] overflow-auto">
           <div className="space-y-3">
-            {sortNotifications(allMessage).map((notification, index) => {
+            {allMessage.map((notification, index) => {
               const isNewest = index === 0;
               return (
                 <div
