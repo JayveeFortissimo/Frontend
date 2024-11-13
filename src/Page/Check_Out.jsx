@@ -213,7 +213,7 @@ const Check_Out = () => {
                                             }}
                                             className='cursor-pointer'
 
-                                            disabled = {allPoints.totalReferred < 5}
+                                            disabled = {allPoints.totalReferred < 10}
                                             /> 
                                             <p>Apply referral points discount</p></span>
                                         </div>
