@@ -1,10 +1,8 @@
 import { VscChromeClose, VscBell } from "react-icons/vsc";
-import { Sidebars } from '../../Store/Side.js';
-import { useDispatch } from 'react-redux';
 
 const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
   // Helper function to parse dates
-  const dispatch = useDispatch();
+
 
   const parseDate = (dateStr) => {
     if (!dateStr) return new Date(0);
@@ -70,11 +68,14 @@ const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
                         
                         onClick={()=>{
                           if(notif.message === "YOUR ITEM IS APPROVED"){
-                            dispatch(Sidebars.Activity('History'))
+                            dispatch(Side.Activity('History'));
+                            setHaveNotif(false);
                           }else if(notif.message === "YOUR ITEM IS CANCELLED"){
-                            dispatch(Sidebars.Activity('Cancelled'))
+                            dispatch(Side.Activity('Cancelled'));
+                            setHaveNotif(false);
                           }else if(notif.message === "YOUR ITEM IS COMPLETED"){
-                            dispatch(Sidebars.Activity('FinalH'))
+                            dispatch(Side.Activity('FinalH'));
+                            setHaveNotif(false);
                           }
                         }}
                     >
