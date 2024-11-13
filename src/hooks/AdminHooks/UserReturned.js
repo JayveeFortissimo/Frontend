@@ -108,7 +108,6 @@ const userReturnedItems = (setToReturn, toReturn) => {
        toast.success("USER RETURNED THE ITEMS");
     // sendSMSNotification('+639604099126',`THANK YOU VERY MUCH https://docs.google.com/forms/d/e/1FAIpQLSc30TriVIQ-VrjBh_UwLdecsc79nV3ftHREcer79aHiBUr1Bw/viewform?usp=sf_link`);
 
-
         const allDatas = {
             product_Name: qrCodeData.product_Name,
             picture: qrCodeData.picture,
@@ -157,7 +156,8 @@ const userReturnedItems = (setToReturn, toReturn) => {
             status: "NO QRCODE",
             user_ID: pro.user_ID,
             penalty: 1000,
-            quantity:pro.quantity
+            quantity:pro.quantity,
+            code:pro.code
         };
 
         try {

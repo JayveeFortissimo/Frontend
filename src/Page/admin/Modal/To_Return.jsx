@@ -23,7 +23,8 @@ const ToReturn = ({ userID }) => {
     user_ID: 0,
     penalty: 0,
     quantity:0,
-    returnID: 0
+    returnID: 0,
+    code:""
   });
 
 
@@ -141,7 +142,8 @@ const ToReturn = ({ userID }) => {
               user_ID: userID.data1[0].id,
               penalty: totalPenalty,
               quantity:item.quantity,
-              returnID: item.id// Set returnID to the current item ID
+              code:item.code,
+              returnID: item.id
             });
             setOpenConfirmation(true);
            }}
