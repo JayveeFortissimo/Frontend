@@ -3,56 +3,54 @@ import { VscChromeClose } from "react-icons/vsc";
 import { BiDollar } from "react-icons/bi";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdWarning } from "react-icons/md";
+import { FaFilter } from "react-icons/fa";
 import toast from 'react-hot-toast';
 import io from 'socket.io-client';
 
 const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
   const [selectedDeposit, setSelectedDeposit] = useState(null);
   const [showReturnModal, setShowReturnModal] = useState(false);
-  const [allDatas,setAlldatas] = useState([]);
+  const [allDatas, setAlldatas] = useState([]);
+  const [showNoDate, setShowNoDate] = useState(false);
   const code = useRef("");
 
-    useEffect(() => {
-          const socket = io('https://backend-production-024f.up.railway.app');
+  useEffect(() => {
+    const socket = io('https://backend-production-024f.up.railway.app');
+    setAlldatas(DashInfo);
 
-            setAlldatas(DashInfo);
+    socket.on("securityUpdated", (updatedData) => {
+      setAlldatas((prevData) =>
+        prevData.map((item) =>
+          item.Code === updatedData.code ? { ...item, Security: updatedData.Security } : item
+        )
+      );
 
-            socket.on("securityUpdated", (updatedData) => {
-              setAlldatas((prevData) =>
-                prevData.map((item) =>
-                  item.Code === updatedData.code ? { ...item, Security: updatedData.Security } : item
-                )
-              );
+      setSecurityDeposit(pre => ({
+        ...pre,
+        TotalIncomes: pre.TotalIncomes - 200
+      }));
+      toast.success("Security updated successfully!");
+    });
 
-              setSecurityDeposit(pre =>(
-                {
-                  ...pre,
-                  TotalIncomes: pre.TotalIncomes - 200
-                }
-              ))
-              toast.success("Security updated successfully!");
-
-
-            });
-
-        return () => {
-          socket.off("securityUpdated");
-        };
-}, [DashInfo]);
-
+    return () => {
+      socket.off("securityUpdated");
+    };
+  }, [DashInfo]);
 
   const validDeposits = allDatas.filter(r => Number(r.Security) !== 0);
   const totalAmount = validDeposits.reduce((sum, r) => sum + Number(r.Security), 0);
+
+  // Separate deposits based on date
+  const regularDeposits = validDeposits.filter(r => r.Datenow !== "no_Date");
+  const noDateDeposits = validDeposits.filter(r => r.Datenow === "no_Date");
 
   const handleProcessReturn = (reservation) => {
     setSelectedDeposit(reservation);
     setShowReturnModal(true);
   };
 
-  const confirmReturn = async(e,condition, Date) => {
-  
-     e.preventDefault();
-
+  const confirmReturn = async(e, condition, Date) => {
+    e.preventDefault();
 
     if(condition === "perfect"){
       try{
@@ -61,49 +59,71 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
           headers:{
             'Content-Type':'application/json'
           },
-          body:JSON.stringify(
-            {
-              code:code.current
-            }
-          )
-        })
+          body:JSON.stringify({
+            code:code.current
+          })
+        });
       
-        if(!response.ok) return console.log("HAve a problem here");
+        if(!response.ok) return console.log("Have a problem here");
         toast.success("Updated");
         setAlldatas((pro) => pro.filter((item) => item.Code !== code.current));
-          }catch(error){
-       console.log(error);
-          }
-    }else if(condition === "damaged"){
-
+      } catch(error){
+        console.log(error);
+      }
+    } else if(condition === "damaged"){
       try{
         const response = await fetch(`https://backend-production-024f.up.railway.app/DamageItems`,{
           method:"PUT",
           headers:{
             'Content-Type':'application/json'
           },
-          body:JSON.stringify(
-            {
-              code:code.current,
-              date:"no_Date"
-            }
-          )
-        })
+          body:JSON.stringify({
+            code:code.current,
+            date:"no_Date"
+          })
+        });
       
-        if(!response.ok) return console.log("HAve a problem here");
+        if(!response.ok) return console.log("Have a problem here");
         toast.success("Updated");
         setAlldatas((pro) => pro.filter((item) => item.Code !== code.current));
-          }catch(error){
-       console.log(error);
-          }
-
-      console.log("HAvee A problem")
+      } catch(error){
+        console.log(error);
+      }
     }
 
     setShowReturnModal(false);
     setSelectedDeposit(null);
-    
   };
+
+  const DepositCard = ({ reservation }) => (
+    <div className="relative overflow-hidden group bg-gradient-to-br from-slate-800 to-slate-700 border border-slate-600 rounded-xl p-5 transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1">
+      <div className="flex justify-between items-start mb-4">
+        <div className="space-y-1">
+          <h3 className="font-semibold text-white">{reservation.Name}</h3>
+        </div>
+        <div className="flex items-center">
+          <BiDollar className="text-blue-400" size={20} />
+          <span className="text-white font-semibold">{reservation.Security}</span>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <div className="flex justify-between text-sm">
+          {reservation.Datenow}
+        </div>
+      </div>
+
+      <button 
+        onClick={() => {
+          handleProcessReturn(reservation);
+          code.current = reservation.Code;
+        }}
+        className="w-full mt-4 py-2 px-4 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors duration-200"
+      >
+        Process Return
+      </button>
+    </div>
+  );
 
   return (
     <div className="fixed inset-0 flex justify-center items-center z-50 px-5">
@@ -118,69 +138,31 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
             </h1>
             <p className="text-slate-400 text-sm mt-1">Total Deposits Held: ₱{totalAmount.toLocaleString()}</p>
           </div>
-          <button 
-            onClick={() => setTotalReserve((pro) => ({ ...pro, SecurityDeposit: false }))}
-            className="p-2 rounded-full hover:bg-slate-700/50 transition-colors"
-          >
-            <VscChromeClose className="text-slate-400 hover:text-white" size={24} />
-          </button>
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setShowNoDate(!showNoDate)}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 transition-colors"
+            >
+              <FaFilter size={16} />
+              {showNoDate ? 'Show All' : 'Show No Date'}
+            </button>
+            <button 
+              onClick={() => setTotalReserve((pro) => ({ ...pro, SecurityDeposit: false }))}
+              className="p-2 rounded-full hover:bg-slate-700/50 transition-colors"
+            >
+              <VscChromeClose className="text-slate-400 hover:text-white" size={24} />
+            </button>
+          </div>
         </div>
 
         {/* Deposits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {validDeposits.map((reservation, index) => {
-           
-            return (
-              <div
-                key={index}
-                className={`
-                  relative overflow-hidden group
-                  bg-gradient-to-br from-slate-800 to-slate-700
-                  border border-slate-600 rounded-xl p-5
-                  transition-all duration-300 ease-in-out
-                  ${selectedDeposit === reservation ? 'ring-2 ring-blue-400' : ''}
-                  hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1
-                `}
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <div className="space-y-1">
-                    <h3 className="font-semibold text-white">
-                      {reservation.Name}
-                    </h3>
-               
-                  </div>
-                  <div className="flex items-center">
-                    <BiDollar className="text-blue-400" size={20} />
-                    <span className="text-white font-semibold">
-                      {reservation.Security}
-                    </span>
-                  </div>
-                </div>
+          {(showNoDate ? noDateDeposits : regularDeposits).map((reservation, index) => (
+            <DepositCard key={index} reservation={reservation} />
+          ))}
+        </div>
 
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                  {reservation.Datenow}
-                  </div>
-                </div>
-
-         <button 
-                onClick={() => {
-                  handleProcessReturn(reservation);
-                  code.current = reservation.Code
-                }}
-                className="
-                  w-full mt-4 py-2 px-4 rounded-lg
-                  bg-blue-500 hover:bg-blue-600
-                  text-white text-sm font-medium
-                  transition-colors duration-200
-                "
-              >
-                Process Return
-              </button>
-
-
-
-              {validDeposits.length === 0 && (
+        {validDeposits.length === 0 && (
           <div className="text-center py-20">
             <p className="text-slate-400">No active security deposits</p>
           </div>
@@ -198,24 +180,19 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
               
               <div className="space-y-3">
                 <button
-                  onClick={(e) => confirmReturn(e,'perfect',reservation.Datenow)}
+                  onClick={(e) => confirmReturn(e, 'perfect', selectedDeposit.Datenow)}
                   className="w-full flex items-center justify-between p-3 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400"
                 >
-                  <span>Nodamage?</span>
+                  <span>No damage?</span>
                   <FaCheckCircle />
                 </button>
-                {
-              
-                
                 <button
-                  onClick={(e) => confirmReturn(e,'damaged',reservation.Datenow)}
+                  onClick={(e) => confirmReturn(e, 'damaged', selectedDeposit.Datenow)}
                   className="w-full flex items-center justify-between p-3 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400"
                 >
                   <span>Damaged - No Deposit</span>
                   <MdWarning />
                 </button>
-
-                }
               </div>
 
               <button
@@ -227,17 +204,6 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
             </div>
           </div>
         )}
-
-        
-              </div>
-            );
-
-
-            
-          })}
-        </div>
-
-       
       </div>
     </div>
   );
