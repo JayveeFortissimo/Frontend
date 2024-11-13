@@ -62,7 +62,6 @@ const Faqs = () => {
               <p>• 50% deduction from down payment or full payment for cancellations</p>
               <p>• Cancellations must be approved by admin</p>
               <p>• No refunds for cancellations after admin approval deadline</p>
-              <p>• Cancellation requests must be submitted at least 48 hours before rental date</p>
             </div>
           </div>
 
@@ -76,7 +75,6 @@ const Faqs = () => {
               <p>• ₱500 charge per day for late returns</p>
               <p>• Late fees are calculated from the day after due date</p>
               <p>• No grace period for returns</p>
-              <p>• Multiple late returns may affect future rental privileges</p>
             </div>
           </div>
 
@@ -103,8 +101,8 @@ const Faqs = () => {
             <div className="text-sm text-gray-600 space-y-2">
               <p>• 50% down payment required for reservations</p>
               <p>• Full payment must be made before item pickup</p>
-              <p>• Security deposit of ₱200 required</p>
-              <p>• Accepted payments: Cash, GCash</p>
+              <p>• Security deposit of ₱200 each gown required</p>
+              <p>• Accepted payments: Cash, GCash(Fullpayment, downPayment)</p>
             </div>
           </div>
         </div>
@@ -118,10 +116,9 @@ const faqItems = [
     question: 'What If I Damage The Item?',
     answer: [
       'Cristobal Collection covers minor wear and tear. Each rental piece is inspected thoroughly to ensure that it arrives in good condition and is checked again upon return.',
-      'In the event that the rental is damaged or badly stained, we will assess the damage and inform you of any additional charges needed for repairs.',
+      'In the event that the rental is damaged or badly stained, we will assess the damage and inform you of any additional charges including Security deposit needed for repairs.',
     ],
   },
-
 
   {
     question: "What happens if I don't pick up my items on the start date?",
@@ -131,31 +128,21 @@ const faqItems = [
       'If you wish to request a refund, please contact the admin to find out whether your reservation is eligible for a refund.'
     ],
   },
-
-  {
-    question: 'How Do I Know My Size?',
-    answer: [
-      'We provide detailed size measurements for each item in our collection.',
-      'You can find specific measurements in the product description.',
-      'If you re unsure, feel free to contact us for sizing assistance.',
-    ],
-  },
   {
     question: 'What Is The Rental Period?',
     answer: [
-      'Standard rental period is 3-5 days.',
-      'Extended rental periods are available upon request.',
-      'Late returns will incur additional charges as per our Late Return Policy.',
+      'Standard rental period is 3 days minimum and can you extend it.',
+      'Extend each day can charge 150 pesos',
+      'Late returns will incur additional charges 500 pesos as per our Late Return Policy.',
     ],
   },
+
   {
-    question: 'How Do I Make A Reservation?',
+    question: 'What if I lost QR Code?',
     answer: [
-      'Select your desired item and rental dates.',
-      'Complete the checkout process with your payment information.',
-      'You ll receive a confirmation email with rental details.',
-      'We recommend booking at least a week in advance for special events.',
+      'We penalty you at range 1000 pesos',
     ],
+    
   },
 ];
 
