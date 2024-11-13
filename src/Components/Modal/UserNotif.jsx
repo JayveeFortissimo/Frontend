@@ -17,7 +17,6 @@ const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
       <div className="fixed inset-0 bg-black/20 backdrop-blur-sm" />
-      
       <div className="relative w-full sm:w-[32rem] bg-white rounded-xl shadow-xl">
         <div className="p-4 sm:p-6">
           {/* Header */}
@@ -48,7 +47,9 @@ const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
             {sortedNotifications.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-gray-500">
                 <VscBell className="w-10 h-10 sm:w-12 sm:h-12 mb-3 text-gray-300" />
-                <p className="text-base sm:text-lg font-medium">No notifications yet</p>
+                <p className="text-base sm:text-lg font-medium">
+                  No notifications yet
+                </p>
                 <p className="text-xs sm:text-sm text-gray-400">
                   We'll notify you when something arrives
                 </p>
@@ -60,11 +61,11 @@ const UserNotif = ({ dispatch, Side, allNotif, setHaveNotif }) => {
                   return (
                     <div
                       key={notif.id || index}
-                      className={`p-3 sm:p-4 rounded-lg border 
-                        ${isNewest 
-                          ? 'border-blue-100 bg-blue-50/50 hover:bg-blue-50' 
+                      className={`p-3 sm:p-4 rounded-lg border
+                        ${isNewest
+                          ? 'border-blue-100 bg-blue-50/50 hover:bg-blue-50'
                           : 'border-gray-100 hover:bg-gray-50'
-                        } 
+                        }
                         transition-colors duration-200`}
                     >
                       <div className="flex items-start sm:items-center justify-between gap-3">
