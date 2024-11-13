@@ -97,7 +97,7 @@ const History = () => {
   const generateQRCode = async (id, text) => {
     if (qrRefs.current[id]) {
       const options = {
-        width:300,
+        width:200,
         margin: 0,
         color: {
           dark: '#000000',
@@ -238,8 +238,6 @@ const History = () => {
                           <canvas
                             ref={el => (qrRefs.current[pro.id] = el)}
                             className="mx-auto mb-3"
-                            width={300} // Set width attribute for canvas element
-                            height={300}
                           />
                           
                           <div className="flex flex-col gap-3">
