@@ -138,10 +138,58 @@ const userReturnedItems = (setToReturn, toReturn) => {
         }
     }
 
+
+
+
+    const PushHistoryNoQRCODE = async (e, pro) => {
+        e.preventDefault();
+
+        //console.log("IDS" , pro.ID)
+        Remove(pro.returnID);
+
+        toast.success("USER RETURNED THE ITEMS");
+
+        const dataPenalty = {
+            product_Name: pro.product_Name,
+            picture: pro.picture,
+            start_Date: pro.start_Date,
+            return_Date: pro.return_Date,
+            status: "NO QRCODE",
+            user_ID: pro.user_ID,
+            penalty: 1000,
+            quantity:pro.quantity
+        };
+
+        try {
+            const response = await fetch(`https://backend-production-024f.up.railway.app/to_History`, {
+                method: "POST",
+                body: JSON.stringify(dataPenalty),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) return console.log("Have A server problem");
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
+
+
     return {
         PushHistory,
-        pushAutoMatically
+        pushAutoMatically,
+        PushHistoryNoQRCODE
     };
 }
 
 export default userReturnedItems;
+
+
+
+
+
+

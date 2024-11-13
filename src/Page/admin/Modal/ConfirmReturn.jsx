@@ -5,8 +5,9 @@ import { useDispatch } from 'react-redux';
 
 const ConfirmReturn = ({ setOpenConfirmation, Info, setToReturn, toReturn }) => {
 
-  const { PushHistory } = ReturnITEMS(setToReturn, toReturn);
+  const { PushHistory, PushHistoryNoQRCODE } = ReturnITEMS(setToReturn, toReturn);
   const dispatch = useDispatch();
+
   return (
     <div className="fixed inset-0 flex justify-center items-center z-50 p-4">
       {/* Backdrop */}
@@ -53,8 +54,8 @@ const ConfirmReturn = ({ setOpenConfirmation, Info, setToReturn, toReturn }) => 
 
             <button 
               onClick={(e) =>{
-                PushHistory(e, Info);
-                setOpenConfirmation(false);
+               PushHistoryNoQRCODE(e,Info);
+               setOpenConfirmation(false);
                 dispatch(Sidebars.Activity('FinalH'));
               }}
               className="px-4 py-2 rounded-lg text-sm font-medium text-white
