@@ -17,7 +17,12 @@ const Check_Out = () => {
     const redirect = useNavigate();
     const [downPay, setDownpayment] = useState(false);
     const [gcash, setGcash] = useState(false);
+
     const { allOrders, total } = toCart();
+
+    console.log("LAHAT NG ORDERS" , allOrders);
+    console.log("Total ALL", total);
+
     const [isdown,setDown] = useState(false);
     const { allDatas, setPayment, Gcash, DownpaymentInstore } = ChekDetails(allOrders);
     const { allPoints } = RefferalPoints();

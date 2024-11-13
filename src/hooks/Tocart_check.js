@@ -8,6 +8,8 @@ const toCart = () =>{
     const navigate = useNavigate();
 
     const [allOrders,setAllOrders] = useState([]);
+    
+    //!!!ETO YUNG PINAKA TOTAL
     const [total,SetTotal] = useState([]);
 
 
