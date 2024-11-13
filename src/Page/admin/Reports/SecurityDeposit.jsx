@@ -49,8 +49,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
     setShowReturnModal(true);
   };
 
-  const confirmReturn = async(e,condition) => {
-     console.log(condition)
+  const confirmReturn = async(e,condition, Date) => {
   
      e.preventDefault();
 
@@ -70,12 +69,34 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
         })
       
         if(!response.ok) return console.log("HAve a problem here");
-        toast.success("ALL GOOODS");
+        toast.success("Updated");
         setAlldatas((pro) => pro.filter((item) => item.Code !== code.current));
           }catch(error){
        console.log(error);
           }
-    }else{
+    }else if(condition === "damaged"){
+
+      try{
+        const response = await fetch(`https://backend-production-024f.up.railway.app/DamageItems`,{
+          method:"PUT",
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify(
+            {
+              code:code.current,
+              date:"no_Date"
+            }
+          )
+        })
+      
+        if(!response.ok) return console.log("HAve a problem here");
+        toast.success("Updated");
+        setAlldatas((pro) => pro.filter((item) => item.Code !== code.current));
+          }catch(error){
+       console.log(error);
+          }
+
       console.log("HAvee A problem")
     }
 
@@ -140,8 +161,6 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
                   <div className="flex justify-between text-sm">
                   {reservation.Datenow}
                   </div>
-                  
-                  
                 </div>
 
          <button 
@@ -182,7 +201,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
               
               <div className="space-y-3">
                 <button
-                  onClick={(e) => confirmReturn(e,'perfect')}
+                  onClick={(e) => confirmReturn(e,'perfect',reservation.Datenow)}
                   className="w-full flex items-center justify-between p-3 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400"
                 >
                   <span>Nodamage?</span>
@@ -192,7 +211,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
               
                 
                 <button
-                  onClick={(e) => confirmReturn(e,'damaged')}
+                  onClick={(e) => confirmReturn(e,'damaged',reservation.Datenow)}
                   className="w-full flex items-center justify-between p-3 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400"
                 >
                   <span>Damaged - No Deposit</span>

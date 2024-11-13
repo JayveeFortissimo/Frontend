@@ -56,8 +56,6 @@ const Dashboard = () => {
     },[]);
   
 
-
-
   const filterData = (month) => {
     let filtered;
     if (month === 'All Months') {
