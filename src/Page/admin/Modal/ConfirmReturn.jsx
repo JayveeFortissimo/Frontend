@@ -35,16 +35,7 @@ const ConfirmReturn = ({ setOpenConfirmation, Info, setToReturn, toReturn }) => 
 
           {/* Actions */}
           <div className="flex justify-end gap-3 mt-4">
-            <button 
-              onClick={() => setOpenConfirmation(false)}
-              className="px-4 py-2 rounded-lg text-sm font-medium text-zinc-700
-                border border-zinc-200 
-                hover:bg-zinc-50 active:bg-zinc-100 
-                transform active:scale-[0.98] transition-all
-                focus:outline-none focus:ring-2 focus:ring-zinc-500"
-            >
-              Cancel
-            </button>
+         
             <button 
               onClick={(e) =>{
                 PushHistory(e, Info);
@@ -58,6 +49,35 @@ const ConfirmReturn = ({ setOpenConfirmation, Info, setToReturn, toReturn }) => 
             >
               Confirm Return
             </button>
+
+
+            <button 
+              onClick={(e) =>{
+                PushHistory(e, Info);
+                setOpenConfirmation(false);
+                dispatch(Sidebars.Activity('FinalH'));
+              }}
+              className="px-4 py-2 rounded-lg text-sm font-medium text-white
+                bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-900
+                transform active:scale-[0.98] transition-all
+                focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            >
+             <p>Order Confirm</p>
+             <p className="text-[0.7rem]">No QR  Code</p>
+            </button>
+
+
+            <button 
+              onClick={() => setOpenConfirmation(false)}
+              className="px-4 py-2 rounded-lg text-sm font-medium text-zinc-700
+                border border-zinc-200 
+                hover:bg-zinc-50 active:bg-zinc-100 
+                transform active:scale-[0.98] transition-all
+                focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            >
+              Cancel
+            </button>
+
           </div>
         </div>
       </div>
