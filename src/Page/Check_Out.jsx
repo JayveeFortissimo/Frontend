@@ -216,19 +216,17 @@ const Check_Out = () => {
                                             <span className="text-sm font-medium">{allPoints.totalReferred} </span>
                                         </div>
 
-                                        <div className="flex justify-between mb-2">
-                                            <span className="text-sm text-gray-600 flex gap-3">
-                                            <input 
-                                            type="checkbox" 
-                                            checked={ TotalsAll >= 3000 ? isradio || displayDiscount ? isRadio : false : false}  
-                                            onChange={()=> {
-                                                isRadio? setRadio(pro => !pro) : setRadio(pro => !pro);
-                                            }}
-                                            className='cursor-pointer'
-
-                                            disabled = {allPoints.totalReferred < 10}
-                                            /> 
-                                            <p>Apply referral points discount</p></span>
+                                <div className="flex justify-between mb-2">
+                               <span className="text-sm text-gray-600 flex gap-3"> 
+                                    <input  
+                                        type="checkbox"  
+                                        checked={TotalsAll >= 3000 ? isradio : false}   
+                                        onChange={() => setRadio(prev => !prev)} 
+                                        className='cursor-pointer' 
+                                        disabled={TotalsAll < 3000 || allPoints.totalReferred < 10} 
+                                    />  
+                                    <p>Apply referral points discount</p>
+                                </span>
                                         </div>
 
 
