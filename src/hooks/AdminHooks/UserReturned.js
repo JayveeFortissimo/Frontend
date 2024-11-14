@@ -56,7 +56,8 @@ const userReturnedItems = (setToReturn, toReturn) => {
             status: pro.status,
             user_ID: pro.user_ID,
             penalty: pro.penalty,
-            quantity:pro.quantity
+            quantity:pro.quantity,
+            price:pro.price
         };
 
         try {
@@ -157,7 +158,8 @@ const userReturnedItems = (setToReturn, toReturn) => {
             user_ID: pro.user_ID,
             penalty: 1000,
             quantity:pro.quantity,
-            code:pro.code
+            code:pro.code,
+            price:pro.price
         };
 
         try {

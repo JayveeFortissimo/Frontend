@@ -69,7 +69,8 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
           user_ID: data.user_id,
           penalty: totalPenalty,
           returnID: data.returnID,
-          quantity:data.quantity
+          quantity:data.quantity,
+          price:data.price
         });
         setOpenScanner(false);
         //!OPTIONAL THIS ONE BAGUHIN MO SYA
@@ -154,7 +155,7 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
                   <p><strong>Payment Method:</strong> {parsedData.payment_method}</p>
                   <p><strong>Penalty: {parsedData.penalty}</strong></p>
                   <p><strong>User ID:</strong> {parsedData.user_id}</p>
-               
+                  <p><strong>Price:</strong> {parsedData.price}</p>
                 </div>
                 
               </div>

@@ -24,7 +24,8 @@ const ToReturn = ({ userID }) => {
     penalty: 0,
     quantity:0,
     returnID: 0,
-    code:""
+    code:"",
+    price:0
   });
 
 
@@ -143,7 +144,8 @@ const ToReturn = ({ userID }) => {
               penalty: totalPenalty,
               quantity:item.quantity,
               code:item.code,
-              returnID: item.id
+              price:item.price,
+              returnID: item.id,
             });
             setOpenConfirmation(true);
            }}

@@ -140,6 +140,7 @@ const History = () => {
           payment_method: pro.payment_Method,
           penalty: 0,
           user_id: pro.user_ID,
+          price:pro.price,
           returnID: pro.id
         });
         await generateQRCode(pro.id, qrData);
