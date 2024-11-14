@@ -22,7 +22,7 @@ const Choose = ({ setOpenFitting, setOpenChoose }) => {
           {/* Title */}
           <div className="text-center space-y-2">
             <h2 className="text-2xl font-semibold text-neutral-800">
-              Want Fitting Appointment? 🤔
+              Want Fitting Appointment? 
             </h2>
             <p className="text-neutral-600">
               Choose whether you'd like to schedule a fitting appointment with us.
