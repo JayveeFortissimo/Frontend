@@ -279,10 +279,14 @@ const Dashboard = () => {
     doc.setFontSize(10);
     doc.text(`${startDate} - ${returnDate}`, 15, yPosition + 16);
     
-    // Status with color-coding
-    doc.setTextColor(customer.status === 'Approved' ? [0, 128, 0] : [0, 0, 0]);
+    // Status with color-coding - FIXED VERSION
+    if (customer.status === 'Approved') {
+        doc.setTextColor(0, 128, 0);  // Green for approved
+    } else {
+        doc.setTextColor(0, 0, 0);    // Black for other statuses
+    }
     doc.text(`Status: ${customer.status}`, pageWidth - 85, yPosition + 8);
-    doc.setTextColor(0, 0, 0);
+    doc.setTextColor(0, 0, 0); // Reset to black
     
     // List all items
     doc.setFont(undefined, 'normal');
@@ -291,8 +295,7 @@ const Dashboard = () => {
     });
     
     yPosition += 30 + (customer.items.length * 8);
-  });
-
+});
   // Canceled Reservations
   checkPageBreak(40);
   yPosition += 10;
