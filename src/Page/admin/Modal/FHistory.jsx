@@ -87,7 +87,7 @@ const HistoryItem = ({ pro }) => {
               </span>
             </div>
             <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-sm border border-emerald-500/30">
-              
+              HHAHAHAasdas
             </span>
           </div>
         </div>

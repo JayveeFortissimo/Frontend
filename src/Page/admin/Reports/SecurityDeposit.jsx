@@ -41,7 +41,6 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
   const validDeposits = allDatas.filter(r => Number(r.Security) !== 0);
   const totalAmount = validDeposits.reduce((sum, r) => sum + Number(r.Security), 0);
 
-  // Separate deposits based on date
   const regularDeposits = validDeposits.filter(r => r.Datenow !== "no_Date");
   const noDateDeposits = validDeposits.filter(r => r.Datenow === "no_Date");
 
