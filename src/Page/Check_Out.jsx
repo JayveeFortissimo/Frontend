@@ -220,7 +220,7 @@ const Check_Out = () => {
                                             <span className="text-sm text-gray-600 flex gap-3">
                                             <input 
                                             type="checkbox" 
-                                            checked={isradio || displayDiscount ? isRadio : false}  
+                                            checked={ TotalsAll >= 3000 ? isradio || displayDiscount ? isRadio : false : false}  
                                             onChange={()=> {
                                                 isRadio? setRadio(pro => !pro) : setRadio(pro => !pro);
                                             }}
