@@ -87,7 +87,7 @@ const HistoryItem = ({ pro }) => {
               </span>
             </div>
             <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-sm border border-emerald-500/30">
-              HHAHAHAasdas
+            
             </span>
           </div>
         </div>
@@ -123,7 +123,7 @@ const FHistory = () => {
         <div className="relative">
           {/* Background blur effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-2xl blur-xl" />
-          
+          HHAHAHAasdas
           {/* Content */}
           <div className="relative bg-gray-800/30 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50">
             {/* Scrollable Container */}
