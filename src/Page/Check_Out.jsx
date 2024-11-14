@@ -52,8 +52,16 @@ const Check_Out = () => {
 
     return (
         <>
-
-        {allPoints.totalReferred >= 10 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio} setIsRadio={setIsRadio}/>}
+ 
+    {
+        TotalsAll >= 3000 ?
+        (
+        <div>
+{allPoints.totalReferred >= 10 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio} setIsRadio={setIsRadio}/>}
+        </div>
+        ):(<div></div>)
+    }
+        
 
             {isdown && <DownpaymentG setDown={setDown} Gcash={Gcash} total={total} allGownSecurity={allGownSecurity}/>}
             
