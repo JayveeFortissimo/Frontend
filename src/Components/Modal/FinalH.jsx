@@ -75,7 +75,7 @@ const FinalH = ({ ID }) => {
 
                   <div className="mt-2">
                     <button className="text-blue-600 hover:text-blue-700 text-xs md:text-sm font-medium transition-colors duration-150">
-                      Reserve Again
+                      Price : {pro.price}
                     </button>
                   </div>
                 </div>
