@@ -88,6 +88,7 @@ const Dashboard = () => {
   });
 
   
+ console.log(DashInfo.data2)
 
   const generatePDF = () => {
     // Initialize PDF document
