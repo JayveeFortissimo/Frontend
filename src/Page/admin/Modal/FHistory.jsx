@@ -123,8 +123,9 @@ const FHistory = () => {
         <div className="relative">
           {/* Background blur effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-2xl blur-xl" />
-          HHAHAHAasdas
+        
           {/* Content */}
+          <p>Price: </p>
           <div className="relative bg-gray-800/30 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50">
             {/* Scrollable Container */}
             <div className="space-y-6 max-h-[32rem] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800/50">
