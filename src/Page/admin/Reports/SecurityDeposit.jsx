@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import io from 'socket.io-client';
 
 const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
+  
   const [selectedDeposit, setSelectedDeposit] = useState(null);
   const [showReturnModal, setShowReturnModal] = useState(false);
   const [allDatas, setAlldatas] = useState([]);
@@ -108,7 +109,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
       </div>
 
       <div className="space-y-2">
-        <div className="flex justify-between text-sm">
+        <div className="flex justify-between text-sm text-slate-400">
           {reservation.Datenow}
         </div>
       </div>
@@ -118,12 +119,24 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
           handleProcessReturn(reservation);
           code.current = reservation.Code;
         }}
-        className="w-full mt-4 py-2 px-4 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition-colors duration-200"
+        disabled={showNoDate && reservation.Datenow === "no_Date"}
+        className={`w-full mt-4 py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-200
+          ${showNoDate && reservation.Datenow === "no_Date" 
+            ? 'bg-slate-600 cursor-not-allowed opacity-50' 
+            : 'bg-blue-500 hover:bg-blue-600 text-white'}`}
       >
-        Process Return
+        {showNoDate && reservation.Datenow === "no_Date" ? "Processing Disabled" : "Process Return"}
       </button>
+
+      {showNoDate && reservation.Datenow === "no_Date" && (
+        <p className="text-xs text-red-400 mt-2 text-center">
+          Cannot process items with no return date
+        </p>
+      )}
     </div>
   );
+
+  // ... (rest of the component remains the same)
 
   return (
     <div className="fixed inset-0 flex justify-center items-center z-50 px-5">
@@ -144,7 +157,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 transition-colors"
             >
               <FaFilter size={16} />
-              {showNoDate ? 'Show All' : 'Show No Date'}
+              {showNoDate ? 'Show All' : 'Show No Deposit Items'}
             </button>
             <button 
               onClick={() => setTotalReserve((pro) => ({ ...pro, SecurityDeposit: false }))}
@@ -161,7 +174,6 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
             <DepositCard key={index} reservation={reservation} />
           ))}
         </div>
-
         {validDeposits.length === 0 && (
           <div className="text-center py-20">
             <p className="text-slate-400">No active security deposits</p>
@@ -204,6 +216,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
             </div>
           </div>
         )}
+        {/* ... (rest of the component remains the same) */}
       </div>
     </div>
   );
