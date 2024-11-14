@@ -251,7 +251,7 @@ const referralLink = userProfile.length > 0
         {/* Activity Section */}
         <div className="bg-white rounded-2xl shadow-sm p-6">
           <div className="flex items-center justify-between mb-6 flex-wrap">
-            <h3 className="text-lg font-semibold text-gray-800">Your Activity</h3>
+            <h3 className="text-lg font-semibold text-gray-800">Orders Status</h3>
             <button
               onClick={() => dispatch(Sidebars.Appointment(true))}
               className="flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors"
@@ -273,7 +273,7 @@ const referralLink = userProfile.length > 0
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
             <ActivityTab 
               icon={VscPackage}
-              label="Order Status"
+              label="For Approval"
               count={allOrders?.length}
               isActive={isReserveOrders === "Reserve"}
               onClick={() => dispatch(Sidebars.Activity("Reserve"))}
