@@ -79,9 +79,8 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
                 size:pro.size,
                 subTotal:pro.subTotal,
                 code:pro.code,
+                price:pro.price,
                 Today: new Date(Date.UTC(DateNows.getFullYear(), DateNows.getMonth(), DateNows.getDate())).toISOString().split('T')[0],
-                price:pro.price
-                
             }),
                headers:{
                   'Content-Type':'application/json'
