@@ -225,7 +225,8 @@ const Dashboard = () => {
     
     DashInfo.data2.reservations.forEach((reservation) => {
       checkPageBreak(15);
-      doc.text(`• ${reservation.Name}`, 15, yPosition);
+      doc.text(`• ${reservation.Name} ${reservation.product_Name}`, 15, yPosition);
+      
       yPosition += 8;
     });
   
