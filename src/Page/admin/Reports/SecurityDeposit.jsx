@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import io from 'socket.io-client';
 
 const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
-  
+
   const [selectedDeposit, setSelectedDeposit] = useState(null);
   const [showReturnModal, setShowReturnModal] = useState(false);
   const [allDatas, setAlldatas] = useState([]);
@@ -50,7 +50,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
     setShowReturnModal(true);
   };
 
-  const confirmReturn = async(e, condition, Date) => {
+  const confirmReturn = async(e, condition, Date, Security) => {
     e.preventDefault();
 
     if(condition === "perfect"){
@@ -61,7 +61,8 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
             'Content-Type':'application/json'
           },
           body:JSON.stringify({
-            code:code.current
+            code:code.current,
+            security:Security
           })
         });
       
@@ -136,7 +137,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
     </div>
   );
 
-  // ... (rest of the component remains the same)
+  
 
   return (
     <div className="fixed inset-0 flex justify-center items-center z-50 px-5">
@@ -157,7 +158,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 transition-colors"
             >
               <FaFilter size={16} />
-              {showNoDate ? 'Show All' : 'Show No Deposit Items'}
+              {showNoDate ? 'Show All' : 'Show No Deposit User'}
             </button>
             <button 
               onClick={() => setTotalReserve((pro) => ({ ...pro, SecurityDeposit: false }))}
@@ -192,14 +193,14 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
               
               <div className="space-y-3">
                 <button
-                  onClick={(e) => confirmReturn(e, 'perfect', selectedDeposit.Datenow)}
+                  onClick={(e) => confirmReturn(e, 'perfect', selectedDeposit.Datenow, selectedDeposit.Security)}
                   className="w-full flex items-center justify-between p-3 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400"
                 >
                   <span>No damage?</span>
                   <FaCheckCircle />
                 </button>
                 <button
-                  onClick={(e) => confirmReturn(e, 'damaged', selectedDeposit.Datenow)}
+                  onClick={(e) => confirmReturn(e, 'damaged', selectedDeposit.Datenow, selectedDeposit.Security)}
                   className="w-full flex items-center justify-between p-3 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400"
                 >
                   <span>Damaged - No Deposit</span>
