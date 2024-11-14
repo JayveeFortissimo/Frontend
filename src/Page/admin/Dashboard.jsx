@@ -87,7 +87,7 @@ const Dashboard = () => {
     ReservesTodays:false
   });
 
-  
+  console.log(DashInfo)
  console.log(DashInfo.data2)
 
   const generatePDF = () => {
@@ -224,6 +224,7 @@ const Dashboard = () => {
     doc.setFontSize(11);
     doc.setFont(undefined, 'normal');
     
+    /*
     DashInfo.data2.reservations.forEach((reservation) => {
       checkPageBreak(15);
       doc.text(`• ${reservation.Name} ${reservation.product_Name}`, 15, yPosition);
@@ -231,6 +232,9 @@ const Dashboard = () => {
       yPosition += 8;
     });
   
+
+    */
+   
     // Canceled Reservations
     checkPageBreak(40);
     yPosition += 10;
