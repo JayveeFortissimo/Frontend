@@ -273,7 +273,7 @@ const referralLink = userProfile.length > 0
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
             <ActivityTab 
               icon={VscPackage}
-              label="Rental Requests"
+              label="Order Status"
               count={allOrders?.length}
               isActive={isReserveOrders === "Reserve"}
               onClick={() => dispatch(Sidebars.Activity("Reserve"))}
