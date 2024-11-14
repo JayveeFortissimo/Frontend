@@ -83,7 +83,7 @@ const HistoryItem = ({ pro }) => {
             <div className="flex items-center gap-2">
               
               <span className="px-3 py-1 rounded-full bg-gray-700/50 text-gray-300 text-sm border border-gray-600/50">
-                {pro.payment_Method}
+                {pro.price}
               </span>
             </div>
             <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-sm border border-emerald-500/30">
@@ -125,7 +125,7 @@ const FHistory = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-2xl blur-xl" />
         
           {/* Content */}
-          <p>Price: </p>
+        
           <div className="relative bg-gray-800/30 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50">
             {/* Scrollable Container */}
             <div className="space-y-6 max-h-[32rem] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800/50">
