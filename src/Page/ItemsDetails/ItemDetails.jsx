@@ -206,16 +206,16 @@ console.log(fullImages)
               {/* Product Header */}
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <span className="px-4 py-1.5 bg-emerald-50 text-emerald-600 rounded-full text-sm font-medium">
+                  <span className=" bg-indigo-50 text-indigo-600 rounded-full hover:bg-indigo-100 transition-colors px-4 py-2  text-sm font-medium">
                     {pro.type}
                   </span>
-                  <span className="px-4 py-1.5 bg-emerald-50 text-emerald-600 rounded-full text-sm font-medium">
+                  <span className="bg-indigo-50 text-indigo-600 rounded-full hover:bg-indigo-100 transition-colors px-4 py-2 text-sm font-medium">
                     {pro.color}
                   </span>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 tracking-tight">{pro.product_Name}</h2>
                 <div className="flex items-center space-x-2">
-                  <span className="text-xl font-bold text-emerald-600">
+                  <span className="text-xl font-bold text-violet-600">
                     ₱{(pro.price + additionalFee).toLocaleString('en-US')}
                   </span>
                 </div>
@@ -245,8 +245,8 @@ console.log(fullImages)
                           onClick={() => handleSizeToggle(size.sizes)}
                           className={`px-4 py-2 rounded-xl border-2 transition-all duration-300 transform hover:scale-105 flex items-center
                             ${selectedSizes[size.sizes]
-                              ? 'border-emerald-600 bg-emerald-600 text-white shadow-lg'
-                              : 'border-gray-200 hover:border-emerald-600 text-gray-700 hover:shadow-md'
+                              ? 'border-violet-600 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg'
+                              : 'border-gray-200 hover:border-violet-600 text-gray-700 hover:shadow-md'
                             }
                              ${
                               size.quantity <= 0? "bg-gray-600 text-white":undefined
@@ -269,7 +269,7 @@ console.log(fullImages)
                 <div key={size} className="bg-gray-50 p-6 rounded-2xl space-y-4 transform transition-all duration-300 hover:shadow-md">
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-semibold text-gray-900">Size {size}</span>
-                    <span className="text-sm text-emerald-600 font-medium">
+                    <span className="text-sm text-violet-600 font-medium">
                       {maxQuantityPerSize.current[size]} available
                     </span>
                   </div>
@@ -326,7 +326,7 @@ console.log(fullImages)
                       endDate={endDate}
                       minDate={new Date()}
                       dateFormat="MMMM d, yyyy"
-                      className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
                       placeholderText="Select start date"
                     />
                   </div>
@@ -340,15 +340,15 @@ console.log(fullImages)
                       endDate={endDate}
                       minDate={startDate}
                       dateFormat="MMMM d, yyyy"
-                      className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+                      className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
                       placeholderText="Select end date"
                     />
                   </div>
                 </div>
 
                 {startDate && (
-                  <div className="bg-emerald-50 p-6 rounded-xl space-y-3">
-                    <div className="space-y-2 text-emerald-700">
+                  <div className="bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors p-6 rounded-xl space-y-3">
+                    <div className="space-y-2 text-violet-700">
                       <p className="text-sm font-medium">
                         Rental period: {format(startDate, 'MMM d')} - {format(endDate, 'MMM d, yyyy')}
                       </p>
@@ -377,7 +377,7 @@ console.log(fullImages)
                   onClick={(e) => Token ? handleAddToCart(e, pro) : navigate('/login')}
                   className={`w-full py-3 px-6 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-102 flex items-center justify-center space-x-2
                     ${Token && startDate && endDate
-                      ? 'bg-emerald-600 hover:bg-emerald-700 shadow-lg hover:shadow-xl'
+                      ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/50'
                       : 'bg-gray-300 cursor-not-allowed'
                     }`}
                   disabled={!Token || !startDate || !endDate}
@@ -404,7 +404,7 @@ console.log(fullImages)
 
 export default ItemDetails;
 
-// Keep the existing loader function
+
 export const itemsInfos = async ({ params }) => {
   const id = params.Items_ID;
   try {

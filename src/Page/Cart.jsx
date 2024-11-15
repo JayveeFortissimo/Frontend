@@ -33,7 +33,7 @@ const Cart = () => {
 
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 rounded-2xl shadow-lg overflow-hidden mb-8">
+        <div className="bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-2xl shadow-lg overflow-hidden mb-8">
           <div className="px-6 py-8">
             <div className="flex items-center justify-between">
               <button 
@@ -47,11 +47,14 @@ const Cart = () => {
             
 
               <div className="flex items-center gap-3">
+                <h1 className="xs:text[0.9rem] md:text-xl font-bold text-white">Cart</h1>
                 <FiShoppingCart className="w-7 h-7 text-white" />
-                <h1 className="xs:text[0.9rem] md:text-xl font-bold text-white">Your Cart</h1>
               </div>
               
          <div></div>
+
+
+
             </div>
           </div>
         </div>
@@ -90,7 +93,7 @@ const Cart = () => {
                         <div>
                           <h3 className="text-xl font-semibold text-gray-900">{item.product_Name}</h3>
                           <div className="mt-1 flex items-center gap-2">
-                            <FiTag className="w-4 h-4 text-emerald-600" />
+                            <FiTag className="w-4 h-4 text-violet-600" />
                             <span className="text-gray-600">{item.type}</span>
                           </div>
                         </div>
@@ -104,11 +107,11 @@ const Cart = () => {
                       
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         <div className="flex items-center gap-2 text-gray-600">
-                          <FiPackage className="w-4 h-4 text-emerald-600" />
+                          <FiPackage className="w-4 h-4 text-violet-600" />
                           <span>Size: {item.size}</span>
                         </div>
                         <div className="flex items-center gap-2 text-gray-600">
-                          <FiShoppingBag className="w-4 h-4 text-emerald-600" />
+                          <FiShoppingBag className="w-4 h-4 text-violet-600" />
                           <span>Qty: {item.quantity}</span>
                         </div>
                         <div className="flex items-center gap-6 text-gray-600">
@@ -119,9 +122,9 @@ const Cart = () => {
                       </div>
                       
                       <div className="flex flex-col md:flex-row gap-4 pt-2">
-                        <div className="flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-xl">
-                          <FiCalendar className="w-4 h-4 text-emerald-600" />
-                          <span className="text-sm text-emerald-700">
+                        <div className="flex items-center gap-2 bg-indigo-50 text-indigo-600 rounded-lg hover:bg-indigo-100 transition-colors px-4 py-2 rounded-xl">
+                          <FiCalendar className="w-4 h-4 " />
+                          <span className="text-sm ">
                             Start: {new Date(item.start_Date).toLocaleDateString('en-US', { 
                               year: 'numeric', 
                               month: 'long', 
@@ -178,7 +181,7 @@ const Cart = () => {
                 <div className="flex flex-col gap-4">
                   <button 
                     onClick={() => setOpenChoose(true)}
-                    className="w-full py-4 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-all duration-300 transform hover:scale-102 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 font-medium"
+                    className="w-full py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/50  flex items-center justify-center gap-2 font-medium"
                   >
                     <FiCalendar className="w-5 h-5" />
                     Schedule Fitting Appointment

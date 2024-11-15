@@ -73,7 +73,7 @@ const Check_Out = () => {
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-8">
-                        <h1 className="text-3xl font-bold text-gray-900">Checkout</h1>
+                        <h1 className="text-3xl font-bold text-gray-900">Confirmation Page</h1>
                         <p className="mt-2 text-sm text-gray-600">Complete your order at Cristobal Collection</p>
                     </div>
 
@@ -137,23 +137,13 @@ const Check_Out = () => {
 
                             {/* Payment Methods Card */}
                             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden p-6">
-                                <h2 className="text-xl font-semibold text-gray-900 mb-4">Payment Method</h2>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <button
-                                        onClick={() => { setPayment("In store"); setDownpayment(true); }}
-                                        className="flex items-center justify-center gap-2 p-4 rounded-lg border-2 border-green-500 bg-green-50 hover:bg-green-100 transition-colors"
-                                    >
-                                        <FaStore className="w-5 h-5 text-green-600" />
-                                        <span className="font-medium text-green-700">Payment in Store</span>
-                                    </button>
-                                    <button
-                                        onClick={() => { setPayment("Gcash"); setGcash(true); }}
-                                        className="flex items-center justify-center gap-2 p-4 rounded-lg border-2 border-blue-500 bg-blue-50 hover:bg-blue-100 transition-colors"
-                                    >
-                                        <FaGooglePay className="w-5 h-5 text-blue-600" />
-                                        <span className="font-medium text-blue-700">GCash</span>
-                                    </button>
-                                </div>
+
+                            <h3 className="font-semibold text-gray-900">Cristobal Collection</h3>
+                                        <div className="flex items-center text-sm text-gray-500 mt-1">
+                                            <HiLocationMarker className="w-4 h-4 mr-1" />
+                                            Bagbaguin Santa Maria Bulacan
+                                        </div>
+
                             </div>
 
                             {/* Cancellation Policy */}

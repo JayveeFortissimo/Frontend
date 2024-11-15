@@ -71,7 +71,7 @@ const NavigationBar = () => {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-1 lg:flex-none">
-              <span className="xs:2xl md:text-lg font-bold bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 bg-clip-text text-transparent">
+              <span className="xs:2xl md:text-lg font-bold bg-gradient-to-r from-violet-600 via-violet-500 to-violet-400 bg-clip-text text-transparent">
                 Cristobal Collection
               </span>
             </div>
@@ -83,7 +83,7 @@ const NavigationBar = () => {
                   to="/" 
                   end
                   className={({isActive}) => 
-                    `${isActive ? 'bg-white text-amber-600 shadow-sm' : 'text-gray-700'} px-4 py-2 rounded-lg transition-all duration-200 text-sm font-medium hover:text-amber-600`
+                    `${isActive ? 'bg-white text-violet-600 shadow-sm' : 'text-gray-700'} px-4 py-2 rounded-lg transition-all duration-200 text-sm font-medium hover:text-violet-700`
                   }
                 >
                   HOME
@@ -93,7 +93,7 @@ const NavigationBar = () => {
                 <div className="relative">
                   <button
                     onClick={() => setIsCollectionOpen(!isCollectionOpen)}
-                    className="flex items-center space-x-1 px-4 py-2 rounded-lg text-gray-700 hover:text-amber-600 transition-all duration-200 text-sm font-medium"
+                    className="flex items-center space-x-1 px-4 py-2 rounded-lg text-gray-700 hover:text-violet-600 transition-all duration-200 text-sm font-medium"
                   >
                     <span>COLLECTION</span>
                     <VscChevronDown className={`w-4 h-4 transition-transform duration-200 ${isCollectionOpen ? 'rotate-180' : ''}`} />
@@ -106,7 +106,7 @@ const NavigationBar = () => {
                           <button
                             key={index}
                             onClick={() => handleCategoryClick(item.category)}
-                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-all duration-200"
+                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-violet-50 hover:text-violet-600 transition-all duration-200"
                           >
                             {item.category}
                           </button>
@@ -120,7 +120,7 @@ const NavigationBar = () => {
                 <div className="relative">
                   <button
                     onClick={() => setIsHowItWorksOpen(!isHowItWorksOpen)}
-                    className="flex items-center space-x-1 px-4 py-2 rounded-lg text-gray-700 hover:text-amber-600 transition-all duration-200 text-sm font-medium"
+                    className="flex items-center space-x-1 px-4 py-2 rounded-lg text-gray-700 hover:text-violet-600 transition-all duration-200 text-sm font-medium"
                   >
                     <span>HOW IT WORKS</span>
                     <VscChevronDown className={`w-4 h-4 transition-transform duration-200 ${isHowItWorksOpen ? 'rotate-180' : ''}`} />
@@ -130,7 +130,7 @@ const NavigationBar = () => {
                     <div className="absolute top-full left-0 mt-2 w-48 rounded-xl shadow-lg bg-white/80 backdrop-blur-sm ring-1 ring-black/5">
                       <NavLink
                         to="Faqs"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-all duration-200"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-50 hover:text-violet-600 transition-all duration-200"
                         onClick={() => setIsHowItWorksOpen(false)}
                       >
                         FAQs
@@ -142,7 +142,7 @@ const NavigationBar = () => {
                 <NavLink
                   to="Inquire"
                   className={({isActive}) =>
-                    `${isActive ? 'bg-white text-amber-600 shadow-sm' : 'text-gray-700'} px-4 py-2 rounded-lg transition-all duration-200 text-sm font-medium hover:text-amber-600`
+                    `${isActive ? 'bg-white text-violet-600 shadow-sm' : 'text-gray-700'} px-4 py-2 rounded-lg transition-all duration-200 text-sm font-medium hover:text-violet-600`
                   }
                 >
                   CONTACT
@@ -151,7 +151,7 @@ const NavigationBar = () => {
                 <NavLink
                   to="Review"
                   className={({isActive}) =>
-                    `${isActive ? 'bg-white text-amber-600 shadow-sm' : 'text-gray-700'} px-4 py-2 rounded-lg transition-all duration-200 text-sm font-medium hover:text-amber-600`
+                    `${isActive ? 'bg-white text-violet-600 shadow-sm' : 'text-gray-700'} px-4 py-2 rounded-lg transition-all duration-200 text-sm font-medium hover:text-violet-600`
                   }
                 >
                   REVIEWS
@@ -166,20 +166,20 @@ const NavigationBar = () => {
                   to={token ? "profile" : "Login"}
                   className="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
                 >
-                  <VscAccount className="w-5 h-5 text-gray-700 hover:text-amber-600" />
+                  <VscAccount className="w-5 h-5 text-gray-700 hover:text-violet-600" />
                 </NavLink>
                 <button 
                   onClick={() => navigate('search')}
                   className="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
                 >
-                  <VscSearch className="w-5 h-5 text-gray-700 hover:text-amber-600" />
+                  <VscSearch className="w-5 h-5 text-gray-700 hover:text-violet-600" />
                 </button>
                 {token && (
                   <button 
                     onClick={() => navigate('cart')}
                     className="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
                   >
-                    <BsCart3 className="w-5 h-5 text-gray-700 hover:text-amber-600" />
+                    <BsCart3 className="w-5 h-5 text-gray-700 hover:text-violet-600" />
                   </button>
                 )}
               </div>
@@ -209,7 +209,7 @@ const NavigationBar = () => {
                 to="/"
                 end
                 className={({isActive}) =>
-                  `${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-amber-600 transition-all duration-200`
+                  `${isActive ? 'bg-amber-50 text-violet-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-violet-600 transition-all duration-200`
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -219,13 +219,13 @@ const NavigationBar = () => {
  
                <div>
 
-               <button onClick={()=> setOpenCollect(pro => !pro)} className='mt-3 block w-full text-left px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-amber-50 hover:text-amber-600 transition-all duration-200'>COLLECTIONS</button>
+               <button onClick={()=> setOpenCollect(pro => !pro)} className='mt-3 block w-full text-left px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-amber-50 hover:text-violet-600 transition-all duration-200'>COLLECTIONS</button>
             
               {mergingig.map((item, index) => (
                 <button
                   key={index}
                   onClick={() => handleCategoryClick(item.category)}
-                  className={`${openCollect? "block":"hidden"}  block w-full text-left px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-amber-50 hover:text-amber-600 transition-all duration-200`}
+                  className={`${openCollect? "block":"hidden"}  block w-full text-left px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-amber-50 hover:text-violet-600 transition-all duration-200`}
                 >
                   {item.category}
                 </button>
@@ -236,7 +236,7 @@ const NavigationBar = () => {
               <NavLink
                 to="Faqs"
                 className={({isActive}) =>
-                  `${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-amber-600 transition-all duration-200`
+                  `${isActive ? 'bg-amber-50 text-violet-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-violet-600 transition-all duration-200`
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -246,7 +246,7 @@ const NavigationBar = () => {
               <NavLink
                 to="Review"
                 className={({isActive}) =>
-                  `${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-amber-600 transition-all duration-200`
+                  `${isActive ? 'bg-amber-50 text-violet-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-violet-600 transition-all duration-200`
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -256,7 +256,7 @@ const NavigationBar = () => {
               <NavLink
                 to="Inquire"
                 className={({isActive}) =>
-                  `${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-amber-600 transition-all duration-200`
+                  `${isActive ? 'bg-amber-50 text-violet-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-violet-600 transition-all duration-200`
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -267,7 +267,7 @@ const NavigationBar = () => {
               <NavLink
                 to="profile"
                 className={({isActive}) =>
-                  `${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-amber-600 transition-all duration-200`
+                  `${isActive ? 'bg-amber-50 text-violet-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-violet-600 transition-all duration-200`
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -278,7 +278,7 @@ const NavigationBar = () => {
               <NavLink
                 to="search"
                 className={({isActive}) =>
-                  `${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-amber-600 transition-all duration-200`
+                  `${isActive ? 'bg-amber-50 text-violet-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-violet-600 transition-all duration-200`
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -289,7 +289,7 @@ const NavigationBar = () => {
                 token &&   <NavLink
                 to="cart"
                 className={({isActive}) =>
-                  `${isActive ? 'bg-amber-50 text-amber-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-amber-600 transition-all duration-200`
+                  `${isActive ? 'bg-amber-50 text-violet-600' : 'text-gray-700'} block px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 hover:text-violet-600 transition-all duration-200`
                 }
                 onClick={() => setIsMobileMenuOpen(false)}
               >
