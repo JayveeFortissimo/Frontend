@@ -24,7 +24,7 @@ const DetailCheck = (allOrders) =>{
     useEffect(()=>{
         async function info(){
             try{
-                const response = await fetch(`http://localhost:8000//profile/${ID.id}`,{
+                const response = await fetch(`http://localhost:8000/profile/${ID.id}`,{
                     method:"GET",
                     headers:{
                       authorization: "Bearer " + ID.token
@@ -61,7 +61,7 @@ const DetailCheck = (allOrders) =>{
 async function Payments(e,payment,Type,sameCode){
    e.preventDefault();
   try{
-    const response = await fetch(`http://localhost:8000//userPayment`,{
+    const response = await fetch(`http://localhost:8000/userPayment`,{
       method:"POST",
       body:JSON.stringify({
         DATENOW:dateNow,
@@ -112,7 +112,7 @@ async function Payments(e,payment,Type,sameCode){
        
           try{
 
-            const response = await fetch(`http://localhost:8000//check_Out`,{
+            const response = await fetch(`http://localhost:8000/check_Out`,{
                 method:"POST",
                 body:JSON.stringify(Datas),
                 headers:{
@@ -138,7 +138,7 @@ async function Payments(e,payment,Type,sameCode){
     
     try{
 
-       const response = await fetch(`http://localhost:8000//allDeleted/${allDatas[0].id}`,{
+       const response = await fetch(`http://localhost:8000/allDeleted/${allDatas[0].id}`,{
            method:"delete",
            headers:{
                'Content-Type':'application/json'
@@ -166,7 +166,7 @@ const DownpaymentInstore = async (e,total) => {
     toast.error("Need to reserve an items");
   }else{
     try{
-      const response = await fetch('http://localhost:8000//create-payment-link', {
+      const response = await fetch('http://localhost:8000/create-payment-link', {
         method: 'POST',
         body:JSON.stringify({
           amount: total * 100, 
@@ -204,7 +204,7 @@ const DownpaymentInstore = async (e,total) => {
     toast.error("Need to reserve an items");
   }else{
     try{
-      const response = await fetch('http://localhost:8000//create-payment-link', {
+      const response = await fetch('http://localhost:8000/create-payment-link', {
         method:'POST',
         body:JSON.stringify({
           amount: selectedOptions === "downpayment"? total * 100 : total * 100, 

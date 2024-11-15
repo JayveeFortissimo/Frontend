@@ -15,7 +15,7 @@ const To_Return = ({ user_ID }) => {
   const { toReturn, setToReturn } = History(user_ID);
 
   useEffect(() => {
-    const socket = io('http://localhost:8000/');
+    const socket = io('http://localhost:8000');
     
     socket.on('itemRemoved', (id) => {
       const filtered = toReturn.filter(pro => pro.id !== id);
@@ -80,7 +80,7 @@ const To_Return = ({ user_ID }) => {
                       <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                         <div className="relative mx-auto sm:mx-0">
                           <img 
-                            src={`http://localhost:8000//uploads/${pro.picture}`}
+                            src={`http://localhost:8000/uploads/${pro.picture}`}
                             className="h-40 sm:h-48 w-32 sm:w-36 object-cover rounded-lg shadow-md"
                             alt={pro.product_Name}
                           />

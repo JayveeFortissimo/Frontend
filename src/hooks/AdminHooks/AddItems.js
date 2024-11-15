@@ -67,7 +67,7 @@ const AddItems = () => {
         });
       }
 
-      const response = await fetch('http://localhost:8000//addItems', {
+      const response = await fetch('http://localhost:8000/addItems', {
         method: 'POST',
         body: formDataToSend,
       });

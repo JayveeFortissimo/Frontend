@@ -37,7 +37,7 @@ const Dashboard = () => {
 
     //!this is from another for notification
     useEffect(() =>{
-      const socket = io('http://localhost:8000/');
+      const socket = io('http://localhost:8000');
   
       socket.on('connect', () => {
         console.log('Connected to Socket.IO server');
@@ -560,7 +560,7 @@ export const Dash = async() => {
 
     const responses = await Promise.all(
       endpoints.map(endpoint => 
-        fetch(`http://localhost:8000//${endpoint}`, {
+        fetch(`http://localhost:8000/${endpoint}`, {
           method: 'get',
           headers: {
             'Content-Type': 'application/json'

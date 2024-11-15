@@ -264,7 +264,7 @@ const TotalReservations = ({ setTotalReserve, DashInfo }) => {
                         </div>
 
                         <div className='mt-3'>
-                       <img src={`http://localhost:8000//uploads/${reservation.picture}`} className='h-[8rem]' />
+                       <img src={`http://localhost:8000/uploads/${reservation.picture}`} className='h-[8rem]' />
                       </div>
                         
                         <div className="space-y-1 text-xs">

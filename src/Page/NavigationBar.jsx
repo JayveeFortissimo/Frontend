@@ -24,10 +24,10 @@ const NavigationBar = () => {
   const token = useRouteLoaderData("root");
 
   useEffect(() => {
-    const socket = io('http://localhost:8000/');
+    const socket = io('http://localhost:8000');
     const array = [];
 
-    fetch(`http://localhost:8000//allCategorys`)
+    fetch(`http://localhost:8000allCategorys`)
       .then(response => response.json())
       .then(data => {
         data.data.forEach(element => {

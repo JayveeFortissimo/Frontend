@@ -57,7 +57,7 @@ const socket = useRef(null);
         async function data() {
            try{
       
-            const response = await fetch(`http://localhost:8000//orders/${ID.id}`,{
+            const response = await fetch(`http://localhost:8000/orders/${ID.id}`,{
               method:'GET',
               headers:{
                 'Content-Type':'application/json'
@@ -82,7 +82,7 @@ const socket = useRef(null);
         async function Size() {
           try{
      
-           const response = await fetch(`http://localhost:8000//Size/${SizeName.id}`,{
+           const response = await fetch(`http://localhost:8000/Size/${SizeName.id}`,{
              method:'GET',
              headers:{
                'Content-Type':'application/json'
@@ -104,7 +104,7 @@ const socket = useRef(null);
 
       useEffect(() => {
         
-        socket.current = io("http://localhost:8000/"); 
+        socket.current = io("http://localhost:8000"); 
 
         socket.current.on('canceled', (data) => {
             console.log('Item canceled:', data);
@@ -143,7 +143,7 @@ const PushToHistoryCancel = async(e) =>{
 
     try{
 
-        const response = await fetch(`http://localhost:8000//cancelled`,{
+        const response = await fetch(`http://localhost:8000/cancelled`,{
            method:"POST",
            body:JSON.stringify({
                picture:dataOut.picture,
@@ -183,7 +183,7 @@ useEffect(()=>{
 
     try{
     
-      const response = await fetch(`http://localhost:8000//allCanceled/${ID.id}`,{
+      const response = await fetch(`http://localhost:8000/allCanceled/${ID.id}`,{
         method:"GET",
         headers:{
           'Content-Type':'application/json'
@@ -215,7 +215,7 @@ useEffect(()=>{
 
     try{
     
-      const response = await fetch(`http://localhost:8000//notifications/${ID.id}`,{
+      const response = await fetch(`http://localhost:8000/notifications/${ID.id}`,{
         method:"GET",
         headers:{
           'Content-Type':'application/json'

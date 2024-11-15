@@ -23,7 +23,7 @@ const History = ({ user_ID }) => {
     });
 
     useEffect(() => {
-        const socket = io('http://localhost:8000/');
+        const socket = io('http://localhost:8000');
 
         socket.on('pickup-status-updated', (data) => {
             setAllDatas((prevDatas) => {
@@ -116,7 +116,7 @@ const History = ({ user_ID }) => {
                                 >
                                     <div className="relative">
                                         <img
-                                            src={`http://localhost:8000//uploads/${pro.picture}`}
+                                            src={`http://localhost:8000/uploads/${pro.picture}`}
                                             className="w-full h-48 object-cover"
                                             alt={pro.product_Name}
                                         />

@@ -39,7 +39,7 @@ const FinalH = ({ ID }) => {
               <div className="flex flex-col sm:flex-row gap-3 md:gap-6 p-3 md:p-4">
                 <div className="flex-shrink-0">
                   <img
-                    src={`http://localhost:8000//uploads/${pro.picture}`}
+                    src={`http://localhost:8000/uploads/${pro.picture}`}
                     alt={pro.product_Name}
                     className="w-full sm:w-32 h-48 sm:h-32 object-cover rounded-lg shadow-sm"
                   />

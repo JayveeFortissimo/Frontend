@@ -17,7 +17,7 @@ const CategoryTable = () => {
 
       e.preventDefault();
     try{
-      const response = await fetch(`http://localhost:8000//CategoryEdit/${id}`,{
+      const response = await fetch(`http://localhost:8000/CategoryEdit/${id}`,{
         method:"put",
         headers:{
             'Content-Type':'application/json'
@@ -43,7 +43,7 @@ const CategoryTable = () => {
     e.preventDefault();
    console.log(category)
   try{
-   const response = await fetch(`http://localhost:8000//CategoryDelete/${id}`,{
+   const response = await fetch(`http://localhost:8000/CategoryDelete/${id}`,{
     method:"delete",
     headers:{
         'Content-Type':'application/json'

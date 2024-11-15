@@ -6,7 +6,7 @@ const userReturnedItems = (setToReturn, toReturn) => {
 
     useEffect(() => {
        
-        const socket = io('http://localhost:8000/'); 
+        const socket = io('http://localhost:8000'); 
 
         socket.on('itemRemoved', (id) => {
             console.log(id);
@@ -25,7 +25,7 @@ const userReturnedItems = (setToReturn, toReturn) => {
 
     const Remove = async (id) => {
         try {
-            const response = await fetch(`http://localhost:8000//itemsRemoved/${id}`, {
+            const response = await fetch(`http://localhost:8000/itemsRemoved/${id}`, {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ const userReturnedItems = (setToReturn, toReturn) => {
         };
 
         try {
-            const response = await fetch(`http://localhost:8000//to_History`, {
+            const response = await fetch(`http://localhost:8000/to_History`, {
                 method: "POST",
                 body: JSON.stringify(dataPenalty),
                 headers: {
@@ -82,7 +82,7 @@ const userReturnedItems = (setToReturn, toReturn) => {
        //! FOR SMS Message
        const sendSMSNotification = async (to, message) => {
         try {
-            const response = await fetch('http://localhost:8000//send-sms', {
+            const response = await fetch('http://localhost:8000/send-sms', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const userReturnedItems = (setToReturn, toReturn) => {
         };
 
         try {
-            const response = await fetch(`http://localhost:8000//to_History`, {
+            const response = await fetch(`http://localhost:8000/to_History`, {
                 method: "POST",
                 body: JSON.stringify(allDatas),
                 headers: {
@@ -163,7 +163,7 @@ const userReturnedItems = (setToReturn, toReturn) => {
         };
 
         try {
-            const response = await fetch(`http://localhost:8000//to_History`, {
+            const response = await fetch(`http://localhost:8000/to_History`, {
                 method: "POST",
                 body: JSON.stringify(dataPenalty),
                 headers: {

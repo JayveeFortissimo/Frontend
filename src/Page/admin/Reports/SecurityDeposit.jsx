@@ -16,7 +16,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
   const code = useRef("");
 
   useEffect(() => {
-    const socket = io('http://localhost:8000/');
+    const socket = io('http://localhost:8000');
     setAlldatas(DashInfo);
 
     socket.on("securityUpdated", (updatedData) => {
@@ -54,7 +54,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
 
     if(condition === "perfect"){
       try{
-        const response = await fetch(`http://localhost:8000//processSecurity`,{
+        const response = await fetch(`http://localhost:8000/processSecurity`,{
           method:"PUT",
           headers:{
             'Content-Type':'application/json'
@@ -73,7 +73,7 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
       }
     } else if(condition === "damaged"){
       try{
-        const response = await fetch(`http://localhost:8000//DamageItems`,{
+        const response = await fetch(`http://localhost:8000/DamageItems`,{
           method:"PUT",
           headers:{
             'Content-Type':'application/json'

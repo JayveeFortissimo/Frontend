@@ -15,7 +15,7 @@ const Color = () => {
 
       e.preventDefault();
       try{
-        const response = await fetch(`http://localhost:8000//ColorEdit/${id}`,{
+        const response = await fetch(`http://localhost:8000/ColorEdit/${id}`,{
           method:"put",
           headers:{
               'Content-Type':'application/json'
@@ -40,7 +40,7 @@ const Color = () => {
         e.preventDefault();
 
           try{
-          const response = await fetch(`http://localhost:8000//ColorDelete/${id}`,{
+          const response = await fetch(`http://localhost:8000/ColorDelete/${id}`,{
             method:"delete",
             headers:{
                 'Content-Type':'application/json'

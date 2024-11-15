@@ -12,7 +12,7 @@ const RefferalPoints = () =>{
     async function allDatas() {
           
         try{
-     const response = await fetch(`http://localhost:8000//allRefferer/${ID.id}`,{
+     const response = await fetch(`http://localhost:8000/allRefferer/${ID.id}`,{
         method:'GET',
         headers:{
             'Content-Type':'application/json'
@@ -39,7 +39,7 @@ const RefferalPoints = () =>{
   const Refresh = async(e) =>{
       e.preventDefault();
     try{
-      const response = await fetch(`http://localhost:8000//Refresh/${ID.id}`,{
+      const response = await fetch(`http://localhost:8000/Refresh/${ID.id}`,{
          method:'DELETE',
          headers:{
              'Content-Type':'application/json'

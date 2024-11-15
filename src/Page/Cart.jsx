@@ -79,7 +79,7 @@ const Cart = () => {
                   <div className="flex flex-col md:flex-row gap-6 p-6">
                     <div className="w-full md:w-48 h-48">
                       <img 
-                        src={`http://localhost:8000//uploads/${item.picture}`}
+                        src={`http://localhost:8000/uploads/${item.picture}`}
                         alt={item.product_Name}
                         className="w-full h-full object-cover rounded-xl"
                       />

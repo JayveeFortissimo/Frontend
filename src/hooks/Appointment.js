@@ -16,7 +16,7 @@ const Appointment = () =>{
     async function appointment(){
 
         try{
-            const response =  await fetch(`http://localhost:8000//appoinmentID/${ID.id}`,{
+            const response =  await fetch(`http://localhost:8000/appoinmentID/${ID.id}`,{
                 method:'get',
                 headers:{
                     'Content-Type':'application/json'
@@ -42,12 +42,12 @@ const Appointment = () =>{
    useEffect(()=>{
 
 
-     const socket = io.connect('http://localhost:8000/'); // Use your server's URL
+     const socket = io.connect('http://localhost:8000'); // Use your server's URL
 
     async function ALLappointment(){
 
         try{
-            const response =  await fetch(`http://localhost:8000//allAppointments`,{
+            const response =  await fetch(`http://localhost:8000/allAppointments`,{
                 method:'get',
                 headers:{
                     'Content-Type':'application/json'

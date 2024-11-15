@@ -8,7 +8,7 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
 //! FOR SMS Message
   const sendSMSNotification = async (to, message) => {
     try {
-        const response = await fetch('http://localhost:8000//send-sms', {
+        const response = await fetch('http://localhost:8000/send-sms', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
   
       try{
 
-          const response = await fetch(`http://localhost:8000//removeIncheck/${pro.id}`,{
+          const response = await fetch(`http://localhost:8000/removeIncheck/${pro.id}`,{
                method:"delete",
                headers:{
                   'Content-Type':'application/json'
@@ -60,7 +60,7 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
       
       try{
 
-          const response = await fetch(`http://localhost:8000//ItemsApproved`,{
+          const response = await fetch(`http://localhost:8000/ItemsApproved`,{
                method:"POST",
 
                body:JSON.stringify({
@@ -104,7 +104,7 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
     DELETE(e,pro)
     try{
 
-        const response = await fetch(`http://localhost:8000//cancelled`,{
+        const response = await fetch(`http://localhost:8000/cancelled`,{
            method:"POST",
            body:JSON.stringify({
                picture:pro.picture,

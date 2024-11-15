@@ -63,7 +63,7 @@ const Fitting = ({ setOpenFitting }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:8000//profile/${ID.id}`,
+        `http://localhost:8000/profile/${ID.id}`,
         {
           method: "GET",
           headers: {
@@ -106,7 +106,7 @@ const Fitting = ({ setOpenFitting }) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`http://localhost:8000//Appointment`, {
+      const response = await fetch(`http://localhost:8000/Appointment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

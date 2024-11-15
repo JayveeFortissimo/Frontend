@@ -35,7 +35,7 @@ const Products = () => {
 
   useEffect(() => {
     const array = [];
-    fetch(`http://localhost:8000//allCategorys`)
+    fetch(`http://localhost:8000/allCategorys`)
       .then(response => response.json())
       .then(data => {
         data.data.forEach(element => {
@@ -181,7 +181,7 @@ const Products = () => {
               hover:border-blue-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10">
               <div className="relative aspect-square overflow-hidden rounded-t-xl">
                 <img 
-                  src={`http://localhost:8000//uploads/${pro.image}`}
+                  src={`http://localhost:8000/uploads/${pro.image}`}
                   alt={pro.product_Name}
                   className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
                 />
@@ -251,7 +251,7 @@ export default Products;
 // Loader function remains unchanged
 export const itemsProduct = async () => {
   try {
-    const response = await fetch(`http://localhost:8000//Items`, {
+    const response = await fetch(`http://localhost:8000/Items`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

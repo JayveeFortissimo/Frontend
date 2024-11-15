@@ -10,7 +10,7 @@ const HistoryOfUser = (ID) =>{
 
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:8000//ApprovedItems/${ID}`);
+          const response = await fetch(`http://localhost:8000/ApprovedItems/${ID}`);
           const data = await response.json();
 
           const dateOfNow = new Date();
@@ -43,7 +43,7 @@ const HistoryOfUser = (ID) =>{
 
     const deletedItems = async(id) =>{
        try{
-       const response = await fetch(`http://localhost:8000//removeGrace/${id}`,{
+       const response = await fetch(`http://localhost:8000/removeGrace/${id}`,{
         method:"DELETE",
         headers:{
           'Content-Type':'application/json'

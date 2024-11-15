@@ -15,7 +15,7 @@ const Material = () => {
     
       e.preventDefault();
       try{
-        const response = await fetch(`http://localhost:8000//MaterialEdit/${id}`,{
+        const response = await fetch(`http://localhost:8000/MaterialEdit/${id}`,{
           method:"put",
           headers:{
               'Content-Type':'application/json'
@@ -39,7 +39,7 @@ const Material = () => {
         e.preventDefault();
 
         try{
-        const response = await fetch(`http://localhost:8000//MaterialDelete/${id}`,{
+        const response = await fetch(`http://localhost:8000/MaterialDelete/${id}`,{
           method:"delete",
           headers:{
               'Content-Type':'application/json'
