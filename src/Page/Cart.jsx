@@ -145,7 +145,7 @@ const Cart = () => {
                       </div>
                       
                       <div className="flex justify-end">
-                        <span className="text-xl font-semibold text-emerald-600">
+                        <span className="text-xl font-semibold text-violet-600">
                           ₱{item.subTotal.toLocaleString('en-US')}
                         </span>
                       </div>
@@ -159,7 +159,7 @@ const Cart = () => {
                 <div className="bg-gradient-to-r from-gray-50 to-white p-6 rounded-2xl border border-gray-100 shadow-sm">
                   <div className="flex justify-between items-center">
                     <span className="text-xl font-semibold text-gray-900">Total Amount</span>
-                    <span className="text-3xl font-bold text-emerald-600">
+                    <span className="text-3xl font-bold text-violet-600">
                       ₱{total?.toLocaleString('en-US') ?? '0'}
                     </span>
                   </div>

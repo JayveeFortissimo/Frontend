@@ -6,9 +6,7 @@ const toCart = () =>{
    
     const user_ID = JSON.parse(localStorage.getItem("ID"));
     const navigate = useNavigate();
-
     const [allOrders,setAllOrders] = useState([]);
-    
     //!!!ETO YUNG PINAKA TOTAL
     const [total,SetTotal] = useState([]);
 
@@ -103,80 +101,6 @@ useEffect(()=>{
 },[]);
 
 
-//Edit in dataBAse Quantity and Subtotals
-
-async function quantityChange(id,newQuantity,Subtotal) {
-
-  try{
-
-    const response = await fetch(`http://localhost:8000/change_Quantity/${id}`,{
-      method:"POST",
-      body:JSON.stringify({
-      quantity:newQuantity,
-      sub_Total:Subtotal
-      }),
-      headers:{
-       'Content-Type':'application/json'
-      }
-    });
- 
-     //Condition if response is Have A problem HAHAHHA
-    if(!response.ok) console.log("Have A Problem");
- 
-  }catch(error){
-    console.log(error)
-  }
-}
-
-
-//addQuantity
-
-const addQuantity = (id) =>{
-
-  const itemID = allOrders.find(pro => pro.id === id);
- const itemsEdit = [...allOrders];
-
-  if(itemID){
-    if(itemID.originalQuantity <= itemID.quantity){
-      toast.error("Items reached at his limit quantity")
-    }else{
-      const quantityAdd =  itemID.quantity += 1;
-      const subtotal = quantityAdd * itemID.price;
-      itemID.subTotal = subtotal
-    quantityChange(id,quantityAdd,subtotal);
-    setAllOrders([...itemsEdit]);
-    }
-
-
-  }
- 
-}
-
-const subtructQuantity = (id) =>{
-
-  const itemID = allOrders.find(pro => pro.id === id);
- const itemsEdit = [...allOrders];
-
-
-  if(itemID){
-
-
-    if(itemID && itemID.quantity <= 1){
-      itemID.quantity = 1;
-    }else{
-
-      const quantityAdd =  itemID.quantity -= 1;
-      const subtotal = quantityAdd * itemID.price;
-      itemID.subTotal = subtotal
-      quantityChange(id,quantityAdd,subtotal);
-    }
-    
-    setAllOrders([...itemsEdit])
-  }
-
-};
-
-
 
 //Delete Functions
 
@@ -237,13 +161,11 @@ const removeItems = async(id) =>{
     };
   
     Totals();
-   },[addQuantity])
+   },[])
 
       return{
         toCart,
         allOrders,
-        addQuantity,
-        subtructQuantity,
         removeItems,
         total,
         setAllOrders

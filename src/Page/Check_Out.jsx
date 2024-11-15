@@ -143,6 +143,16 @@ const Check_Out = () => {
                                             <HiLocationMarker className="w-4 h-4 mr-1" />
                                             Bagbaguin Santa Maria Bulacan
                                         </div>
+         <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d679.1955379849777!2d120.95977901777923!3d14.815306132410914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ad85d98af4ef%3A0xc39409567392e609!2sSonia%E2%80%99s%20Carwash!5e1!3m2!1sen!2sph!4v1728389316190!5m2!1sen!2sph"
+              width="100%"
+              height="250"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full mt-3 rounded"
+            />
 
                             </div>
 
@@ -228,8 +238,7 @@ const Check_Out = () => {
                                             <span className="text-lg font-semibold flex gap-4 text-[0.8rem]">
                                                           {
                                                             displayDiscount &&  <p className='line-through'>₱ {OriginalValue}</p>
-                                                          }
-                                                 
+                                                          }                                                
                                                          <p>₱ {total ? TotalsAll : 0}</p>
                                                 </span>
                                         </div>
@@ -238,10 +247,16 @@ const Check_Out = () => {
                                     {/* Continue Shopping Button */}
 
 
+                                    <button
+                                        onClick={() => console.log("Hellows")}
+                                        className="w-full mt-6 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-2xl  py-2 px-4  hover:bg-gray-800 transition-colors"
+                                    >
+                                       Reserve
+                                    </button>
 
                                     <button
-                                        onClick={() => redirect('/')}
-                                        className="w-full mt-6 bg-gray-900 text-white py-3 px-4 rounded-lg hover:bg-gray-800 transition-colors"
+                                        onClick={() => redirect('/Items')}
+                                        className="w-full mt-3 bg-gray-900 text-white py-2 px-4 rounded-2xl hover:bg-gray-800 transition-colors"
                                     >
                                         Continue Shopping
                                     </button>
