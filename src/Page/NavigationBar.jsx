@@ -27,7 +27,7 @@ const NavigationBar = () => {
     const socket = io('http://localhost:8000');
     const array = [];
 
-    fetch(`http://localhost:8000allCategorys`)
+    fetch(`http://localhost:8000/allCategorys`)
       .then(response => response.json())
       .then(data => {
         data.data.forEach(element => {
