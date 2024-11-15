@@ -30,7 +30,7 @@ const SizeUser = (navigate) =>{
         e.preventDefault();
        
         try{
-            const response = await fetch(`https://backend-production-024f.up.railway.app/sendSize`,{
+            const response = await fetch(`http://localhost:8000//sendSize`,{
                 method:'POST',
                 body:JSON.stringify(measurements),
                 headers:{
@@ -58,7 +58,7 @@ const SizeUser = (navigate) =>{
         e.preventDefault();
        
         try{
-            const response = await fetch(`https://backend-production-024f.up.railway.app/sendSize`,{
+            const response = await fetch(`http://localhost:8000//sendSize`,{
                 method:'POST',
                 body:JSON.stringify({
                     bust:0,

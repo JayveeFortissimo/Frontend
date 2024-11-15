@@ -32,23 +32,23 @@ const EditItems = (id) => {
 
   useEffect(() => {
     // Fetch categories
-    fetch('https://backend-production-024f.up.railway.app/allCategorys')
+    fetch('http://localhost:8000//allCategorys')
       .then(response => response.json())
       .then(data => setCategorys(data.data))
       .catch(err => console.error('Error fetching categories:', err));
 
-      fetch('https://backend-production-024f.up.railway.app/allColors')
+      fetch('http://localhost:8000//allColors')
       .then(response => response.json())
       .then(data => setColor(data.data))
       .catch(err => console.error('Error fetching categories:', err));
 
-      fetch('https://backend-production-024f.up.railway.app/allMaterials')
+      fetch('http://localhost:8000//allMaterials')
       .then(response => response.json())
       .then(data => setMaterials(data.data))
       .catch(err => console.error('Error fetching categories:', err));
 
     // Fetch item details
-    fetch(`https://backend-production-024f.up.railway.app/getItemsByID/${id}`)
+    fetch(`http://localhost:8000//getItemsByID/${id}`)
       .then(res => res.json())
       .then(data => setItemDetails(data))
       .catch(err => console.error('Error fetching item details:', err));
@@ -96,7 +96,7 @@ const EditItems = (id) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`https://backend-production-024f.up.railway.app/updateItem`, {
+      const response = await fetch(`http://localhost:8000//updateItem`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

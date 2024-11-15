@@ -48,7 +48,7 @@ const Items = () => {
 
   // WebSocket connection effect
   useEffect(() => {
-    const socket = io('https://backend-production-024f.up.railway.app');
+    const socket = io('http://localhost:8000/');
     
     socket.on('connect', () => {
       console.log('Connected to WebSocket');
@@ -119,7 +119,7 @@ const Items = () => {
     setIsLoading(true);
     
     try {
-      const response = await fetch(`https://backend-production-024f.up.railway.app/getUserSize`, {
+      const response = await fetch(`http://localhost:8000//getUserSize`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -288,7 +288,7 @@ const Items = () => {
               >
                 <div className="relative w-full pt-[100%]">
                   <img
-                    src={`https://backend-production-024f.up.railway.app/uploads/${pro.image}`}
+                    src={`http://localhost:8000//uploads/${pro.image}`}
                     alt={pro.product_Name}
                     className="absolute top-0 left-0 w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-300"
                   />

@@ -13,7 +13,7 @@ const deleteItems = (allData,setData) =>{
 
         try{
 
-            const response = await fetch(`https://backend-production-024f.up.railway.app/itemdelete/${id}`,{
+            const response = await fetch(`http://localhost:8000//itemdelete/${id}`,{
                 method:"DELETE",
                 headers:{
                     'Content-Type':'application/json'

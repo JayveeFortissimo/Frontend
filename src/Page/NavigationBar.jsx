@@ -24,10 +24,10 @@ const NavigationBar = () => {
   const token = useRouteLoaderData("root");
 
   useEffect(() => {
-    const socket = io('https://backend-production-024f.up.railway.app');
+    const socket = io('http://localhost:8000/');
     const array = [];
 
-    fetch(`https://backend-production-024f.up.railway.app/allCategorys`)
+    fetch(`http://localhost:8000//allCategorys`)
       .then(response => response.json())
       .then(data => {
         data.data.forEach(element => {

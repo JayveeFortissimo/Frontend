@@ -12,7 +12,7 @@ const HavePenaltys = ({ setTotalReserve, DashInfo, setCancelled, setRentalE}) =>
   const Reason = useRef('');
 
 useEffect(() => {
-  const socket = io('https://backend-production-024f.up.railway.app');
+  const socket = io('http://localhost:8000/');
 
   socket.on('statusUpdated', (data) => {
       // Handle the real-time data (status update) from the backend
@@ -54,7 +54,7 @@ useEffect(() => {
     setClickedItems(prev => [...prev, id]);
     
     try {
-      const response = await fetch(`https://backend-production-024f.up.railway.app/editStatus/${id}`, {
+      const response = await fetch(`http://localhost:8000//editStatus/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

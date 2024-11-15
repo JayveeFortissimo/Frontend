@@ -35,7 +35,7 @@ const Cancelled = ({ dataCancel }) => {
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-3 sm:p-4">
                 <div className="flex-shrink-0 mx-auto sm:mx-0">
                   <img
-                    src={`https://backend-production-024f.up.railway.app/uploads/${pro.picture}`}
+                    src={`http://localhost:8000//uploads/${pro.picture}`}
                     alt={pro.Name}
                     className="w-full sm:w-32 h-48 sm:h-32 object-cover rounded-lg shadow-sm"
                   />

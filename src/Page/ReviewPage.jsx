@@ -33,7 +33,7 @@ const ReviewPage = () => {
 
   // Remove the header row and map data to create testimonials
   const testimonials = data.slice(1).map((row) => {
-    const imageUrl = row[5] ? `https://backend-production-024f.up.railway.app/proxy-image/${row[5].split('id=')[1]}` : null;
+    const imageUrl = row[5] ? `http://localhost:8000//proxy-image/${row[5].split('id=')[1]}` : null;
     return {
       quote: row[3],
       name: row[1],

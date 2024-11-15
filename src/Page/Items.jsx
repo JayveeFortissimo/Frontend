@@ -11,7 +11,7 @@ export const items = async () => {
   try {
     const userId = JSON.parse(localStorage.getItem('ID')); // Get userId from local storage
 
-    const response = await fetch(`https://backend-production-024f.up.railway.app/Items`, {
+    const response = await fetch(`http://localhost:8000//Items`, {
       method: "POST", // Change to POST to send userId in the request body
       headers: {
         'Content-Type': 'application/json',

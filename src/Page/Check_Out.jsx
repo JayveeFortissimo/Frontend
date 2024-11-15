@@ -178,7 +178,7 @@ const Check_Out = () => {
                                         {allOrders.map(pro => (
                                             <div key={pro.id} className="flex gap-4 p-4 bg-gray-50 rounded-lg">
                                                 <img
-                                                    src={`https://backend-production-024f.up.railway.app/uploads/${pro.picture}`}
+                                                    src={`http://localhost:8000//uploads/${pro.picture}`}
                                                     alt={pro.product_Name}
                                                     className="h-24 w-24 object-cover rounded-lg"
                                                 />

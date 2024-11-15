@@ -12,9 +12,9 @@ useEffect(() =>{
   async function AllDAtas(){
 
     try{
-        const Category = await fetch(`https://backend-production-024f.up.railway.app/allCategorys`);
-        const Colors = await fetch(`https://backend-production-024f.up.railway.app/allColors`);
-        const Materials = await fetch(`https://backend-production-024f.up.railway.app/allMaterials`);
+        const Category = await fetch(`http://localhost:8000//allCategorys`);
+        const Colors = await fetch(`http://localhost:8000//allColors`);
+        const Materials = await fetch(`http://localhost:8000//allMaterials`);
    
        const data1 = await Category.json();
        const data2 = await Colors.json();
