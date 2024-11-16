@@ -6,7 +6,9 @@ import { useState, useEffect } from 'react';
 import Notif from './Modal/Notif';
 import TotalReservations from './Reports/TotalReservations';
 import NumbersOfUsers from './Reports/NumberofUsers';
+import RentalRevenue from './Reports/RentalRevenue';
 import TotalGowns from './Reports/TotalGowns';
+import SecurityDeposit from './Reports/SecurityDeposit';
 import HavePenaltys from './Reports/Cacelled';
 import PaymentStatus from './Reports/PaymentStatus';
 import ReservesToday from './Reports/ReservesToday';
@@ -24,8 +26,13 @@ const Dashboard = () => {
    //ADMIN PROFILE
    const {profile} = AdminProfile();
 
+    const [rentalE,setRentalE] = useState(DashInfo.data5);
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
+    const [securityDeposit, setSecurityDeposit] = useState(DashInfo.data2);
+
     const [reserveToday, setReserveToday] = useState(DashInfo.data9);
+  
+
     const [notifications, setNotifications] = useState(false);
 
     //!this is from another for notification
@@ -70,7 +77,9 @@ const Dashboard = () => {
   const [openTotalReserve, setTotalReserve] = useState({
     TotalReserves: false,
     TotalGowns: false,
+    SecurityDeposit: false,
     NumbersOfUsers: false,
+    RentalRevenue: false,
     HavePenaltys: false,
     Notifs: false,
     PaymentStatus:false,
@@ -78,6 +87,10 @@ const Dashboard = () => {
     ReservesTodays:false
   });
 
+  console.log(DashInfo)
+ console.log(DashInfo.data2)
+
+ 
 
  const generatePDF = () => {
   // Initialize PDF document
@@ -194,6 +207,8 @@ const Dashboard = () => {
 
   // Financial Information
   doc.text(`Total Canceled Reservations: ${DashInfo.data6.totalCancelled}`, 15, yPosition + 8);
+  doc.text(`Current Month Revenue: ₱${DashInfo.data5.AllTotal.toLocaleString()}`, 15, yPosition + 16);
+  doc.text(`All-Time Revenue: ₱${DashInfo.data5.AllTotal.toLocaleString()}`, 15, yPosition + 24);
 
   // Recent Reservations
   yPosition += 50;
@@ -326,6 +341,10 @@ const Dashboard = () => {
 
 
 
+
+
+
+
  
   const cardData = [
 
@@ -353,6 +372,13 @@ const Dashboard = () => {
       onClick: () => setTotalReserve(prev => ({ ...prev, TotalGowns: true }))
     },
     {
+      title: "Security Deposit",
+      value: `₱ ${securityDeposit.TotalIncomes}`,
+      icon: <FaMoneyBill1Wave size={24} />,
+      gradient: "from-emerald-500 to-emerald-600",
+      onClick: () => setTotalReserve(prev => ({ ...prev, SecurityDeposit: true }))
+    },
+    {
       title: "Number of Users",
       value: DashInfo.data4.totalUser,
       icon: <VscAccount size={24} />,
@@ -366,6 +392,14 @@ const Dashboard = () => {
       gradient: "from-pink-500 to-pink-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, HavePenaltys: true }))
     },
+    {
+      title: "Rental Income",
+      value: `₱ ${rentalE.AllTotal}`,
+      icon: <FaPesoSign size={24} />,
+      gradient: "from-amber-500 to-amber-600",
+      onClick: () => setTotalReserve(prev => ({ ...prev, RentalRevenue: true }))
+    },
+
     {
       title: "Payment Status",
       value: `See Here`,
@@ -386,8 +420,14 @@ const Dashboard = () => {
       {openTotalReserve.Notifs && <Notif setTotalReserve={setTotalReserve} setNotifications={setNotifications}/>}
       {openTotalReserve.TotalReserves && <TotalReservations setTotalReserve={setTotalReserve} DashInfo={DashInfo.data3.reservations} />}
       {openTotalReserve.TotalGowns && <TotalGowns setTotalReserve={setTotalReserve} DashInfo={DashInfo.data1.INFO} />}
+      {openTotalReserve.SecurityDeposit && <SecurityDeposit 
+      setTotalReserve={setTotalReserve}
+       DashInfo={securityDeposit.reservations} 
+       setSecurityDeposit={setSecurityDeposit}
+       />}
       {openTotalReserve.NumbersOfUsers && <NumbersOfUsers setTotalReserve={setTotalReserve} DashInfo={DashInfo.data4.users} />}
-      {openTotalReserve.HavePenaltys && <HavePenaltys setTotalReserve={setTotalReserve} DashInfo={Cancelled} setCancelled={setCancelled} />}
+      {openTotalReserve.HavePenaltys && <HavePenaltys setTotalReserve={setTotalReserve} DashInfo={Cancelled} setCancelled={setCancelled} setRentalE={setRentalE} />}
+      {openTotalReserve.RentalRevenue && <RentalRevenue setTotalReserve={setTotalReserve} DashInfo={DashInfo.data5.AllResult} />}
 
       <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         <header className="h-16 border-b border-gray-700/50 bg-gray-900/50 backdrop-blur-sm px-6 flex justify-between items-center sticky top-0 z-10">
@@ -508,8 +548,10 @@ export const Dash = async() => {
   try {
     const endpoints = [
       'numberOfItems',
+      'numbersOfPending',
       'totalReserves',
       'totalUsers',
+      'totalIncome',
       'AllCancelled',
       'AllTrends',
       'PaymentStatus',
@@ -529,8 +571,10 @@ export const Dash = async() => {
 
     const [
       dataTotalItems,
+      dataPending,
       dataReserves,
       NumbersOfUsers,
+      RentalIncome,
       AllCacelled,
       TrendsAll,
       PaymentStatus,
@@ -539,9 +583,10 @@ export const Dash = async() => {
 
     return {
       data1: dataTotalItems,
-   
+      data2: dataPending,
       data3: dataReserves,
       data4: NumbersOfUsers,
+      data5: RentalIncome,
       data6: AllCacelled,
       data7: TrendsAll,
       data8: PaymentStatus,

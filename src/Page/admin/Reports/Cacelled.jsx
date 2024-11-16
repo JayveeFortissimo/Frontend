@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import io  from 'socket.io-client';
 import AdminProfile from '../../../hooks/AdminHooks/AdminProfile.js';
 
-const HavePenaltys = ({ setTotalReserve, DashInfo, setCancelled}) => {
+const HavePenaltys = ({ setTotalReserve, DashInfo, setCancelled, setRentalE}) => {
   const [clickedItems, setClickedItems] = useState([]);
   const [filterStatus, setFilterStatus] = useState("pending");
   const {profile} = AdminProfile();
@@ -26,7 +26,16 @@ useEffect(() => {
             item.id === data.id ? { ...item, status: data.status } : item
         )
 
-    }))
+    }));
+
+      if(Reason.current === "ADMIN DECLINE"){
+        console.log("HAHAHHA")
+      }else{
+        setRentalE(prevCancelled => ({
+          ...prevCancelled,
+          AllTotal: prevCancelled.AllTotal - data.TotalEdit  
+      }))
+      }
    
 
   });
@@ -317,6 +326,7 @@ useEffect(() => {
                       <button
                         onClick={(e) => {
                           handleSubmitEdit(e, item.id, item.code, item.sub_Total, item.Reason);
+                          Reason.current = item.Reason
                         }}
                         className="mt-4 px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-lg hover:bg-green-600 transition-colors"
                       >
