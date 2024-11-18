@@ -10,7 +10,6 @@ import RentalRevenue from './Reports/RentalRevenue';
 import TotalGowns from './Reports/TotalGowns';
 import SecurityDeposit from './Reports/SecurityDeposit';
 import HavePenaltys from './Reports/Cacelled';
-import PaymentStatus from './Reports/PaymentStatus';
 import ReservesToday from './Reports/ReservesToday';
 import io from 'socket.io-client';
 import jsPDF from 'jspdf';
@@ -21,6 +20,8 @@ import AdminProfile from '../../hooks/AdminHooks/AdminProfile';
 const Dashboard = () => {
   //From loader
   const DashInfo = useLoaderData();
+
+  console.log(DashInfo)
   const [filteredData, setFilteredData] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState('All Months');
    //ADMIN PROFILE
@@ -82,13 +83,9 @@ const Dashboard = () => {
     RentalRevenue: false,
     HavePenaltys: false,
     Notifs: false,
-    PaymentStatus:false,
     PaymentMethods:false,
     ReservesTodays:false
   });
-
-  console.log(DashInfo)
- console.log(DashInfo.data2)
 
  
 
@@ -400,14 +397,6 @@ const Dashboard = () => {
       onClick: () => setTotalReserve(prev => ({ ...prev, RentalRevenue: true }))
     },
 
-    {
-      title: "Payment Status",
-      value: `See Here`,
-      icon: <MdOutlinePayment size={24} />,
-      gradient: "bg-yellow-600",
-      onClick: () => setTotalReserve(prev => ({ ...prev, PaymentStatus: true }))
-    },
-
   ];
 
  
@@ -416,10 +405,13 @@ const Dashboard = () => {
   return (
     <>
       {openTotalReserve.ReservesTodays &&  <ReservesToday setTotalReserve={setTotalReserve} DashInfo={reserveToday.reservations}/>}
-      {openTotalReserve.PaymentStatus && <PaymentStatus setTotalReserve={setTotalReserve} DashInfo ={DashInfo.data8} />}
+    
       {openTotalReserve.Notifs && <Notif setTotalReserve={setTotalReserve} setNotifications={setNotifications}/>}
+    
       {openTotalReserve.TotalReserves && <TotalReservations setTotalReserve={setTotalReserve} DashInfo={DashInfo.data3.reservations} />}
+   
       {openTotalReserve.TotalGowns && <TotalGowns setTotalReserve={setTotalReserve} DashInfo={DashInfo.data1.INFO} />}
+      
       {openTotalReserve.SecurityDeposit && <SecurityDeposit 
       setTotalReserve={setTotalReserve}
        DashInfo={securityDeposit.reservations} 
@@ -427,6 +419,7 @@ const Dashboard = () => {
        />}
       {openTotalReserve.NumbersOfUsers && <NumbersOfUsers setTotalReserve={setTotalReserve} DashInfo={DashInfo.data4.users} />}
       {openTotalReserve.HavePenaltys && <HavePenaltys setTotalReserve={setTotalReserve} DashInfo={Cancelled} setCancelled={setCancelled} setRentalE={setRentalE} />}
+    
       {openTotalReserve.RentalRevenue && <RentalRevenue setTotalReserve={setTotalReserve} DashInfo={DashInfo.data5.AllResult} />}
 
       <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
@@ -554,7 +547,6 @@ export const Dash = async() => {
       'totalIncome',
       'AllCancelled',
       'AllTrends',
-      'PaymentStatus',
       'Today'
     ];
 
@@ -577,7 +569,6 @@ export const Dash = async() => {
       RentalIncome,
       AllCacelled,
       TrendsAll,
-      PaymentStatus,
       Today
     ] = await Promise.all(responses.map(response => response.json()));
 
@@ -589,10 +580,10 @@ export const Dash = async() => {
       data5: RentalIncome,
       data6: AllCacelled,
       data7: TrendsAll,
-      data8: PaymentStatus,
       data9: Today
     };
   } catch (error) {
     console.log(error);
+    return null
   }
 };

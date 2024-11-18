@@ -102,8 +102,8 @@ const SecurityDeposit = ({ setTotalReserve, DashInfo, setSecurityDeposit}) => {
         <div className="space-y-1">
           <h3 className="font-semibold text-white">{reservation.Name}</h3>
         </div>
-        <div className="flex items-center">
-          <BiDollar className="text-blue-400" size={20} />
+        <div className="flex items-center gap-2">
+          <p className='text-white'>₱ </p>
           <span className="text-white font-semibold">{reservation.Security}</span>
         </div>
       </div>

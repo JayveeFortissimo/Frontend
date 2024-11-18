@@ -28,8 +28,14 @@ const Cart = () => {
   return (
     <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
       {sure && <Think Navigate={navigate} setSure={setSure} />}
-      {openChoose && <Choose setOpenFitting={setOpenFitting} setOpenChoose={setOpenChoose} />}
+
+      {
+  /*
+  {openChoose && <Choose setOpenFitting={setOpenFitting} setOpenChoose={setOpenChoose} />}
       {openFitting && <Fitting setOpenFitting={setOpenFitting} />}
+      */
+      }
+      
 
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
@@ -37,7 +43,7 @@ const Cart = () => {
           <div className="px-6 py-8">
             <div className="flex items-center justify-between">
               <button 
-                onClick={() => navigate('/')} 
+                onClick={() => navigate('/items')} 
                 className="flex items-center gap-2 text-white hover:text-emerald-100 transition-all duration-300 transform hover:scale-105"
               >
                 <FiArrowLeft className="w-5 h-5" />
@@ -66,8 +72,8 @@ const Cart = () => {
               <FiShoppingBag className="w-20 h-20 text-gray-300 mb-4" />
               <p className="text-gray-500 text-xl font-medium mb-4">Your cart is empty</p>
               <button 
-                onClick={() => navigate('/')}
-                className="px-8 py-3 bg-emerald-600 text-white rounded-xl font-medium hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                onClick={() => navigate('/items')}
+                className="px-8 py-3 bg-violet-600 text-white rounded-xl font-medium hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 Start Shopping
               </button>
@@ -172,20 +178,33 @@ const Cart = () => {
                       <h3 className="text-lg font-semibold text-orange-800">Cancellation Policy</h3>
                     </div>
                     <p className="text-sm text-orange-700 leading-relaxed">
-                      Please note that cancellations will incur a 50% fee from your downpayment/full payment. 
-                      No cancellations are allowed after admin approval.
+                      Waiting for Cancellation policy
                     </p>
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-4">
-                  <button 
+                  {
+               /*
+               <button 
                     onClick={() => setOpenChoose(true)}
                     className="w-full py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/50  flex items-center justify-center gap-2 font-medium"
                   >
                     <FiCalendar className="w-5 h-5" />
                     Schedule Fitting Appointment
                   </button>
+              */
+                  }
+              
+                  <button 
+                    onClick={() => navigate('/items')}
+                    className="w-full py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/50  flex items-center justify-center gap-2 font-medium"
+                  >
+                    <FiCalendar className="w-5 h-5" />
+                    Continue Shopping
+                  </button>
+
+
                   <button 
                     onClick={() => total === null ? toast.error("Please add items to cart first") : setSure(true)}
                     className="w-full py-4 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all duration-300 transform hover:scale-102 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 font-medium"

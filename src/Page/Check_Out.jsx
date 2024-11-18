@@ -1,30 +1,23 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiAlertCircle } from 'react-icons/fi';
-import { FaStore, FaGooglePay } from 'react-icons/fa';
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { HiLocationMarker } from 'react-icons/hi';
 import { BsCalendarDate, BsBox } from 'react-icons/bs';
 import ChekDetails from '../hooks/CheckOutDetails.js';
 import toCart from '../hooks/Tocart_check.js';
-import DownPayment from '../Components/Modal/DownPayment.jsx';
-import ConfirmGcash from '../Components/Modal/ConfirmGcash.jsx';
-import DownpaymentG from '../Components/Modal/DownpaymentG.jsx';
 import RefferalPoints from '../hooks/Referalpoints.js';
 import Percent5 from '../Components/Modal/Percent5.jsx';
+import OTPSecurity from '../Components/Modal/OTPSecurity.jsx';
+import Fitting from '../Components/Fitting.jsx';
+import toast from 'react-hot-toast';
+import QRGenerator from '../Components/Modal/QRGenerator.jsx';
+
 
 const Check_Out = () => {
-    
     const redirect = useNavigate();
-    const [downPay, setDownpayment] = useState(false);
-    const [gcash, setGcash] = useState(false);
-
     const { allOrders, total } = toCart();
-
-    console.log("LAHAT NG ORDERS" , allOrders);
-    console.log("Total ALL", total);
-
-    const [isdown,setDown] = useState(false);
-    const { allDatas, setPayment, Gcash, DownpaymentInstore } = ChekDetails(allOrders);
+    const { allDatas, CheckOUtss } = ChekDetails(allOrders);
     const { allPoints } = RefferalPoints();
 
     const formatDate = (dateString) => {
@@ -37,44 +30,84 @@ const Check_Out = () => {
     };
 
     const [onUse,setOnuse] = useState(true);
- 
-    const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
-    //length ng gowns in array
-    const allGownSecurity = allOrders.length;
-
-    const TotalsAll = displayDiscount ? (parseInt(total) + (200 * allGownSecurity)) * 0.95 : parseInt(total) + (200 * allGownSecurity);
-    const OriginalValue = parseInt(total) + 200;
-
     const [isRadio, setRadio] = useState(false);
     const [isradio, setIsRadio ]  = useState(false);
+    const [openFitting, setOpenFitting] = useState(false);
+    const [FinalQR, setFinalQR] = useState(false);
+   //For Modal Confirmation
+    const [confirm, setConfirm] = useState(false);
+    const [loading, setLoading] = useState(false);
 
+    const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
+    //length ng gowns in array   //!WAIT D2 DAT BY Quantity Eh ni rush ko lang d2
+    const allGownSecurity = allOrders.length;
+
+    const TotalsAll = displayDiscount ? (parseInt(total) + (200 * allGownSecurity)): parseInt(total) + (200 * allGownSecurity);
+    const OriginalValue = parseInt(total) + 200;
     isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
+  
+  //Reserve Button!
+  const ConfirmationReserve = async(e) =>{
+        e.preventDefault();
+        setLoading(true);
+        //!I have a probem here
+        const email = allDatas[0].email || "No show";
+        console.log(email)
+
+        try{
+            const response  = await fetch(`http://localhost:8000/ForgotPassword`,{
+               method:'POST',
+               headers:{
+                   'Content-Type':'application/json'
+               },
+               body:JSON.stringify({email})
+            })
+           
+            const data = await response.json();
+           
+             if(data.message === "EMAIL NOT EXIST") {
+               toast.error("EMAIL NOT EXIST");
+             }else{
+              
+                setTimeout(()=>{
+                    toast.success("Check Your Email Now");
+                    setLoading(false);
+                    setConfirm(true);
+                },2000);
+
+             }
+               }catch(error){
+                   console.log(error);
+               }
+  }
 
     return (
         <>
  
-    {
-        TotalsAll >= 3000 ?
-        (
-        <div>
-{allPoints.totalReferred >= 10 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio} setIsRadio={setIsRadio}/>}
-        </div>
-        ):(<div></div>)
-    }
-        
+        {
+            TotalsAll >= 3000 ?
+            (
+            <div>
+    {allPoints.totalReferred >= 10 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio} setIsRadio={setIsRadio}/>}
+            </div>
+            ):(<div></div>)
+        }
 
-            {isdown && <DownpaymentG setDown={setDown} Gcash={Gcash} total={total} allGownSecurity={allGownSecurity}/>}
-            
-            {gcash && <ConfirmGcash setGcash={setGcash} total={total} setDown={setDown} allGownSecurity={allGownSecurity}/>}
-            
-            {downPay && <DownPayment setDownpayment={setDownpayment} DownpaymentInstore={DownpaymentInstore} total={total} allGownSecurity={allGownSecurity} />}
-            
+       { confirm && <OTPSecurity setConfirm={setConfirm} setOpenFitting={setOpenFitting}/>  }
+     
+        {/*!WAIT PA D2 SA APOOINTTTMENTTTTTTTTTT&                   E2 kyung Function to checkout   */}   
+       {openFitting && <Fitting setOpenFitting={setOpenFitting} setFinalQR={setFinalQR} />}
+
+        {FinalQR && <QRGenerator allOrders = {allOrders} CheckOUtss={CheckOUtss} TotalsAll={TotalsAll}/>}
+       
+
+
             <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-8">
                         <h1 className="text-3xl font-bold text-gray-900">Confirmation Page</h1>
-                        <p className="mt-2 text-sm text-gray-600">Complete your order at Cristobal Collection</p>
+                        <p className="mt-2 text-sm text-gray-600">Complete your reservation at Cristobal Collection</p>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -163,8 +196,7 @@ const Check_Out = () => {
                                     <h3 className="text-lg font-semibold text-orange-800">Cancellation Policy</h3>
                                 </div>
                                 <p className="text-sm text-orange-700">
-                                    Please note that cancellations will incur a 50% fee from your downpayment/full payment.
-                                    No cancellations are allowed after admin approval.
+                                    Wait pa sa Policy
                                 </p>
                             </div>
                         </div>
@@ -218,6 +250,7 @@ const Check_Out = () => {
 
                                 <div className="flex justify-between mb-2">
                                <span className="text-sm text-gray-600 flex gap-3"> 
+                                  <p>Apply referral points discount</p>
                                     <input  
                                         type="checkbox"  
                                         checked={TotalsAll >= 3000 ? isradio : false}   
@@ -225,7 +258,6 @@ const Check_Out = () => {
                                         className='cursor-pointer' 
                                         disabled={TotalsAll < 3000 || allPoints.totalReferred < 10} 
                                     />  
-                                    <p>Apply referral points discount</p>
                                 </span>
                                         </div>
 
@@ -248,10 +280,11 @@ const Check_Out = () => {
 
 
                                     <button
-                                        onClick={() => console.log("Hellows")}
+                                        onClick={(e) => ConfirmationReserve(e)}
+                                        disabled={loading}
                                         className="w-full mt-6 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-2xl  py-2 px-4  hover:bg-gray-800 transition-colors"
                                     >
-                                       Reserve
+                                      {loading ? (<AiOutlineLoading3Quarters className="h-5 w-5 animate-spin mx-auto" />):(<p>Reserve</p>)} 
                                     </button>
 
                                     <button
@@ -278,6 +311,7 @@ const Check_Out = () => {
                                     </div>
                                 </div>
                                 <button
+                                onClick={()=> redirect('/Faqs')}
                                     className="w-full text-sm text-blue-600 hover:text-blue-700 hover:underline"
                                 >
                                     Terms of Service

@@ -49,9 +49,11 @@ const SizingForm = () => {
             </div>
           ))}
 
-          <button
+
+<div className='flex gap-3'>
+<button
             type="submit"
-            className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 font-medium"
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 font-medium"
           >
             Get My Size
           </button>
@@ -59,10 +61,12 @@ const SizingForm = () => {
           <button
             type="button" // Change type to "button" to prevent form submission
             onClick={handleSubmitLater} // Attach handleSubmitLater to onClick
-            className="w-full bg-red-600 text-white py-3 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 font-medium"
+            className="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 font-medium"
           >
             Maybe Later
           </button>
+</div>
+         
         </form>
       </div>
     </div>

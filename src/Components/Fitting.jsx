@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import toast from 'react-hot-toast';
 
-const Fitting = ({ setOpenFitting }) => {
+const Fitting = ({ setOpenFitting,setFinalQR }) => {
   const ID = JSON.parse(localStorage.getItem("ID"));
   const [isSubmitting, setIsSubmitting] = useState(false);
   
@@ -126,7 +126,9 @@ const Fitting = ({ setOpenFitting }) => {
       if (!response.ok) throw new Error("Submission failed");
 
       toast.success("Appointment successfully scheduled");
-      setOpenFitting(false);
+       //!!!!!Eto yung checkoout Function
+       setOpenFitting(false);
+       setFinalQR(true);
     } catch (error) {
       toast.error("Failed to schedule appointment");
       console.error(error);

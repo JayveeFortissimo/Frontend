@@ -55,7 +55,7 @@ const SearchBar = () => {
             <h3 className="text-lg font-semibold text-gray-800 line-clamp-1">
               {product.product_Name}
             </h3>
-            <p className="text-amber-600 font-medium">
+            <p className="text-violet-600 font-medium">
               ₱{product.price.toLocaleString()}
             </p>
           </div>
@@ -67,8 +67,8 @@ const SearchBar = () => {
         <button
           onClick={() => navigate(`/Items/${product.id}`)}
           className="w-full py-2 px-4 bg-neutral-700 text-white rounded-md 
-                   transition-colors duration-300 hover:bg-amber-600 
-                   focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"
+                   transition-colors duration-300 hover:bg-violet-600 
+                   focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-opacity-50"
         >
           View Details
         </button>
@@ -90,7 +90,7 @@ const SearchBar = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value.toUpperCase())}
                 className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 
-                         focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent
+                         focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent
                          text-lg transition-all duration-300"
               />
             </div>
@@ -108,7 +108,7 @@ const SearchBar = () => {
       <div className="pt-24 px-4 pb-8 max-w-7xl mx-auto">
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600" />
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-600" />
           </div>
         ) : (
           <>

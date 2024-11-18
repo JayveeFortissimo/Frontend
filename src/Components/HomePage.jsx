@@ -195,7 +195,7 @@ const HomePage = () => {
               Cristobal Collections
             </h2>
             <p className="text-2xl md:text-3xl mb-8 text-gray-800">
-              Best Gown rental Located at Santa Maria
+              Best Gown Rental Located at Santa Maria
             </p>
           </motion.div>
           

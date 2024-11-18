@@ -19,13 +19,11 @@ useEffect(() => {
       console.log("Received status update:", data);
       toast.success(`Status for item ${data.id} updated to ${data.status}`);
       
-      // Optionally, update `setCancelled` or other relevant state
       setCancelled(prevCancelled => ({
         ...prevCancelled,
         cancelledDetails: prevCancelled.cancelledDetails.map(item => 
             item.id === data.id ? { ...item, status: data.status } : item
         )
-
     }));
 
       if(Reason.current === "ADMIN DECLINE"){
@@ -49,7 +47,7 @@ useEffect(() => {
   const handleSubmitEdit = async (e, id, code, sub_Total, Reason) => {
     e.preventDefault();
      
-    const TotalEdit =  Reason === "ADMIN DECLINE" ?  sub_Total :(sub_Total * 0.50);
+    const TotalEdit =  Reason === "ADMIN DECLINE" ?  sub_Total : sub_Total;
 
     setClickedItems(prev => [...prev, id]);
     

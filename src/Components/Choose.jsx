@@ -36,19 +36,13 @@ const Choose = ({ setOpenFitting, setOpenChoose }) => {
                 setOpenFitting(true);
                 setOpenChoose(false);
               }}
-              className="flex-1 px-4 py-2.5 rounded-lg bg-green-600 text-white font-medium
-                hover:bg-green-700 active:bg-green-800 
-                transform active:scale-[0.98] transition-all
-                focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
+              className="flex-1 px-4 py-2.5  bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/50"
             >
               Yes, I want 
             </button>
             <button 
               onClick={() => setOpenChoose(false)}
-              className="flex-1 px-4 py-2.5 rounded-lg bg-red-600 text-white font-medium
-                hover:bg-red-700 active:bg-red-800 
-                transform active:scale-[0.98] transition-all
-                focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
+              className="flex-1 px-4 py-2.5  bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all duration-300 transform hover:scale-102 shadow-lg hover:shadow-xl"
             >
               No, Thanks 
             </button>
