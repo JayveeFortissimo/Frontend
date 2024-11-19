@@ -1,6 +1,5 @@
 import { useLoaderData } from 'react-router-dom';
 import { VscCalendar, VscJersey, VscAccount, VscOutput, VscBell, VscBellDot } from "react-icons/vsc";
-import { MdOutlinePayments, MdOutlinePayment } from "react-icons/md";
 import { FaPesoSign, FaMoneyBill1Wave } from "react-icons/fa6";
 import { useState, useEffect } from 'react';
 import Notif from './Modal/Notif';
@@ -18,13 +17,13 @@ import { IoIosToday } from "react-icons/io";
 import AdminProfile from '../../hooks/AdminHooks/AdminProfile';
 
 const Dashboard = () => {
-  //From loader
+
   const DashInfo = useLoaderData();
 
   console.log(DashInfo)
   const [filteredData, setFilteredData] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState('All Months');
-   //ADMIN PROFILE
+
    const {profile} = AdminProfile();
 
     const [rentalE,setRentalE] = useState(DashInfo.data5);
@@ -51,6 +50,7 @@ const Dashboard = () => {
       });
   
       return () => {
+        socket.off('bellsDash');
         socket.disconnect();
       };
   

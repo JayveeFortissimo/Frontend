@@ -28,8 +28,6 @@ const history = (ID)=>{
 
     },[]);
 
-
-
     return{
         history
     }

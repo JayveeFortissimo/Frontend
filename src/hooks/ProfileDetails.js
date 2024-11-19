@@ -107,15 +107,10 @@ const socket = useRef(null);
         socket.current = io("http://localhost:8000"); 
 
         socket.current.on('canceled', (data) => {
-            console.log('Item canceled:', data);
-            setAllOrders((prevOrders) => prevOrders.filter(order => order.id !== data.id));
-        });
-
-        socket.current.on('canceled', (data) => {
           console.log('Item canceled:', data);
-          setDataCancel((prevOrders) => [...prevOrders,data]);
-      });
-
+          setAllOrders((prevOrders) => prevOrders.filter(order => order.id !== data.id));
+          setDataCancel((prevOrders) => [...prevOrders, data]);
+        });
 
       socket.current.on('statusUpdated', ({ id, status }) => {
         setDataCancel(prevItems =>
@@ -126,6 +121,8 @@ const socket = useRef(null);
       });
       
         return () => {
+          socket.current.off('canceled');
+          socket.current.off('statusUpdated');
             socket.current.disconnect();
         };
     }, []);

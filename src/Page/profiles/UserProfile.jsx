@@ -32,6 +32,8 @@ import ReferalsPoints from '../../Components/Modal/referalsPoints.jsx';
 import io from 'socket.io-client';
 
 const UserProfile = () => {
+
+  let Activity;
   const ID = JSON.parse(localStorage.getItem("ID"));
   const [bell, setHaveNotif] = useState(false);
   const [refferal,setRefferal] = useState(false);
@@ -81,16 +83,20 @@ const referralLink = userProfile.length > 0
 
   useEffect(() => {
     const socket = io('http://localhost:8000');
+  
     socket.on('notification', (data) => {
       setHaveNotif(true);
       if (data.user_ID === ID.id) {
         setAllnotifs((prev) => [...prev, data]);
       }
     });
+  
+    return () => {
+      socket.off('notification'); 
+      socket.disconnect(); 
+    };
   }, []);
-
-  let Activity;
- 
+  
 
   if (isReserveOrders === "Reserve") {
     Activity = <ReservesOrders allOrders={allOrders} user_ID={ID.id} PushToHistoryCancel={PushToHistoryCancel} setAllOrders={setAllOrders} />

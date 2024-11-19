@@ -12,14 +12,11 @@ const HistoryOfUser = (ID) =>{
         try {
           const response = await fetch(`http://localhost:8000/ApprovedItems/${ID}`);
           const data = await response.json();
-
-          const dateOfNow = new Date();
   
           const approvedDatas = [];
           const returnTodayData = [];
   
           data.forEach(pro => {
-            const returnDate = new Date(pro.return_Date);
   
             if (pro.Pickuped === "ITEM PICKED UP ALREADY") {
               returnTodayData.push(pro);

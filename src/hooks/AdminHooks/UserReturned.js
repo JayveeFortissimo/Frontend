@@ -18,6 +18,7 @@ const userReturnedItems = (setToReturn, toReturn) => {
 
         return () => {
             socket.off('itemRemoved');
+            socket.disconnect()
         };
         
     }, [toReturn, setToReturn]);
