@@ -71,13 +71,11 @@ const Cancelled = () => {
                         ₱ {pro.Price}
                       </p>
                     </div>
-                    <div className={`flex items-center justify-center sm:justify-start gap-1 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm w-fit mx-auto sm:mx-0 ${
-                      pro.status === "APPROVED BY ADMIN" 
-                        ? 'bg-green-100 text-green-700' 
-                        : 'bg-yellow-100 text-yellow-700'
-                    }`}>
+                    <div className={`flex items-center justify-center sm:justify-start gap-1 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm w-fit mx-auto sm:mx-0
+                    bg-red-100 text-red-700
+                    `}>
                       <MdPayments className="w-3 h-3 sm:w-4 sm:h-4" />
-                      <span className="font-medium">{pro.status}</span>
+                      <span className="font-medium">Cancelled</span>
                     </div>
                   </div>
 
