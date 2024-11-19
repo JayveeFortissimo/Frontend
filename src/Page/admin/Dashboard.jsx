@@ -5,9 +5,7 @@ import { useState, useEffect } from 'react';
 import Notif from './Modal/Notif';
 import TotalReservations from './Reports/TotalReservations';
 import NumbersOfUsers from './Reports/NumberofUsers';
-import RentalRevenue from './Reports/RentalRevenue';
 import TotalGowns from './Reports/TotalGowns';
-import SecurityDeposit from './Reports/SecurityDeposit';
 import HavePenaltys from './Reports/Cacelled';
 import ReservesToday from './Reports/ReservesToday';
 import io from 'socket.io-client';
@@ -21,15 +19,14 @@ const Dashboard = () => {
   const DashInfo = useLoaderData();
 
   console.log(DashInfo)
-  const [filteredData, setFilteredData] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState('All Months');
+   const [filteredData, setFilteredData] = useState([]);
+   const [selectedMonth, setSelectedMonth] = useState('All Months');
 
    const {profile} = AdminProfile();
 
-    const [rentalE,setRentalE] = useState(DashInfo.data5);
-    const [Cancelled,setCancelled] = useState(DashInfo.data6);
-    const [securityDeposit, setSecurityDeposit] = useState(DashInfo.data2);
 
+    const [Cancelled,setCancelled] = useState(DashInfo.data6);
+   
     const [reserveToday, setReserveToday] = useState(DashInfo.data9);
   
 
@@ -43,8 +40,6 @@ const Dashboard = () => {
         console.log('Connected to Socket.IO server');
       });
 
- //?! WAIT LANG D2 AHHH baka lagyan mo ng array yung sa may metrics
-      
       socket.on('bellsDash', () => {
            setNotifications(true);
       });
@@ -78,9 +73,7 @@ const Dashboard = () => {
   const [openTotalReserve, setTotalReserve] = useState({
     TotalReserves: false,
     TotalGowns: false,
-    SecurityDeposit: false,
     NumbersOfUsers: false,
-    RentalRevenue: false,
     HavePenaltys: false,
     Notifs: false,
     PaymentMethods:false,
@@ -349,7 +342,7 @@ const Dashboard = () => {
       title: "Todays Rented",
       value:  reserveToday.totalReservations,
       icon: <IoIosToday  size={24}/>,
-      gradient: "from-red-500 to-blue-600",
+      gradient: "from-orange-500 to-yellow-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, ReservesTodays: true }))
     },
 
@@ -368,13 +361,7 @@ const Dashboard = () => {
       gradient: "from-purple-500 to-purple-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, TotalGowns: true }))
     },
-    {
-      title: "Security Deposit",
-      value: `₱ ${securityDeposit.TotalIncomes}`,
-      icon: <FaMoneyBill1Wave size={24} />,
-      gradient: "from-emerald-500 to-emerald-600",
-      onClick: () => setTotalReserve(prev => ({ ...prev, SecurityDeposit: true }))
-    },
+
     {
       title: "Number of Users",
       value: DashInfo.data4.totalUser,
@@ -389,12 +376,13 @@ const Dashboard = () => {
       gradient: "from-pink-500 to-pink-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, HavePenaltys: true }))
     },
+
     {
-      title: "Rental Income",
-      value: `₱ ${rentalE.AllTotal}`,
-      icon: <FaPesoSign size={24} />,
-      gradient: "from-amber-500 to-amber-600",
-      onClick: () => setTotalReserve(prev => ({ ...prev, RentalRevenue: true }))
+      title: "Gown Trending",
+      value: 0,
+      icon: <VscOutput size={24} />,
+      gradient: "from-red-500 to-pink-600",
+      onClick: () => console.log("Hellow PO")
     },
 
   ];
@@ -412,15 +400,10 @@ const Dashboard = () => {
    
       {openTotalReserve.TotalGowns && <TotalGowns setTotalReserve={setTotalReserve} DashInfo={DashInfo.data1.INFO} />}
       
-      {openTotalReserve.SecurityDeposit && <SecurityDeposit 
-      setTotalReserve={setTotalReserve}
-       DashInfo={securityDeposit.reservations} 
-       setSecurityDeposit={setSecurityDeposit}
-       />}
       {openTotalReserve.NumbersOfUsers && <NumbersOfUsers setTotalReserve={setTotalReserve} DashInfo={DashInfo.data4.users} />}
-      {openTotalReserve.HavePenaltys && <HavePenaltys setTotalReserve={setTotalReserve} DashInfo={Cancelled} setCancelled={setCancelled} setRentalE={setRentalE} />}
-    
-      {openTotalReserve.RentalRevenue && <RentalRevenue setTotalReserve={setTotalReserve} DashInfo={DashInfo.data5.AllResult} />}
+
+      {openTotalReserve.HavePenaltys && <HavePenaltys setTotalReserve={setTotalReserve} DashInfo={Cancelled} setCancelled={setCancelled} />}
+ 
 
       <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         <header className="h-16 border-b border-gray-700/50 bg-gray-900/50 backdrop-blur-sm px-6 flex justify-between items-center sticky top-0 z-10">
@@ -544,7 +527,6 @@ export const Dash = async() => {
       'numbersOfPending',
       'totalReserves',
       'totalUsers',
-      'totalIncome',
       'AllCancelled',
       'AllTrends',
       'Today'
@@ -566,7 +548,6 @@ export const Dash = async() => {
       dataPending,
       dataReserves,
       NumbersOfUsers,
-      RentalIncome,
       AllCacelled,
       TrendsAll,
       Today
@@ -577,7 +558,7 @@ export const Dash = async() => {
       data2: dataPending,
       data3: dataReserves,
       data4: NumbersOfUsers,
-      data5: RentalIncome,
+   
       data6: AllCacelled,
       data7: TrendsAll,
       data9: Today
