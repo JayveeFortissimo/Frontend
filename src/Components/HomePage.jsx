@@ -5,143 +5,52 @@ import MostPicked from '../hooks/MostPicked.js';
 import toast from 'react-hot-toast';
 
 const GridBackground = () => (
-  <div className="absolute inset-0 overflow-hidden">
-    <div className="absolute inset-0" style={{ 
-      backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 0.15) 1px, transparent 1px), 
-                       linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 1px, transparent 1px)`,
-      backgroundSize: '50px 50px',
-    }}>
-      <motion.div 
-        className="absolute inset-0"
-        animate={{
-          x: [0, -50],
-          y: [0, -50]
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-      />
-    </div>
-  </div>
+  <div className="absolute inset-0 overflow-hidden bg-gradient-to-b from-gray-100 to-white opacity-80" />
 );
 
-// Large, prominent particles
 const Particle = ({ size, initialPosition }) => (
-  <motion.div
-    className={`absolute ${size} rounded-full bg-gradient-to-r from-black/30 to-black/10`}
+  <div
+    className={`absolute ${size} rounded-full bg-gradient-to-r from-black/30 to-black/10 opacity-0 animate-fade`}
     style={{
       ...initialPosition,
-      boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)"
-    }}
-    animate={{
-      y: [initialPosition.top, initialPosition.top - 200],
-      opacity: [0, 1, 0],
-      scale: [0.5, 1.5, 0.5]
-    }}
-    transition={{
-      duration: 10,
-      repeat: Infinity,
-      ease: "easeInOut"
+      boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)", // Lighter shadow
     }}
   />
 );
 
 const ParticlesEffect = () => (
   <div className="absolute inset-0 overflow-hidden">
-    {Array.from({ length: 25 }).map((_, i) => (
+    {Array.from({ length: 8 }).map((_, i) => (
       <Particle
         key={i}
-        size={`w-${Math.floor(Math.random() * 6 + 4)} h-${Math.floor(Math.random() * 6 + 4)}`}
+        size={`w-${Math.floor(Math.random() * 4 + 4)} h-${Math.floor(Math.random() * 4 + 4)}`}
         initialPosition={{
           left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100 + 100}%`
+          top: `${Math.random() * 100 + 50}%`, // Keep particles lower for less effect
         }}
       />
     ))}
   </div>
 );
 
-// Bold animated lines
-const FloatingLines = () => (
-  <div className="absolute inset-0 overflow-hidden">
-    {Array.from({ length: 12 }).map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute h-1 bg-gradient-to-r from-transparent via-black/30 to-transparent"
-        style={{
-          width: `${Math.random() * 40 + 30}%`,
-          left: `${Math.random() * 60}%`,
-          top: `${Math.random() * 100}%`,
-        }}
-        animate={{
-          opacity: [0, 0.9, 0],
-          scale: [0.8, 1.2, 0.8],
-          x: [-100, 100, -100]
-        }}
-        transition={{
-          duration: Math.random() * 7 + 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: Math.random() * 2
-        }}
-      />
-    ))}
-  </div>
-);
 
-// Larger floating elements with stronger effects
 const FloatingElement = ({ delay, duration, x, y, size = "w-32 h-32" }) => (
   <motion.div
-    className={`absolute ${size} rounded-full bg-gradient-to-r from-white to-gray-200 border-2 border-black/10`}
+    className={`absolute ${size} rounded-full bg-gradient-to-r from-white to-gray-200 border border-gray-300`}
+    style={{ top: `${y}px`, left: `${x}px`, backdropFilter: "blur(8px)" }}
     animate={{
-      y: [y, y + 60, y],
-      x: [x, x + 50, x],
-      scale: [1, 1.2, 1],
-      rotate: [0, 180, 0],
+      y: [y, y + 30, y], // Reduced movement range
+      scale: [1, 1.1, 1],
     }}
     transition={{
       duration: duration,
       repeat: Infinity,
       delay: delay,
-      ease: "easeInOut"
-    }}
-    style={{
-      backdropFilter: "blur(12px)",
-      boxShadow: "0 16px 48px rgba(0, 0, 0, 0.2)"
+      ease: "easeInOut",
     }}
   />
 );
 
-// Enhanced background pattern
-const BackgroundPattern = () => (
-  <div className="absolute inset-0 overflow-hidden">
-    {Array.from({ length: 15 }).map((_, i) => (
-      <motion.div
-        key={i}
-        className="absolute rounded-full bg-gradient-to-r from-white to-gray-200"
-        style={{
-          width: Math.random() * 300 + 150,
-          height: Math.random() * 300 + 150,
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-          border: "2px solid rgba(0, 0, 0, 0.15)",
-          backdropFilter: "blur(8px)"
-        }}
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.5, 0.8, 0.5],
-        }}
-        transition={{
-          duration: Math.random() * 5 + 5,
-          repeat: Infinity,
-          delay: Math.random() * 2,
-        }}
-      />
-    ))}
-  </div>
-);
 const HomePage = () => {
     const isLogin = useRouteLoaderData('root');
     
@@ -156,24 +65,20 @@ const HomePage = () => {
 {/* Hero Section */}
 <section className="relative h-[40rem] overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white">
       <GridBackground />
+
       <ParticlesEffect />
-      <FloatingLines />
-      <BackgroundPattern />
-      
-      <FloatingElement delay={0} duration={8} x={100} y={100} size="w-48 h-48" />
-      <FloatingElement delay={1} duration={9} x={400} y={200} size="w-56 h-56" />
-      <FloatingElement delay={2} duration={10} x={200} y={400} size="w-64 h-64" />
-      <FloatingElement delay={3} duration={7} x={600} y={300} size="w-40 h-40" />
-      
+
+      {/* Reduce Floating Elements */}
+      <FloatingElement delay={0} duration={8} x={100} y={100} size="w-32 h-32" />
+      <FloatingElement delay={1} duration={9} x={400} y={200} size="w-40 h-40" />
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute inset-0"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 to-white/30 backdrop-blur-[2px]" />
-      </motion.div>
-      
+        className="absolute inset-0 bg-gradient-to-b from-white/70 to-white/30 backdrop-blur-[2px]"
+      />
+
       <div className="relative h-full flex items-center justify-center">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -181,32 +86,20 @@ const HomePage = () => {
           transition={{ delay: 0.5 }}
           className="text-center z-10"
         >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ 
-              delay: 0.3,
-              type: "spring",
-              stiffness: 100
-            }}
-            className="mb-8"
-          >
-            <h2 className="text-4xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-800">
-              Cristobal Collections
-            </h2>
-            <p className="text-2xl md:text-3xl mb-8 text-gray-800">
-              Best Gown Rental Located at Santa Maria
-            </p>
-          </motion.div>
-          
+          <h2 className="text-4xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-black to-gray-800">
+            Cristobal Collections
+          </h2>
+          <p className="text-2xl md:text-3xl mb-8 text-gray-800">
+            Best Gown Rental Located at Santa Maria
+          </p>
           <motion.button
-            className="px-10 py-4 bg-black hover:bg-gray-900 text-white rounded-full transition-colors flex items-center mx-auto space-x-3 shadow-xl"
-            whileHover={{ 
+            className="px-10 py-4 bg-black hover:bg-gray-900 text-white rounded-full transition-colors flex items-center mx-auto space-x-3 shadow-lg"
+            whileHover={{
               scale: 1.05,
-              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2)"
+              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)", // Reduced shadow
             }}
             whileTap={{ scale: 0.95 }}
-            onClick={()=> navigate('/Items')}
+            onClick={() => navigate('/Items')}
           >
             <span className="text-lg">Explore Collection</span>
             <BsArrowRight className="w-6 h-6" />
@@ -214,7 +107,6 @@ const HomePage = () => {
         </motion.div>
       </div>
     </section>
-    
 
 {/* Featured Gowns */}
 {/* Featured Gowns */}
