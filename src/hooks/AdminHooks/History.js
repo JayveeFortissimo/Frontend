@@ -36,28 +36,8 @@ const HistoryOfUser = (ID) =>{
     }, [ID]);
 
     
-    //!MAG LALAGAY PA KO MESSAGES
-
-    const deletedItems = async(id) =>{
-       try{
-       const response = await fetch(`http://localhost:8000/removeGrace/${id}`,{
-        method:"DELETE",
-        headers:{
-          'Content-Type':'application/json'
-        },
-        //!BAKA MAGKA ERROR AHH DAHIL SA ID
-        body:JSON.stringify({user_ID:ID})
-       });
-
-       if(!response.ok) return console.log("CANNOT DELETE ITEMS");
-       }catch(error){
-        console.log(error);
-       }
-    }
-
-
   
-    return { allDatas, toReturn, setAllDatas, setToReturn, deletedItems };
+    return { allDatas, toReturn, setAllDatas, setToReturn };
     
 };
 

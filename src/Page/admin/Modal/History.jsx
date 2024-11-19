@@ -22,7 +22,7 @@ const History = () => {
   const userID = useLoaderData();
   const qrRef = useRef(null);
   
-  const {allDatas, setAllDatas, deletedItems } = HistoryOfUser(userID.data1[0].id);
+  const {allDatas, setAllDatas} = HistoryOfUser(userID.data1[0].id);
   const [pickUp, setPickUp] = useState(false);
 
   const [QrValue, setQrValue] = useState({});
@@ -40,13 +40,13 @@ const History = () => {
     size: "",
     code:"",
     subTotal:0
-   // subtotal:0
+ 
   });
 
-   //!For Specific data
+   
    useEffect(() => {
     if (allDatas.length > 0) {
-      const pro = allDatas[0];  // Use the first item in `allDatas` as an example
+      const pro = allDatas[0];  
       const data = {
         product_name: pro.product_Name,
         quantity: pro.quantity,
@@ -109,11 +109,6 @@ const History = () => {
     } else if (status === "No Show") {
       Icon = PiWarning;
       colorClasses = "bg-red-500/20 text-red-400 border border-red-500/30";
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11111DELETE
-      setTimeout(() => {
-        deletedItems(id);
-        window.location.reload();
-      }, 1000);
     }
 
     return (
