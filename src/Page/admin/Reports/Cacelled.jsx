@@ -140,8 +140,7 @@ const generatePDF = () => {
       doc.text(`Code: ${item.code}`, 20, yPosition + 8);
       doc.text(`Price: ₱${item.Price.toLocaleString()}`, 20, yPosition + 16);
       
-      // Right column
-      doc.text(`Status: ${item.status}`, pageWidth/2, yPosition + 8);
+    
       doc.text(`Subtotal: ₱${item.sub_Total.toLocaleString()}`, pageWidth/2, yPosition + 16);
       
       yPosition += 30;
