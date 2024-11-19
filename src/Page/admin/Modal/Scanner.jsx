@@ -72,7 +72,8 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
           penalty: totalPenalty,
           returnID: data.returnID,
           quantity:data.quantity,
-          price:data.price
+          price:data.price,
+          code:data.code
         });
 
         setOpenScanner(false);

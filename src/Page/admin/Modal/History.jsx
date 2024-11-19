@@ -58,10 +58,11 @@ const History = () => {
         penalty: 0,
         user_id: pro.user_ID,
         price: pro.price,
-        returnID: pro.id
+        returnID: pro.id,
+        code:pro.code
       };
   
-      setQrValue(data); // Set `QrValue` as an object
+      setQrValue(data); 
     }
   }, [allDatas]);
 

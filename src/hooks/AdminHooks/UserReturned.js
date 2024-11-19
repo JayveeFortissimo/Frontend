@@ -57,7 +57,8 @@ const userReturnedItems = (setToReturn, toReturn) => {
             user_ID: pro.user_ID,
             penalty: pro.penalty,
             quantity:pro.quantity,
-            price:pro.price
+            price:pro.price,
+            code:pro.code,
         };
 
         try {
@@ -92,7 +93,9 @@ const userReturnedItems = (setToReturn, toReturn) => {
             status: qrCodeData.status,
             user_ID: qrCodeData.user_ID,
             penalty: qrCodeData.penalty,
-            quantity:qrCodeData.quantity
+            quantity:qrCodeData.quantity,
+            price:qrCodeData.price,
+            code:qrCodeData.code
         };
 
         try {
@@ -132,8 +135,8 @@ const userReturnedItems = (setToReturn, toReturn) => {
             user_ID: pro.user_ID,
             penalty: 1000,
             quantity:pro.quantity,
+            price:pro.price,
             code:pro.code,
-            price:pro.price
         };
 
         try {

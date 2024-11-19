@@ -3,51 +3,25 @@ import {
   PiShoppingCartSimple,
   PiCalendarBlank,
   PiPackage,
-  PiCreditCard,
   PiCheckCircle,
   PiClock,
   PiXCircle
 } from "react-icons/pi";
 import Items_Approved from '../../../hooks/AdminHooks/ItemsApproved.js';
-import io from 'socket.io-client';
+
 
 const ReserveOrders = ({ userID }) => {
   const [orders, setOrders] = useState([]);
   
   useEffect(() => {
-    //This is my data from database
+  
     setOrders(userID.data2.result);
+
   }, []);
 
   const { PushToApprove, DeclineReserve } = Items_Approved(orders, setOrders, userID);
 
-  useEffect(() => {
-    const socket = io('http://localhost:8000');
-    
-    socket.on('connect', () => {
-      console.log('Connected to WebSocket');
-    });
-
-    socket.on('newCheckOut', (data) => {
-      //Socket
-      setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
-     
-    });
-   
-
-    socket.on('deleteItem', (data) => {
-      setOrders(prevOrders => prevOrders.filter(order => order.id !== data.id));
-    
-  });
-
-    return () => {
-      socket.off('deleteItem');
-      socket.off('newCheckOut');
-      socket.disconnect();
-    };
-
-
-  }, []);
+  
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -74,12 +48,7 @@ const ReserveOrders = ({ userID }) => {
     );
   };
 
-  const PaymentBadge = ({ method }) => (
-    <span className="flex items-center gap-1 px-3 py-1 text-xs font-semibold rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 backdrop-blur-sm">
-      <PiCreditCard className="w-3 h-3" />
-      {method === "Gcash" ? "Paid via GCash" : "Down Payment Received"}
-    </span>
-  );
+
 
   if (orders.length === 0) {
     return (

@@ -1,6 +1,34 @@
 import { toast } from 'react-hot-toast';
+import { useEffect } from 'react';
+import io from 'socket.io-client';
 
-const Items_Approved = (alldatas,setAlldata,userID) =>{
+const Items_Approved = (orders, setOrders, userID) =>{
+
+
+  useEffect(() => {
+    const socket = io('http://localhost:8000');
+    
+    socket.on('connect', () => {
+      console.log('Connected to WebSocket');
+    });
+
+    socket.on('newCheckOut', (data) => {
+      //Socket
+      setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
+     
+    });
+   
+    socket.on('deleteItem', (data) => {
+      setOrders(prevOrders => prevOrders.filter(order => order.id !== data.id));
+    
+  });
+    return () => {
+      socket.off('deleteItem');
+      socket.off('newCheckOut');
+      socket.disconnect();
+    };
+  }, []);
+
 
   const DELETE = async(e,pro) =>{
 
