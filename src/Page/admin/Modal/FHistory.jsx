@@ -1,7 +1,5 @@
-import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { VscNotebook } from "react-icons/vsc";
-import { motion } from "framer-motion";
 import History from '../../../hooks/History';
 
 // History Item Component

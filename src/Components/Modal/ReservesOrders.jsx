@@ -120,14 +120,6 @@ const ReservesOrders = ({ allOrders, user_ID, setAllOrders }) => {
                         </div>
 
                         <div className="space-y-2">
-                          <div className="flex items-center gap-1.5 text-gray-600">
-                            <MdOutlinePayments className="w-4 h-4" />
-                            <div>
-                              <p className="text-xs">Payment</p>
-                              <p className="font-medium text-green-600">{pro.payment_Method}</p>
-                            </div>
-                          </div>
-
                           <div className="bg-gray-50 rounded p-2">
                             <p className="text-xs text-gray-600">Total</p>
                             <p className="font-semibold text-gray-900">₱{pro.subTotal}</p>

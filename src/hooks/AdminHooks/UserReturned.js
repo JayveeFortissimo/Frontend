@@ -77,38 +77,13 @@ const userReturnedItems = (setToReturn, toReturn) => {
     };
 
 
-
-
-       //! FOR SMS Message
-       const sendSMSNotification = async (to, message) => {
-        try {
-            const response = await fetch('http://localhost:8000/send-sms', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ to, message }),
-            });
-    
-            const data = await response.json();
-            if (data.success) {
-                console.log('SMS sent successfully:', data.messageId);
-            } else {
-                console.error('Error sending SMS:', data.error);
-            }
-        } catch (error) {
-            console.error('Error sending SMS:', error);
-        }
-    };
-    
  
 
     const pushAutoMatically = async(qrCodeData) =>{
        
         Remove(qrCodeData.returnID);
        toast.success("USER RETURNED THE ITEMS");
-    // sendSMSNotification('+639604099126',`THANK YOU VERY MUCH https://docs.google.com/forms/d/e/1FAIpQLSc30TriVIQ-VrjBh_UwLdecsc79nV3ftHREcer79aHiBUr1Bw/viewform?usp=sf_link`);
-
+  
         const allDatas = {
             product_Name: qrCodeData.product_Name,
             picture: qrCodeData.picture,
@@ -144,7 +119,6 @@ const userReturnedItems = (setToReturn, toReturn) => {
     const PushHistoryNoQRCODE = async (e, pro) => {
         e.preventDefault();
 
-        //console.log("IDS" , pro.ID)
         Remove(pro.returnID);
 
         toast.success("USER RETURNED THE ITEMS");
@@ -177,8 +151,6 @@ const userReturnedItems = (setToReturn, toReturn) => {
             console.log(error);
         }
     };
-
-
 
 
     return {

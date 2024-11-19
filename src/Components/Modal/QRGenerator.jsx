@@ -1,12 +1,32 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import QRCode from 'react-qr-code';
 import { toCanvas } from 'html-to-image';
 
 const QRGenerator = ({ allOrders, CheckOUtss, TotalsAll }) => {
     const qrRef = useRef(null);
 
+
+    const [newArray, setNewArray] = useState([]);
+
+            useEffect(() => {
+                const updatedArray = allOrders.map(pro => ({
+                    id: pro.id,
+                    product_Name: pro.product_Name,
+                    picture: pro.picture,
+                    size: pro.size,
+                    user_ID: pro.user_ID,
+                    AllTotal: TotalsAll,
+                }));
+
+                setNewArray(updatedArray);
+            }, [allOrders]);
+
+
+              console.log(newArray)
+
     const handleDownloadQRCode = async (e) => {
         e.preventDefault();
+
         if (qrRef.current === null) return;
 
         try {
@@ -84,7 +104,7 @@ const QRGenerator = ({ allOrders, CheckOUtss, TotalsAll }) => {
                             <h3>QR Code:</h3>
                             <div ref={qrRef} className="bg-white p-4">
                                 <QRCode 
-                                    value={JSON.stringify(allOrders)} 
+                                    value={JSON.stringify(newArray)} 
                                     size={150}
                                     style={{ background: 'white' }}
                                 />

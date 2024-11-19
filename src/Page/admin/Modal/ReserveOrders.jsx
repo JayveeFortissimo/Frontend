@@ -143,7 +143,7 @@ const ReserveOrders = ({ userID }) => {
                       <p className="bg-gray-800/50 p-2 rounded-lg border border-gray-700/50">
                         Quantity: {order.quantity}
                       </p>
-                      <PaymentBadge method={order.payment_Method} />
+                     
                     </div>
                   </div>
   

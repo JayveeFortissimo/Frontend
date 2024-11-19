@@ -4,7 +4,8 @@ import HistoryOfUser from "../../../hooks/AdminHooks/History.js";
 import { useLoaderData } from 'react-router-dom';
 import PickUp from "./PickUp.jsx";
 import io from 'socket.io-client';
-import QRCode from 'qrcode';
+import QRCode from 'react-qr-code';
+import { toCanvas } from 'html-to-image';
 
 import { 
   PiCalendarBlank, 
@@ -19,10 +20,13 @@ import {
 
 const History = () => {
   const userID = useLoaderData();
-  const qrRefs = useRef({});
+  const qrRef = useRef(null);
   
   const {allDatas, setAllDatas, deletedItems } = HistoryOfUser(userID.data1[0].id);
   const [pickUp, setPickUp] = useState(false);
+
+  const [QrValue, setQrValue] = useState({});
+
   const [productINFO, setProductInfo] = useState({
     product_Name: "",
     subtotal: "",
@@ -38,6 +42,28 @@ const History = () => {
     subTotal:0
    // subtotal:0
   });
+
+   //!For Specific data
+   useEffect(() => {
+    if (allDatas.length > 0) {
+      const pro = allDatas[0];  // Use the first item in `allDatas` as an example
+      const data = {
+        product_name: pro.product_Name,
+        quantity: pro.quantity,
+        status: pro.status,
+        picture: pro.picture,
+        start_date: new Date(pro.start_Date).toLocaleDateString(),
+        return_date: new Date(pro.return_Date).toLocaleDateString(),
+        pickup_status: pro.Pickuped,
+        penalty: 0,
+        user_id: pro.user_ID,
+        price: pro.price,
+        returnID: pro.id
+      };
+  
+      setQrValue(data); // Set `QrValue` as an object
+    }
+  }, [allDatas]);
 
 
   useEffect(() => {
@@ -58,6 +84,8 @@ const History = () => {
     };
   }, [setAllDatas]); 
 
+
+
   const handleGracePeriodCheck = (startDate, Pickuped) => {
     const now = new Date();
     const gracePeriodEnd = new Date(startDate);
@@ -68,6 +96,7 @@ const History = () => {
     }
     return Pickuped;
   };
+
 
   const StatusBadge = ({ status, id }) => {
     let Icon = PiClock;
@@ -93,65 +122,70 @@ const History = () => {
       </span>
     );
   };
+
+
+  const handleDownloadQRCode = async (e) => {
+    e.preventDefault();
+
+    if (qrRef.current === null) return;
+
+    try {
+        // Create a temporary container
+        const container = document.createElement('div');
+        container.style.background = 'white';
+        container.style.padding = '20px';
+        container.style.width = 'fit-content';
+        
+        // Create a temporary element for the QR code
+        const qrContainer = document.createElement('div');
+        container.appendChild(qrContainer);
+        document.body.appendChild(container);
+
+        // Clone the SVG
+        const svg = qrRef.current.querySelector('svg');
+        if (svg) {
+            const svgClone = svg.cloneNode(true);
+            qrContainer.appendChild(svgClone);
+
+            // Convert to canvas with options to suppress font errors
+            const canvas = await toCanvas(container, {
+                skipFonts: true,
+                filter: (node) => {
+                    // Properly check for node type and className
+                    if (node.tagName === 'LINK') return false;
+                    if (node.className && typeof node.className === 'string' && 
+                        node.className.includes('google')) return false;
+                    return true;
+                },
+                backgroundColor: '#ffffff'
+            });
+            
+            // Clean up the temporary elements
+            document.body.removeChild(container);
+
+            // Convert canvas to blob and download
+            canvas.toBlob((blob) => {
+                if (blob) {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'qrcode.png';
+                    link.click();
+                    // Clean up
+                    URL.revokeObjectURL(url);
+                }
+            }, 'image/png', 1.0);
+        }
+
+    } catch (err) {
+        console.error('Failed to download QR code:', err);
+    }
+};
   
-  const generateQRCode = async (id, text) => {
-    if (qrRefs.current[id]) {
-      const options = {
-        width:200,
-        margin: 0,
-        color: {
-          dark: '#000000',
-          light: '#FFFFFF'
-        },
-        errorCorrectionLevel: 'H'
-      };
-      
-      await QRCode.toCanvas(qrRefs.current[id], text, options);
-    }
-  };
+  
 
-  const downloadQRCode = (id) => {
-    const canvas = qrRefs.current[id];
-    if (!canvas) {
-      console.error('Canvas not found for QR code with id:', id);
-      return;
-    }
 
-    const pngUrl = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
-    const downloadLink = document.createElement('a');
-    downloadLink.href = pngUrl;
-    downloadLink.download = `${id}-QRCode.png`;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  };
-
-  useEffect(() => {
-    const generateAllQRCodes = async () => {
-      for (const pro of allDatas) {
-        const qrData = JSON.stringify({
-          product_name: pro.product_Name,
-          quantity: pro.quantity,
-          status: pro.status,
-          picture: pro.picture,
-          start_date: new Date(pro.start_Date).toLocaleDateString(),
-          return_date: new Date(pro.return_Date).toLocaleDateString(),
-          pickup_status: pro.Pickuped,
-          payment_method: pro.payment_Method,
-          penalty: 0,
-          user_id: pro.user_ID,
-          price:pro.price,
-          returnID: pro.id
-        });
-        await generateQRCode(pro.id, qrData);
-      }
-    };
-
-    if (allDatas.length) {
-      generateAllQRCodes();
-    }
-  }, [allDatas]); 
-
+  //SEE IF Zero array Length
   if (allDatas.length === 0) {
     return (
       <div className="mt-6 p-8 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 shadow-2xl border border-gray-700/50">
@@ -230,25 +264,30 @@ const History = () => {
                         <p className="font-medium text-gray-200 bg-gray-800/50 p-2 rounded-lg border border-gray-700/50">
                           Quantity: {pro.quantity}
                         </p>
-                        <p className="text-blue-400 font-medium bg-gray-800/50 p-2 rounded-lg border border-gray-700/50">
-                          {pro.payment_Method.toUpperCase()} PAYMENT
-                        </p>
                        
                         
                         <div className="mt-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
-                          <canvas
-                            ref={el => (qrRefs.current[pro.id] = el)}
-                            className="mx-auto mb-3"
-                          />
+                        
+
+                        <h3>QR Code:</h3>
+                            <div ref={qrRef} className="bg-white p-4">
+                                <QRCode 
+                                    value={JSON.stringify(QrValue)} 
+                                    size={150}
+                                    style={{ background: 'white' }}
+                                />
+                            </div>
                           
                           <div className="flex flex-col gap-3">
                             <button
-                              onClick={() => downloadQRCode(pro.id)}
+                              onClick={(e) => handleDownloadQRCode(e)}
                               className="inline-flex justify-center items-center px-4 py-2 bg-blue-500/20 text-blue-400 text-sm font-medium rounded-lg hover:bg-blue-500/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500/50 transition-all duration-300 border border-blue-500/30 backdrop-blur-sm"
                             >
                               <PiDownload className="w-4 h-4 mr-2" />
                               Download QR Code
                             </button>
+
+
 
                             <button
                               onClick={() => {

@@ -2,32 +2,6 @@ import { toast } from 'react-hot-toast';
 
 const Items_Approved = (alldatas,setAlldata,userID) =>{
 
-
-
-
-//! FOR SMS Message
-  const sendSMSNotification = async (to, message) => {
-    try {
-        const response = await fetch('http://localhost:8000/send-sms', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ to, message }),
-        });
-
-        const data = await response.json();
-        if (data.success) {
-            console.log('SMS sent successfully:', data.messageId);
-        } else {
-            console.error('Error sending SMS:', data.error);
-        }
-    } catch (error) {
-        console.error('Error sending SMS:', error);
-    }
-};
-
-
   const DELETE = async(e,pro) =>{
 
     e.preventDefault()
@@ -53,9 +27,7 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
     e.preventDefault();
 
       DELETE(e,pro);
-      //sendSMSNotification(`+639604099126`, 'Your gown reservation has been confirmed!');
-
-
+   
       const DateNows = new Date();
       
       try{
@@ -71,8 +43,6 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
                 user_ID:userID.data1[0].id,
                 picture:pro.picture,
                 returned:"ON GOING",
-                payment_Method:pro.payment_Method,
-                PD:pro.PD,
                 product_ID:pro.id,
                 statusPickuped:"THIS ITEM NOT PICKUPED YET",
                 quantity:pro.quantity,
@@ -91,7 +61,6 @@ const Items_Approved = (alldatas,setAlldata,userID) =>{
           if(!response.ok) return toast.error("Have A server problem");
            toast.success("Items Approved!");
        
-
       }catch(error){
           console.log(error);
       }

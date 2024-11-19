@@ -10,10 +10,13 @@ import ReturnITEMS from '../../../hooks/AdminHooks/UserReturned.js';
 const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
  
   const { pushAutoMatically } = ReturnITEMS( toReturn , setToReturn);
+
    const dispatch = useDispatch();
 
   const qrCodeRegionId = "qr-reader";
+
   const [qrCodeData, setQrCodeData] = useState(null);
+
   const [parsedData, setParsedData] = useState({});
   const [error, setError] = useState(null);
 
@@ -21,6 +24,9 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
     try {
 
       const data = JSON.parse(qrCodeMessage); 
+
+      console.log("Parsed Data:", data);
+      console.log("ItemID:", ItemID.current);
 
       const dateOfNow = new Date();
       const startDate = new Date(data.start_date);
@@ -34,7 +40,6 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
       const penaltyPerDay = 500;
       const totalPenalty = isPastReturnDate ? daysNotReturned * penaltyPerDay : 0;
 
-          //!MATIC SCAN
   
       //!DISPLAYED SCAN
       setParsedData({
@@ -45,7 +50,6 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
         return_date: returnFormatted,
         picture: data.picture,
         pickup_status: data.pickup_status,
-        payment_method: data.payment_method,
         penalty: totalPenalty,
         user_id: data.user_id,
         returnID:data.returnID
@@ -55,11 +59,9 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
       
       if (!FindID) {
         console.error("ID not found:", data.returnID);
-
         setError(`ID ${data.returnID} this is not item you reserve`);
       } else {
 
-     //!Pushed all data in history then scanner modal closed automatic HAHAHAHA
         pushAutoMatically({
           product_Name: data.product_name,
           picture: data.picture,
@@ -72,10 +74,9 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
           quantity:data.quantity,
           price:data.price
         });
+
         setOpenScanner(false);
-        //!OPTIONAL THIS ONE BAGUHIN MO SYA
         dispatch(Sidebars.Activity('FinalH'));
-        //window.location.reload();
       }
 
     } catch (err) {
@@ -152,7 +153,6 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
                   <p><strong>Start Date:</strong> {parsedData.start_date}</p>
                   <p><strong>Return Date:</strong> {parsedData.return_date}</p>
                   <p><strong>Pickup Status:</strong> {parsedData.pickup_status}</p>
-                  <p><strong>Payment Method:</strong> {parsedData.payment_method}</p>
                   <p><strong>Penalty: {parsedData.penalty}</strong></p>
                   <p><strong>User ID:</strong> {parsedData.user_id}</p>
                   <p><strong>Price:</strong> {parsedData.price}</p>
