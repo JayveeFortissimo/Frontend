@@ -25,12 +25,10 @@ const Dashboard = () => {
    const {profile} = AdminProfile();
 
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
-   
     const [reserveToday, setReserveToday] = useState(DashInfo.data9);
-
     const [notifications, setNotifications] = useState(false);
 
-    //!this is from another for notification
+  
     useEffect(() =>{
       const socket = io('http://localhost:8000');
   
