@@ -42,8 +42,8 @@ const AdminProfile = () =>{
             }
 
             YourProfile();
-
-        },[ADID.id]);
+       //!Tnanggal ko d2 yung AIID.id
+        },[]);
 
 
         const Edits = async (e) => {
