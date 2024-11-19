@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 import { VscCalendar, VscJersey, VscAccount, VscOutput, VscBell, VscBellDot } from "react-icons/vsc";
-import { FaPesoSign, FaMoneyBill1Wave } from "react-icons/fa6";
+import { IoIosPie } from "react-icons/io";
 import { useState, useEffect } from 'react';
 import Notif from './Modal/Notif';
 import TotalReservations from './Reports/TotalReservations';
@@ -24,11 +24,9 @@ const Dashboard = () => {
 
    const {profile} = AdminProfile();
 
-
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
    
     const [reserveToday, setReserveToday] = useState(DashInfo.data9);
-  
 
     const [notifications, setNotifications] = useState(false);
 
@@ -334,7 +332,6 @@ const Dashboard = () => {
 
 
 
-
  
   const cardData = [
 
@@ -379,15 +376,14 @@ const Dashboard = () => {
 
     {
       title: "Gown Trending",
-      value: 0,
-      icon: <VscOutput size={24} />,
+      value: null,
+      icon: <IoIosPie size={24}/>,
       gradient: "from-red-500 to-pink-600",
       onClick: () => console.log("Hellow PO")
     },
 
   ];
 
- 
 
 
   return (
@@ -524,7 +520,6 @@ export const Dash = async() => {
   try {
     const endpoints = [
       'numberOfItems',
-      'numbersOfPending',
       'totalReserves',
       'totalUsers',
       'AllCancelled',
@@ -545,7 +540,6 @@ export const Dash = async() => {
 
     const [
       dataTotalItems,
-      dataPending,
       dataReserves,
       NumbersOfUsers,
       AllCacelled,
@@ -555,7 +549,6 @@ export const Dash = async() => {
 
     return {
       data1: dataTotalItems,
-      data2: dataPending,
       data3: dataReserves,
       data4: NumbersOfUsers,
    
