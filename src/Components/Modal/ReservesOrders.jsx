@@ -21,7 +21,7 @@ const ReservesOrders = ({ allOrders, user_ID, setAllOrders }) => {
   // Filter to only show pending orders
   const pendingOrders = allOrders.filter(order => order.status === "Waiting for approval");
 
-  
+  console.log(allOrders)
 
   useEffect(() => {
     const socket = io('http://localhost:8000');
@@ -35,8 +35,29 @@ const ReservesOrders = ({ allOrders, user_ID, setAllOrders }) => {
       });
     });
 
+
+    socket.on('EditStatus', (element) => {
+    
+      setAllOrders((prevItems) => {
+        return prevItems.map(item => {
+          if (item.id === element.product_ID) {
+            
+            return { ...item, status: element.status };
+          }
+          return item; 
+        });
+      });
+
+
+
+    });
+    
+
     return () => {
+      socket.off('connect');
+      socket.off('EditStatus');
       socket.disconnect();
+  
     };
   }, [setAllOrders]);
 
