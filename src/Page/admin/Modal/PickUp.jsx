@@ -10,9 +10,6 @@ const PickUp = ({ setPickUp, productINFO }) => {
 
   const [pickuped, setPickuped] = useState('');
   const dispatch = useDispatch();
-  const [isCustomize, setIsCustomize] = useState(false);
-  const [money, setMoney] = useState(0);
-
 
   useEffect(() => {
     if (pickuped === "ITEM PICKED UP ALREADY") {
@@ -126,14 +123,6 @@ const PickUp = ({ setPickUp, productINFO }) => {
               <p>Customize</p>
               <input type="checkbox" onChange={() => setIsCustomize(pro => !pro)}/>
               </div>
-                
-
-              <div className="mt-1 mb-1">
-             {isCustomize && <input type="number" 
-             className="h-[2rem] w-[13rem] border px-2 border-black rounded" 
-             onChange={e => setMoney(e.target.value)}
-             />}
-            </div>
 
             </div>
 

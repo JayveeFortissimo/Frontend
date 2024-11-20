@@ -8,19 +8,12 @@ import {
   PiXCircle
 } from "react-icons/pi";
 import Items_Approved from '../../../hooks/AdminHooks/ItemsApproved.js';
+import OrderWaiting from '../../../hooks/AdminHooks/OrderWaiting.js';
 
 const ReserveOrders = ({ userID }) => {
-  const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    // Filter orders to only show those waiting for approval
-    const pendingOrders = userID.data2.result.filter(
-      order => order.status === "Waiting for approval"
-    );
-    setOrders(pendingOrders);
-  }, []);
-
-  const { PushToApprove, DeclineReserve } = Items_Approved(orders, setOrders, userID);
+const {orders, setOrders} = OrderWaiting(userID.data1[0].id);
+const { PushToApprove, DeclineReserve } = Items_Approved(orders, setOrders, userID);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {

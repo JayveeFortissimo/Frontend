@@ -21,21 +21,27 @@ const ReservesOrders = ({ allOrders, user_ID, setAllOrders }) => {
   // Filter to only show pending orders
   const pendingOrders = allOrders.filter(order => order.status === "Waiting for approval");
 
+  
+
   useEffect(() => {
     const socket = io('http://localhost:8000');
     socket.on('connect', () => {
       console.log('Connected to WebSocket');
     });
+    
     socket.on('deleteItem', (deletedItem) => {
       setAllOrders((prevItems) => {
         return prevItems.filter(item => item.id !== deletedItem.id);
       });
     });
+
     return () => {
       socket.disconnect();
     };
   }, [setAllOrders]);
+
   
+ 
 
   const StatusBadge = ({ status }) => (
     <div className="absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium

@@ -39,6 +39,8 @@ const History = ({ user_ID }) => {
 
         return () => {
             socket.off('pickup-status-updated');
+            //!E2 Binago ko
+            socket.disconnect();
         };
     }, [setAllDatas]);
 

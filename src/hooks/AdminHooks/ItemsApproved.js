@@ -1,8 +1,14 @@
 import { toast } from 'react-hot-toast';
 import { useEffect } from 'react';
 import io from 'socket.io-client';
+import {Sidebars}from '../../Store/Side.js';
+import { useDispatch } from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 
 const Items_Approved = (orders, setOrders, userID) =>{
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const socket = io('http://localhost:8000');
@@ -12,9 +18,10 @@ const Items_Approved = (orders, setOrders, userID) =>{
     });
 
     socket.on('newCheckOut', (data) => {
+      console.log(data)
       setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
     });
-  
+
     return () => {
       socket.off('newCheckOut');
       socket.disconnect();
@@ -49,6 +56,7 @@ const Items_Approved = (orders, setOrders, userID) =>{
 
           if(!response.ok) return toast.error("Have A server problem");
            toast.success("Items Approved!");
+           dispatch(Sidebars.Activity('History'));
        
       }catch(error){
           console.log(error);
@@ -73,6 +81,8 @@ const DELETE = async(e,pro) =>{
         });
 
         if(!response.ok) return console.log("Have A server problem");
+
+        navigate('/admin')
 
     }catch(error){
         console.log(error);
