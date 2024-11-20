@@ -35,6 +35,7 @@ const ReservesOrders = ({ allOrders, user_ID, setAllOrders }) => {
       socket.disconnect();
     };
   }, [setAllOrders]);
+  
 
   const StatusBadge = ({ status }) => (
     <div className="absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium

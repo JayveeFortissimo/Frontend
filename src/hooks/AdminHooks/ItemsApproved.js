@@ -4,7 +4,6 @@ import io from 'socket.io-client';
 
 const Items_Approved = (orders, setOrders, userID) =>{
 
-
   useEffect(() => {
     const socket = io('http://localhost:8000');
     
@@ -15,13 +14,8 @@ const Items_Approved = (orders, setOrders, userID) =>{
     socket.on('newCheckOut', (data) => {
       setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
     });
-   
-    socket.on('deleteItem', (data) => {
-      setOrders(prevOrders => prevOrders.filter(order => order.id !== data.id));
-    
-  });
+  
     return () => {
-      socket.off('deleteItem');
       socket.off('newCheckOut');
       socket.disconnect();
     };

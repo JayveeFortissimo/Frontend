@@ -16,40 +16,14 @@ const PickUp = ({ setPickUp, productINFO }) => {
 
   useEffect(() => {
     if (pickuped === "ITEM PICKED UP ALREADY") {
-        //sendSMSNotification(`+639604099126`, 'YOU PICKUPED THE ITEMS ALREADY!');
       SubmitPickuped();
     }
   }, [pickuped]);
-
-  const sendSMSNotification = async (to, message) => {
-    try {
-      const response = await fetch('http://localhost:8000/send-sms', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ to, message }),
-      });
-
-      const data = await response.json();
-      if (data.success) {
-        console.log('SMS sent successfully:', data.messageId);
-      } else {
-        console.error('Error sending SMS:', data.error);
-      }
-    } catch (error) {
-      console.error('Error sending SMS:', error);
-    }
-  };
 
 
   const SubmitPickuped = async (e) => {
     if (e) e.preventDefault();
     
-     const OriginalVAlue = productINFO.subTotal;
-     const code = productINFO.code
-    const total =  parseInt(money) > 0? (OriginalVAlue + parseInt(money)) / 0.3    :  OriginalVAlue / 0.3;
-
     if (pickuped === '') {
       toast.error("Have problem");
     } else {
@@ -59,8 +33,6 @@ const PickUp = ({ setPickUp, productINFO }) => {
           method: "PUT",
           body: JSON.stringify({
             Pickuped: pickuped,
-            code:code,
-            total:total
           }),
           headers: {
             'Content-Type': 'application/json'

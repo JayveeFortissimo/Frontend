@@ -25,7 +25,7 @@ const HistoryOfUser = (ID) =>{
             }
           });
 
-  
+
           setAllDatas(approvedDatas);   
           setToReturn(returnTodayData);  
         } catch (error) {
@@ -36,7 +36,6 @@ const HistoryOfUser = (ID) =>{
       fetchData();
     }, [ID]);
 
-    
     return { allDatas, toReturn, setAllDatas, setToReturn };
     
 };
