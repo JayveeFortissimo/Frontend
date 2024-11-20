@@ -9,10 +9,13 @@ import { RiGpsFill } from "react-icons/ri";
 import io from 'socket.io-client';
 import toast from 'react-hot-toast';
 import jsPDF from 'jspdf';
+import {Sidebars} from '../../Store/Side.js';
+import {useDispatch} from 'react-redux'
 
 const History = ({ user_ID }) => {
     const { allDatas, setAllDatas } = Historys(user_ID);
     const [openPick, setOpenPick] = useState(false);
+    const dispatch = useDispatch();
     const [pickupDetails, setPickupDetails] = useState({
         productName: '',
         start_Date: '',
@@ -34,7 +37,9 @@ const History = ({ user_ID }) => {
                     return item;
                 });
             });
+
             toast.success(`Pickup status for product ID ${data.prodID} has been updated to ${data.Pickuped}`);
+            dispatch(Sidebars.Activity('Return'))
         });
 
         return () => {
