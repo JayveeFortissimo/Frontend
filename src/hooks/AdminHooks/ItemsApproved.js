@@ -13,9 +13,7 @@ const Items_Approved = (orders, setOrders, userID) =>{
     });
 
     socket.on('newCheckOut', (data) => {
-      //Socket
       setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
-     
     });
    
     socket.on('deleteItem', (data) => {
@@ -30,38 +28,14 @@ const Items_Approved = (orders, setOrders, userID) =>{
   }, []);
 
 
-  const DELETE = async(e,pro) =>{
-
-    e.preventDefault()
-  
-      try{
-
-          const response = await fetch(`http://localhost:8000/removeIncheck/${pro.id}`,{
-               method:"delete",
-               headers:{
-                  'Content-Type':'application/json'
-               }
-          });
-
-          if(!response.ok) return console.log("Have A server problem");
-
-      }catch(error){
-          console.log(error);
-      }
-
-  }
 
   const PushToApprove = async(e,pro) =>{
     e.preventDefault();
-
-      DELETE(e,pro);
    
-      const DateNows = new Date();
-      
       try{
 
           const response = await fetch(`http://localhost:8000/ItemsApproved`,{
-               method:"POST",
+               method:"PUT",
 
                body:JSON.stringify({
                 product_Name:pro.product_Name,
@@ -73,18 +47,11 @@ const Items_Approved = (orders, setOrders, userID) =>{
                 returned:"ON GOING",
                 product_ID:pro.id,
                 statusPickuped:"THIS ITEM NOT PICKUPED YET",
-                quantity:pro.quantity,
-                size:pro.size,
-                subTotal:pro.subTotal,
-                code:pro.code,
-                price:pro.price,
-                Today: new Date(Date.UTC(DateNows.getFullYear(), DateNows.getMonth(), DateNows.getDate())).toISOString().split('T')[0],
             }),
                headers:{
                   'Content-Type':'application/json'
                }
           });
-
 
           if(!response.ok) return toast.error("Have A server problem");
            toast.success("Items Approved!");
@@ -95,7 +62,31 @@ const Items_Approved = (orders, setOrders, userID) =>{
 
   }
 
-//!ADD Message Here
+
+
+//!DEcline Cancellations Here
+
+
+const DELETE = async(e,pro) =>{
+  e.preventDefault();
+
+    try{
+        const response = await fetch(`http://localhost:8000/removeIncheck/${pro.id}`,{
+             method:"delete",
+             headers:{
+                'Content-Type':'application/json'
+             }
+        });
+
+        if(!response.ok) return console.log("Have A server problem");
+
+    }catch(error){
+        console.log(error);
+    }
+}
+
+
+
   const DeclineReserve = async(e,pro) =>{
     e.preventDefault();
     DELETE(e,pro)

@@ -24,6 +24,7 @@ const HistoryOfUser = (ID) =>{
                 approvedDatas.push(pro)
             }
           });
+
   
           setAllDatas(approvedDatas);   
           setToReturn(returnTodayData);  
@@ -36,7 +37,6 @@ const HistoryOfUser = (ID) =>{
     }, [ID]);
 
     
-  
     return { allDatas, toReturn, setAllDatas, setToReturn };
     
 };

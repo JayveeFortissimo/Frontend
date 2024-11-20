@@ -23,10 +23,9 @@ const History = () => {
   const qrRef = useRef(null);
   
   const {allDatas, setAllDatas} = HistoryOfUser(userID.data1[0].id);
+
   const [pickUp, setPickUp] = useState(false);
-
   const [QrValue, setQrValue] = useState({});
-
   const [productINFO, setProductInfo] = useState({
     product_Name: "",
     subtotal: "",
@@ -40,11 +39,9 @@ const History = () => {
     size: "",
     code:"",
     subTotal:0
- 
   });
 
-   
-   useEffect(() => {
+  useEffect(() => {
     if (allDatas.length > 0) {
       const pro = allDatas[0];  
       const data = {
@@ -59,13 +56,12 @@ const History = () => {
         user_id: pro.user_ID,
         price: pro.price,
         returnID: pro.id,
-        code:pro.code
+        code: pro.code
       };
   
       setQrValue(data); 
     }
   }, [allDatas]);
-
 
   useEffect(() => {
     const socket = io('http://localhost:8000');
@@ -85,8 +81,6 @@ const History = () => {
     };
   }, [setAllDatas]); 
 
-
-
   const handleGracePeriodCheck = (startDate, Pickuped) => {
     const now = new Date();
     const gracePeriodEnd = new Date(startDate);
@@ -97,7 +91,6 @@ const History = () => {
     }
     return Pickuped;
   };
-
 
   const StatusBadge = ({ status, id }) => {
     let Icon = PiClock;
@@ -119,35 +112,28 @@ const History = () => {
     );
   };
 
-
   const handleDownloadQRCode = async (e) => {
     e.preventDefault();
-
     if (qrRef.current === null) return;
 
     try {
-        // Create a temporary container
         const container = document.createElement('div');
         container.style.background = 'white';
         container.style.padding = '20px';
         container.style.width = 'fit-content';
         
-        // Create a temporary element for the QR code
         const qrContainer = document.createElement('div');
         container.appendChild(qrContainer);
         document.body.appendChild(container);
 
-        // Clone the SVG
         const svg = qrRef.current.querySelector('svg');
         if (svg) {
             const svgClone = svg.cloneNode(true);
             qrContainer.appendChild(svgClone);
 
-            // Convert to canvas with options to suppress font errors
             const canvas = await toCanvas(container, {
                 skipFonts: true,
                 filter: (node) => {
-                    // Properly check for node type and className
                     if (node.tagName === 'LINK') return false;
                     if (node.className && typeof node.className === 'string' && 
                         node.className.includes('google')) return false;
@@ -156,10 +142,8 @@ const History = () => {
                 backgroundColor: '#ffffff'
             });
             
-            // Clean up the temporary elements
             document.body.removeChild(container);
 
-            // Convert canvas to blob and download
             canvas.toBlob((blob) => {
                 if (blob) {
                     const url = URL.createObjectURL(blob);
@@ -167,28 +151,25 @@ const History = () => {
                     link.href = url;
                     link.download = 'qrcode.png';
                     link.click();
-                    // Clean up
                     URL.revokeObjectURL(url);
                 }
             }, 'image/png', 1.0);
         }
-
     } catch (err) {
         console.error('Failed to download QR code:', err);
     }
-};
-  
-  
+  };
 
+  // Filter to show only Approved items
+  const displayItems = allDatas.filter(item => item.status === "Approved");
 
-  //SEE IF Zero array Length
-  if (allDatas.length === 0) {
+  if (displayItems.length === 0) {
     return (
       <div className="mt-6 p-8 rounded-xl bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 shadow-2xl border border-gray-700/50">
         <div className="flex flex-col items-center justify-center py-12 text-gray-400">
           <PiShoppingBag className="w-16 h-16 mb-4 opacity-50" />
-          <h3 className="text-lg font-semibold text-gray-200">No History Found</h3>
-          <p className="text-sm">User has not reserved or purchased any items</p>
+          <h3 className="text-lg font-semibold text-gray-200">No Approved Items Found</h3>
+          <p className="text-sm">Your items are pending approval or no items available</p>
         </div>
       </div>
     );
@@ -206,7 +187,7 @@ const History = () => {
 
       <div className="mt-6 h-[80vh] overflow-auto px-4 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
         <div className="space-y-6">
-          {allDatas.map(pro => {
+          {displayItems.map(pro => {
             const dateOfNow = new Date();
             const startDate = new Date(pro.start_Date);
             const returnDate = new Date(pro.return_Date);
@@ -260,19 +241,16 @@ const History = () => {
                         <p className="font-medium text-gray-200 bg-gray-800/50 p-2 rounded-lg border border-gray-700/50">
                           Quantity: {pro.quantity}
                         </p>
-                       
                         
                         <div className="mt-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
-                        
-
-                        <h3>QR Code:</h3>
-                            <div ref={qrRef} className="bg-white p-4">
-                                <QRCode 
-                                    value={JSON.stringify(QrValue)} 
-                                    size={150}
-                                    style={{ background: 'white' }}
-                                />
-                            </div>
+                          <h3>QR Code:</h3>
+                          <div ref={qrRef} className="bg-white p-4">
+                            <QRCode 
+                              value={JSON.stringify(QrValue)} 
+                              size={150}
+                              style={{ background: 'white' }}
+                            />
+                          </div>
                           
                           <div className="flex flex-col gap-3">
                             <button
@@ -282,8 +260,6 @@ const History = () => {
                               <PiDownload className="w-4 h-4 mr-2" />
                               Download QR Code
                             </button>
-
-
 
                             <button
                               onClick={() => {
@@ -299,8 +275,8 @@ const History = () => {
                                   approvedID: pro.id,
                                   quantity: pro.quantity,
                                   size: pro.size,
-                                  code:pro.code,
-                                  subTotal:pro.subTotal
+                                  code: pro.code,
+                                  subTotal: pro.subTotal
                                 });
                                 setPickUp(true);
                               }}

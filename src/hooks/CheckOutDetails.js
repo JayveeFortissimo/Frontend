@@ -17,7 +17,7 @@ const DetailCheck = (allOrders) =>{
       const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
 
 
-      //FOR CODE PURPOSES
+   
     function generateRandomWord(length) {
       const letters = "abcdefghijklmnopqrstuvwxyz";
       let word = "";
@@ -28,7 +28,7 @@ const DetailCheck = (allOrders) =>{
       return word;
     }
 
-   //CODE FOR PAYMENTS
+
     const Samecode  = generateRandomWord(5);
 
 
@@ -57,38 +57,6 @@ const DetailCheck = (allOrders) =>{
     },[ID.id, ID.token]);
 
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!FOR PAYMENTS D2 ko lallagay Final total
-async function Payments(e,Type, payment){
-   e.preventDefault();
-  try{
-    const response = await fetch(`http://localhost:8000/userPayment`,{
-      method:"POST",
-      body:JSON.stringify({
-        DATENOW:dateNow,
-        payment:payment,
-         Security:SecurityDeposit * allOrders.length,
-          Type:Type,
-           user_ID:ID.id,
-           code:Samecode
-      }),
-      headers:{
-        'Content-Type':'application/json'
-      }
-    });
-
-    if(!response.ok) return console.log("HAE PROBLEM");
-
-  }catch(error){
-    console.log(error);
-  }
-
-}
-
-
-
-
-
- //Delete in Cart when its already Check In
  const deleted = async(e) =>{
 
   e.preventDefault();
@@ -115,8 +83,6 @@ async function Payments(e,Type, payment){
  async function CheckOUtss(e, TotalsAll){
     e.preventDefault();
 
-
-    Payments(e, "WAKATA", TotalsAll);
     deleted(e);
     const DateNows = new Date();
   
@@ -127,13 +93,15 @@ async function Payments(e,Type, payment){
       start_Date:new Date(Date.UTC(new Date(pro.start_Date).getFullYear(), new Date(pro.start_Date).getMonth(), new Date(pro.start_Date).getDate())).toISOString().split('T')[0],
       return_Date:new Date(Date.UTC(new Date(pro.return_Date).getFullYear(), new Date(pro.return_Date).getMonth(), new Date(pro.return_Date).getDate())).toISOString().split('T')[0],
       price:pro.price,
-      quantity:pro.quantity,      //!BALI WALA NA TALAGANG Down Payment
+      quantity:pro.quantity,    
       subTotal: displayDiscount?((pro.subTotal + 200) * 0.30) : (pro.subTotal + 200) ,
       user_ID:pro.user_ID,
       status:"Waiting for approval",
       item_id:pro.product_ID,
       code:Samecode,
-      Today: new Date(Date.UTC(DateNows.getFullYear(), DateNows.getMonth(), DateNows.getDate())).toISOString().split('T')[0]
+      Today: new Date(Date.UTC(DateNows.getFullYear(), DateNows.getMonth(), DateNows.getDate())).toISOString().split('T')[0],
+      returned:"ON GOING",
+      statusPickuped:"THIS ITEM NOT PICKUPED YET",
      }));
        
           try{

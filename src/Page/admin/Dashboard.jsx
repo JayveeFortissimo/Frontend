@@ -23,7 +23,6 @@ const Dashboard = () => {
    const [selectedMonth, setSelectedMonth] = useState('All Months');
 
    const {profile} = AdminProfile();
-
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
     const [reserveToday, setReserveToday] = useState(DashInfo.data9);
     const [notifications, setNotifications] = useState(false);
