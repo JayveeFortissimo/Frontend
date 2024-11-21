@@ -20,6 +20,7 @@ const Items_Approved = (orders, setOrders, userID) =>{
     socket.on('newCheckOut', (data) => {
       console.log(data)
       setOrders(prevOrders => [...prevOrders, ...data.checkouts]);
+      
     });
 
     return () => {

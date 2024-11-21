@@ -59,7 +59,9 @@ useEffect(() =>{
 
 return{
     TodaysRented,
-    RentedGowns
+    RentedGowns,
+    setTodaysRented,
+    setRentedGowns
 }
 
 

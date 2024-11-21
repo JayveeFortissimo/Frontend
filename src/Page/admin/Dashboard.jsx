@@ -22,15 +22,15 @@ const Dashboard = () => {
   const DashInfo = useLoaderData();
 
  //!THI IS HOOKS 
-  const { TodaysRented , RentedGowns } = Dashboards();
+  const {profile} = AdminProfile();
+  const { TodaysRented , RentedGowns,  setTodaysRented, setRentedGowns} = Dashboards();
 
-  console.log(TodaysRented)
+  console.log(TodaysRented);
 
-  console.log(DashInfo)
    const [filteredData, setFilteredData] = useState([]);
    const [selectedMonth, setSelectedMonth] = useState('All Months');
 
-   const {profile} = AdminProfile();
+   
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
     const [notifications, setNotifications] = useState(false);
 
@@ -45,9 +45,46 @@ const Dashboard = () => {
       socket.on('bellsDash', () => {
            setNotifications(true);
       });
-  
+        
+      socket.on('newCheckOut', (data) => {
+        console.log(data)
+       
+        setTodaysRented(prevOrders => {
+          // Ensure `prevOrders` has the correct structure
+          if (!prevOrders || typeof prevOrders.reservations === 'undefined') {
+            prevOrders = { totalReservations: 0, reservations: [] };
+          }
+
+          const quantitySum = data.checkouts.reduce((total, item) => total + (item.quantity || 0), 0);
+
+      
+          return {
+            ...prevOrders,
+            reservations: [...prevOrders.reservations, ...data.checkouts],
+            totalReservations: parseInt(prevOrders.totalReservations) + quantitySum
+          };
+        });
+
+
+        setRentedGowns(prevOrders => {
+          if (!prevOrders || typeof prevOrders.reservations === 'undefined') {
+            prevOrders = { totalReservations: 0, reservations: [] };
+          }
+
+          const quantitySum = data.checkouts.reduce((total, item) => total + (item.quantity || 0), 0);
+          return {
+            ...prevOrders,
+            reservations: [...prevOrders.reservations, ...data.checkouts],
+            totalReservations: parseInt(prevOrders.totalReservations) + quantitySum
+          };
+        });
+        
+        
+      });
+
       return () => {
         socket.off('bellsDash');
+        socket.off('newCheckOut');
         socket.disconnect();
       };
   
@@ -329,10 +366,6 @@ const Dashboard = () => {
 
   doc.save('Gown_Rental_Report.pdf');
 };
-
-
-
-
 
 
 
