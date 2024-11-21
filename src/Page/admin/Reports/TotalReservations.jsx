@@ -6,20 +6,20 @@ import AdminProfile from '../../../hooks/AdminHooks/AdminProfile.js';
 const TotalReservations = ({ setTotalReserve, DashInfo }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const {profile} = AdminProfile();
-  
+  console.log(DashInfo)
   
   const groupedReservations = useMemo(() => {
     return DashInfo.reduce((acc, reservation) => {
-      if (!acc[reservation.CustomerID]) {
-        acc[reservation.CustomerID] = {
+      if (!acc[reservation.user_ID]) {
+        acc[reservation.user_ID] = {
           customerInfo: {
             name: reservation.name,
-            id: reservation.CustomerID,
+            id: reservation.user_ID,
           },
           reservations: []
         };
       }
-      acc[reservation.CustomerID].reservations.push(reservation);
+      acc[reservation.user_ID].reservations.push(reservation);
       return acc;
     }, {});
   }, [DashInfo]);
@@ -27,8 +27,8 @@ const TotalReservations = ({ setTotalReserve, DashInfo }) => {
   // Filter customers based on search query
   const filteredCustomers = useMemo(() => {
     return Object.values(groupedReservations).filter(userData =>
-      userData.customerInfo.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      userData.customerInfo.id.toString().includes(searchQuery)
+      userData.customerInfo.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+     // userData.customerInfo.id.toString().includes(searchQuery)
     );
   }, [groupedReservations, searchQuery]);
 
