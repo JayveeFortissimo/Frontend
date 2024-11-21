@@ -59,9 +59,8 @@ const Faqs = () => {
               <h3 className="font-semibold text-lg">Cancellation Policy</h3>
             </div>
             <div className="text-sm text-gray-600 space-y-2">
-              <p>• 50% deduction from down payment or full payment for cancellations</p>
-              <p>• Cancellations must be approved by admin</p>
-              <p>• No refunds for cancellations after admin approval deadline</p>
+              <p>• Once admin approve no cancellation</p>
+              <p>• If user not attend fitting appointment on the date user set up, Admin cancell the reservation</p>
             </div>
           </div>
 
@@ -99,10 +98,7 @@ const Faqs = () => {
               <h3 className="font-semibold text-lg">Payment Policy</h3>
             </div>
             <div className="text-sm text-gray-600 space-y-2">
-              <p>• 50% down payment required for reservations</p>
-              <p>• Full payment must be made before item pickup</p>
-              <p>• Security deposit of ₱200 each gown required</p>
-              <p>• Accepted payments: Cash, GCash(Fullpayment, downPayment)</p>
+              <p>• Payment is onsite, after fitting appointment</p>
             </div>
           </div>
         </div>
@@ -116,15 +112,6 @@ const faqItems = [
     question: 'What If I Damage The Item?',
     answer: [
       'In the event that the rental is damaged or badly stained, we will assess the damage and inform you of any additional charges including Security deposit needed for repairs.',
-    ],
-  },
-
-  {
-    question: "What happens if I don't pick up my items on the start date?",
-    answer: [
-      'We provide a grace period of 24 hours after the start date.',
-      'If the item is not picked up within the grace period, the reservation will be automatically canceled. You can inquire with the admin about the next steps.',
-      'If you wish to request a refund, please contact the admin to find out whether your reservation is eligible for a refund.'
     ],
   },
   {
