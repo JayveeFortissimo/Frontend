@@ -14,9 +14,17 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { IoIosToday } from "react-icons/io";
 import AdminProfile from '../../hooks/AdminHooks/AdminProfile';
 
+//For Dashboard CustomHooks
+import Dashboards from '../../hooks/AdminHooks/Dasboards';
+
 const Dashboard = () => {
 
   const DashInfo = useLoaderData();
+
+ //!THI IS HOOKS 
+  const { TodaysRented , RentedGowns } = Dashboards();
+
+  console.log(TodaysRented)
 
   console.log(DashInfo)
    const [filteredData, setFilteredData] = useState([]);
@@ -24,7 +32,6 @@ const Dashboard = () => {
 
    const {profile} = AdminProfile();
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
-    const [reserveToday, setReserveToday] = useState(DashInfo.data9);
     const [notifications, setNotifications] = useState(false);
 
   
@@ -334,7 +341,7 @@ const Dashboard = () => {
 
     {
       title: "Todays Rented",
-      value:  reserveToday.totalReservations,
+      value:  TodaysRented.totalReservations,
       icon: <IoIosToday  size={24}/>,
       gradient: "from-orange-500 to-yellow-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, ReservesTodays: true }))
@@ -342,7 +349,7 @@ const Dashboard = () => {
 
     {
       title: "Rented Gowns",
-      value: DashInfo.data3.totalReservations,
+      value: RentedGowns.totalReservations,
       icon: <VscCalendar size={24} />,
       gradient: "from-blue-500 to-blue-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, TotalReserves: true }))
@@ -385,7 +392,7 @@ const Dashboard = () => {
 
   return (
     <>
-      {openTotalReserve.ReservesTodays &&  <ReservesToday setTotalReserve={setTotalReserve} DashInfo={reserveToday.reservations}/>}
+      {openTotalReserve.ReservesTodays &&  <ReservesToday setTotalReserve={setTotalReserve} DashInfo={TodaysRented.reservations}/>}
     
       {openTotalReserve.Notifs && <Notif setTotalReserve={setTotalReserve} setNotifications={setNotifications}/>}
     

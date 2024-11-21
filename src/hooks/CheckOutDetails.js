@@ -16,7 +16,6 @@ const DetailCheck = (allOrders) =>{
       const dateNow = DATEOFNOW;
       const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
 
-
    
     function generateRandomWord(length) {
       const letters = "abcdefghijklmnopqrstuvwxyz";
@@ -87,6 +86,7 @@ const DetailCheck = (allOrders) =>{
     const DateNows = new Date();
   
     const Datas =  allOrders.map(pro =>({
+      name:allDatas[0].name,
       picture:pro.picture,
       product_Name:pro.product_Name,
       size:pro.size,
