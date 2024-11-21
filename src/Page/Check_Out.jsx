@@ -98,9 +98,9 @@ const Check_Out = () => {
         {/*!WAIT PA D2 SA APOOINTTTMENTTTTTTTTTT&                   E2 kyung Function to checkout   */}   
        {openFitting && <Fitting setOpenFitting={setOpenFitting} setFinalQR={setFinalQR} />}
 
-        {FinalQR && <QRGenerator allOrders = {allOrders} CheckOUtss={CheckOUtss} TotalsAll={TotalsAll}/>}
+        {FinalQR && <QRGenerator allOrders = {allOrders} CheckOUtss={CheckOUtss} TotalsAll={TotalsAll} allDatas={allDatas}/>}
        
-
+  
 
             <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">

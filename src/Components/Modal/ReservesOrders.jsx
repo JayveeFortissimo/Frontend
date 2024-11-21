@@ -18,10 +18,7 @@ const ReservesOrders = ({ allOrders, user_ID, setAllOrders }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Filter to only show pending orders
   const pendingOrders = allOrders.filter(order => order.status === "Waiting for approval");
-
-  console.log(allOrders)
 
   useEffect(() => {
     const socket = io('http://localhost:8000');
@@ -48,8 +45,6 @@ const ReservesOrders = ({ allOrders, user_ID, setAllOrders }) => {
         });
       });
 
-
-
     });
     
 
@@ -62,8 +57,6 @@ const ReservesOrders = ({ allOrders, user_ID, setAllOrders }) => {
   }, [setAllOrders]);
 
   
- 
-
   const StatusBadge = ({ status }) => (
     <div className="absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium
       bg-yellow-100 text-yellow-800"
