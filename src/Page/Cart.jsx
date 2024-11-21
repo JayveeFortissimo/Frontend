@@ -9,32 +9,20 @@ import {
   FiAlertCircle,
   FiShoppingBag,
   FiClock,
-  FiDollarSign,
   FiPackage,
   FiTag
 } from 'react-icons/fi';
 import Carts from '../hooks/Tocart_check.js';
-import Fitting from '../Components/Fitting.jsx';
-import Choose from '../Components/Choose.jsx';
 import Think from '../Components/Think.jsx';
 
 const Cart = () => {
   const { allOrders, removeItems, total } = Carts();
   const navigate = useNavigate();
-  const [openFitting, setOpenFitting] = useState(false);
-  const [openChoose, setOpenChoose] = useState(false);
   const [sure, setSure] = useState(false);
 
   return (
     <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
       {sure && <Think Navigate={navigate} setSure={setSure} />}
-
-      {
-  /*
-  {openChoose && <Choose setOpenFitting={setOpenFitting} setOpenChoose={setOpenChoose} />}
-      {openFitting && <Fitting setOpenFitting={setOpenFitting} />}
-      */
-      }
       
 
       <div className="max-w-7xl mx-auto">
@@ -184,17 +172,7 @@ const Cart = () => {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                  {
-               /*
-               <button 
-                    onClick={() => setOpenChoose(true)}
-                    className="w-full py-4 bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/50  flex items-center justify-center gap-2 font-medium"
-                  >
-                    <FiCalendar className="w-5 h-5" />
-                    Schedule Fitting Appointment
-                  </button>
-              */
-                  }
+               
               
                   <button 
                     onClick={() => navigate('/items')}

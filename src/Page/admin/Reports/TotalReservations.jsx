@@ -122,12 +122,12 @@ const TotalReservations = ({ setTotalReserve, DashInfo }) => {
         checkPageBreak(30);
         
         // Format dates
-        const startDate = new Date(reservation.StartDate).toLocaleDateString('en-US', {
+        const startDate = new Date(reservation.start_Date).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'short',
           day: 'numeric'
         });
-        const returnDate = new Date(reservation.ExpectedReturnDate).toLocaleDateString('en-US', {
+        const returnDate = new Date(reservation.return_Date).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'short',
           day: 'numeric'
@@ -275,13 +275,13 @@ const TotalReservations = ({ setTotalReserve, DashInfo }) => {
                           <div className="flex justify-between">
                             <span className="text-gray-400">Start:</span>
                             <span className="text-gray-300">
-                              {new Date(reservation.StartDate).toLocaleDateString()}
+                              {new Date(reservation.start_Date).toLocaleDateString()}
                             </span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-400">Return:</span>
                             <span className="text-gray-300">
-                              {new Date(reservation.ExpectedReturnDate).toLocaleDateString()}
+                              {new Date(reservation.return_Date).toLocaleDateString()}
                             </span>
                           </div>
                           <div className="flex justify-between">
