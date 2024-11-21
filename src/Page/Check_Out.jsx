@@ -52,7 +52,6 @@ const Check_Out = () => {
         setLoading(true);
         //!I have a probem here
         const email = allDatas[0].email || "No show";
-        console.log(email)
 
         try{
             const response  = await fetch(`http://localhost:8000/ForgotPassword`,{
@@ -93,9 +92,8 @@ const Check_Out = () => {
             ):(<div></div>)
         }
 
-       { confirm && <OTPSecurity setConfirm={setConfirm} setOpenFitting={setOpenFitting}/>  }
+       { confirm && <OTPSecurity setConfirm={setConfirm} setOpenFitting={setOpenFitting} ConfirmationReserve={ConfirmationReserve}/>  }
      
-        {/*!WAIT PA D2 SA APOOINTTTMENTTTTTTTTTT&                   E2 kyung Function to checkout   */}   
        {openFitting && <Fitting setOpenFitting={setOpenFitting} setFinalQR={setFinalQR} />}
 
         {FinalQR && <QRGenerator allOrders = {allOrders} CheckOUtss={CheckOUtss} TotalsAll={TotalsAll} allDatas={allDatas}/>}

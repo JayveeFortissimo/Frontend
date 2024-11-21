@@ -19,9 +19,9 @@ const Login = () => {
 
       {resetPass &&  <ResetPassword setResetpass={setResetpass}/>}
   
-       {/*!WAIT PA D@ BALAK KO SANA LAGAY SA LOCAL STORAGE E2 */}
        {openOTP && <OTPcode setOtp={setOtp} setResetpass={setResetpass}/>}
     {openModal && <ForgotPassword setOpenModal={setOpenModal} setOtp={setOtp}/>}
+    
    <section className="min-h-[40rem] flex items-center justify-center bg-white p-4">
       {/* Background animation circles */}
       <div className="absolute inset-0 overflow-hidden">

@@ -114,10 +114,6 @@ const OTPcode = ({setOtp,setResetpass}) => {
               Verify Code
             </button>
 
-            {/* Resend Option */}
-            <button className="w-full text-sm text-gray-500 hover:text-gray-700 transition-colors">
-              Didn't receive code? Resend
-            </button>
           </div>
         </div>
       </div>

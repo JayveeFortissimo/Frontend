@@ -2,7 +2,7 @@ import  { useState, useRef, useEffect } from 'react';
 import { VscChromeClose } from "react-icons/vsc";
 import toast from 'react-hot-toast';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-const OTPSecurity = ({setConfirm, setOpenFitting}) => {
+const OTPSecurity = ({setConfirm, setOpenFitting, ConfirmationReserve}) => {
 
     const [otp, setOtps] = useState(['', '', '', '', '']);
     const inputRefs = useRef([]);
@@ -137,7 +137,9 @@ const OTPSecurity = ({setConfirm, setOpenFitting}) => {
           </button>
 
           {/* Resend Option */}
-          <button className="w-full text-sm text-gray-500 hover:text-gray-700 transition-colors">
+          <button 
+          onClick={(e)=> ConfirmationReserve(e)}
+          className="w-full text-sm text-gray-500 hover:text-gray-700 transition-colors">
             Didn't receive code? Resend
           </button>
         </div>
