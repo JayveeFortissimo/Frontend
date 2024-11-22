@@ -108,7 +108,6 @@ const removeItems = async(id) =>{
 
  const items  = allOrders.filter(pro => pro.id !== id);
   
-     
     setTimeout(()=>{
       toast.success("Item DEleted Successfully")
       setAllOrders(items)
@@ -133,10 +132,10 @@ const removeItems = async(id) =>{
 
 
 
-   // FOR Total Quantity
+
    useEffect(()=>{
     async function Totals(){
-   //!BAKA MAG KA ERROR
+
       if(user_ID === null) {
         console.log("LOGIN FIRSTTT")
       }else{

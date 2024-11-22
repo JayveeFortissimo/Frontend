@@ -20,6 +20,9 @@ const Cart = () => {
   const navigate = useNavigate();
   const [sure, setSure] = useState(false);
 
+  //!ALLTOTALS HERE
+  const allTotal = allOrders.reduce((a,b) => a + parseInt(b.subTotal),0);
+
   return (
     <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
       {sure && <Think Navigate={navigate} setSure={setSure} />}
@@ -182,9 +185,8 @@ const Cart = () => {
                     Continue Shopping
                   </button>
 
-
                   <button 
-                    onClick={() => total === null ? toast.error("Please add items to cart first") : setSure(true)}
+                    onClick={() => allTotal === null ? toast.error("Please add items to cart first") : setSure(true)}
                     className="w-full py-4 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all duration-300 transform hover:scale-102 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 font-medium"
                   >
                     <FiShoppingCart className="w-5 h-5" />
