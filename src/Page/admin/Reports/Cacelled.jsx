@@ -220,7 +220,11 @@ const generatePDF = () => {
                     <h3 className="text-lg font-bold text-white">{item.Name}</h3>
                     <p className="text-sm text-white">Order ID: ORD-2024-{item.id}</p>
                     <p className="text-sm  text-white">Customer Name: <span className='text-green-600'>{item.name}</span></p>
-                    
+                    <p className="text-sm text-white">Price: <span className='text-green-600'>{item.sub_Total}</span></p>
+                    <p className="text-sm text-white">Date of Cancellation: <span className='text-green-600'>
+                    {new Date(item.Today).toLocaleDateString()}
+                    </span></p>
+
                     <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
                       <div>
                         <p className="text-gray-500">Items</p>

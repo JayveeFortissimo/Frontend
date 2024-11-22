@@ -10,6 +10,8 @@ const Items_Approved = (orders, setOrders, userID) =>{
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const date2 = new Date();
+
   useEffect(() => {
     const socket = io('http://localhost:8000');
     
@@ -113,7 +115,8 @@ const DELETE = async(e,pro) =>{
                size:pro.size,
                id:pro.id,
                code:pro.code,
-               sub_Total:pro.subTotal
+               sub_Total:pro.subTotal,
+               Today:new Date(Date.UTC(new Date(date2).getFullYear(), new Date(date2).getMonth(), new Date(date2).getDate())).toISOString().split('T')[0]
            }),
            headers:{
                'Content-Type':'application/json'

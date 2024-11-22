@@ -20,7 +20,6 @@ const profileDetails = (SizeName) =>{
 
     const [time, setTime] = useState('');
     const date2 = new Date();
-    // Extract date
   const year = date2.getFullYear();
   const month = (date2.getMonth() + 1).toString().padStart(2, '0'); 
   const day = date2.getDate().toString().padStart(2, '0');
@@ -28,9 +27,9 @@ const profileDetails = (SizeName) =>{
   const dates = new Date(formattedDate)
 
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
-const Starto =  dates.toLocaleDateString('en-US', options);
+  const Starto =  dates.toLocaleDateString('en-US', options);
 
-const socket = useRef(null);
+  const socket = useRef(null);
 
   //For time
   //!ARALIN MO TO
@@ -156,7 +155,8 @@ const PushToHistoryCancel = async(e) =>{
                size:dataOut.size,
                id:dataOut.id,
                code:dataOut.code,
-               sub_Total:dataOut.sub_Total
+               sub_Total:dataOut.sub_Total,
+               Today:new Date(Date.UTC(new Date(date2).getFullYear(), new Date(date2).getMonth(), new Date(date2).getDate())).toISOString().split('T')[0]
            }),
            headers:{
                'Content-Type':'application/json'
