@@ -8,13 +8,12 @@ import NumbersOfUsers from './Reports/NumberofUsers';
 import TotalGowns from './Reports/TotalGowns';
 import HavePenaltys from './Reports/Cacelled';
 import ReservesToday from './Reports/ReservesToday';
+import PieCharts from './Reports/PieCharts';
 import io from 'socket.io-client';
 import jsPDF from 'jspdf';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { IoIosToday } from "react-icons/io";
 import AdminProfile from '../../hooks/AdminHooks/AdminProfile';
-
-//For Dashboard CustomHooks
 import Dashboards from '../../hooks/AdminHooks/Dasboards';
 
 const Dashboard = () => {
@@ -23,14 +22,11 @@ const Dashboard = () => {
 
  //!THI IS HOOKS 
   const {profile} = AdminProfile();
-  const { TodaysRented , RentedGowns,  setTodaysRented, setRentedGowns} = Dashboards();
-
-  console.log(TodaysRented);
+  const { TodaysRented , RentedGowns, pieChart,  setTodaysRented, setRentedGowns} = Dashboards();
 
    const [filteredData, setFilteredData] = useState([]);
    const [selectedMonth, setSelectedMonth] = useState('All Months');
 
-   
     const [Cancelled,setCancelled] = useState(DashInfo.data6);
     const [notifications, setNotifications] = useState(false);
 
@@ -50,14 +46,12 @@ const Dashboard = () => {
         console.log(data)
        
         setTodaysRented(prevOrders => {
-          // Ensure `prevOrders` has the correct structure
           if (!prevOrders || typeof prevOrders.reservations === 'undefined') {
             prevOrders = { totalReservations: 0, reservations: [] };
           }
 
           const quantitySum = data.checkouts.reduce((total, item) => total + (item.quantity || 0), 0);
 
-      
           return {
             ...prevOrders,
             reservations: [...prevOrders.reservations, ...data.checkouts],
@@ -67,6 +61,7 @@ const Dashboard = () => {
 
 
         setRentedGowns(prevOrders => {
+          console.log(data)
           if (!prevOrders || typeof prevOrders.reservations === 'undefined') {
             prevOrders = { totalReservations: 0, reservations: [] };
           }
@@ -116,7 +111,8 @@ const Dashboard = () => {
     HavePenaltys: false,
     Notifs: false,
     PaymentMethods:false,
-    ReservesTodays:false
+    ReservesTodays:false,
+    Piechar:false
   });
 
  
@@ -416,7 +412,7 @@ const Dashboard = () => {
       value: null,
       icon: <IoIosPie size={24}/>,
       gradient: "from-red-500 to-pink-600",
-      onClick: () => console.log("Hellow PO")
+      onClick: () =>  setTotalReserve(prev => ({ ...prev, Piechar: true }))
     },
 
   ];
@@ -425,6 +421,9 @@ const Dashboard = () => {
 
   return (
     <>
+    
+    {openTotalReserve.Piechar && <PieCharts setTotalReserve={setTotalReserve} pieChart={pieChart}/>}
+
       {openTotalReserve.ReservesTodays &&  <ReservesToday setTotalReserve={setTotalReserve} DashInfo={TodaysRented.reservations}/>}
     
       {openTotalReserve.Notifs && <Notif setTotalReserve={setTotalReserve} setNotifications={setNotifications}/>}

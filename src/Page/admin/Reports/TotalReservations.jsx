@@ -6,7 +6,6 @@ import AdminProfile from '../../../hooks/AdminHooks/AdminProfile.js';
 const TotalReservations = ({ setTotalReserve, DashInfo }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const {profile} = AdminProfile();
-  console.log(DashInfo)
   
   const groupedReservations = useMemo(() => {
     return DashInfo.reduce((acc, reservation) => {
