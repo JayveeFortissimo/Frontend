@@ -280,7 +280,7 @@ const referralLink = userProfile.length > 0
             <ActivityTab 
               icon={VscPackage}
               label="For Approval"
-              count={allOrders?.length}
+              count={0}
               isActive={isReserveOrders === "Reserve"}
               onClick={() => dispatch(Sidebars.Activity("Reserve"))}
             />
