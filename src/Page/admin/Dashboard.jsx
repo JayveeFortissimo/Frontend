@@ -53,10 +53,15 @@ const Dashboard = () => {
   });
 
   setRentedGowns(prevOrders => {
+    if (!prevOrders || typeof prevOrders.reservations === 'undefined') {
+      prevOrders = { totalReservations: 0, reservations: [] };
+    }
+
     const quantitySum = data.checkouts.reduce((total, item) => total + (item.quantity || 0), 0);
     return {
-      reservations: [...(prevOrders?.reservations || []), ...data.checkouts], 
-      totalReservations: quantitySum
+      ...prevOrders,
+      reservations: [...prevOrders.reservations, ...data.checkouts],
+      totalReservations: parseInt(prevOrders.totalReservations) + quantitySum
     };
   });
         
