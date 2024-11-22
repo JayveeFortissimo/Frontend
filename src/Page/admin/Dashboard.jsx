@@ -43,37 +43,22 @@ const Dashboard = () => {
       });
         
       socket.on('newCheckOut', (data) => {
-        console.log(data)
-       
-        setTodaysRented(prevOrders => {
-          if (!prevOrders || typeof prevOrders.reservations === 'undefined') {
-            prevOrders = { totalReservations: 0, reservations: [] };
-          }
 
-          const quantitySum = data.checkouts.reduce((total, item) => total + (item.quantity || 0), 0);
+  setTodaysRented(prevOrders => {
+    const quantitySum = data.checkouts.reduce((total, item) => total + (item.quantity || 0), 0);
+    return {
+      reservations: [...(prevOrders?.reservations || []), ...data.checkouts],
+      totalReservations: parseInt(prevOrders?.totalReservations || 0) + quantitySum
+    };
+  });
 
-          return {
-            ...prevOrders,
-            reservations: [...prevOrders.reservations, ...data.checkouts],
-            totalReservations: parseInt(prevOrders.totalReservations) + quantitySum
-          };
-        });
-
-
-        setRentedGowns(prevOrders => {
-          console.log(data)
-          if (!prevOrders || typeof prevOrders.reservations === 'undefined') {
-            prevOrders = { totalReservations: 0, reservations: [] };
-          }
-
-          const quantitySum = data.checkouts.reduce((total, item) => total + (item.quantity || 0), 0);
-          return {
-            ...prevOrders,
-            reservations: [...prevOrders.reservations, ...data.checkouts],
-            totalReservations: parseInt(prevOrders.totalReservations) + quantitySum
-          };
-        });
-        
+  setRentedGowns(prevOrders => {
+    const quantitySum = data.checkouts.reduce((total, item) => total + (item.quantity || 0), 0);
+    return {
+      reservations: [...(prevOrders?.reservations || []), ...data.checkouts], 
+      totalReservations: quantitySum
+    };
+  });
         
       });
 
@@ -363,8 +348,6 @@ const Dashboard = () => {
   doc.save('Gown_Rental_Report.pdf');
 };
 
-
-
  
   const cardData = [
 
@@ -428,7 +411,7 @@ const Dashboard = () => {
     
       {openTotalReserve.Notifs && <Notif setTotalReserve={setTotalReserve} setNotifications={setNotifications}/>}
     
-      {openTotalReserve.TotalReserves && <TotalReservations setTotalReserve={setTotalReserve} DashInfo={DashInfo.data3.reservations} />}
+      {openTotalReserve.TotalReserves && <TotalReservations setTotalReserve={setTotalReserve} DashInfo={RentedGowns.reservations} />}
    
       {openTotalReserve.TotalGowns && <TotalGowns setTotalReserve={setTotalReserve} DashInfo={DashInfo.data1.INFO} />}
       
