@@ -157,7 +157,7 @@ const Cart = () => {
                   <div className="flex justify-between items-center">
                     <span className="text-xl font-semibold text-gray-900">Total Amount</span>
                     <span className="text-3xl font-bold text-violet-600">
-                      ₱{total?.toLocaleString('en-US') ?? '0'}
+                      ₱{allTotal?.toLocaleString('en-US') ?? '0'}
                     </span>
                   </div>
                 </div>
