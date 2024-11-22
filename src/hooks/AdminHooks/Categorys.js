@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 const Categorys = () =>{
 
     const [allData, setAlldatas] = useState({

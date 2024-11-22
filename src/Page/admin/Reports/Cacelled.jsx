@@ -8,7 +8,6 @@ const HavePenaltys = ({ setTotalReserve, DashInfo}) => {
   const {profile} = AdminProfile();
   const Reason = useRef('');
 
-
 const generatePDF = () => {
   const doc = new jsPDF();
   const pageWidth = doc.internal.pageSize.width;

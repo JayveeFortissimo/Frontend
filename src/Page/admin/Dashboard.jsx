@@ -26,8 +26,6 @@ const Dashboard = () => {
 
    const [filteredData, setFilteredData] = useState([]);
    const [selectedMonth, setSelectedMonth] = useState('All Months');
-
-
     const [notifications, setNotifications] = useState(false);
 
   
@@ -67,9 +65,32 @@ const Dashboard = () => {
         
       });
 
+
+      socket.on('canceled', (data) => {
+        setCancels((prevOrders) => {
+
+          const updatedCancelledDetails = Array.isArray(prevOrders.cancelledDetails) 
+            ? prevOrders.cancelledDetails 
+            : [];
+          
+          return {
+            ...prevOrders,
+            cancelledDetails: [...updatedCancelledDetails, data]
+          };
+        });
+  
+        setCancels((prevOrders) => ({
+          ...prevOrders,
+          totalCancelled: parseInt(prevOrders.totalCancelled) + data.quantity
+        }));
+        
+      });
+      
+
       return () => {
         socket.off('bellsDash');
         socket.off('newCheckOut');
+        socket.off('canceled');
         socket.disconnect();
       };
   
