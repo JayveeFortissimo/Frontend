@@ -69,9 +69,6 @@ const Items_Approved = (orders, setOrders, userID) =>{
 
 
 
-//!DEcline Cancellations Here
-
-
 const DELETE = async(e,pro) =>{
   e.preventDefault();
 
