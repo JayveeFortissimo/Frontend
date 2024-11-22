@@ -4,7 +4,8 @@ const Dashboards = () =>{
 
 const [TodaysRented, setTodaysRented] = useState([]);
 const [RentedGowns, setRentedGowns] = useState([]);
-const [pieChart, setPiechar] = useState([])
+const [pieChart, setPiechar] = useState([]);
+const [cancels,setCancels] = useState([]);
 
 useEffect(() =>{
 async function TodaysRented() {
@@ -58,6 +59,35 @@ useEffect(() =>{
   },[]);
 
 
+
+
+  useEffect(() =>{
+    async function Cancellation() {
+        
+      try{
+        const response = await fetch(`http://localhost:8000/AllCancelled`,{
+            method:'GET',
+            headers:{
+                'Content-Type':'application/json'
+            }
+        });
+    
+        const datas = await response.json();
+        console.log("Cancellations: ",datas)
+        setCancels(datas);
+         
+      }catch(error){
+        console.log(error);
+      }
+    
+    };
+    
+    Cancellation();
+
+    },[]);
+
+
+
   useEffect(() =>{
     async function PieChart() {
         
@@ -88,7 +118,9 @@ return{
     RentedGowns,
     setTodaysRented,
     setRentedGowns,
-    pieChart
+    pieChart,
+    cancels,
+    setCancels
 }
 
 

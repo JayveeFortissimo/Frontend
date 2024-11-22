@@ -22,12 +22,12 @@ const Dashboard = () => {
 
  //!THI IS HOOKS 
   const {profile} = AdminProfile();
-  const { TodaysRented , RentedGowns, pieChart,  setTodaysRented, setRentedGowns} = Dashboards();
+  const { TodaysRented , RentedGowns, pieChart, cancels ,  setTodaysRented, setRentedGowns, setCancels} = Dashboards();
 
    const [filteredData, setFilteredData] = useState([]);
    const [selectedMonth, setSelectedMonth] = useState('All Months');
 
-    const [Cancelled,setCancelled] = useState(DashInfo.data6);
+
     const [notifications, setNotifications] = useState(false);
 
   
@@ -389,7 +389,7 @@ const Dashboard = () => {
     },
     {
       title: "Cancelled Reserved",
-      value: DashInfo.data6.totalCancelled,
+      value: cancels.totalCancelled,
       icon: <VscOutput size={24} />,
       gradient: "from-pink-500 to-pink-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, HavePenaltys: true }))
@@ -422,7 +422,7 @@ const Dashboard = () => {
       
       {openTotalReserve.NumbersOfUsers && <NumbersOfUsers setTotalReserve={setTotalReserve} DashInfo={DashInfo.data4.users} />}
 
-      {openTotalReserve.HavePenaltys && <HavePenaltys setTotalReserve={setTotalReserve} DashInfo={Cancelled} setCancelled={setCancelled} />}
+      {openTotalReserve.HavePenaltys && <HavePenaltys setTotalReserve={setTotalReserve} DashInfo={cancels} />}
  
 
       <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
@@ -544,11 +544,8 @@ export const Dash = async() => {
   try {
     const endpoints = [
       'numberOfItems',
-      'totalReserves',
       'totalUsers',
-      'AllCancelled',
       'AllTrends',
-      'Today'
     ];
 
     const responses = await Promise.all(
@@ -564,21 +561,14 @@ export const Dash = async() => {
 
     const [
       dataTotalItems,
-      dataReserves,
       NumbersOfUsers,
-      AllCacelled,
       TrendsAll,
-      Today
     ] = await Promise.all(responses.map(response => response.json()));
 
     return {
       data1: dataTotalItems,
-      data3: dataReserves,
       data4: NumbersOfUsers,
-   
-      data6: AllCacelled,
       data7: TrendsAll,
-      data9: Today
     };
   } catch (error) {
     console.log(error);

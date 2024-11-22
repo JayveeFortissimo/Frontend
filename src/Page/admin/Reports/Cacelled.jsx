@@ -1,36 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { VscChromeClose } from "react-icons/vsc";
 import jsPDF from 'jspdf';
-import toast from 'react-hot-toast';
-import io  from 'socket.io-client';
 import AdminProfile from '../../../hooks/AdminHooks/AdminProfile.js';
 
-const HavePenaltys = ({ setTotalReserve, DashInfo, setCancelled}) => {
+const HavePenaltys = ({ setTotalReserve, DashInfo}) => {
 
   const {profile} = AdminProfile();
   const Reason = useRef('');
-
-useEffect(() => {
-  const socket = io('http://localhost:8000');
-
-  socket.on('statusUpdated', (data) => {
-      console.log("Received status update:", data);
-      toast.success(`Status for item ${data.id} updated to ${data.status}`);
-      
-      setCancelled(prevCancelled => ({
-        ...prevCancelled,
-        cancelledDetails: prevCancelled.cancelledDetails.map(item => 
-            item.id === data.id ? { ...item, status: data.status } : item
-        )
-    }));
-   
-
-  });
-
-  return () => {
-      socket.off('statusUpdated');
-  };
-}, []);
 
 
 const generatePDF = () => {
