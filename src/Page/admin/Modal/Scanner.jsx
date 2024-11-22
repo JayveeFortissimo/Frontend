@@ -7,9 +7,9 @@ import { Sidebars } from "../../../Store/Side.js";
 import { useDispatch } from 'react-redux';
 import ReturnITEMS from '../../../hooks/AdminHooks/UserReturned.js';
 
-const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID }) => {
+const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID, userEmail }) => {
  
-  const { pushAutoMatically } = ReturnITEMS( toReturn , setToReturn);
+  const { pushAutoMatically } = ReturnITEMS( toReturn , setToReturn, userEmail);
 
    const dispatch = useDispatch();
 

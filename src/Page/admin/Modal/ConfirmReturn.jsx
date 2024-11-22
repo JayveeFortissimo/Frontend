@@ -3,9 +3,9 @@ import ReturnITEMS from '../../../hooks/AdminHooks/UserReturned.js';
 import { Sidebars } from "../../../Store/Side.js";
 import { useDispatch } from 'react-redux';
 
-const ConfirmReturn = ({ setOpenConfirmation, Info, setToReturn, toReturn }) => {
+const ConfirmReturn = ({ setOpenConfirmation, Info, setToReturn, toReturn, userEmail }) => {
 
-  const { PushHistory, PushHistoryNoQRCODE } = ReturnITEMS(setToReturn, toReturn);
+  const { PushHistory, PushHistoryNoQRCODE } = ReturnITEMS(setToReturn, toReturn, userEmail);
   const dispatch = useDispatch();
 
   return (

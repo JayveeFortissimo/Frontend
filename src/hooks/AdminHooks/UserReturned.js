@@ -2,12 +2,11 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import io from 'socket.io-client';
 
-const userReturnedItems = (setToReturn, toReturn) => {
+const userReturnedItems = (setToReturn, toReturn, userEmail) => {
 
     useEffect(() => {
        
         const socket = io('http://localhost:8000'); 
-
         socket.on('itemRemoved', (id) => {
             console.log(id);
             console.log(toReturn)
@@ -41,10 +40,34 @@ const userReturnedItems = (setToReturn, toReturn) => {
     };
 
 
+
+
+   const MessageThankyou = async() =>{
+
+  try{
+  const response  = await fetch(`http://localhost:8000/thankyou`,{
+    method:"POST",
+    headers:{
+        'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+        email:userEmail
+    })
+  })
+
+  if(!response.ok) return console.log("Cannot Send Emails");
+
+  }catch(error){
+   console.log(error);
+  }
+
+   }
+
+
     const PushHistory = async (e, pro) => {
         e.preventDefault();
 
-        console.log("IDS" , pro.ID)
+        MessageThankyou();
         Remove(pro.returnID);
 
         toast.success("USER RETURNED THE ITEMS");
@@ -82,7 +105,8 @@ const userReturnedItems = (setToReturn, toReturn) => {
  
 
     const pushAutoMatically = async(qrCodeData) =>{
-       
+         
+        MessageThankyou();
         Remove(qrCodeData.returnID);
        toast.success("USER RETURNED THE ITEMS");
   
@@ -122,7 +146,8 @@ const userReturnedItems = (setToReturn, toReturn) => {
 
     const PushHistoryNoQRCODE = async (e, pro) => {
         e.preventDefault();
-
+        
+        MessageThankyou();
         Remove(pro.returnID);
 
         toast.success("USER RETURNED THE ITEMS");
