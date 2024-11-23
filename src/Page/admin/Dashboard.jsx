@@ -19,7 +19,7 @@ import Dashboards from '../../hooks/AdminHooks/Dasboards';
 const Dashboard = () => {
 
   const DashInfo = useLoaderData();
-
+      console.log(DashInfo)
  //!THI IS HOOKS 
   const {profile} = AdminProfile();
   const { TodaysRented , RentedGowns, pieChart, cancels ,  setTodaysRented, setRentedGowns, setCancels} = Dashboards();
@@ -203,7 +203,7 @@ const Dashboard = () => {
   doc.setFontSize(11);
   doc.setFont(undefined, 'normal');
   const summaryData = [
-    `Total Gowns Rented: ${DashInfo.data3.totalReservations}`,
+    `Total Gowns Rented: ${RentedGowns.totalReservations}`,
     `Available Gowns: ${DashInfo.data1.SumAll.totalQuantity}`,
     `Number of Users: ${DashInfo.data4.totalUser}`
   ];
@@ -242,9 +242,7 @@ const Dashboard = () => {
   });
 
   // Financial Information
-  doc.text(`Total Canceled Reservations: ${DashInfo.data6.totalCancelled}`, 15, yPosition + 8);
-  doc.text(`Current Month Revenue: ₱${DashInfo.data5.AllTotal.toLocaleString()}`, 15, yPosition + 16);
-  doc.text(`All-Time Revenue: ₱${DashInfo.data5.AllTotal.toLocaleString()}`, 15, yPosition + 24);
+  doc.text(`Total Canceled Reservations: ${cancels.totalCancelled}`, 15, yPosition + 8);
 
   // Recent Reservations
   yPosition += 50;
@@ -283,7 +281,7 @@ const Dashboard = () => {
     return Object.values(grouped);
   };
 
-  const groupedReservations = groupReservationsByCustomer(DashInfo.data9.reservations);
+  const groupedReservations = groupReservationsByCustomer(RentedGowns.reservations);
 
   groupedReservations.forEach((customer) => {
     checkPageBreak(45);
@@ -315,16 +313,16 @@ const Dashboard = () => {
     doc.setFontSize(10);
     doc.text(`${startDate} - ${returnDate}`, 15, yPosition + 16);
     
-    // Status with color-coding - FIXED VERSION
+    
     if (customer.status === 'Approved') {
-        doc.setTextColor(0, 128, 0);  // Green for approved
+        doc.setTextColor(0, 128, 0);  
     } else {
-        doc.setTextColor(0, 0, 0);    // Black for other statuses
+        doc.setTextColor(0, 0, 0);  
     }
     doc.text(`Status: ${customer.status}`, pageWidth - 85, yPosition + 8);
-    doc.setTextColor(0, 0, 0); // Reset to black
+    doc.setTextColor(0, 0, 0); 
     
-    // List all items
+
     doc.setFont(undefined, 'normal');
     customer.items.forEach((item, index) => {
       doc.text(`• ${item.productName} (Qty: ${item.quantity})`, 20, yPosition + 24 + (index * 8));
@@ -332,7 +330,7 @@ const Dashboard = () => {
     
     yPosition += 30 + (customer.items.length * 8);
 });
-  // Canceled Reservations
+ 
   checkPageBreak(40);
   yPosition += 10;
   doc.setFontSize(14);
@@ -348,7 +346,7 @@ const Dashboard = () => {
   doc.setFontSize(11);
   doc.setFont(undefined, 'normal');
   
-  DashInfo.data6.cancelledDetails.forEach((cancel) => {
+  cancels.cancelledDetails.forEach((cancel) => {
     checkPageBreak(15);
     const cancelText = `• ${cancel.Name} - ₱${cancel.Price.toLocaleString()} (${new Date(cancel.start_Date).toLocaleDateString()})`;
     doc.text(cancelText, 15, yPosition);
