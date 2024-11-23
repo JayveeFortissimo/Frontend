@@ -42,7 +42,7 @@ const Appointment = () =>{
    useEffect(()=>{
 
 
-     const socket = io.connect('http://localhost:8000'); // Use your server's URL
+     const socket = io.connect('http://localhost:8000'); 
 
     async function ALLappointment(){
 

@@ -19,7 +19,7 @@ import Dashboards from '../../hooks/AdminHooks/Dasboards';
 const Dashboard = () => {
 
   const DashInfo = useLoaderData();
-      console.log(DashInfo)
+   
  //!THI IS HOOKS 
   const {profile} = AdminProfile();
   const { TodaysRented , RentedGowns, pieChart, cancels ,  setTodaysRented, setRentedGowns, setCancels} = Dashboards();

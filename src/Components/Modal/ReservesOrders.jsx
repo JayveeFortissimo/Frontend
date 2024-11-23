@@ -46,11 +46,22 @@ const ReservesOrders = ({ allOrders, user_ID, setAllOrders }) => {
       });
 
     });
+
+    //!May Problem pa d2
+    socket.on('CancelAppountment', (element) => {
+      console.log(element)
+      console.log(allOrders)
+      setAllOrders((prevItems) => {
+        return prevItems.filter(item => item.user_ID !== element.id);
+      });
+
+    });
     
 
     return () => {
       socket.off('connect');
       socket.off('EditStatus');
+      socket.off('CancelAppountment');
       socket.disconnect();
   
     };
