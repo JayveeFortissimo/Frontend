@@ -19,10 +19,20 @@ import Dashboards from '../../hooks/AdminHooks/Dasboards';
 const Dashboard = () => {
 
   const DashInfo = useLoaderData();
-   
+
  //!THI IS HOOKS 
   const {profile} = AdminProfile();
-  const { TodaysRented , RentedGowns, pieChart, cancels ,  setTodaysRented, setRentedGowns, setCancels} = Dashboards();
+  const { TodaysRented ,
+          RentedGowns, 
+          pieChart,
+           cancels ,
+           AllGraph,
+           setTodaysRented,
+            setRentedGowns,
+             setCancels,
+              setPiechar,
+              setGraph
+            } = Dashboards();
 
    const [filteredData, setFilteredData] = useState([]);
    const [selectedMonth, setSelectedMonth] = useState('All Months');
@@ -85,12 +95,24 @@ const Dashboard = () => {
         }));
         
       });
-      
 
+
+      socket.on('piecharizz', (data) =>{
+        setPiechar(data.pieChartData)
+      })
+
+      /*
+      socket.on('reservationTrendsUpdate', (data) =>{
+        setGraph(data.trends)
+      })
+      
+*/
       return () => {
         socket.off('bellsDash');
         socket.off('newCheckOut');
         socket.off('canceled');
+        socket.off('piecharizz');
+       // socket.off('reservationTrendsUpdate');
         socket.disconnect();
       };
   
@@ -100,16 +122,16 @@ const Dashboard = () => {
   const filterData = (month) => {
     let filtered;
     if (month === 'All Months') {
-      filtered = DashInfo.data7;
+      filtered = AllGraph;
     } else {
-      filtered = DashInfo.data7.filter(item => item.Date === month);
+      filtered = AllGraph.filter(item => item.Date === month);
     }
     setFilteredData(filtered.map(item => ({ name: item.Date, reservations: item.total_count })));
   };
 
   useEffect(() => {
     filterData(selectedMonth);
-  }, [selectedMonth, DashInfo.data7]);
+  }, [selectedMonth, AllGraph]);
 
   const handleMonthChange = (event) => {
     setSelectedMonth(event.target.value);
@@ -564,7 +586,6 @@ export const Dash = async() => {
     const endpoints = [
       'numberOfItems',
       'totalUsers',
-      'AllTrends',
     ];
 
     const responses = await Promise.all(
@@ -581,13 +602,11 @@ export const Dash = async() => {
     const [
       dataTotalItems,
       NumbersOfUsers,
-      TrendsAll,
     ] = await Promise.all(responses.map(response => response.json()));
 
     return {
       data1: dataTotalItems,
       data4: NumbersOfUsers,
-      data7: TrendsAll,
     };
   } catch (error) {
     console.log(error);

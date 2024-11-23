@@ -8,8 +8,6 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
        
         const socket = io('http://localhost:8000'); 
         socket.on('itemRemoved', (id) => {
-            console.log(id);
-            console.log(toReturn)
             const filtered = toReturn.filter(pro => pro.id !== id);
             setToReturn(filtered);
             toast.success(`Item with ID ${id} has been removed`);

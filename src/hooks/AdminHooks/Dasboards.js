@@ -6,6 +6,7 @@ const [TodaysRented, setTodaysRented] = useState([]);
 const [RentedGowns, setRentedGowns] = useState([]);
 const [pieChart, setPiechar] = useState([]);
 const [cancels,setCancels] = useState([]);
+const [AllGraph, setGraph] = useState([]);
 
 useEffect(() =>{
 async function TodaysRented() {
@@ -18,7 +19,6 @@ async function TodaysRented() {
     });
 
     const datas = await response.json();
-    console.log("Today: ", datas)
      setTodaysRented(datas);
      
   }catch(error){
@@ -45,7 +45,6 @@ useEffect(() =>{
       });
   
       const datas = await response.json();
-      console.log("Total: ", datas)
       setRentedGowns(datas);
        
     }catch(error){
@@ -71,7 +70,6 @@ useEffect(() =>{
         });
     
         const datas = await response.json();
-        console.log("Cancellations: ",datas)
         setCancels(datas);
          
       }catch(error){
@@ -98,7 +96,7 @@ useEffect(() =>{
         });
     
         const datas = await response.json();
-      
+        console.log("Emiter: ", datas)
         setPiechar(datas);
          
       }catch(error){
@@ -111,6 +109,35 @@ useEffect(() =>{
     
     },[]);
 
+
+
+
+
+    useEffect(() =>{
+      async function Graph() {
+          
+        try{
+          const response = await fetch(`http://localhost:8000/AllTrends`,{
+              method:'GET',
+              headers:{
+                  'Content-Type':'application/json'
+              }
+          });
+      
+          const datas = await response.json();
+          console.log("Garaph: ", datas)
+          setGraph(datas);
+           
+        }catch(error){
+          console.log(error);
+        }
+      
+      };
+      
+      Graph();
+      
+      },[]);
+
 return{
     TodaysRented,
     RentedGowns,
@@ -118,7 +145,10 @@ return{
     setRentedGowns,
     pieChart,
     cancels,
-    setCancels
+    setCancels,
+    setPiechar,
+    AllGraph,
+     setGraph
 }
 
 
