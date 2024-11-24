@@ -96,7 +96,6 @@ useEffect(() =>{
         });
     
         const datas = await response.json();
-        console.log("Emiter: ", datas)
         setPiechar(datas);
          
       }catch(error){
@@ -125,7 +124,6 @@ useEffect(() =>{
           });
       
           const datas = await response.json();
-          console.log("Garaph: ", datas)
           setGraph(datas);
            
         }catch(error){

@@ -8,7 +8,6 @@ import { FaCalendarAlt, FaStore } from "react-icons/fa";
 import { RiGpsFill } from "react-icons/ri";
 import io from 'socket.io-client';
 import toast from 'react-hot-toast';
-import jsPDF from 'jspdf';
 import {Sidebars} from '../../Store/Side.js';
 import {useDispatch} from 'react-redux'
 
@@ -44,34 +43,9 @@ const History = ({ user_ID }) => {
 
         return () => {
             socket.off('pickup-status-updated');
-            //!E2 Binago ko
             socket.disconnect();
         };
     }, [setAllDatas]);
-
-    const generatePDF = () => {
-        const doc = new jsPDF();
-        doc.setFontSize(20);
-        doc.text('YOUR RESERVED ITEMS REPORT', 10, 10);
-        doc.setFontSize(12);
-        doc.text('Summary:', 10, 20);
-        doc.text('---------------------------------', 10, 25);
-
-        let yOffset = 35;
-
-        allDatas.forEach((pro, index) => {
-            doc.text(`ITEM ${index + 1}:`, 10, yOffset);
-            doc.text(`Product Name: ${pro.product_Name}`, 15, yOffset + 5);
-            doc.text(`Quantity: ${pro.quantity}`, 15, yOffset + 10);
-            doc.text(`Start Date: ${pro.start_Date}`, 15, yOffset + 15);
-            doc.text(`Return Date: ${pro.return_Date}`, 15, yOffset + 20);
-            doc.text(`Pickup Status: ${pro.Pickuped}`, 15, yOffset + 25);
-            doc.text('---------------------------------', 10, yOffset + 30);
-            yOffset += 40;
-        });
-
-        doc.save('reservation-report.pdf');
-    };
 
     
   // Filter to show only Approved items
@@ -93,15 +67,6 @@ const History = ({ user_ID }) => {
 
             <div className="mb-8 flex justify-between items-center">
                 <h2 className="text-xl font-bold text-gray-800">Reservation History</h2>
-                {displayItems.length > 0 && (
-                    <button
-                        onClick={generatePDF}
-                        className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-                    >
-                        <HiOutlineDocumentDownload className="text-xl" />
-                        Download Report
-                    </button>
-                )}
             </div>
 
             <div className="space-y-6">

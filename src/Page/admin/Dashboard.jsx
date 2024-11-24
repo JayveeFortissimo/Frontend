@@ -38,7 +38,6 @@ const Dashboard = () => {
    const [selectedMonth, setSelectedMonth] = useState('All Months');
     const [notifications, setNotifications] = useState(false);
 
-  
     useEffect(() =>{
       const socket = io('http://localhost:8000');
   
@@ -77,8 +76,10 @@ const Dashboard = () => {
 
 
       socket.on('canceled', (data) => {
+        
         setCancels((prevOrders) => {
-
+        console.log("Samay Array", prevOrders)
+        console.log("ArrayData: ", data)
           const updatedCancelledDetails = Array.isArray(prevOrders.cancelledDetails) 
             ? prevOrders.cancelledDetails 
             : [];
@@ -93,9 +94,73 @@ const Dashboard = () => {
           ...prevOrders,
           totalCancelled: parseInt(prevOrders.totalCancelled) + data.quantity
         }));
+
+          setTodaysRented((prevOrders) => {
+            
+            const currentReservations = Array.isArray(prevOrders.reservations)
+              ? [...prevOrders.reservations] 
+              : [];
+            
+            const findByUserIdAndItemId = currentReservations.find(
+              (pro) => pro.user_ID === data.user_ID
+            );
+            
+            if (findByUserIdAndItemId) {
+              const filteredReservations = currentReservations.filter(
+                (pro) => pro.product_Name !== data.name
+              );
+              
+              // Log new state
+              const newState = {
+                ...prevOrders,
+                reservations: filteredReservations,
+                totalReservations: Math.max(
+                  0,
+                  parseInt(prevOrders?.totalReservations || 0) - data.quantity
+                ).toString()  // Convert to string to match your format
+              };
+              console.log('New state:', newState);
+              
+              return newState;
+            }
+            
+            return prevOrders;
+          });
+
+          setRentedGowns((prevOrders) => {
+            
+            const currentReservations = Array.isArray(prevOrders.reservations)
+              ? [...prevOrders.reservations]  
+              : [];
+            
+            const findByUserIdAndItemId = currentReservations.find(
+              (pro) => pro.user_ID === data.user_ID
+            );
+            
+            if (findByUserIdAndItemId) {
+              const filteredReservations = currentReservations.filter(
+                (pro) => pro.product_Name !== data.name
+              );
+              
+              // Log new state
+              const newState = {
+                ...prevOrders,
+                reservations: filteredReservations,
+                totalReservations: Math.max(
+                  0,
+                  parseInt(prevOrders?.totalReservations || 0) - data.quantity
+                ).toString()
+              };
+              console.log('New state:', newState);
+              
+              return newState;
+            }
+            
+            return prevOrders;
+          });
         
       });
-
+      
 
       socket.on('piecharizz', (data) =>{
         setPiechar(data.pieChartData)

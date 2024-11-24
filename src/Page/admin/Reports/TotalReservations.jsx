@@ -6,7 +6,7 @@ import AdminProfile from '../../../hooks/AdminHooks/AdminProfile.js';
 const TotalReservations = ({ setTotalReserve, DashInfo }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const {profile} = AdminProfile();
-  
+  console.log(DashInfo)
   const groupedReservations = useMemo(() => {
     return DashInfo.reduce((acc, reservation) => {
       if (!acc[reservation.user_ID]) {
@@ -269,7 +269,7 @@ const TotalReservations = ({ setTotalReserve, DashInfo }) => {
                         <div className="space-y-1 text-xs">
                           <div className="flex justify-between">
                             <span className="text-gray-400">Item ID:</span>
-                            <span className="text-gray-300">{reservation.ItemID}</span>
+                            <span className="text-gray-300">{reservation.item_id}</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-gray-400">Start:</span>
