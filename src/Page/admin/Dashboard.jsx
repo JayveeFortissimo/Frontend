@@ -315,15 +315,6 @@ const Dashboard = () => {
   // Monthly stats in styled box
   doc.setFillColor(240, 240, 240);
   doc.roundedRect(10, yPosition, pageWidth - 20, 35, 1, 1, 'FD');
-  
-  DashInfo.data7.forEach(pro => {
-    const datnow = new Date();
-    const monthName = datnow.toLocaleString('default', { month: 'long' });
-    if(pro.Date === monthName) {
-      doc.text(`Total Reservations (${monthName}): ${pro.total_count}`, 15, yPosition + 8);
-      yPosition += 8;
-    }
-  });
 
   // Financial Information
   doc.text(`Total Canceled Reservations: ${cancels.totalCancelled}`, 15, yPosition + 8);
