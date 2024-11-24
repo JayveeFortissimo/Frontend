@@ -110,8 +110,6 @@ useEffect(() =>{
 
 
 
-
-
     useEffect(() =>{
       async function Graph() {
           
@@ -124,6 +122,7 @@ useEffect(() =>{
           });
       
           const datas = await response.json();
+          console.log(datas)
           setGraph(datas);
            
         }catch(error){
@@ -131,7 +130,6 @@ useEffect(() =>{
         }
       
       };
-      
       Graph();
       
       },[]);

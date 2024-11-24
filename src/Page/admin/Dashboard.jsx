@@ -20,7 +20,6 @@ const Dashboard = () => {
 
   const DashInfo = useLoaderData();
 
- //!THI IS HOOKS 
   const {profile} = AdminProfile();
   const { TodaysRented ,
           RentedGowns, 
