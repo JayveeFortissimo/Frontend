@@ -76,10 +76,8 @@ const Dashboard = () => {
 
 
       socket.on('canceled', (data) => {
-        
+
         setCancels((prevOrders) => {
-        console.log("Samay Array", prevOrders)
-        console.log("ArrayData: ", data)
           const updatedCancelledDetails = Array.isArray(prevOrders.cancelledDetails) 
             ? prevOrders.cancelledDetails 
             : [];
