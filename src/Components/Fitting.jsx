@@ -4,9 +4,10 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import toast from 'react-hot-toast';
 
-const Fitting = ({ setOpenFitting,setFinalQR }) => {
+const Fitting = ({ setOpenFitting, setFinalQR }) => {
   const ID = JSON.parse(localStorage.getItem("ID"));
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const SLOT_LIMIT = 10;
   
   const [formData, setFormData] = useState({
     startDate: new Date(),
@@ -15,6 +16,12 @@ const Fitting = ({ setOpenFitting,setFinalQR }) => {
     email: '',
     contact: '',
     user_ID: ID?.id || ''
+  });
+
+  const [slotCounts, setSlotCounts] = useState({
+    morning: 0,
+    afternoon: 0,
+    evening: 0
   });
 
   const [availableTimes, setAvailableTimes] = useState({
@@ -29,25 +36,50 @@ const Fitting = ({ setOpenFitting,setFinalQR }) => {
   }, []);
 
   useEffect(() => {
-    updateAvailableTimes(formData.startDate);
+    fetchSlotCounts(formData.startDate);
   }, [formData.startDate]);
 
-  const updateAvailableTimes = (selectedDate) => {
+  const fetchSlotCounts = async (date) => {
+    try {
+      const formattedDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
+        .toISOString()
+        .split('T')[0];
+
+      const timeSlots = ['morning', 'afternoon', 'evening'];
+      const counts = {};
+
+      for (const slot of timeSlots) {
+        const response = await fetch(
+          `http://localhost:8000/appointment-count?date=${formattedDate}&time=${slot}`
+        );
+        const count = await response.json();
+        counts[slot] = count;
+      }
+
+      setSlotCounts(counts);
+      updateAvailableTimes(date, counts);
+    } catch (error) {
+      console.error('Failed to fetch slot counts:', error);
+      toast.error('Failed to check slot availability');
+    }
+  };
+
+  const updateAvailableTimes = (selectedDate, currentSlotCounts = slotCounts) => {
     const now = new Date();
     const selected = new Date(selectedDate);
     
     if (selected.toDateString() === now.toDateString()) {
       const currentHour = now.getHours();
       setAvailableTimes({
-        morning: currentHour < 9,
-        afternoon: currentHour < 17,
-        evening: currentHour < 20
+        morning: currentHour < 9 && currentSlotCounts.morning < SLOT_LIMIT,
+        afternoon: currentHour < 17 && currentSlotCounts.afternoon < SLOT_LIMIT,
+        evening: currentHour < 20 && currentSlotCounts.evening < SLOT_LIMIT
       });
     } else if (selected > now) {
       setAvailableTimes({
-        morning: true,
-        afternoon: true,
-        evening: true
+        morning: currentSlotCounts.morning < SLOT_LIMIT,
+        afternoon: currentSlotCounts.afternoon < SLOT_LIMIT,
+        evening: currentSlotCounts.evening < SLOT_LIMIT
       });
     } else {
       setAvailableTimes({
@@ -106,7 +138,7 @@ const Fitting = ({ setOpenFitting,setFinalQR }) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`http://localhost:8000/Appointment`, {
+      const response = await fetch("http://localhost:8000/Appointment", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -126,9 +158,9 @@ const Fitting = ({ setOpenFitting,setFinalQR }) => {
       if (!response.ok) throw new Error("Submission failed");
 
       toast.success("Appointment successfully scheduled");
-       //!!!!!Eto yung checkoout Function
-       setOpenFitting(false);
-       setFinalQR(true);
+      await fetchSlotCounts(startDate); // Refresh slot counts after booking
+      setOpenFitting(false);
+      setFinalQR(true);
     } catch (error) {
       toast.error("Failed to schedule appointment");
       console.error(error);
@@ -137,30 +169,43 @@ const Fitting = ({ setOpenFitting,setFinalQR }) => {
     }
   };
 
-  const TimeSlot = ({ value, label, disabled }) => (
-    <label className={`
-      flex items-center p-3 border rounded-lg cursor-pointer transition-all duration-200
-      ${formData.times === value && !disabled ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}
-      ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-blue-200'}
-      w-full sm:w-auto
-    `}>
-      <input
-        type="radio"
-        name="PreferredTime"
-        value={value}
-        checked={formData.times === value}
-        onChange={e => handleChange('times', e.target.value)}
-        disabled={disabled}
-        className="hidden"
-      />
-      <span className={`
-        ${formData.times === value && !disabled ? 'text-blue-700' : 'text-gray-700'}
-        text-sm sm:text-base w-full text-center
+  const TimeSlot = ({ value, label, disabled }) => {
+    const remainingSlots = SLOT_LIMIT - slotCounts[value];
+    const isSlotFull = slotCounts[value] >= SLOT_LIMIT;
+
+    return (
+      <label className={`
+        flex items-center p-3 border rounded-lg cursor-pointer transition-all duration-200
+        ${formData.times === value && !disabled ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}
+        ${(disabled || isSlotFull) ? 'opacity-50 cursor-not-allowed' : 'hover:border-blue-200'}
+        w-full sm:w-auto
       `}>
-        {label}
-      </span>
-    </label>
-  );
+        <input
+          type="radio"
+          name="PreferredTime"
+          value={value}
+          checked={formData.times === value}
+          onChange={e => handleChange('times', e.target.value)}
+          disabled={disabled || isSlotFull}
+          className="hidden"
+        />
+        <div className="w-full text-center">
+          <span className={`
+            ${formData.times === value && !disabled ? 'text-blue-700' : 'text-gray-700'}
+            text-sm sm:text-base block
+          `}>
+            {label}
+          </span>
+          <span className={`
+            text-xs mt-1 block
+            ${isSlotFull ? 'text-red-500 font-medium' : 'text-gray-500'}
+          `}>
+            {isSlotFull ? 'Fully Booked' : `${remainingSlots} slots available`}
+          </span>
+        </div>
+      </label>
+    );
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 p-2 sm:p-4">
@@ -179,6 +224,7 @@ const Fitting = ({ setOpenFitting,setFinalQR }) => {
           </div>
 
           <form onSubmit={handleSubmit} className="mt-4 sm:mt-6 space-y-4 sm:space-y-6">
+            {/* Your existing form fields remain the same */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
