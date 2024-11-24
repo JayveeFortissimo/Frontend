@@ -8,9 +8,9 @@ const SizingForm = () => {
   const { handleChange, measurements, handleSubmit, handleSubmitLater } = SizeUser(navigate);
 
   const inputFields = [
-    { name: "bust", label: "Bust", icon: <FaRuler />, unit: "cm" },
-    { name: "waist", label: "Waist", icon: <FaRulerVertical />, unit: "cm" },
-    { name: "hips", label: "Hips", icon: <FaUserAlt />, unit: "cm" },
+    { name: "bust", label: "Bust Size", icon: <FaRuler />, unit: "cm" },
+    { name: "waist", label: "Waist Size", icon: <FaRulerVertical />, unit: "cm" },
+    { name: "hips", label: "Hips Size", icon: <FaUserAlt />, unit: "cm" },
     { name: "height", label: "Height", icon: <GiBodyHeight />, unit: "cm" },
     { name: "weight", label: "Weight", icon: <FaWeight />, unit: "kg" }
   ];
