@@ -1,11 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import toast from 'react-hot-toast';
 import HistoryOfUser from "../../../hooks/AdminHooks/History.js";
 import { useLoaderData } from 'react-router-dom';
 import PickUp from "./PickUp.jsx";
 import io from 'socket.io-client';
 import QRCode from 'react-qr-code';
+import { toPng } from 'html-to-image';
 import { toCanvas } from 'html-to-image';
+
 
 import { 
   PiCalendarBlank, 
@@ -20,12 +22,9 @@ import {
 
 const History = () => {
   const userID = useLoaderData();
-  const qrRef = useRef(null);
-  
   const {allDatas, setAllDatas} = HistoryOfUser(userID.data1[0].id);
-
+  
   const [pickUp, setPickUp] = useState(false);
-  const [QrValue, setQrValue] = useState({});
   const [productINFO, setProductInfo] = useState({
     product_Name: "",
     subtotal: "",
@@ -40,28 +39,6 @@ const History = () => {
     code:"",
     subTotal:0
   });
-
-  useEffect(() => {
-    if (allDatas.length > 0) {
-      const pro = allDatas[0];  
-      const data = {
-        product_name: pro.product_Name,
-        quantity: pro.quantity,
-        status: pro.status,
-        picture: pro.picture,
-        start_date: new Date(pro.start_Date).toLocaleDateString(),
-        return_date: new Date(pro.return_Date).toLocaleDateString(),
-        pickup_status: pro.Pickuped,
-        penalty: 0,
-        user_id: pro.user_ID,
-        price: pro.price,
-        returnID: pro.id,
-        code: pro.code
-      };
-  
-      setQrValue(data); 
-    }
-  }, [allDatas]);
 
   useEffect(() => {
     const socket = io('http://localhost:8000');
@@ -80,7 +57,6 @@ const History = () => {
       socket.off('pickup-status-updated');
     };
   }, [setAllDatas]); 
-  
 
   const handleGracePeriodCheck = (startDate, Pickuped) => {
     const now = new Date();
@@ -93,7 +69,88 @@ const History = () => {
     return Pickuped;
   };
 
-  const StatusBadge = ({ status, id }) => {
+  const getQRValue = (pro) => {
+    return {
+      product_name: pro.product_Name,
+      quantity: pro.quantity,
+      status: pro.status,
+      picture: pro.picture,
+      start_date: new Date(pro.start_Date).toLocaleDateString(),
+      return_date: new Date(pro.return_Date).toLocaleDateString(),
+      pickup_status: pro.Pickuped,
+      penalty: 0,
+      user_id: pro.user_ID,
+      price: pro.price,
+      returnID: pro.id,
+      code: pro.code
+    };
+  };
+
+  const handleDownloadQRCode = async (qrContainerId, productName) => {
+    const qrContainer = document.getElementById(qrContainerId);
+  
+    if (!qrContainer) {
+      toast.error('QR code container not found');
+      return;
+    }
+  
+    try {
+      // Create a temporary container
+      const tempContainer = document.createElement('div');
+      tempContainer.style.background = 'white';
+      tempContainer.style.padding = '20px';
+      tempContainer.style.width = 'fit-content';
+      
+      // Clone the QR code SVG
+      const svg = qrContainer.querySelector('svg');
+      if (!svg) {
+        toast.error('QR code SVG not found');
+        return;
+      }
+  
+      const svgClone = svg.cloneNode(true);
+      tempContainer.appendChild(svgClone);
+      document.body.appendChild(tempContainer);
+  
+      // Convert to canvas with filters to avoid CSS issues
+      const canvas = await toCanvas(tempContainer, {
+        skipFonts: true, // Skip loading external fonts
+        filter: (node) => {
+          // Filter out external stylesheets and Google-related elements
+          if (node.tagName === 'LINK') return false;
+          if (node.className && typeof node.className === 'string' && 
+              node.className.includes('google')) return false;
+          return true;
+        },
+        backgroundColor: '#ffffff',
+        width: 190,
+        height: 190
+      });
+  
+      // Clean up temporary container
+      document.body.removeChild(tempContainer);
+  
+      // Convert to blob and download
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `qrcode-${productName.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.png`;
+          link.click();
+          URL.revokeObjectURL(url);
+          toast.success('QR code downloaded successfully');
+        }
+      }, 'image/png', 1.0);
+  
+    } catch (err) {
+      console.error('QR code download failed:', err);
+      toast.error('Failed to download QR code');
+    }
+  };
+
+
+  const StatusBadge = ({ status }) => {
     let Icon = PiClock;
     let colorClasses = "bg-gray-500/20 text-gray-300 border border-gray-500/30";
 
@@ -111,54 +168,6 @@ const History = () => {
         {status}
       </span>
     );
-  };
-
-  const handleDownloadQRCode = async (e) => {
-    e.preventDefault();
-    if (qrRef.current === null) return;
-
-    try {
-        const container = document.createElement('div');
-        container.style.background = 'white';
-        container.style.padding = '20px';
-        container.style.width = 'fit-content';
-        
-        const qrContainer = document.createElement('div');
-        container.appendChild(qrContainer);
-        document.body.appendChild(container);
-
-        const svg = qrRef.current.querySelector('svg');
-        if (svg) {
-            const svgClone = svg.cloneNode(true);
-            qrContainer.appendChild(svgClone);
-
-            const canvas = await toCanvas(container, {
-                skipFonts: true,
-                filter: (node) => {
-                    if (node.tagName === 'LINK') return false;
-                    if (node.className && typeof node.className === 'string' && 
-                        node.className.includes('google')) return false;
-                    return true;
-                },
-                backgroundColor: '#ffffff'
-            });
-            
-            document.body.removeChild(container);
-
-            canvas.toBlob((blob) => {
-                if (blob) {
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = 'qrcode.png';
-                    link.click();
-                    URL.revokeObjectURL(url);
-                }
-            }, 'image/png', 1.0);
-        }
-    } catch (err) {
-        console.error('Failed to download QR code:', err);
-    }
   };
 
   // Filter to show only Approved items
@@ -197,6 +206,7 @@ const History = () => {
             const returns = returnDate.toLocaleDateString('en-US', options);
             const istodayPickuped = dateOfNow.toDateString() === returnDate.toDateString();
             const PickupedStatus = handleGracePeriodCheck(startDate, pro.Pickuped);
+            const qrContainerId = `qr-container-${pro.id}`;
 
             return (
               <div 
@@ -217,7 +227,7 @@ const History = () => {
                       <h3 className="text-lg font-semibold text-gray-200">
                         {pro.product_Name}
                       </h3>
-                      <StatusBadge status={PickupedStatus} id={pro.id} />
+                      <StatusBadge status={PickupedStatus} />
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm text-gray-400">
@@ -245,9 +255,9 @@ const History = () => {
                         
                         <div className="mt-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700/50">
                           <h3>QR Code:</h3>
-                          <div ref={qrRef} className="bg-white p-4">
+                          <div id={qrContainerId} className="bg-white p-4">
                             <QRCode 
-                              value={JSON.stringify(QrValue)} 
+                              value={JSON.stringify(getQRValue(pro))} 
                               size={150}
                               style={{ background: 'white' }}
                             />
@@ -255,7 +265,7 @@ const History = () => {
                           
                           <div className="flex flex-col gap-3">
                             <button
-                              onClick={(e) => handleDownloadQRCode(e)}
+                              onClick={() => handleDownloadQRCode(qrContainerId, pro.product_Name)}
                               className="inline-flex justify-center items-center px-4 py-2 bg-blue-500/20 text-blue-400 text-sm font-medium rounded-lg hover:bg-blue-500/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500/50 transition-all duration-300 border border-blue-500/30 backdrop-blur-sm"
                             >
                               <PiDownload className="w-4 h-4 mr-2" />
