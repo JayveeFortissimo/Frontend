@@ -192,7 +192,7 @@ const ToReturn = ({ userID }) => {
               {toReturn.length === 0 ? (
                 <EmptyState />
               ) : (
-                toReturn.map(item => (
+                toReturn.reverse().map(item => (
                   <ReturnCard key={item.id} item={item} />
                 ))
               )}

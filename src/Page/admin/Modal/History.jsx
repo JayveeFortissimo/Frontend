@@ -171,7 +171,7 @@ const History = () => {
   };
 
   // Filter to show only Approved items
-  const displayItems = allDatas.filter(item => item.status === "Approved");
+  const displayItems = allDatas.filter(item => item.status === "Approved").reverse();
 
   if (displayItems.length === 0) {
     return (

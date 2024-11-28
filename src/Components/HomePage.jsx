@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { BsArrowRight, BsInstagram, BsPinterest, BsFacebook } from 'react-icons/bs';
 import {useNavigate, useRouteLoaderData} from 'react-router-dom';
 import MostPicked from '../hooks/MostPicked.js';
-import toast from 'react-hot-toast';
+
 
 const GridBackground = () => (
   <div className="absolute inset-0 overflow-hidden bg-gradient-to-b from-gray-100 to-white opacity-80" />
@@ -169,35 +169,6 @@ const HomePage = () => {
   </div>
 </section>
 </div>
-
-
-      {/* Appointment Section */}
-      <section className="py-24 bg-gradient-to-t from-purple-50 to-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="space-y-8"
-          >
-            <h3 className="text-4xl font-bold">Fitting Appointment</h3>
-            <p className="text-lg text-gray-600">
-             This is not required but this is for the assurance of the size of yours
-            </p>
-            <p>(In cart section after add products)</p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={()=>{
-                !isLogin? navigate('/login'): toast.success("Please Add item first")
-              }}
-              className="px-8 py-3 bg-black hover:bg-gray-900 text-white rounded-full transition-colors inline-flex items-center space-x-2"
-            >
-              <span>Schedule Appointment</span>
-              <BsArrowRight className="w-5 h-5" />
-            </motion.button>
-          </motion.div>
-        </div>
-      </section>
 
      
     </div>
