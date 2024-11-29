@@ -87,7 +87,7 @@ const History = () => {
     };
   };
 
-  const handleDownloadQRCode = async (qrContainerId, productName) => {
+  const handleDownloadQRCode = async (qrContainerId, productName, userName) => {
     const qrContainer = document.getElementById(qrContainerId);
   
     if (!qrContainer) {
@@ -137,7 +137,7 @@ const History = () => {
           const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.href = url;
-          link.download = `qrcode-${productName.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.png`;
+          link.download = `${userName}-qrcode-${productName.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.png`;
           link.click();
           URL.revokeObjectURL(url);
           toast.success('QR code downloaded successfully');
@@ -266,7 +266,7 @@ const History = () => {
                           
                           <div className="flex flex-col gap-3">
                             <button
-                              onClick={() => handleDownloadQRCode(qrContainerId, pro.product_Name)}
+                              onClick={() => handleDownloadQRCode(qrContainerId, pro.product_Name, pro.name)}
                               className="inline-flex justify-center items-center px-4 py-2 bg-blue-500/20 text-blue-400 text-sm font-medium rounded-lg hover:bg-blue-500/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500/50 transition-all duration-300 border border-blue-500/30 backdrop-blur-sm"
                             >
                               <PiDownload className="w-4 h-4 mr-2" />
