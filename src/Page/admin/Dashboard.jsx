@@ -8,7 +8,7 @@ import NumbersOfUsers from './Reports/NumberofUsers';
 import TotalGowns from './Reports/TotalGowns';
 import HavePenaltys from './Reports/Cacelled';
 import ReservesToday from './Reports/ReservesToday';
-import PieCharts from './Reports/PieCharts';
+
 import io from 'socket.io-client';
 import jsPDF from 'jspdf';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -23,13 +23,11 @@ const Dashboard = () => {
   const {profile} = AdminProfile();
   const { TodaysRented ,
           RentedGowns, 
-          pieChart,
            cancels ,
            AllGraph,
            setTodaysRented,
             setRentedGowns,
              setCancels,
-              setPiechar,
               setGraph
             } = Dashboards();
 
@@ -159,22 +157,11 @@ const Dashboard = () => {
       });
       
 
-      socket.on('piecharizz', (data) =>{
-        setPiechar(data.pieChartData)
-      })
-
-      /*
-      socket.on('reservationTrendsUpdate', (data) =>{
-        setGraph(data.trends)
-      })
-      
-*/
+  
       return () => {
         socket.off('bellsDash');
         socket.off('newCheckOut');
         socket.off('canceled');
-        socket.off('piecharizz');
-       // socket.off('reservationTrendsUpdate');
         socket.disconnect();
       };
   
@@ -207,7 +194,7 @@ const Dashboard = () => {
     Notifs: false,
     PaymentMethods:false,
     ReservesTodays:false,
-    Piechar:false
+    History:false
   });
 
  
@@ -490,11 +477,11 @@ const Dashboard = () => {
     },
 
     {
-      title: "Gown Trending",
+      title: "History",
       value: null,
       icon: <IoIosPie size={24}/>,
       gradient: "from-red-500 to-pink-600",
-      onClick: () =>  setTotalReserve(prev => ({ ...prev, Piechar: true }))
+      onClick: () =>  console.log("Hello worlds")
     },
 
   ];
@@ -503,8 +490,6 @@ const Dashboard = () => {
 
   return (
     <>
-    
-    {openTotalReserve.Piechar && <PieCharts setTotalReserve={setTotalReserve} pieChart={pieChart}/>}
 
       {openTotalReserve.ReservesTodays &&  <ReservesToday setTotalReserve={setTotalReserve} DashInfo={TodaysRented.reservations}/>}
     

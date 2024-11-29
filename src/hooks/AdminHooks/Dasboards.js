@@ -4,7 +4,6 @@ const Dashboards = () =>{
 
 const [TodaysRented, setTodaysRented] = useState([]);
 const [RentedGowns, setRentedGowns] = useState([]);
-const [pieChart, setPiechar] = useState([]);
 const [cancels,setCancels] = useState([]);
 const [AllGraph, setGraph] = useState([]);
 
@@ -83,33 +82,6 @@ useEffect(() =>{
     },[]);
 
 
-
-  useEffect(() =>{
-    async function PieChart() {
-        
-      try{
-        const response = await fetch(`http://localhost:8000/PieCharts`,{
-            method:'GET',
-            headers:{
-                'Content-Type':'application/json'
-            }
-        });
-    
-        const datas = await response.json();
-        setPiechar(datas);
-         
-      }catch(error){
-        console.log(error);
-      }
-    
-    };
-    
-    PieChart();
-    
-    },[]);
-
-
-
     useEffect(() =>{
       async function Graph() {
           
@@ -139,10 +111,8 @@ return{
     RentedGowns,
     setTodaysRented,
     setRentedGowns,
-    pieChart,
     cancels,
     setCancels,
-    setPiechar,
     AllGraph,
      setGraph
 }
