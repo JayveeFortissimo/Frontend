@@ -116,11 +116,6 @@ const ReviewPage = () => {
           We appreciate every customer who takes the time to share their experience at Cristobal Collections.
           Your feedback helps us maintain our commitment to excellence.
         </p>
-        <div className="flex justify-center gap-2 text-3xl">
-          <span role="img" aria-label="smile">😊</span>
-          <span role="img" aria-label="heart">❤️</span>
-          <span role="img" aria-label="thank you">🙏</span>
-        </div>
       </div>
     </div>
   );
