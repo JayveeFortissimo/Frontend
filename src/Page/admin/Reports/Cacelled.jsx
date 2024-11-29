@@ -97,9 +97,6 @@ const HavePenaltys = ({ setTotalReserve, DashInfo }) => {
     doc.setFont(undefined, 'normal');
     doc.text(`Total Cancelled Reservations: ${DashInfo.cancelledDetails.length}`, 20, yPosition);
     yPosition += 7;
-    doc.text(`Approved by Admin: ${approvedItems.length}`, 20, yPosition);
-    yPosition += 7;
-    doc.text(`Waiting for Refund: ${waitingForRefundItems.length}`, 20, yPosition);
   
     // Function to print items
     const printItems = (items, sectionTitle) => {
