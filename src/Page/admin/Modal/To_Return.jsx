@@ -11,7 +11,7 @@ const ToReturn = ({ userID }) => {
  const ItemID = useRef(0);
   const { toReturn, setToReturn } = History(userID.data1[0].id);
   const [openScanner, setOpenScanner] = useState(false);
-
+console.log(toReturn)
 
   const [info, setInfo] = useState({
     product_Name: "",
@@ -24,7 +24,8 @@ const ToReturn = ({ userID }) => {
     quantity:0,
     returnID: 0,
     code:"",
-    price:0
+    price:0,
+    name:""
   });
 
 
@@ -145,6 +146,7 @@ const ToReturn = ({ userID }) => {
               code:item.code,
               price:item.price,
               returnID: item.id,
+              name:item.name
             });
             setOpenConfirmation(true);
            }}

@@ -8,7 +8,7 @@ import NumbersOfUsers from './Reports/NumberofUsers';
 import TotalGowns from './Reports/TotalGowns';
 import HavePenaltys from './Reports/Cacelled';
 import ReservesToday from './Reports/ReservesToday';
-
+import AllHistorys from './Reports/AllHistory';
 import io from 'socket.io-client';
 import jsPDF from 'jspdf';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -28,7 +28,9 @@ const Dashboard = () => {
            setTodaysRented,
             setRentedGowns,
              setCancels,
-              setGraph
+              setGraph,
+             AllHistory,
+             setAllhistory
             } = Dashboards();
 
    const [filteredData, setFilteredData] = useState([]);
@@ -481,7 +483,7 @@ const Dashboard = () => {
       value: null,
       icon: <IoIosPie size={24}/>,
       gradient: "from-red-500 to-pink-600",
-      onClick: () =>  console.log("Hello worlds")
+      onClick: () => setTotalReserve(prev => ({ ...prev, History: true }))
     },
 
   ];
@@ -490,6 +492,8 @@ const Dashboard = () => {
 
   return (
     <>
+
+    {openTotalReserve.History && <AllHistorys setTotalReserve={setTotalReserve} AllHistory={AllHistory}/>}
 
       {openTotalReserve.ReservesTodays &&  <ReservesToday setTotalReserve={setTotalReserve} DashInfo={TodaysRented.reservations}/>}
     

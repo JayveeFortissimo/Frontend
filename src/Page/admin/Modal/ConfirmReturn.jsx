@@ -4,7 +4,7 @@ import { Sidebars } from "../../../Store/Side.js";
 import { useDispatch } from 'react-redux';
 
 const ConfirmReturn = ({ setOpenConfirmation, Info, setToReturn, toReturn, userEmail }) => {
-
+   console.log(Info)
   const { PushHistory, PushHistoryNoQRCODE } = ReturnITEMS(setToReturn, toReturn, userEmail);
   const dispatch = useDispatch();
 

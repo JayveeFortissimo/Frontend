@@ -6,6 +6,8 @@ const [TodaysRented, setTodaysRented] = useState([]);
 const [RentedGowns, setRentedGowns] = useState([]);
 const [cancels,setCancels] = useState([]);
 const [AllGraph, setGraph] = useState([]);
+const [AllHistory, setAllhistory] = useState([]);
+
 
 useEffect(() =>{
 async function TodaysRented() {
@@ -106,6 +108,31 @@ useEffect(() =>{
       
       },[]);
 
+
+      useEffect(() =>{
+        async function AllHistory() {
+            
+          try{
+            const response = await fetch(`http://localhost:8000/DashboardHistory`,{
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            });
+        
+            const datas = await response.json();
+            console.log(datas)
+            setAllhistory(datas);
+             
+          }catch(error){
+            console.log(error);
+          }
+        
+        };
+        AllHistory();
+        
+        },[]);
+
 return{
     TodaysRented,
     RentedGowns,
@@ -114,7 +141,9 @@ return{
     cancels,
     setCancels,
     AllGraph,
-     setGraph
+     setGraph,
+     AllHistory,
+      setAllhistory
 }
 
 

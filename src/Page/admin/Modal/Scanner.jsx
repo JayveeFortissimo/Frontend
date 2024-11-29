@@ -52,13 +52,13 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID, userEmail })
         pickup_status: data.pickup_status,
         penalty: totalPenalty,
         user_id: data.user_id,
-        returnID:data.returnID
+        returnID:data.returnID,
+        name:data.name
       });
 
       const FindID =  data.returnID === ItemID.current;
       
       if (!FindID) {
-        console.error("ID not found:", data.returnID);
         setError(`ID ${data.returnID} this is not item you reserve`);
       } else {
 
@@ -73,7 +73,8 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID, userEmail })
           returnID: data.returnID,
           quantity:data.quantity,
           price:data.price,
-          code:data.code
+          code:data.code,
+          name:data.name
         });
 
         setOpenScanner(false);

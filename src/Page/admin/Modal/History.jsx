@@ -5,7 +5,6 @@ import { useLoaderData } from 'react-router-dom';
 import PickUp from "./PickUp.jsx";
 import io from 'socket.io-client';
 import QRCode from 'react-qr-code';
-import { toPng } from 'html-to-image';
 import { toCanvas } from 'html-to-image';
 
 
@@ -23,7 +22,7 @@ import {
 const History = () => {
   const userID = useLoaderData();
   const {allDatas, setAllDatas} = HistoryOfUser(userID.data1[0].id);
-  
+  console.log(allDatas)
   const [pickUp, setPickUp] = useState(false);
   const [productINFO, setProductInfo] = useState({
     product_Name: "",
@@ -37,7 +36,8 @@ const History = () => {
     quantity: "",
     size: "",
     code:"",
-    subTotal:0
+    subTotal:0,
+    name:""
   });
 
   useEffect(() => {
@@ -82,7 +82,8 @@ const History = () => {
       user_id: pro.user_ID,
       price: pro.price,
       returnID: pro.id,
-      code: pro.code
+      code: pro.code,
+      name:pro.name
     };
   };
 
@@ -287,7 +288,8 @@ const History = () => {
                                   quantity: pro.quantity,
                                   size: pro.size,
                                   code: pro.code,
-                                  subTotal: pro.subTotal
+                                  subTotal: pro.subTotal,
+                                  name:pro.name
                                 });
                                 setPickUp(true);
                               }}

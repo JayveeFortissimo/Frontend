@@ -81,6 +81,7 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
             quantity:pro.quantity,
             price:pro.price,
             code:pro.code,
+            name:pro.name
         };
 
         try {
@@ -118,7 +119,8 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
             penalty: qrCodeData.penalty,
             quantity:qrCodeData.quantity,
             price:qrCodeData.price,
-            code:qrCodeData.code
+            code:qrCodeData.code,
+            name:qrCodeData.name
         };
 
         try {
@@ -161,6 +163,7 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
             quantity:pro.quantity,
             price:pro.price,
             code:pro.code,
+            name:pro.name
         };
 
         try {
