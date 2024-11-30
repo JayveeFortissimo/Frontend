@@ -38,8 +38,6 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
     };
 
 
-
-
    const MessageThankyou = async() =>{
 
   try{
@@ -81,7 +79,9 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
             quantity:pro.quantity,
             price:pro.price,
             code:pro.code,
-            name:pro.name
+            name:pro.name,
+            size:pro.size,
+            item_id:pro.item_id
         };
 
         try {
@@ -120,7 +120,9 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
             quantity:qrCodeData.quantity,
             price:qrCodeData.price,
             code:qrCodeData.code,
-            name:qrCodeData.name
+            name:qrCodeData.name,
+            size:qrCodeData.size,
+            item_id:qrCodeData.item_id
         };
 
         try {
@@ -163,7 +165,9 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
             quantity:pro.quantity,
             price:pro.price,
             code:pro.code,
-            name:pro.name
+            name:pro.name,
+            size:pro.size,
+            item_id:pro.item_id
         };
 
         try {

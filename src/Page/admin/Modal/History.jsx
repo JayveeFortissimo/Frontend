@@ -37,7 +37,8 @@ const History = () => {
     size: "",
     code:"",
     subTotal:0,
-    name:""
+    name:"",
+    item_id:0
   });
 
   useEffect(() => {
@@ -83,7 +84,9 @@ const History = () => {
       price: pro.price,
       returnID: pro.id,
       code: pro.code,
-      name:pro.name
+      name:pro.name,
+      size:pro.size,
+      item_id:pro.item_id
     };
   };
 
@@ -289,7 +292,9 @@ const History = () => {
                                   size: pro.size,
                                   code: pro.code,
                                   subTotal: pro.subTotal,
-                                  name:pro.name
+                                  name:pro.name,
+                                  size:pro.size,
+                                  item_id:pro.item_id
                                 });
                                 setPickUp(true);
                               }}

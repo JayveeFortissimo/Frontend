@@ -53,7 +53,9 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID, userEmail })
         penalty: totalPenalty,
         user_id: data.user_id,
         returnID:data.returnID,
-        name:data.name
+        name:data.name,
+        size:data.size,
+        item_id:data.item_id
       });
 
       const FindID =  data.returnID === ItemID.current;
@@ -74,7 +76,9 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID, userEmail })
           quantity:data.quantity,
           price:data.price,
           code:data.code,
-          name:data.name
+          name:data.name,
+          size:data.size,
+          item_id:data.item_id
         });
 
         setOpenScanner(false);
