@@ -6,9 +6,11 @@ import History from '../../../hooks/History';
 const HistoryItem = ({ pro }) => {
   const startDate = new Date(pro.start_Date);
   const returnDate = new Date(pro.return_Date);
+  const DateReturns = new Date(pro.Treturns);
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   const Starto = startDate.toLocaleDateString('en-US', options);
   const returns = returnDate.toLocaleDateString('en-US', options);
+  const FinalReturns = DateReturns.toLocaleDateString('en-US', options);
 
   return (
     <div className="group relative">
@@ -73,6 +75,14 @@ const HistoryItem = ({ pro }) => {
                   {returns}
                 </span>
               </div>
+
+              <div className="group/date flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors">
+                <span className="font-medium">Date Returned:</span>
+                <span className="group-hover/date:translate-x-1 transition-transform text-green-600">
+                  {FinalReturns}
+                </span>
+              </div>
+
             </div>
           </div>
 
@@ -81,13 +91,11 @@ const HistoryItem = ({ pro }) => {
             <div className="flex items-center gap-2">
               
               <span className="px-3 py-1 rounded-full bg-gray-700/50 text-gray-300 text-sm border border-gray-600/50">
-               Total ₱{pro.price + pro.penalty}
+               Price ₱{pro.price + pro.penalty}
               </span>
             </div>
-            <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-sm border border-emerald-500/30">
-            
-            </span>
           </div>
+          
         </div>
       </div>
     </div>
@@ -115,6 +123,8 @@ const FHistory = () => {
   const ID = useLoaderData();
   const { history } = History(ID.data1[0].id);
 
+ //Reversed
+  const HistoryReversed = [...history].reverse();
 
 
   return (
@@ -129,10 +139,10 @@ const FHistory = () => {
           <div className="relative bg-gray-800/30 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50">
             {/* Scrollable Container */}
             <div className="space-y-6 max-h-[32rem] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800/50">
-              {history.length === 0 ? (
+              {HistoryReversed.length === 0 ? (
                 <EmptyState />
               ) : (
-                history.reverse().map(pro => (
+                HistoryReversed.map(pro => (
                   <HistoryItem key={pro.id} pro={pro} />
                 ))
               )}
