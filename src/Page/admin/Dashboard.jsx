@@ -75,7 +75,7 @@ const Dashboard = () => {
 
 
       socket.on('canceled', (data) => {
-
+           console.log(data)
         setCancels((prevOrders) => {
           const updatedCancelledDetails = Array.isArray(prevOrders.cancelledDetails) 
             ? prevOrders.cancelledDetails 
