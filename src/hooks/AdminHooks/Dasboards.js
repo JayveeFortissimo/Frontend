@@ -121,7 +121,6 @@ useEffect(() =>{
             });
         
             const datas = await response.json();
-            console.log(datas)
             setAllhistory(datas);
              
           }catch(error){

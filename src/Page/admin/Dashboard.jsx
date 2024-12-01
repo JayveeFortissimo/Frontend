@@ -158,12 +158,16 @@ const Dashboard = () => {
         
       });
       
+      socket.on('updatedReservationTrends', (updatedTrends) => {
+        setGraph(updatedTrends);
+    });
 
   
       return () => {
         socket.off('bellsDash');
         socket.off('newCheckOut');
         socket.off('canceled');
+        socket.off('updatedReservationTrends');
         socket.disconnect();
       };
   
