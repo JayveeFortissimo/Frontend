@@ -7,7 +7,7 @@ const [RentedGowns, setRentedGowns] = useState([]);
 const [cancels,setCancels] = useState([]);
 const [AllGraph, setGraph] = useState([]);
 const [AllHistory, setAllhistory] = useState([]);
-
+const [AllDress, setAlldress] = useState([]);
 
 useEffect(() =>{
 async function TodaysRented() {
@@ -96,7 +96,6 @@ useEffect(() =>{
           });
       
           const datas = await response.json();
-          console.log(datas)
           setGraph(datas);
            
         }catch(error){
@@ -132,6 +131,31 @@ useEffect(() =>{
         
         },[]);
 
+
+
+        useEffect(() =>{
+          async function AllDress() {
+              
+            try{
+              const response = await fetch(`http://localhost:8000/numberOfItems`,{
+                  method:'GET',
+                  headers:{
+                      'Content-Type':'application/json'
+                  }
+              });
+          
+              const datas = await response.json();
+              setAlldress(datas);
+               
+            }catch(error){
+              console.log(error);
+            }
+          
+          };
+          AllDress();
+          
+          },[]);
+
 return{
     TodaysRented,
     RentedGowns,
@@ -142,7 +166,9 @@ return{
     AllGraph,
      setGraph,
      AllHistory,
-      setAllhistory
+      setAllhistory,
+      AllDress, 
+      setAlldress
 }
 
 
