@@ -11,7 +11,7 @@ const ForgotPassword = ({ setOpenModal,setOtp }) => {
       setDisable(true);
       
     try{
- const response  = await fetch(`http://localhost:8000/ForgotPassword`,{
+ const response  = await fetch(`https://backend-production-d6a2.up.railway.app/ForgotPassword`,{
     method:'POST',
     headers:{
         'Content-Type':'application/json'

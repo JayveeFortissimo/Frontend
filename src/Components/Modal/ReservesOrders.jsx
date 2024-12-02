@@ -21,7 +21,7 @@ const ReservesOrders = ({ allOrders, user_ID, setAllOrders }) => {
   const pendingOrders = allOrders.filter(order => order.status === "Waiting for approval");
 
   useEffect(() => {
-    const socket = io('http://localhost:8000');
+    const socket = io('https://backend-production-d6a2.up.railway.app');
     socket.on('connect', () => {
       console.log('Connected to WebSocket');
     });
@@ -113,7 +113,7 @@ const ReservesOrders = ({ allOrders, user_ID, setAllOrders }) => {
                   <div className="flex flex-col sm:flex-row gap-4">
                     <div className="relative">
                       <img 
-                        src={`http://localhost:8000/uploads/${pro.picture}`} 
+                        src={`https://backend-production-d6a2.up.railway.app/uploads/${pro.picture}`} 
                         alt={pro.product_Name} 
                         className="h-36 w-full sm:h-40 sm:w-40 object-cover rounded-lg shadow-sm"
                       />

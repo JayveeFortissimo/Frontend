@@ -13,7 +13,7 @@ const Items_Approved = (orders, setOrders, userID) =>{
   const date2 = new Date();
 
   useEffect(() => {
-    const socket = io('http://localhost:8000');
+    const socket = io('https://backend-production-d6a2.up.railway.app');
     
     socket.on('connect', () => {
       console.log('Connected to WebSocket');
@@ -38,7 +38,7 @@ const Items_Approved = (orders, setOrders, userID) =>{
    
       try{
 
-          const response = await fetch(`http://localhost:8000/ItemsApproved`,{
+          const response = await fetch(`https://backend-production-d6a2.up.railway.app/ItemsApproved`,{
                method:"PUT",
 
                body:JSON.stringify({
@@ -73,7 +73,7 @@ const DELETE = async(e,pro) =>{
   e.preventDefault();
 
     try{
-        const response = await fetch(`http://localhost:8000/removeIncheck/${pro.id}`,{
+        const response = await fetch(`https://backend-production-d6a2.up.railway.app/removeIncheck/${pro.id}`,{
              method:"delete",
              headers:{
                 'Content-Type':'application/json'
@@ -96,7 +96,7 @@ const DELETE = async(e,pro) =>{
     DELETE(e,pro)
     try{
 
-        const response = await fetch(`http://localhost:8000/cancelled`,{
+        const response = await fetch(`https://backend-production-d6a2.up.railway.app/cancelled`,{
            method:"POST",
            body:JSON.stringify({
                picture:pro.picture,

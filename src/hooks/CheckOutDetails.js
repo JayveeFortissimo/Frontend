@@ -35,7 +35,7 @@ const DetailCheck = (allOrders) =>{
     useEffect(()=>{
         async function info(){
             try{
-                const response = await fetch(`http://localhost:8000/profile/${ID.id}`,{
+                const response = await fetch(`https://backend-production-d6a2.up.railway.app/profile/${ID.id}`,{
                     method:"GET",
                     headers:{
                       authorization: "Bearer " + ID.token
@@ -62,7 +62,7 @@ const DetailCheck = (allOrders) =>{
   
   try{
 
-     const response = await fetch(`http://localhost:8000/allDeleted/${allDatas[0].id}`,{
+     const response = await fetch(`https://backend-production-d6a2.up.railway.app/allDeleted/${allDatas[0].id}`,{
          method:"delete",
          headers:{
              'Content-Type':'application/json'
@@ -107,7 +107,7 @@ const DetailCheck = (allOrders) =>{
        
           try{
 
-            const response = await fetch(`http://localhost:8000/check_Out`,{
+            const response = await fetch(`https://backend-production-d6a2.up.railway.app/check_Out`,{
                 method:"POST",
                 body:JSON.stringify(Datas),
                 headers:{

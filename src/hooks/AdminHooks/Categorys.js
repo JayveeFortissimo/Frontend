@@ -21,7 +21,7 @@ const handleChange = (type,value) =>{
 const handleSubmitCategory = async(e) =>{
     e.preventDefault();
     try{
- const response = await fetch(`http://localhost:8000/addCategorys`,{
+ const response = await fetch(`https://backend-production-d6a2.up.railway.app/addCategorys`,{
     method:'POST',
     headers:{
         'Content-Type':'application/json'
@@ -43,7 +43,7 @@ const handleSubmitCategory = async(e) =>{
 const handleSubmitColors = async(e) =>{
     e.preventDefault();
     try{
- const response = await fetch(`http://localhost:8000/addColors`,{
+ const response = await fetch(`https://backend-production-d6a2.up.railway.app/addColors`,{
     method:'POST',
     headers:{
         'Content-Type':'application/json'
@@ -66,7 +66,7 @@ const handleSubmitColors = async(e) =>{
 const handleSubmitMaterials = async(e) =>{
     e.preventDefault();
     try{
- const response = await fetch(`http://localhost:8000/addMaterials`,{
+ const response = await fetch(`https://backend-production-d6a2.up.railway.app/addMaterials`,{
     method:'POST',
     headers:{
         'Content-Type':'application/json'

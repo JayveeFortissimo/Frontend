@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:8000");
+const socket = io("https://backend-production-d6a2.up.railway.app");
 
 const Messages = (id) => {
   const [messenger, setMessenger] = useState([]);
@@ -16,7 +16,7 @@ const Messages = (id) => {
   useEffect(() => {
     const userProfile = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/profile/${id.id}`, {
+        const response = await fetch(`https://backend-production-d6a2.up.railway.app/profile/${id.id}`, {
           method: 'GET',
           headers: {
             authorization: "Bearer " + id.token,
@@ -43,7 +43,7 @@ const Messages = (id) => {
   useEffect(() => {
     const allMessage = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/allmessage/${id.id}`, {
+        const response = await fetch(`https://backend-production-d6a2.up.railway.app/allmessage/${id.id}`, {
           method: 'get',
           headers: {
             'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const Messages = (id) => {
   const HandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8000/messageUser`, {
+      const response = await fetch(`https://backend-production-d6a2.up.railway.app/messageUser`, {
         method: 'POST',
         body: JSON.stringify(message),
         headers: {

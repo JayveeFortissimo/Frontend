@@ -123,7 +123,7 @@ const HomePage = () => {
           className="group relative overflow-hidden rounded-lg shadow-lg bg-white"
         >
           <img 
-            src={`http://localhost:8000/uploads/${gown.picture}`}
+            src={`https://backend-production-d6a2.up.railway.app/uploads/${gown.picture}`}
             alt={gown.product_Name}
             className="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-110"
           />

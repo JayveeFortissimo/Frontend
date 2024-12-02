@@ -44,7 +44,7 @@ const OTPSecurity = ({setConfirm, setOpenFitting, ConfirmationReserve}) => {
         if (otpValue.length === 5) {
           
             try{
-                const response = await fetch(`http://localhost:8000/OTP`,{
+                const response = await fetch(`https://backend-production-d6a2.up.railway.app/OTP`,{
                    method:'post',
                    headers:{
                        'Content-Type':'application/json'

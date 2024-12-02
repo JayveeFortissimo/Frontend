@@ -29,7 +29,7 @@ export const userprofile = (dispatch,userID) =>{
     return async() =>{
 
   try{
-    const response = await fetch(`http://localhost:8000/profile/${userID.id}`,{
+    const response = await fetch(`https://backend-production-d6a2.up.railway.app/profile/${userID.id}`,{
         method:"GET",
         headers:{
           authorization: "Bearer " + userID.token

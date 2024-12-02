@@ -15,7 +15,7 @@ const Cancelled = () => {
 
         async function CancelledData() {
         try{
-        const response = await fetch(`http://localhost:8000/allCanceled/${userID.data1[0].id}`,{
+        const response = await fetch(`https://backend-production-d6a2.up.railway.app/allCanceled/${userID.data1[0].id}`,{
             method:"GET",
             headers:{
                 'Content-Type':'application/json'
@@ -57,7 +57,7 @@ const Cancelled = () => {
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-3 sm:p-4">
                 <div className="flex-shrink-0 mx-auto sm:mx-0">
                   <img
-                    src={`http://localhost:8000/uploads/${pro.picture}`}
+                    src={`https://backend-production-d6a2.up.railway.app/uploads/${pro.picture}`}
                     alt={pro.Name}
                     className="w-full sm:w-32 h-48 sm:h-32 object-cover rounded-lg shadow-sm"
                   />

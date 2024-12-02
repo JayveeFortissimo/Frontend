@@ -12,7 +12,7 @@ const [AllDress, setAlldress] = useState([]);
 useEffect(() =>{
 async function TodaysRented() {
   try{
-    const response = await fetch(`http://localhost:8000/Today`,{
+    const response = await fetch(`https://backend-production-d6a2.up.railway.app/Today`,{
         method:'GET',
         headers:{
             'Content-Type':'application/json'
@@ -38,7 +38,7 @@ useEffect(() =>{
   async function TotalRented() {
       
     try{
-      const response = await fetch(`http://localhost:8000/totalReserves`,{
+      const response = await fetch(`https://backend-production-d6a2.up.railway.app/totalReserves`,{
           method:'GET',
           headers:{
               'Content-Type':'application/json'
@@ -63,7 +63,7 @@ useEffect(() =>{
     async function Cancellation() {
         
       try{
-        const response = await fetch(`http://localhost:8000/AllCancelled`,{
+        const response = await fetch(`https://backend-production-d6a2.up.railway.app/AllCancelled`,{
             method:'GET',
             headers:{
                 'Content-Type':'application/json'
@@ -88,7 +88,7 @@ useEffect(() =>{
       async function Graph() {
           
         try{
-          const response = await fetch(`http://localhost:8000/AllTrends`,{
+          const response = await fetch(`https://backend-production-d6a2.up.railway.app/AllTrends`,{
               method:'GET',
               headers:{
                   'Content-Type':'application/json'
@@ -112,7 +112,7 @@ useEffect(() =>{
         async function AllHistory() {
             
           try{
-            const response = await fetch(`http://localhost:8000/DashboardHistory`,{
+            const response = await fetch(`https://backend-production-d6a2.up.railway.app/DashboardHistory`,{
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json'
@@ -137,7 +137,7 @@ useEffect(() =>{
           async function AllDress() {
               
             try{
-              const response = await fetch(`http://localhost:8000/numberOfItems`,{
+              const response = await fetch(`https://backend-production-d6a2.up.railway.app/numberOfItems`,{
                   method:'GET',
                   headers:{
                       'Content-Type':'application/json'

@@ -26,7 +26,7 @@ const PickUp = ({ setPickUp, productINFO }) => {
     } else {
 
       try {
-        const response = await fetch(`http://localhost:8000/itemPickuped/${productINFO.approvedID}`, {
+        const response = await fetch(`https://backend-production-d6a2.up.railway.app/itemPickuped/${productINFO.approvedID}`, {
           method: "PUT",
           body: JSON.stringify({
             Pickuped: pickuped,

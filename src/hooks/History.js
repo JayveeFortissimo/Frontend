@@ -9,7 +9,7 @@ const history = (ID)=>{
         async function data() {
             try{
        
-             const response = await fetch(`http://localhost:8000/AllHistory/${ID}`,{
+             const response = await fetch(`https://backend-production-d6a2.up.railway.app/AllHistory/${ID}`,{
                method:'GET',
                headers:{
                  'Content-Type':'application/json'

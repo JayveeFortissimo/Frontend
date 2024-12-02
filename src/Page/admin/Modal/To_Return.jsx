@@ -72,7 +72,7 @@ const ToReturn = ({ userID }) => {
           {/* Image Container */}
           <div className="w-full md:w-48 h-48 flex-shrink-0 relative group overflow-hidden rounded-lg">
             <img
-              src={`http://localhost:8000/uploads/${item.picture}`}
+              src={`https://backend-production-d6a2.up.railway.app/uploads/${item.picture}`}
               alt={item.product_Name}
               className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
             />

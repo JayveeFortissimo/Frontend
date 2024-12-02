@@ -55,7 +55,7 @@ const { PushToApprove, DeclineReserve } = Items_Approved(orders, setOrders, user
             <div className="flex gap-6 flex-col sm:flex-row">
               <div className="flex-shrink-0">
                 <img
-                  src={`http://localhost:8000/uploads/${order.picture}`}
+                  src={`https://backend-production-d6a2.up.railway.app/uploads/${order.picture}`}
                   alt={order.product_Name}
                   className="w-32 h-40 object-cover rounded-lg border border-gray-700/50 shadow-lg"
                 />
