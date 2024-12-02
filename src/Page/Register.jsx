@@ -8,7 +8,7 @@ const Register = () => {
 }
 
 export default Register
-
+//KS
 
 export const regista = async({request, params}) =>{
 
