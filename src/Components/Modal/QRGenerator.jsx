@@ -16,6 +16,7 @@ const ModernQRGenerator = ({ allOrders, CheckOUtss, TotalsAll, allDatas }) => {
             startDate: pro.start_Date,
             returnDate: pro.return_Date,
             user_ID: pro.user_ID,
+            subTotal: pro.subTotal,
         }));
         setNewArray(updatedArray);
     }, [allOrders]);
@@ -48,7 +49,10 @@ const ModernQRGenerator = ({ allOrders, CheckOUtss, TotalsAll, allDatas }) => {
             Size: ${item.size}
             Rental Period:
             Start: ${Starto}
-            Return: ${Endo}`
+            Return: ${Endo}
+            Subtotals: ${item.subTotal}
+            Security Deposit Each Items: ₱200 
+            `
                         )
                     }).join('\n\n');
 
