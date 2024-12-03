@@ -1,5 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 import { VscCalendar, VscJersey, VscAccount, VscOutput, VscBell, VscBellDot } from "react-icons/vsc";
+import { FaMoneyBill1Wave } from "react-icons/fa6";
 import { IoIosPie } from "react-icons/io";
 import { useState, useEffect } from 'react';
 import Notif from './Modal/Notif';
@@ -457,7 +458,7 @@ const Dashboard = () => {
     {
       title: "Rental Revenue",
       value: 0,
-      icon: <IoIosPie size={24}/>,
+      icon: <FaMoneyBill1Wave size={24}/>,
       gradient: "from-purple-500 to-violet-600",
       onClick: () => console.log("Hello Worlds")
     },
