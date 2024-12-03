@@ -27,7 +27,7 @@ const EditSize = ({ dispatch, Sidebars }) => {
       </div>
     </div>
   );
-  
+
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
       <div className="fixed inset-0 bg-black/20 backdrop-blur-sm" />
@@ -55,42 +55,40 @@ const EditSize = ({ dispatch, Sidebars }) => {
           {/* Form */}
           <form onSubmit={handleEdit} className="mt-6 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-            <InputField
-              label="Bust"
-              value={measurements2.bust}
-              onChange={(e) => setMeasurements2({ ...measurements2, bust: e.target.value })}
-              unit="cm"
-            />
-
-            <InputField
-              label="Waist"
-              value={measurements2.waist}
-              onChange={(e) => setMeasurements2({ ...measurements2, waist: e.target.value })}
-              unit="cm"
-            />
-
-            <InputField
-              label="Hips"
-              value={measurements2.hips}
-              onChange={(e) => setMeasurements2({ ...measurements2, hips: e.target.value })}
-              unit="cm"
-            />
-
-            <InputField
-              label="Height"
-              value={measurements2.height}
-              onChange={(e) => setMeasurements2({ ...measurements2, height: e.target.value })}
-              unit="cm"
-            />
-
-            <InputField
-              label="Weight"
-              value={measurements2.weight}
-              onChange={(e) => setMeasurements2({ ...measurements2, weight: e.target.value })}
-              unit="kg"
-            />
-
+              <InputField
+                label="Bust"
+                value={measurements2.bust}
+                onChange={(e) => setMeasurements2({...measurements2, bust: e.target.value})}
+                unit="cm"
+              />
+              
+              <InputField
+                label="Waist"
+                value={measurements2.waist}
+                onChange={(e) => setMeasurements2({...measurements2, waist: e.target.value})}
+                unit="cm"
+              />
+              
+              <InputField
+                label="Hips"
+                value={measurements2.hips}
+                onChange={(e) => setMeasurements2({...measurements2, hips: e.target.value})}
+                unit="cm"
+              />
+              
+              <InputField
+                label="Height"
+                value={measurements2.height}
+                onChange={(e) => setMeasurements2({...measurements2, height: e.target.value})}
+                unit="cm"
+              />
+              
+              <InputField
+                label="Weight"
+                value={measurements2.weight}
+                onChange={(e) => setMeasurements2({...measurements2, weight: e.target.value})}
+                unit="kg"
+              />
 
               
               <div className='mt-10'>
