@@ -15,15 +15,9 @@ const EditSize = ({ dispatch, Sidebars }) => {
       </label>
       <div className="relative">
         <input
-          type="text"  // Change from number to text
-          inputMode="numeric"  // This provides a numeric keyboard on mobile
-          pattern="[0-9]*"     // Allows only numeric input
+          type="number"
           value={value}
-          onChange={(e) => {
-            // Only allow numeric input
-            const numericValue = e.target.value.replace(/[^0-9]/g, '');
-            onChange(numericValue);
-          }}
+          onChange={onChange}
           required
           className="w-full p-3 pr-12 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
         />
