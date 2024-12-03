@@ -5,7 +5,6 @@ import AdminProfile from '../../../hooks/AdminHooks/AdminProfile.js';
 
 const HavePenaltys = ({ setTotalReserve, DashInfo }) => {
   const { profile } = AdminProfile();
-     console.log(DashInfo)
   const [activeFilter, setActiveFilter] = useState('today'); 
 
   const getFilteredItems = () => {

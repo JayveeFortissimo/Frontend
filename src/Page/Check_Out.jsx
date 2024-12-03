@@ -34,16 +34,15 @@ const Check_Out = () => {
     const [isradio, setIsRadio ]  = useState(false);
     const [openFitting, setOpenFitting] = useState(false);
     const [FinalQR, setFinalQR] = useState(false);
-   //For Modal Confirmation
+   
     const [confirm, setConfirm] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
-    //length ng gowns in array   //!WAIT D2 DAT BY Quantity Eh ni rush ko lang d2
-    const allGownSecurity = allOrders.length;
 
-    const TotalsAll = displayDiscount ? (parseInt(total) + (200 * allGownSecurity)): parseInt(total) + (200 * allGownSecurity);
-    const OriginalValue = parseInt(total) + 200;
+
+    const TotalsAll = displayDiscount ? (parseInt(total)): parseInt(total);
+    const OriginalValue = parseInt(total);
     isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
   
   //Reserve Button!
@@ -236,10 +235,6 @@ const Check_Out = () => {
 
                                     {/* Total Section */}
                                     <div className="mt-6 pt-6 border-t border-gray-200">
-                                        <div className="flex justify-between mb-2">
-                                            <span className="text-sm text-gray-600">Security Deposit</span>
-                                            <span className="text-sm font-medium">₱200</span>
-                                        </div>
 
                                         <div className="flex justify-between mb-2">
                                             <span className="text-sm text-gray-600">Referral Points</span>

@@ -8,6 +8,7 @@ const [cancels,setCancels] = useState([]);
 const [AllGraph, setGraph] = useState([]);
 const [AllHistory, setAllhistory] = useState([]);
 const [AllDress, setAlldress] = useState([]);
+const [revenue,setRentalRevenue] = useState([]);
 
 useEffect(() =>{
 async function TodaysRented() {
