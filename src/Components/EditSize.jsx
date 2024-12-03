@@ -21,6 +21,11 @@ const EditSize = ({ dispatch, Sidebars }) => {
           value={value}
           onChange={onChange}
           onFocus={() => setFocusedInput(name)}
+          onBlur={() => setFocusedInput(null)}
+          className={`w-full p-3 pr-12 border border-gray-200 rounded-lg transition-all duration-800 
+            ${focusedInput === name 
+              ? 'ring-2 ring-blue-500 border-blue-500' 
+              : 'focus:ring-2 focus:ring-blue-500 focus:border-blue-500'}`}
           required
         />
         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
