@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaRuler, FaWeight, FaRulerVertical, FaUserAlt } from 'react-icons/fa';
 import { GiBodyHeight } from 'react-icons/gi';
 import SizeUser from "../hooks/Sizeuser.js";
+import { FaRulerCombined } from "react-icons/fa";
 
 const SizingForm = () => {
   const navigate = useNavigate();
