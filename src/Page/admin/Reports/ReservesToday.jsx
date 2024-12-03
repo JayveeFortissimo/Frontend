@@ -2,10 +2,11 @@ import { useMemo, useState } from 'react';
 import { VscChromeClose, VscSearch } from "react-icons/vsc";
 import jsPDF from "jspdf";
 import AdminProfile from '../../../hooks/AdminHooks/AdminProfile.js';
+import { useNavigate } from 'react-router-dom';
 
 const ReservesToday = ({ setTotalReserve, DashInfo }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  
+  const navigate = useNavigate();
   const {profile} = AdminProfile();
  
   const groupedReservations = useMemo(() => {
@@ -206,7 +207,8 @@ const ReservesToday = ({ setTotalReserve, DashInfo }) => {
             {filteredCustomers.map((userData, index) => (
               <div 
                 key={index}
-                className="bg-white/10 backdrop-blur-sm rounded-xl border border-gray-200/50 overflow-hidden"
+                onClick={() => navigate(`/admin/Orders/${userData.customerInfo.id}`)}
+                className="bg-white/10 backdrop-blur-sm rounded-xl border border-gray-200/50 overflow-hidden cursor-pointer"
               >
                 {/* Customer Header */}
                 <div className="bg-gray-900/50 px-4 py-3 border-b border-gray-200/50">
