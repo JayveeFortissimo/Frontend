@@ -6,6 +6,7 @@ import { FaRulerCombined } from "react-icons/fa";
 
 const EditSize = ({ dispatch, Sidebars }) => {
   const navigate = useNavigate();
+  
   const { measurements2, handleEdit, setMeasurements2 } = Sizeuser(navigate);
 
   const InputField = ({ label, name, value, onChange, unit }) => (
