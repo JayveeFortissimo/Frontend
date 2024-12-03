@@ -83,7 +83,7 @@ const Register = () => {
             </label>
             <input
               id="contact"
-              type="number"
+              type="text"
               name="contact"
               onChange={handleContactChange}
               value={contact}
