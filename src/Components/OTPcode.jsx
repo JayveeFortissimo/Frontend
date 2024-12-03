@@ -77,10 +77,10 @@ const OTPcode = ({setOtp,setResetpass}) => {
           <div className="space-y-6">
             <div className="text-center">
               <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Enter OTP Code
+                Enter Your Code
               </h1>
               <p className="mt-2 text-gray-500">
-                Please enter the 5-digit code sent to your device
+                Please enter the 5-digit code sent to your Email
               </p>
             </div>
 
