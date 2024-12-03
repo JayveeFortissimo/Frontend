@@ -1,5 +1,5 @@
 import React from 'react';
-import { VscChromeClose } from "react-icons/vsc";
+import { VscChromeClose, /*VscRuler */} from "react-icons/vsc";
 import Sizeuser from '../hooks/EditSize.js';
 import { useNavigate } from 'react-router-dom';
 import { FaRulerCombined } from "react-icons/fa";
@@ -16,13 +16,8 @@ const EditSize = ({ dispatch, Sidebars }) => {
       <div className="relative">
         <input
           type="number"
-          value={value || ''} 
-          onChange={(e) => {
-            
-            const numericValue = e.target.value.replace(/[^0-9]/g, '');
-            onChange(e);
-          }}
-          onFocus={(e) => e.target.select()} 
+          value={value}
+          onChange={onChange}
           required
           className="w-full p-3 pr-12 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
         />

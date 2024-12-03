@@ -78,7 +78,7 @@ const FinalH = ({ ID }) => {
                   </div>
 
                   
-              <div className="group/date flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors">
+              <div className="group/date flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors text-[0.8rem]">
                 <span className="font-medium">Date Returned:</span>
                 <span className="group-hover/date:translate-x-1 transition-transform text-green-600">
                   {FinalReturns}
