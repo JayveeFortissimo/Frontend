@@ -51,7 +51,6 @@ const ModernQRGenerator = ({ allOrders, CheckOUtss, TotalsAll, allDatas }) => {
             Start: ${Starto}
             Return: ${Endo}
             Subtotals: ${item.subTotal}
-            Security Deposit Each Items: ₱200 
             `
                         )
                     }).join('\n\n');
