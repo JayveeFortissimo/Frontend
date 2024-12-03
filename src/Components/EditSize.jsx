@@ -7,7 +7,6 @@ import { FaRulerCombined } from "react-icons/fa";
 const EditSize = ({ dispatch, Sidebars }) => {
   const navigate = useNavigate();
   const { measurements2, handleEdit, setMeasurements2 } = Sizeuser(navigate);
-  const [focusedInput, setFocusedInput] = useState(null);
 
   const InputField = ({ label, name, value, onChange, unit }) => (
     <div className="space-y-2">
@@ -20,12 +19,7 @@ const EditSize = ({ dispatch, Sidebars }) => {
           name={name}
           value={value}
           onChange={onChange}
-          onFocus={() => setFocusedInput(name)}
-          onBlur={() => setFocusedInput(null)}
-          className={`w-full p-3 pr-12 border border-gray-200 rounded-lg transition-all duration-800 
-            ${focusedInput === name 
-              ? 'ring-2 ring-blue-500 border-blue-500' 
-              : 'focus:ring-2 focus:ring-blue-500 focus:border-blue-500'}`}
+          className={`w-full p-3 pr-12 border border-gray-200 rounded-lg transition-all duration-800 `}
           required
         />
         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
