@@ -50,6 +50,12 @@ const SizingForm = () => {
           ))}
 
 
+   
+<div className='mt-10'>
+              <a href="https://ibb.co/1mJvLSP" target="_blank" className='flex gap-2 items-center'><span className='underline'>Size Guide</span>  <FaRulerCombined /> </a>
+ </div>
+            
+
 <div className='flex gap-3'>
 <button
             type="submit"

@@ -30,6 +30,10 @@ const FinalH = ({ ID }) => {
           const options = { year: 'numeric', month: 'long', day: 'numeric' };
           const Starto = startDate.toLocaleDateString('en-US', options);
           const returns = returnDate.toLocaleDateString('en-US', options);
+          const DateReturns = new Date(pro.Treturns);
+          const FinalReturns = DateReturns.toLocaleDateString('en-US', options);
+
+
 
           return (
             <div
@@ -73,9 +77,17 @@ const FinalH = ({ ID }) => {
                     </div>
                   </div>
 
+                  
+              <div className="group/date flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors">
+                <span className="font-medium">Date Returned:</span>
+                <span className="group-hover/date:translate-x-1 transition-transform text-green-600">
+                  {FinalReturns}
+                </span>
+              </div>
+
                   <div className="mt-2">
                     <button className="text-blue-600 hover:text-blue-700 text-xs md:text-sm font-medium transition-colors duration-150">
-                      Price : ₱{pro.price + pro.penalty}
+                      Price : ₱{pro.price}
                     </button>
                   </div>
                 </div>

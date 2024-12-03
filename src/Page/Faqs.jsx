@@ -126,7 +126,7 @@ const faqItems = [
   {
     question: 'What if I lost QR Code?',
     answer: [
-      'We penalty you at range 1000 pesos',
+      'In the event of a lost QR code for a reserved item, customers must promptly inform our support team and provide proof of reservation for verification. A replacement fee of ₱1,000 will be charged to cover administrative costs, and the new QR code will be issued upon payment. By making a reservation, customers agree to this policy and are responsible for keeping their QR code secure. For assistance, please contact our support team.'
     ],
     
   },
