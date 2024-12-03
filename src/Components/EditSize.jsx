@@ -6,7 +6,7 @@ import { FaRulerCombined } from "react-icons/fa";
 
 const EditSize = ({ dispatch, Sidebars }) => {
   const navigate = useNavigate();
-  
+
   const { measurements2, handleEdit, setMeasurements2 } = Sizeuser(navigate);
 
   const InputField = ({ label, name, value, onChange, unit }) => (
@@ -20,7 +20,7 @@ const EditSize = ({ dispatch, Sidebars }) => {
           name={name}
           value={value}
           onChange={onChange}
-          className={`w-full p-3 pr-12 border border-gray-200 rounded-lg transition-all duration-800 `}
+          className={`w-full p-3 pr-12 border border-gray-200 rounded-lg `}
           required
         />
         <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
