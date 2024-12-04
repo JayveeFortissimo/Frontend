@@ -34,7 +34,8 @@ const Dashboard = () => {
              AllHistory,
              setAllhistory,
              AllDress, 
-              setAlldress
+              setAlldress,
+              revenue
             } = Dashboards();
 
    const [filteredData, setFilteredData] = useState([]);
@@ -459,10 +460,10 @@ const Dashboard = () => {
 
     {
       title: "Rental Revenue",
-      value: 0,
+      value: revenue.AllTotal,
       icon: <FaMoneyBill1Wave size={24}/>,
       gradient: "from-purple-500 to-violet-600",
-      onClick: () => console.log("Hello Worlds")
+      onClick: () => setTotalReserve(prev => ({ ...prev, Revenues: true }))
     },
 
   ];
@@ -485,6 +486,10 @@ const Dashboard = () => {
       {openTotalReserve.NumbersOfUsers && <NumbersOfUsers setTotalReserve={setTotalReserve} DashInfo={DashInfo.data4.users} />}
 
       {openTotalReserve.HavePenaltys && <HavePenaltys setTotalReserve={setTotalReserve} DashInfo={cancels} />}
+
+      {
+        openTotalReserve.Revenues && <AllRevenue  setTotalReserve={setTotalReserve} DashInfo={revenue.AllResult} />
+      }
  
 
       <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
