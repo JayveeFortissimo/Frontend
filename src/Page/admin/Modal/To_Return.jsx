@@ -30,7 +30,7 @@ const ToReturn = ({ userID }) => {
     item_id:0,
     subTotal:0
   });
-
+console.log(info)
 
   const EmptyState = () => (
     <div className="flex flex-col items-center justify-center h-64 text-gray-400">
