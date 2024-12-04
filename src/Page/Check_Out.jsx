@@ -28,11 +28,11 @@ const Check_Out = () => {
             day: 'numeric'
         });
     };
-
+    //Onuse is for Percent5 Modal
     const [onUse,setOnuse] = useState(true);
-    const [isRadio, setRadio] = useState(false);
-    const [isradio, setIsRadio ]  = useState(false);
+    //For Fitting
     const [openFitting, setOpenFitting] = useState(false);
+    //Qrcode Modal
     const [FinalQR, setFinalQR] = useState(false);
    
     const [confirm, setConfirm] = useState(false);
@@ -40,9 +40,13 @@ const Check_Out = () => {
 
     const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
 
-
     const TotalsAll = displayDiscount ? (parseInt(total)  * 0.95): parseInt(total);
     const OriginalValue = parseInt(total);
+
+
+    const [isRadio, setRadio] = useState(false);
+    const [isradio, setIsRadio ]  = useState(false);
+
     isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
   
   //Reserve Button!

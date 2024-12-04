@@ -45,7 +45,7 @@ const Percent5 = ({setOnuse, setIsRadio, setRadio }) => {
             localStorage.removeItem("Discount");
             setRadio(false)
             setOnuse(false);
-          
+
           }}
           className="bg-gray-100 hover:bg-gray-200 text-gray-600 py-3 px-6 rounded-xl font-semibold transition-colors">
             No, thanks
