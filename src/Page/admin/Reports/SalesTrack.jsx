@@ -84,7 +84,7 @@ const SalesTrack = ({ setTotalReserve, salesTracks }) => {
                     className="p-4 text-xs uppercase tracking-wider text-slate-400 font-bold border-b border-slate-700 text-right cursor-pointer hover:text-white transition-colors"
                     onClick={toggleSortOrder}
                   >
-                    Quantity
+                    count
                     {renderSortIcon()}
                   </th>
                 </tr>
