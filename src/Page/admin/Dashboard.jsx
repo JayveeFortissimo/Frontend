@@ -310,7 +310,7 @@ const Dashboard = () => {
     doc.setFont(undefined, 'normal');
   
    
-   const Alens =  AllGraph.reduce((a,b) => a + b.total_count , 0)
+   const Alens =  AllGraph.reduce((a,b) => a + parseInt(b.total_count) , 0)
 
     const summaryData = [
       `Total Gowns Rented: ${RentedGowns.totalReservations}`,
