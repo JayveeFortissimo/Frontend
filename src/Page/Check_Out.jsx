@@ -43,9 +43,8 @@ const Check_Out = () => {
     const TotalsAll = displayDiscount ? (parseInt(total)  * 0.95): parseInt(total);
     const OriginalValue = parseInt(total);
 
-
+    // For RadioCheckbox
     const [isRadio, setRadio] = useState(false);
-    const [isradio, setIsRadio ]  = useState(false);
 
     isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
   
@@ -90,7 +89,7 @@ const Check_Out = () => {
             TotalsAll >= 3000 ?
             (
             <div>
-    {allPoints.totalReferred >= 10 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio} setIsRadio={setIsRadio}/>}
+    {allPoints.totalReferred >= 10 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio}/>}
             </div>
             ):(<div></div>)
         }

@@ -1,7 +1,7 @@
 import { IoGift } from "react-icons/io5";
 import { HiArrowRight } from "react-icons/hi";
 
-const Percent5 = ({setOnuse, setIsRadio, setRadio }) => {
+const Percent5 = ({setOnuse, setRadio }) => {
 
   return (
 
@@ -32,7 +32,6 @@ const Percent5 = ({setOnuse, setIsRadio, setRadio }) => {
           <button 
            onClick={() =>{
             setRadio(true);
-            setIsRadio(true);
             setOnuse(false);
            }}
            className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-xl font-semibold transition-colors flex items-center justify-center space-x-2">
@@ -45,7 +44,6 @@ const Percent5 = ({setOnuse, setIsRadio, setRadio }) => {
             localStorage.removeItem("Discount");
             setRadio(false)
             setOnuse(false);
-
           }}
           className="bg-gray-100 hover:bg-gray-200 text-gray-600 py-3 px-6 rounded-xl font-semibold transition-colors">
             No, thanks
