@@ -25,7 +25,8 @@ const Dashboard = () => {
   const DashInfo = useLoaderData();
 
   const {profile} = AdminProfile();
-  const { TodaysRented ,
+  const { 
+         TodaysRented ,
           RentedGowns, 
            cancels ,
            AllGraph,
@@ -42,7 +43,15 @@ const Dashboard = () => {
             } = Dashboards();
 
 
-            console.log(revenue);
+            console.log("Revenues: ",revenue);
+          console.log("cancels:",cancels);
+          console.log("Graphs:", AllGraph);
+                console.log("Alldress:", AllDress);
+                console.log("Statistics: ", PieChart);
+                console.log("History",AllHistory);
+                console.log("TodaysRented",TodaysRented);
+              console.log("Total Rented GownsL", RentedGowns);
+
 
             
    const [filteredData, setFilteredData] = useState([]);
@@ -446,7 +455,7 @@ const Dashboard = () => {
     doc.setFontSize(11);
     doc.setFont(undefined, 'normal');
     
-    cancels.data6.cancelledDetails.forEach((cancel) => {
+    cancels.cancelledDetails.forEach((cancel) => {
       checkPageBreak(15);
       const cancelText = `• ${cancel.Name} - ₱${cancel.Price.toLocaleString()} (${new Date(cancel.start_Date).toLocaleDateString()})`;
       doc.text(cancelText, 15, yPosition);
