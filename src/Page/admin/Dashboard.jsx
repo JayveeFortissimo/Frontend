@@ -399,6 +399,7 @@ const Dashboard = () => {
     const groupedReservations = groupReservationsByCustomer(RentedGowns.reservations);
   
     groupedReservations.forEach((customer) => {
+      console.log("GROUPED TO", customer)
       checkPageBreak(45);
       
       // Create a box for each customer's reservations
