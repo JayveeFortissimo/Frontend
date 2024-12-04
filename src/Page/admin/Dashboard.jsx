@@ -12,6 +12,7 @@ import HavePenaltys from './Reports/Cacelled';
 import ReservesToday from './Reports/ReservesToday';
 import AllHistorys from './Reports/AllHistory';
 import AllRevenue from './Reports/AllRevenue';
+import SalesTrack from './Reports/SalesTrack';
 import io from 'socket.io-client';
 import jsPDF from 'jspdf';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -36,7 +37,8 @@ const Dashboard = () => {
              setAllhistory,
              AllDress, 
               setAlldress,
-              revenue
+              revenue,
+              PieChart
             } = Dashboards();
 
    const [filteredData, setFilteredData] = useState([]);

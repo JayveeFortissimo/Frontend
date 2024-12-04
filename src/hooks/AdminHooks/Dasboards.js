@@ -9,6 +9,7 @@ const [AllGraph, setGraph] = useState([]);
 const [AllHistory, setAllhistory] = useState([]);
 const [AllDress, setAlldress] = useState([]);
 const [revenue,setRentalRevenue] = useState([]);
+const [PieChart,setPieChart] = useState([]);
 
 useEffect(() =>{
 async function TodaysRented() {
@@ -158,8 +159,6 @@ useEffect(() =>{
           },[]);
 
 
-
-
           useEffect(() =>{
             async function AllIncome() {
                 
@@ -183,6 +182,31 @@ useEffect(() =>{
             AllIncome();
             },[]);
 
+
+
+            useEffect(() =>{
+              async function SalesTrack() {
+                  
+                try{
+                  const response = await fetch(`https://backend-production-d6a2.up.railway.app/PieChart`,{
+                      method:'GET',
+                      headers:{
+                          'Content-Type':'application/json'
+                      }
+                  });
+              
+                  const datas = await response.json();
+                  console.log(datas)
+                  setPieChart(datas);
+                   
+                }catch(error){
+                  console.log(error);
+                }
+              
+              };
+              SalesTrack();
+              },[]);
+
 return{
     TodaysRented,
     RentedGowns,
@@ -196,7 +220,8 @@ return{
       setAllhistory,
       AllDress, 
       setAlldress,
-      revenue
+      revenue,
+      PieChart
 }
 
 
