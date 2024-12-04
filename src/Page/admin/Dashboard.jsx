@@ -308,11 +308,17 @@ const Dashboard = () => {
     
     doc.setFontSize(11);
     doc.setFont(undefined, 'normal');
+  
+   
+   const Alens =  AllGraph.reduce((a,b) => a + b.total_count , 0)
+
     const summaryData = [
       `Total Gowns Rented: ${RentedGowns.totalReservations}`,
+      `Todays Rented: ${RentedGowns.totalReservations}`,
       `Available Gowns: ${AllDress?.SumAll?.totalQuantity}`,
       `Number of Users: ${DashInfo.data4.totalUser}`,
-       `Total Canceled Reservations: ${cancels.totalCancelled}`
+       `Total Canceled Reservations: ${cancels.totalCancelled}`,
+       `All Total Reserves: ${Alens}`
     ];
   
     summaryData.forEach((item, index) => {
