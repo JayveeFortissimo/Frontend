@@ -1,6 +1,49 @@
-import { VscChromeClose } from "react-icons/vsc";
+import React, { useState } from 'react';
+import { VscChromeClose, VscArrowUp, VscArrowDown } from "react-icons/vsc";
 
-const SalesTrack = ({setTotalReserve}) => {
+const SalesTrack = ({ setTotalReserve, salesTracks }) => {
+  const [sortOrder, setSortOrder] = useState('default');
+
+  // Sort function
+  const sortedSalesTracks = [...salesTracks].sort((a, b) => {
+    switch(sortOrder) {
+      case 'lowToHigh':
+        return a.count - b.count;
+      case 'highToLow':
+        return b.count - a.count;
+      default:
+        return 0;
+    }
+  });
+
+  // Toggle sort order
+  const toggleSortOrder = () => {
+    setSortOrder(prevOrder => {
+      switch(prevOrder) {
+        case 'default':
+          return 'lowToHigh';
+        case 'lowToHigh':
+          return 'highToLow';
+        case 'highToLow':
+          return 'default';
+        default:
+          return 'default';
+      }
+    });
+  };
+
+  // Determine sort icon based on current sort order
+  const renderSortIcon = () => {
+    switch(sortOrder) {
+      case 'lowToHigh':
+        return <VscArrowUp className="inline ml-2 text-green-400" />;
+      case 'highToLow':
+        return <VscArrowDown className="inline ml-2 text-red-400" />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="fixed inset-0 flex justify-center items-center z-10 px-5">
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 to-black/50 backdrop-blur-sm" />
@@ -11,14 +54,12 @@ const SalesTrack = ({setTotalReserve}) => {
         <div className="absolute -right-24 -bottom-24 w-48 h-48 bg-purple-500 rounded-full blur-[100px] opacity-20" />
         
         <div className="relative p-6 h-full overflow-auto">
-          
           {/* Header */}
           <div className="flex justify-between items-center mb-6">
             <div>
               <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Sales Stack Statistic
               </h2>
-             
             </div>
             <button
               onClick={() => setTotalReserve((prev) => ({ ...prev, SalesTack: false }))}
@@ -28,12 +69,62 @@ const SalesTrack = ({setTotalReserve}) => {
             </button>
           </div>
 
+          {/* Futuristic Table */}
+          <div className="w-full overflow-x-auto">
+            <table className="w-full border-separate border-spacing-0 rounded-xl overflow-hidden">
+              <thead>
+                <tr className="bg-gradient-to-r from-slate-800 to-slate-700 text-left">
+                  <th className="p-4 text-xs uppercase tracking-wider text-slate-400 font-bold border-b border-slate-700">
+                    #
+                  </th>
+                  <th className="p-4 text-xs uppercase tracking-wider text-slate-400 font-bold border-b border-slate-700">
+                    Product Name
+                  </th>
+                  <th 
+                    className="p-4 text-xs uppercase tracking-wider text-slate-400 font-bold border-b border-slate-700 text-right cursor-pointer hover:text-white transition-colors"
+                    onClick={toggleSortOrder}
+                  >
+                    Quantity
+                    {renderSortIcon()}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {sortedSalesTracks.map((item, index) => (
+                  <tr 
+                    key={index} 
+                    className="group hover:bg-slate-700/30 transition-colors duration-200"
+                  >
+                    <td className="p-4 text-slate-300 border-b border-slate-700/50">
+                      <span className="text-slate-500">{index + 1}</span>
+                    </td>
+                    <td className="p-4 text-slate-300 border-b border-slate-700/50">
+                      <div className="flex items-center">
+                        <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-semibold">
+                          {item.product_Name}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="p-4 text-slate-300 border-b border-slate-700/50 text-right">
+                      <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent font-bold">
+                        {item.count}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
 
-               </div>
-               </div>
-          
+            {salesTracks.length === 0 && (
+              <div className="text-center py-10 text-slate-500">
+                No sales data available
+              </div>
+            )}
           </div>
-  )
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default SalesTrack
+export default SalesTrack;

@@ -484,7 +484,7 @@ const Dashboard = () => {
   return (
     <>
 
-     {openTotalReserve.SalesTack && <SalesTrack  setTotalReserve={setTotalReserve}  />}
+     {openTotalReserve.SalesTack && <SalesTrack  setTotalReserve={setTotalReserve} salesTracks={PieChart} />}
 
     {openTotalReserve.History && <AllHistorys setTotalReserve={setTotalReserve} AllHistory={AllHistory}/>}
 
