@@ -465,7 +465,14 @@ const Dashboard = () => {
       gradient: "from-purple-500 to-violet-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, Revenues: true }))
     },
-
+    
+    {
+      title: "Rental Revenue",
+      value:  'See Here',
+      icon: <FaMoneyBill1Wave size={24}/>,
+      gradient: "from-purple-500 to-violet-600",
+      onClick: () => console.log("Hellows")
+    },
   ];
 
 
