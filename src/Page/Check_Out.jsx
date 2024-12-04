@@ -38,14 +38,13 @@ const Check_Out = () => {
     const [confirm, setConfirm] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
-
+    
     const TotalsAll = displayDiscount ? (parseInt(total)  * 0.95): parseInt(total);
     const OriginalValue = parseInt(total);
 
+    const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
     // For RadioCheckbox
     const [isRadio, setRadio] = useState(false);
-
     isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
   
   //Reserve Button!
@@ -240,7 +239,7 @@ const Check_Out = () => {
                                   <p>Apply referral points discount</p>
                                     <input  
                                         type="checkbox"  
-                                        checked={isRadio} 
+                                        checked={TotalsAll >= 3000 ? isRadio : false} 
                                         onChange={() => setRadio(prev => !prev)} 
                                         className='cursor-pointer' 
                                         disabled={TotalsAll < 3000 || allPoints.totalReferred < 10} 
