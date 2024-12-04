@@ -303,7 +303,7 @@ const Dashboard = () => {
     // Summary data in styled box
     yPosition += 10;
     doc.setFillColor(240, 240, 240);
-    doc.setDrawColor(220, 220, 220);
+    doc.setDrawColor(190, 190, 190);
     doc.roundedRect(10, yPosition, pageWidth - 20, 30, 1, 1, 'FD');
     
     doc.setFontSize(11);
