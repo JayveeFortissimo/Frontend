@@ -101,7 +101,7 @@ const Check_Out = () => {
     if (TotalsAll >= 3000 && allPoints.totalReferred >= 10) {
         const newDiscountState = !isRadio;
         setRadio(newDiscountState);
-        
+        setOnuse(true);
         // Update localStorage
         if (newDiscountState) {
             localStorage.setItem("Discount", "true");
@@ -110,7 +110,7 @@ const Check_Out = () => {
         }
         
         // Close the Percent5 modal if reopening is not desired
-        setOnuse(false);
+        
     }
 };
 
