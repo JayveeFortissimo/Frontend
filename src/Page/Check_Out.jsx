@@ -29,7 +29,7 @@ const Check_Out = () => {
         });
     };
     //Onuse is for Percent5 Modal
-   // const [onUse,setOnuse] = useState(true);
+      const [onUse,setOnuse] = useState(true);
    // const [isRadio, setRadio] = useState(false);
     //For Fitting
     const [openFitting, setOpenFitting] = useState(false);
@@ -44,22 +44,12 @@ const Check_Out = () => {
     const TotalsAll = displayDiscount ? (parseInt(total)  * 0.95): parseInt(total);
     const OriginalValue = parseInt(total);
 
-
-   
      // Initialize state from localStorage
      const [isRadio, setRadio] = useState(() => {
         return localStorage.getItem("Discount") === "true";
     });
 
-    // State for Percent5 Modal
-    const [onUse, setOnuse] = useState(() => {
-        // Only show modal if conditions are met and discount is not already applied
-        console.log('Total:', TotalsAll);
-        console.log('Referral Points:', allPoints.totalReferred);
-        return TotalsAll >= 3000 && 
-               allPoints.totalReferred >= 10 && 
-               !localStorage.getItem("Discount");
-    });
+
 
   //  isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
   
@@ -120,12 +110,14 @@ const Check_Out = () => {
     return (
         <>
  
-        {onUse && allPoints.totalReferred >= 10 && (
-            <Percent5 
-                setOnuse={setOnuse}  
-                setRadio={setRadio}
-            />
-        )}
+        {
+            TotalsAll >= 3000 ?
+            (
+            <div>
+    {allPoints.totalReferred >= 10 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio}/>}
+            </div>
+            ):(<div></div>)
+        }
 
        { confirm && <OTPSecurity setConfirm={setConfirm} setOpenFitting={setOpenFitting} ConfirmationReserve={ConfirmationReserve}/>  }
      
