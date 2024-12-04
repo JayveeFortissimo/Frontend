@@ -32,6 +32,7 @@ const Percent5 = ({setOnuse, setRadio }) => {
           <button 
            onClick={() =>{
             setRadio(true);
+            localStorage.setItem("Discount", "true");
             setOnuse(false);
            }}
            className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-xl font-semibold transition-colors flex items-center justify-center space-x-2">

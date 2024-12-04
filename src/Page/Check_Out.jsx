@@ -29,7 +29,8 @@ const Check_Out = () => {
         });
     };
     //Onuse is for Percent5 Modal
-    const [onUse,setOnuse] = useState(true);
+   // const [onUse,setOnuse] = useState(true);
+   // const [isRadio, setRadio] = useState(false);
     //For Fitting
     const [openFitting, setOpenFitting] = useState(false);
     //Qrcode Modal
@@ -44,7 +45,19 @@ const Check_Out = () => {
     const OriginalValue = parseInt(total);
 
 
-    const [isRadio, setRadio] = useState(false);
+   
+     // Initialize state from localStorage
+     const [isRadio, setRadio] = useState(() => {
+        return localStorage.getItem("Discount") === "true";
+    });
+
+    // State for Percent5 Modal
+    const [onUse, setOnuse] = useState(() => {
+        // Only show modal if conditions are met and discount is not already applied
+        return TotalsAll >= 3000 && 
+               allPoints.totalReferred >= 10 && 
+               !localStorage.getItem("Discount");
+    });
 
     isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
   
@@ -81,6 +94,26 @@ const Check_Out = () => {
                    console.log(error);
                }
   }
+
+
+  const handleDiscountToggle = () => {
+    // Only allow if total is over 3000 and referral points are 10 or more
+    if (TotalsAll >= 3000 && allPoints.totalReferred >= 10) {
+        const newDiscountState = !isRadio;
+        setRadio(newDiscountState);
+        
+        // Update localStorage
+        if (newDiscountState) {
+            localStorage.setItem("Discount", "true");
+        } else {
+            localStorage.removeItem("Discount");
+        }
+        
+        // Close the Percent5 modal if reopening is not desired
+        setOnuse(false);
+    }
+};
+
 
     return (
         <>
@@ -241,7 +274,7 @@ const Check_Out = () => {
                                     <input  
                                         type="checkbox"  
                                         checked={isRadio} 
-                                        onChange={() => setRadio(prev => !prev)} 
+                                        onChange={handleDiscountToggle} 
                                         className='cursor-pointer' 
                                         disabled={TotalsAll < 3000 || allPoints.totalReferred < 10} 
                                     />  
