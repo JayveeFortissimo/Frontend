@@ -160,7 +160,7 @@ const SalesTrack = ({ setTotalReserve, salesTracks }) => {
           <div className="flex justify-between items-center mb-6">
             <div>
               <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Sales Stack Statistic
+                Sales Statistic
               </h2>
             </div>
             <button

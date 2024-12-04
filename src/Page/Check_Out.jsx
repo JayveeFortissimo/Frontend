@@ -41,7 +41,7 @@ const Check_Out = () => {
     const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
 
 
-    const TotalsAll = displayDiscount ? (parseInt(total)): parseInt(total);
+    const TotalsAll = displayDiscount ? (parseInt(total)  * 0.95): parseInt(total);
     const OriginalValue = parseInt(total);
     isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
   
@@ -255,7 +255,7 @@ const Check_Out = () => {
                                         </div>
 
 
-                                        <span className="text-sm font-medium"><span className='text-[0.6rem]'>(10 points need for 5% Discount)</span></span>
+                                        <span className="text-sm font-medium"><span className='text-[0.6rem]'>(10 points need for 5% Discount minimum 3000)</span></span>
 
                                         <div className="flex justify-between">
                                             <span className="text-base font-medium">Total Payment</span>
