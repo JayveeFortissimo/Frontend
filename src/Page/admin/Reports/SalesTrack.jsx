@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { VscChromeClose, VscArrowUp, VscArrowDown } from "react-icons/vsc";
+import { VscChromeClose, VscArrowUp, VscArrowDown, VscFilter } from "react-icons/vsc";
 
 const SalesTrack = ({ setTotalReserve, salesTracks }) => {
   const [sortOrder, setSortOrder] = useState('default');
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // Sort function
   const sortedSalesTracks = [...salesTracks].sort((a, b) => {
@@ -16,32 +17,10 @@ const SalesTrack = ({ setTotalReserve, salesTracks }) => {
     }
   });
 
-  // Toggle sort order
-  const toggleSortOrder = () => {
-    setSortOrder(prevOrder => {
-      switch(prevOrder) {
-        case 'default':
-          return 'lowToHigh';
-        case 'lowToHigh':
-          return 'highToLow';
-        case 'highToLow':
-          return 'default';
-        default:
-          return 'default';
-      }
-    });
-  };
-
-  // Determine sort icon based on current sort order
-  const renderSortIcon = () => {
-    switch(sortOrder) {
-      case 'lowToHigh':
-        return <VscArrowUp className="inline ml-2 text-green-400" />;
-      case 'highToLow':
-        return <VscArrowDown className="inline ml-2 text-red-400" />;
-      default:
-        return null;
-    }
+  // Handle sort order change
+  const handleSortChange = (order) => {
+    setSortOrder(order);
+    setIsFilterOpen(false);
   };
 
   return (
@@ -54,13 +33,63 @@ const SalesTrack = ({ setTotalReserve, salesTracks }) => {
         <div className="absolute -right-24 -bottom-24 w-48 h-48 bg-purple-500 rounded-full blur-[100px] opacity-20" />
         
         <div className="relative p-6 h-full overflow-auto">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-6">
+          {/* Header with Filter */}
+          <div className="flex justify-between items-center mb-6 relative">
             <div>
               <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Sales Stack Statistic
               </h2>
             </div>
+            
+            {/* Filter Dropdown */}
+            <div className="relative">
+              <button 
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
+                className="p-2 rounded-full hover:bg-slate-700/50 transition-colors flex items-center"
+              >
+                <VscFilter className={`text-slate-400 hover:text-white ${sortOrder !== 'default' ? 'text-blue-400' : ''}`} size={20} />
+                {sortOrder !== 'default' && (
+                  <span className="ml-2 text-xs text-blue-400">
+                    {sortOrder === 'lowToHigh' ? 'Low to High' : 'High to Low'}
+                  </span>
+                )}
+              </button>
+
+              {isFilterOpen && (
+                <div className="absolute right-0 top-full mt-2 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl z-20">
+                  <ul className="py-1">
+                    <li 
+                      onClick={() => handleSortChange('default')} 
+                      className="px-4 py-2 hover:bg-slate-700 cursor-pointer flex items-center"
+                    >
+                      <span className={`mr-2 ${sortOrder === 'default' ? 'text-blue-400' : 'text-slate-400'}`}>
+                        Default
+                      </span>
+                    </li>
+                    <li 
+                      onClick={() => handleSortChange('lowToHigh')} 
+                      className="px-4 py-2 hover:bg-slate-700 cursor-pointer flex items-center"
+                    >
+                      <VscArrowUp className="mr-2 text-green-400" />
+                      <span className={`${sortOrder === 'lowToHigh' ? 'text-blue-400' : 'text-slate-400'}`}>
+                        Low to High
+                      </span>
+                    </li>
+                    <li 
+                      onClick={() => handleSortChange('highToLow')} 
+                      className="px-4 py-2 hover:bg-slate-700 cursor-pointer flex items-center"
+                    >
+                      <VscArrowDown className="mr-2 text-red-400" />
+                      <span className={`${sortOrder === 'highToLow' ? 'text-blue-400' : 'text-slate-400'}`}>
+                        High to Low
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            {/* Close Button */}
             <button
               onClick={() => setTotalReserve((prev) => ({ ...prev, SalesTack: false }))}
               className="p-2 rounded-full hover:bg-slate-700/50 transition-colors"
@@ -80,12 +109,8 @@ const SalesTrack = ({ setTotalReserve, salesTracks }) => {
                   <th className="p-4 text-xs uppercase tracking-wider text-slate-400 font-bold border-b border-slate-700">
                     Product Name
                   </th>
-                  <th 
-                    className="p-4 text-xs uppercase tracking-wider text-slate-400 font-bold border-b border-slate-700 text-right cursor-pointer hover:text-white transition-colors"
-                    onClick={toggleSortOrder}
-                  >
-                    count
-                    {renderSortIcon()}
+                  <th className="p-4 text-xs uppercase tracking-wider text-slate-400 font-bold border-b border-slate-700 text-right">
+                    Quantity
                   </th>
                 </tr>
               </thead>
