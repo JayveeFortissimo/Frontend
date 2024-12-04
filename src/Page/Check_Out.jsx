@@ -241,7 +241,7 @@ const Check_Out = () => {
                                   <p>Apply referral points discount</p>
                                     <input  
                                         type="checkbox"  
-                                        checked={isradio} 
+                                        checked={isRadio} 
                                         onChange={() => setRadio(prev => !prev)} 
                                         className='cursor-pointer' 
                                         disabled={TotalsAll < 3000 || allPoints.totalReferred < 10} 
