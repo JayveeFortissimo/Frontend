@@ -215,7 +215,8 @@ const Dashboard = () => {
     PaymentMethods:false,
     ReservesTodays:false,
     History:false,
-    Revenues:false
+    Revenues:false,
+    SalesTack:false
   });
 
  
@@ -474,7 +475,7 @@ const Dashboard = () => {
       value:  'See Here',
       icon: <IoIosPie size={24}/>,
       gradient: "from-silver-500 to-black-600",
-      onClick: () => console.log("Hellows")
+      onClick: () =>  setTotalReserve(prev => ({ ...prev, SalesTack: true }))
     },
   ];
 
@@ -482,6 +483,8 @@ const Dashboard = () => {
 
   return (
     <>
+
+     {openTotalReserve.SalesTack && <SalesTrack  setTotalReserve={setTotalReserve}  />}
 
     {openTotalReserve.History && <AllHistorys setTotalReserve={setTotalReserve} AllHistory={AllHistory}/>}
 
