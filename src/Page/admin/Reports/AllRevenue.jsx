@@ -157,7 +157,7 @@ const AllRevenue = ({ setTotalReserve, DashInfo }) => {
     doc.text(text, textOffset, y);
   };
 
-
+  const totalRevenue = filteredData.reduce((sum, item) => sum + item.totalIncome, 0);
 
   return (
    
