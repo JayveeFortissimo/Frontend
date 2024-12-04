@@ -408,12 +408,12 @@ const Dashboard = () => {
       doc.roundedRect(10, yPosition, pageWidth - 20, 25 + (customer.items.length * 8), 1, 1, 'FD');
       
       // Format dates
-      const startDate = new Date(customer.start_Date).toLocaleDateString('en-US', {
+      const startDate = new Date(customer.startDate).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
         day: 'numeric'
       });
-      const returnDate = new Date(customer.return_Date).toLocaleDateString('en-US', {
+      const returnDate = new Date(customer.returnDate).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
         day: 'numeric'
