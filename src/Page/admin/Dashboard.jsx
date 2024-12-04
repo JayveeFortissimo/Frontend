@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import { VscCalendar, VscJersey, VscAccount, VscOutput, VscBell, VscBellDot } from "react-icons/vsc";
 import { FaMoneyBill1Wave } from "react-icons/fa6";
+import { MdAccessTimeFilled } from "react-icons/md";
 import { IoIosPie } from "react-icons/io";
 import { useState, useEffect } from 'react';
 import Notif from './Modal/Notif';
@@ -453,7 +454,7 @@ const Dashboard = () => {
     {
       title: "History",
       value: null,
-      icon: <IoIosPie size={24}/>,
+      icon: <MdAccessTimeFilled size={24}/>,
       gradient: "from-red-500 to-pink-600",
       onClick: () => setTotalReserve(prev => ({ ...prev, History: true }))
     },
@@ -467,10 +468,10 @@ const Dashboard = () => {
     },
     
     {
-      title: "Rental Revenue",
+      title: "Sales track",
       value:  'See Here',
-      icon: <FaMoneyBill1Wave size={24}/>,
-      gradient: "from-purple-500 to-violet-600",
+      icon: <IoIosPie size={24}/>,
+      gradient: "from-silver-500 to-black-600",
       onClick: () => console.log("Hellows")
     },
   ];
