@@ -41,6 +41,10 @@ const Dashboard = () => {
               PieChart
             } = Dashboards();
 
+
+            console.log(revenue);
+
+            
    const [filteredData, setFilteredData] = useState([]);
    const [selectedMonth, setSelectedMonth] = useState('All Months');
     const [notifications, setNotifications] = useState(false);
