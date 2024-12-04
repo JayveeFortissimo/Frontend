@@ -259,7 +259,7 @@ const Check_Out = () => {
                                         </div>
 
 
-                                        <span className="text-sm font-medium"><span className='text-[0.6rem]'>(10 points need for 5% Discount minimum 3000)</span></span>
+                                        <span className="text-sm font-medium"><span className='text-[0.6rem]'>(10 points needed for a 5% discount, with a minimum purchase of 3,000 pesos)</span></span>
 
                                         <div className="flex justify-between">
                                             <span className="text-base font-medium">Total Payment</span>
