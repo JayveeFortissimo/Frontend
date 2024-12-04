@@ -38,13 +38,14 @@ const Check_Out = () => {
     const [confirm, setConfirm] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    
-    const TotalsAll = displayDiscount ? (parseInt(total)  * 0.95): parseInt(total);
+
+    const TotalsAll = displayDiscount ? (parseInt(total)  * 0.95) : parseInt(total);
     const OriginalValue = parseInt(total);
 
+
     const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
-    // For RadioCheckbox
     const [isRadio, setRadio] = useState(false);
+
     isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
   
   //Reserve Button!
@@ -261,8 +262,6 @@ const Check_Out = () => {
                                                 </span>
                                         </div>
                                     </div>
-
-                                    {/* Continue Shopping Button */}
 
 
                                     <button
