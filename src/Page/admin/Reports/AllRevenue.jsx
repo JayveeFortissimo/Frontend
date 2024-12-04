@@ -1,5 +1,3 @@
-//!Code 1
-
 import { VscChromeClose } from "react-icons/vsc";
 import {
   LineChart,
@@ -309,7 +307,7 @@ const AllRevenue = ({ setTotalReserve, DashInfo }) => {
               </p>
             </div>
             <button
-              onClick={() => setTotalReserve((prev) => ({ ...prev, RentalRevenue: false }))}
+              onClick={() => setTotalReserve((prev) => ({ ...prev, Revenues: false }))}
               className="p-2 rounded-full hover:bg-slate-700/50 transition-colors"
             >
               <VscChromeClose className="text-slate-400 hover:text-white" size={20} />
