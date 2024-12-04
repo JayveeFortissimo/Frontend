@@ -190,16 +190,7 @@ const Check_Out = () => {
 
                             </div>
 
-                            {/* Cancellation Policy */}
-                            <div className="bg-orange-50 rounded-xl border border-orange-200 p-6">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <FiAlertCircle className="w-5 h-5 text-orange-500" />
-                                    <h3 className="text-lg font-semibold text-orange-800">Cancellation Policy</h3>
-                                </div>
-                                <p className="text-sm text-orange-700">
-                                    Wait pa sa Policy
-                                </p>
-                            </div>
+                           
                         </div>
 
                         {/* Order Summary */}

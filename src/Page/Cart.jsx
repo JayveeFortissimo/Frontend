@@ -162,18 +162,6 @@ const Cart = () => {
                   </div>
                 </div>
 
-                <div className="bg-orange-50 rounded-2xl overflow-hidden">
-                  <div className="p-6 space-y-3">
-                    <div className="flex items-center gap-2">
-                      <FiAlertCircle className="w-5 h-5 text-orange-500" />
-                      <h3 className="text-lg font-semibold text-orange-800">Cancellation Policy</h3>
-                    </div>
-                    <p className="text-sm text-orange-700 leading-relaxed">
-                      Waiting for Cancellation policy
-                    </p>
-                  </div>
-                </div>
-
                 <div className="flex flex-col gap-4">
                
               

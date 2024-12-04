@@ -93,7 +93,7 @@ const DetailCheck = (allOrders) =>{
       return_Date:new Date(Date.UTC(new Date(pro.return_Date).getFullYear(), new Date(pro.return_Date).getMonth(), new Date(pro.return_Date).getDate())).toISOString().split('T')[0],
       price:pro.price,
       quantity:pro.quantity,    
-      subTotal: displayDiscount?((pro.subTotal) * 0.30) : (pro.subTotal) ,
+      subTotal: displayDiscount?((pro.subTotal) * 0.95) : (pro.subTotal) ,
       user_ID:pro.user_ID,
       status:"Waiting for approval",
       item_id:pro.product_ID,
