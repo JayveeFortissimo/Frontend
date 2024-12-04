@@ -27,7 +27,8 @@ const ToReturn = ({ userID }) => {
     price:0,
     name:"",
     size:"",
-    item_id:0
+    item_id:0,
+    subTotal:0
   });
 
 
@@ -150,7 +151,8 @@ const ToReturn = ({ userID }) => {
               returnID: item.id,
               name:item.name,
               size:item.size,
-              item_id:item.item_id
+              item_id:item.item_id,
+              subTotal:item.subTotal
             });
             setOpenConfirmation(true);
            }}

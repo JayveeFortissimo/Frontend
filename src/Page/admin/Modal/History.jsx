@@ -22,7 +22,8 @@ import {
 const History = () => {
   const userID = useLoaderData();
   const {allDatas, setAllDatas} = HistoryOfUser(userID.data1[0].id);
-  
+  console.log(allDatas);
+
   const [pickUp, setPickUp] = useState(false);
   const [productINFO, setProductInfo] = useState({
     product_Name: "",
@@ -86,7 +87,8 @@ const History = () => {
       code: pro.code,
       name:pro.name,
       size:pro.size,
-      item_id:pro.item_id
+      item_id:pro.item_id,
+      subTotal:pro.subTotal
     };
   };
 
