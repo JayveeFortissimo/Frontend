@@ -56,7 +56,8 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID, userEmail })
         name:data.name,
         size:data.size,
         item_id:data.item_id,
-        subTotal:data.subTotal
+        subTotal:data.subTotal,
+        type:data.type
       });
 
       const FindID =  data.returnID === ItemID.current;
@@ -80,7 +81,8 @@ const Scanner = ({ setOpenScanner,  toReturn , setToReturn, ItemID, userEmail })
           name:data.name,
           size:data.size,
           item_id:data.item_id,
-          subTotal:data.subTotal
+          subTotal:data.subTotal,
+          type:data.type
         });
 
         setOpenScanner(false);

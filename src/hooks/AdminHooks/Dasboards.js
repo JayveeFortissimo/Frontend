@@ -171,7 +171,6 @@ useEffect(() =>{
                 });
             
                 const datas = await response.json();
-                console.log(datas)
                 setRentalRevenue(datas);
                  
               }catch(error){

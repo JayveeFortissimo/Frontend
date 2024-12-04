@@ -28,7 +28,8 @@ const ToReturn = ({ userID }) => {
     name:"",
     size:"",
     item_id:0,
-    subTotal:0
+    subTotal:0,
+    type:""
   });
 console.log(info)
 
@@ -152,7 +153,8 @@ console.log(info)
               name:item.name,
               size:item.size,
               item_id:item.item_id,
-              subTotal:item.subTotal
+              subTotal:item.subTotal,
+              type:item.type
             });
             setOpenConfirmation(true);
            }}

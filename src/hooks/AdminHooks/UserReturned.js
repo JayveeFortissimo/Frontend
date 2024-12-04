@@ -82,7 +82,8 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
             name:pro.name,
             size:pro.size,
             item_id:pro.item_id,
-            subTotal:pro.subTotal
+            subTotal:pro.subTotal,
+            type:pro.type
         };
 
         try {
@@ -124,7 +125,8 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
             name:qrCodeData.name,
             size:qrCodeData.size,
             item_id:qrCodeData.item_id,
-            subTotal:qrCodeData.subTotal
+            subTotal:qrCodeData.subTotal,
+            type:qrCodeData.type
         };
 
         try {
@@ -170,7 +172,8 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
             name:pro.name,
             size:pro.size,
             item_id:pro.item_id,
-            subTotal:pro.subTotal
+            subTotal:pro.subTotal,
+            type:pro.type
         };
 
         try {

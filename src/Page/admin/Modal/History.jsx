@@ -88,7 +88,8 @@ const History = () => {
       name:pro.name,
       size:pro.size,
       item_id:pro.item_id,
-      subTotal:pro.subTotal
+      subTotal:pro.subTotal,
+      type:pro.type
     };
   };
 
