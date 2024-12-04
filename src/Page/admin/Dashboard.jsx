@@ -383,8 +383,8 @@ const Dashboard = () => {
           grouped[reservation.name] = {
             customerName: reservation.name,
             items: [],
-            startDate: reservation.StartDate,
-            returnDate: reservation.ExpectedReturnDate,
+            startDate: reservation.start_Date,
+            returnDate: reservation.return_Date,
             status: reservation.status
           };
         }
