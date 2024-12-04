@@ -18,7 +18,7 @@ const Check_Out = () => {
     const redirect = useNavigate();
     const { allOrders, total } = toCart();
     const { allDatas, CheckOUtss } = ChekDetails(allOrders);
-    const { allPoints } = RefferalPoints();
+    const { allPoints, Refresh } = RefferalPoints();
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -50,9 +50,6 @@ const Check_Out = () => {
     });
 
 
-
-  //  isRadio? localStorage.setItem("Discount", true) :  localStorage.removeItem("Discount");
-  
   //Reserve Button!
   const ConfirmationReserve = async(e) =>{
         e.preventDefault();
@@ -123,7 +120,7 @@ const Check_Out = () => {
      
        {openFitting && <Fitting setOpenFitting={setOpenFitting} setFinalQR={setFinalQR} />}
 
-        {FinalQR && <QRGenerator allOrders = {allOrders} CheckOUtss={CheckOUtss} TotalsAll={TotalsAll} allDatas={allDatas}/>}
+        {FinalQR && <QRGenerator allOrders = {allOrders} CheckOUtss={CheckOUtss} TotalsAll={TotalsAll} allDatas={allDatas} Refresh={Refresh}/>}
        
   
 

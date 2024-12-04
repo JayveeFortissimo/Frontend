@@ -3,7 +3,10 @@ import { FaQrcode, FaDownload } from 'react-icons/fa';
 import QRCode from 'react-qr-code';
 import { toCanvas } from 'html-to-image';
 
-const ModernQRGenerator = ({ allOrders, CheckOUtss, TotalsAll, allDatas }) => {
+const ModernQRGenerator = ({ allOrders, CheckOUtss, TotalsAll, allDatas,Refresh }) => {
+
+    const displayDiscount = JSON.parse(localStorage.getItem("Discount"));
+
     const qrRef = useRef(null);
     const [newArray, setNewArray] = useState([]);
   
@@ -103,6 +106,11 @@ const ModernQRGenerator = ({ allOrders, CheckOUtss, TotalsAll, allDatas }) => {
             }
 
             CheckOUtss(e, TotalsAll);
+            
+            if (displayDiscount) {
+                Refresh(e);
+              }
+              
 
         } catch (err) {
             console.error('Failed to download QR code:', err);
