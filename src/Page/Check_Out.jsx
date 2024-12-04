@@ -98,7 +98,6 @@ const Check_Out = () => {
             localStorage.removeItem("Discount");
         }
         
-        // Close the Percent5 modal if reopening is not desired
         setOnuse(false);
     }
 };
