@@ -157,6 +157,32 @@ useEffect(() =>{
           
           },[]);
 
+
+
+
+          useEffect(() =>{
+            async function AllIncome() {
+                
+              try{
+                const response = await fetch(`https://backend-production-d6a2.up.railway.app/TotalIncome`,{
+                    method:'GET',
+                    headers:{
+                        'Content-Type':'application/json'
+                    }
+                });
+            
+                const datas = await response.json();
+                console.log(datas)
+                setRentalRevenue(datas);
+                 
+              }catch(error){
+                console.log(error);
+              }
+            
+            };
+            AllIncome();
+            },[]);
+
 return{
     TodaysRented,
     RentedGowns,

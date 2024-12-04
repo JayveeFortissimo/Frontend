@@ -10,6 +10,7 @@ import TotalGowns from './Reports/TotalGowns';
 import HavePenaltys from './Reports/Cacelled';
 import ReservesToday from './Reports/ReservesToday';
 import AllHistorys from './Reports/AllHistory';
+import AllRevenue from './Reports/AllRevenue';
 import io from 'socket.io-client';
 import jsPDF from 'jspdf';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -209,7 +210,8 @@ const Dashboard = () => {
     Notifs: false,
     PaymentMethods:false,
     ReservesTodays:false,
-    History:false
+    History:false,
+    Revenues:false
   });
 
  
