@@ -322,7 +322,7 @@ const Dashboard = () => {
     ];
   
     summaryData.forEach((item, index) => {
-      doc.text(item, 15, yPosition + 10 + (index * 10));
+      doc.text(item, 15, yPosition + 6 + (index * 6));
     });
   
     // Monthly Statistics
