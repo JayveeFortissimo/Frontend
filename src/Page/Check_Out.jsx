@@ -54,6 +54,8 @@ const Check_Out = () => {
     // State for Percent5 Modal
     const [onUse, setOnuse] = useState(() => {
         // Only show modal if conditions are met and discount is not already applied
+        console.log('Total:', TotalsAll);
+        console.log('Referral Points:', allPoints.totalReferred);
         return TotalsAll >= 3000 && 
                allPoints.totalReferred >= 10 && 
                !localStorage.getItem("Discount");
@@ -118,14 +120,12 @@ const Check_Out = () => {
     return (
         <>
  
-        {
-            TotalsAll >= 3000 ?
-            (
-            <div>
-    {allPoints.totalReferred >= 10 && onUse &&  <Percent5  setOnuse = {setOnuse}  setRadio={setRadio}/>}
-            </div>
-            ):(<div></div>)
-        }
+        {onUse && allPoints.totalReferred >= 10 && (
+            <Percent5 
+                setOnuse={setOnuse}  
+                setRadio={setRadio}
+            />
+        )}
 
        { confirm && <OTPSecurity setConfirm={setConfirm} setOpenFitting={setOpenFitting} ConfirmationReserve={ConfirmationReserve}/>  }
      
