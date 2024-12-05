@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import { VscChromeClose } from "react-icons/vsc";
+import { VscChromeClose, VscFilePdf } from "react-icons/vsc";
 import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 
 const AllHistory = ({ setTotalReserve, AllHistory }) => {
