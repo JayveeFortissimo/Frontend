@@ -91,7 +91,10 @@ const HistoryItem = ({ pro }) => {
             <div className="flex items-center gap-2">
               
               <span className="px-3 py-1 rounded-full bg-gray-700/50 text-gray-300 text-sm border border-gray-600/50">
-               Price ₱{pro.price + pro.penalty}
+               Price ₱{pro.price}
+              </span>
+              <span className="px-3 py-1 rounded-full bg-gray-700/50 text-gray-300 text-sm border border-gray-600/50">
+               Subtotal: ₱{pro.subTotal}
               </span>
             </div>
           </div>

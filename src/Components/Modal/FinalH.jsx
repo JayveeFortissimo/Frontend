@@ -90,6 +90,10 @@ const FinalH = ({ ID }) => {
                       Price : ₱{pro.price}
                     </button>
                   </div>
+
+                  <button className="text-blue-600 hover:text-blue-700 text-xs md:text-sm font-medium transition-colors duration-150">
+                      Subtotal: ₱{pro.subTotal}
+                    </button>
                 </div>
               </div>
             </div>

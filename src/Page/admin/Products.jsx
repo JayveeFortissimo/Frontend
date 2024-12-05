@@ -204,7 +204,7 @@ const Products = () => {
                       {pro.totalQuantity === 0 ? 'Out of Stock' : `${pro.totalQuantity} in Stock`}
                     </span>
                   </div>
-                  <p className="mt-1 text-sm text-gray-400">{pro.type} gown</p>
+                  <p className="mt-1 text-sm text-gray-400">{pro.type}</p>
                 </div>
 
                 <div className="flex gap-2">
