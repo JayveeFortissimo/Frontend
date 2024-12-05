@@ -139,7 +139,7 @@ const HavePenaltys = ({ setTotalReserve, DashInfo }) => {
     }
   
     if (waitingForRefundItems.length > 0) {
-      printItems(waitingForRefundItems, 'Pending Refunds');
+      printItems(waitingForRefundItems, 'All Cancellations');
     }
   
     // Footer for each page
