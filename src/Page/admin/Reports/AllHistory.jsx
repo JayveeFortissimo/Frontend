@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { VscChromeClose } from "react-icons/vsc";
+import jsPDF from 'jspdf';
 
 const AllHistory = ({ setTotalReserve, AllHistory }) => {
   const mergedHistory = useMemo(() => {
