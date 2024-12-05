@@ -88,7 +88,7 @@ const AllHistory = ({ setTotalReserve, AllHistory }) => {
 
 
         <button
-                onClick={generatePDFReport}
+                onClick={generatePDF}
                 className="p-1 md:p-2 rounded-full hover:bg-gray-100 transition-colors"
                 title="Download PDF Report"
               >
