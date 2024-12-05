@@ -13,65 +13,63 @@ const SideBar = () => {
   const [categorys, setCategorys] = useState([]);
   const mergingig = [{ category: 'ALL' }, ...categorys];
 
-
   useEffect(()=>{
-
     const array = [];
     const material1 = [];
     const colors1 = [];
 
     const allFetched = async() =>{
-
-      try{
-   
+      try {
         const Category = await fetch(`https://backend-production-d6a2.up.railway.app/allCategorys`);
         const Colors = await fetch(`https://backend-production-d6a2.up.railway.app/allColors`);
         const Materials = await fetch(`https://backend-production-d6a2.up.railway.app/allMaterials`);
    
-       const data1 = await Category.json();
-       const data2 = await Colors.json();
-       const data3 = await Materials.json();
+        const data1 = await Category.json();
+        const data2 = await Colors.json();
+        const data3 = await Materials.json();
         
-       data1.data.forEach(element => {
-        if (!array.includes(element.category)) {
-          array.push(element.category); 
-        }
-       });
+        data1.data.forEach(element => {
+          if (!array.includes(element.category)) {
+            array.push(element.category); 
+          }
+        });
 
-       data3.data.forEach(element =>{
-        if (!material1.includes(element.material)) {
-          material1.push(element.material); 
-        }
-       })
+        data3.data.forEach(element =>{
+          if (!material1.includes(element.material)) {
+            material1.push(element.material); 
+          }
+        })
          
-       data2.data.forEach(element =>{
-        if (!colors1.includes(element.color)) {
-          colors1.push(element.color); 
-        }
-       })
+        data2.data.forEach(element =>{
+          if (!colors1.includes(element.color)) {
+            colors1.push(element.color); 
+          }
+        })
       
         setCategorys(array.map(category => ({ category }))); 
         setMaterials(material1);
         setColors(colors1);
    
-      }catch(error){
-       console.log(error);
+      } catch(error) {
+        console.log(error);
       }
+    }
    
-   
-     }
-   
-   allFetched();
+    allFetched();
   },[]);
-
-
-
 
   const browseOpen = useSelector(state => state.Side.browse);
   const colorOpen = useSelector(state => state.Side.color);
 
   const resetFilters = () => {
     dispatch(Sidebars.setPriceRange({ min: 0, max: Infinity }));
+  };
+
+  const handleCategoryClick = (category) => {
+    // Use replace instead of push to prevent adding to browser history
+    navigate('/Items', { replace: true });
+    dispatch(Sidebars.ChangeCategory(category));
+    dispatch(Sidebars.sideModal(false)); // Close sidebar after selection
   };
 
   const FilterSection = ({ title, isOpen, onToggle, children }) => (
@@ -158,10 +156,7 @@ const SideBar = () => {
               <motion.button
                 key={index}
                 whileHover={{ x: 4 }}
-                onClick={() => {
-                  navigate('Items');
-                  dispatch(Sidebars.ChangeCategory(category.category));
-                }}
+                onClick={() => handleCategoryClick(category.category)}
                 className="block w-full text-left text-sm text-gray-600 hover:text-blue-600 py-2 transition-all duration-300"
               >
                 {category.category}
@@ -169,6 +164,7 @@ const SideBar = () => {
             ))}
           </FilterSection>
 
+          {/* Rest of the component remains the same */}
           <FilterSection 
             title="PRICE RANGE"
             isOpen={true}
