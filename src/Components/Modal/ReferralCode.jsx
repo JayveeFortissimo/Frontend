@@ -103,7 +103,7 @@ const ReferralCode = ({referralLink, setRefferal}) => {
               <div className="space-y-2">
                 <label className="text-sm text-gray-400">Your Referral Code</label>
                 <div className="flex items-center gap-2 p-4 bg-gray-800/50 rounded-xl border border-gray-700 backdrop-blur-xl">
-                  <span className="flex-1 font-mono text-[0.8rem] font-bold text-center tracking-wider text-indigo-400 ">
+                  <span className="flex-1 font-mono text-[0.7rem] font-bold text-center tracking-wider text-indigo-400 ">
                     {referralLink}
                   </span>
                   <button
