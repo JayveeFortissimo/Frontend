@@ -6,7 +6,7 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
 
     useEffect(() => {
        
-        const socket = io('https://backend-production-d6a2.up.railway.app'); 
+        const socket = io('https://backend-production-62ff.up.railway.app'); 
         socket.on('itemRemoved', (id) => {
             const filtered = toReturn.filter(pro => pro.id !== id);
             setToReturn(filtered);
@@ -23,7 +23,7 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
 
     const Remove = async (id) => {
         try {
-            const response = await fetch(`https://backend-production-d6a2.up.railway.app/itemsRemoved/${id}`, {
+            const response = await fetch(`https://backend-production-62ff.up.railway.app/itemsRemoved/${id}`, {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
    const MessageThankyou = async() =>{
 
   try{
-  const response  = await fetch(`https://backend-production-d6a2.up.railway.app/thankyou`,{
+  const response  = await fetch(`https://backend-production-62ff.up.railway.app/thankyou`,{
     method:"POST",
     headers:{
         'Content-Type':'application/json'
@@ -87,7 +87,7 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
         };
 
         try {
-            const response = await fetch(`https://backend-production-d6a2.up.railway.app/to_History`, {
+            const response = await fetch(`https://backend-production-62ff.up.railway.app/to_History`, {
                 method: "POST",
                 body: JSON.stringify(dataPenalty),
                 headers: {
@@ -130,7 +130,7 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
         };
 
         try {
-            const response = await fetch(`https://backend-production-d6a2.up.railway.app/to_History`, {
+            const response = await fetch(`https://backend-production-62ff.up.railway.app/to_History`, {
                 method: "POST",
                 body: JSON.stringify(allDatas),
                 headers: {
@@ -177,7 +177,7 @@ const userReturnedItems = (setToReturn, toReturn, userEmail) => {
         };
 
         try {
-            const response = await fetch(`https://backend-production-d6a2.up.railway.app/to_History`, {
+            const response = await fetch(`https://backend-production-62ff.up.railway.app/to_History`, {
                 method: "POST",
                 body: JSON.stringify(dataPenalty),
                 headers: {

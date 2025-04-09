@@ -82,7 +82,7 @@ const referralLink = userProfile.length > 0
   
 
   useEffect(() => {
-    const socket = io('https://backend-production-d6a2.up.railway.app');
+    const socket = io('https://backend-production-62ff.up.railway.app');
   
     socket.on('notification', (data) => {
       setHaveNotif(true);
@@ -337,7 +337,7 @@ export const Logout = async () => {
   }
 
   try {
-    const response = await fetch("https://backend-production-d6a2.up.railway.app/logOut", {
+    const response = await fetch("https://backend-production-62ff.up.railway.app/logOut", {
       method: "delete",
       body: JSON.stringify({
         ids: parseInt(ID.id)

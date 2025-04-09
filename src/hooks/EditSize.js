@@ -20,7 +20,7 @@ import toast from 'react-hot-toast'
         e.preventDefault();
        
         try{
-            const response = await fetch(`https://backend-production-d6a2.up.railway.app/editsize/${ID2.id}`,{
+            const response = await fetch(`https://backend-production-62ff.up.railway.app/editsize/${ID2.id}`,{
                 method:'PUT',
                 body:JSON.stringify(measurements2),
                 headers:{
@@ -45,7 +45,7 @@ import toast from 'react-hot-toast'
         const valueDefault = async() =>{
        
             try{
-                const respionse = await fetch(`https://backend-production-d6a2.up.railway.app/getSize/${ID2.id}`,{
+                const respionse = await fetch(`https://backend-production-62ff.up.railway.app/getSize/${ID2.id}`,{
                    method:"GET",
                    headers:{
                        'Content-Type':'application/json'

@@ -15,7 +15,7 @@ const Color = () => {
 
       e.preventDefault();
       try{
-        const response = await fetch(`https://backend-production-d6a2.up.railway.app/ColorEdit/${id}`,{
+        const response = await fetch(`https://backend-production-62ff.up.railway.app/ColorEdit/${id}`,{
           method:"put",
           headers:{
               'Content-Type':'application/json'
@@ -40,7 +40,7 @@ const Color = () => {
         e.preventDefault();
 
           try{
-          const response = await fetch(`https://backend-production-d6a2.up.railway.app/ColorDelete/${id}`,{
+          const response = await fetch(`https://backend-production-62ff.up.railway.app/ColorDelete/${id}`,{
             method:"delete",
             headers:{
                 'Content-Type':'application/json'

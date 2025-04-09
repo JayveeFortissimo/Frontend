@@ -59,7 +59,7 @@ const Dashboard = () => {
     const [notifications, setNotifications] = useState(false);
 
     useEffect(() =>{
-      const socket = io('https://backend-production-d6a2.up.railway.app');
+      const socket = io('https://backend-production-62ff.up.railway.app');
   
       socket.on('connect', () => {
         console.log('Connected to Socket.IO server');
@@ -704,7 +704,7 @@ export const Dash = async() => {
 
     const responses = await Promise.all(
       endpoints.map(endpoint => 
-        fetch(`https://backend-production-d6a2.up.railway.app/${endpoint}`, {
+        fetch(`https://backend-production-62ff.up.railway.app/${endpoint}`, {
           method: 'get',
           headers: {
             'Content-Type': 'application/json'

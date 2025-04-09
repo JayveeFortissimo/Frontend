@@ -50,7 +50,7 @@ const Fitting = ({ setOpenFitting, setFinalQR }) => {
 
       for (const slot of timeSlots) {
         const response = await fetch(
-          `https://backend-production-d6a2.up.railway.app/appointment-count?date=${formattedDate}&time=${slot}`
+          `https://backend-production-62ff.up.railway.app/appointment-count?date=${formattedDate}&time=${slot}`
         );
         const count = await response.json();
         counts[slot] = count;
@@ -95,7 +95,7 @@ const Fitting = ({ setOpenFitting, setFinalQR }) => {
 
     try {
       const response = await fetch(
-        `https://backend-production-d6a2.up.railway.app/profile/${ID.id}`,
+        `https://backend-production-62ff.up.railway.app/profile/${ID.id}`,
         {
           method: "GET",
           headers: {
@@ -138,7 +138,7 @@ const Fitting = ({ setOpenFitting, setFinalQR }) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://backend-production-d6a2.up.railway.app/Appointment", {
+      const response = await fetch("https://backend-production-62ff.up.railway.app/Appointment", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

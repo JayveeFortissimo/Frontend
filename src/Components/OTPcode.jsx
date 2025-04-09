@@ -38,7 +38,7 @@ const OTPcode = ({setOtp,setResetpass}) => {
     if (otpValue.length === 5) {
 
      try{
-        const response = await fetch(`https://backend-production-d6a2.up.railway.app/OTP`,{
+        const response = await fetch(`https://backend-production-62ff.up.railway.app/OTP`,{
            method:'post',
            headers:{
                'Content-Type':'application/json'

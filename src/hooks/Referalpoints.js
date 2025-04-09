@@ -12,7 +12,7 @@ const RefferalPoints = () =>{
     async function allDatas() {
           
         try{
-     const response = await fetch(`https://backend-production-d6a2.up.railway.app/allRefferer/${ID.id}`,{
+     const response = await fetch(`https://backend-production-62ff.up.railway.app/allRefferer/${ID.id}`,{
         method:'GET',
         headers:{
             'Content-Type':'application/json'
@@ -39,7 +39,7 @@ const RefferalPoints = () =>{
   const Refresh = async(e) =>{
       e.preventDefault();
     try{
-      const response = await fetch(`https://backend-production-d6a2.up.railway.app/Refresh/${ID.id}`,{
+      const response = await fetch(`https://backend-production-62ff.up.railway.app/Refresh/${ID.id}`,{
          method:'DELETE',
          headers:{
              'Content-Type':'application/json'

@@ -33,7 +33,7 @@ export const regista = async({request, params}) =>{
   }else{
     try{
 
-      const response = await fetch(`https://backend-production-d6a2.up.railway.app/register`,{
+      const response = await fetch(`https://backend-production-62ff.up.railway.app/register`,{
         method:"POST",
         body:JSON.stringify(Alldatas),
         headers:{

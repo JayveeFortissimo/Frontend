@@ -21,7 +21,7 @@ const allData = {
 
   try{
 
-    const response = await fetch(`https://backend-production-d6a2.up.railway.app/login`,{
+    const response = await fetch(`https://backend-production-62ff.up.railway.app/login`,{
       method:"POST",
       body:JSON.stringify(allData),
       headers:{

@@ -10,7 +10,7 @@ const HistoryOfUser = (ID) =>{
 
       const fetchData = async () => {
         try {
-          const response = await fetch(`https://backend-production-d6a2.up.railway.app/ApprovedItems/${ID}`);
+          const response = await fetch(`https://backend-production-62ff.up.railway.app/ApprovedItems/${ID}`);
           const data = await response.json();
   
           const approvedDatas = [];

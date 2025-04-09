@@ -58,7 +58,7 @@ const Check_Out = () => {
         const email = allDatas[0].email || "No show";
 
         try{
-            const response  = await fetch(`https://backend-production-d6a2.up.railway.app/ForgotPassword`,{
+            const response  = await fetch(`https://backend-production-62ff.up.railway.app/ForgotPassword`,{
                method:'POST',
                headers:{
                    'Content-Type':'application/json'
@@ -222,7 +222,7 @@ const Check_Out = () => {
                                         {allOrders.map(pro => (
                                             <div key={pro.id} className="flex gap-4 p-4 bg-gray-50 rounded-lg">
                                                 <img
-                                                    src={`https://backend-production-d6a2.up.railway.app/uploads/${pro.picture}`}
+                                                    src={`https://backend-production-62ff.up.railway.app/uploads/${pro.picture}`}
                                                     alt={pro.product_Name}
                                                     className="h-24 w-24 object-cover rounded-lg"
                                                 />

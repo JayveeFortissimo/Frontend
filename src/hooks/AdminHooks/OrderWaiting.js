@@ -11,7 +11,7 @@ async function AllOrders() {
       
     try{
 
-    const responnse = await fetch(`https://backend-production-d6a2.up.railway.app/orders/${user_ID}`,{
+    const responnse = await fetch(`https://backend-production-62ff.up.railway.app/orders/${user_ID}`,{
         method:'GET',
         headers:{
             'Content-Type':'application/json'

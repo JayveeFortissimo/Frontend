@@ -67,7 +67,7 @@ const AddItems = () => {
         });
       }
 
-      const response = await fetch('https://backend-production-d6a2.up.railway.app/addItems', {
+      const response = await fetch('https://backend-production-62ff.up.railway.app/addItems', {
         method: 'POST',
         body: formDataToSend,
       });

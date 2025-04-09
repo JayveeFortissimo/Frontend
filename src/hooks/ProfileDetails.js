@@ -56,7 +56,7 @@ const profileDetails = (SizeName) =>{
         async function data() {
            try{
       
-            const response = await fetch(`https://backend-production-d6a2.up.railway.app/orders/${ID.id}`,{
+            const response = await fetch(`https://backend-production-62ff.up.railway.app/orders/${ID.id}`,{
               method:'GET',
               headers:{
                 'Content-Type':'application/json'
@@ -81,7 +81,7 @@ const profileDetails = (SizeName) =>{
         async function Size() {
           try{
      
-           const response = await fetch(`https://backend-production-d6a2.up.railway.app/Size/${SizeName.id}`,{
+           const response = await fetch(`https://backend-production-62ff.up.railway.app/Size/${SizeName.id}`,{
              method:'GET',
              headers:{
                'Content-Type':'application/json'
@@ -103,7 +103,7 @@ const profileDetails = (SizeName) =>{
 
       useEffect(() => {
         
-        socket.current = io("https://backend-production-d6a2.up.railway.app"); 
+        socket.current = io("https://backend-production-62ff.up.railway.app"); 
 
         socket.current.on('canceled', (data) => {
           console.log('Item canceled:', data);
@@ -139,7 +139,7 @@ const PushToHistoryCancel = async(e) =>{
 
     try{
 
-        const response = await fetch(`https://backend-production-d6a2.up.railway.app/cancelled`,{
+        const response = await fetch(`https://backend-production-62ff.up.railway.app/cancelled`,{
            method:"POST",
            body:JSON.stringify({
                picture:dataOut.picture,
@@ -180,7 +180,7 @@ useEffect(()=>{
 
     try{
     
-      const response = await fetch(`https://backend-production-d6a2.up.railway.app/allCanceled/${ID.id}`,{
+      const response = await fetch(`https://backend-production-62ff.up.railway.app/allCanceled/${ID.id}`,{
         method:"GET",
         headers:{
           'Content-Type':'application/json'
@@ -212,7 +212,7 @@ useEffect(()=>{
 
     try{
     
-      const response = await fetch(`https://backend-production-d6a2.up.railway.app/notifications/${ID.id}`,{
+      const response = await fetch(`https://backend-production-62ff.up.railway.app/notifications/${ID.id}`,{
         method:"GET",
         headers:{
           'Content-Type':'application/json'

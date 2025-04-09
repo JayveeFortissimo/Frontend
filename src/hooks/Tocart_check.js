@@ -51,7 +51,7 @@ const toCart = () =>{
   
           try{
         
-            const response = await fetch(`https://backend-production-d6a2.up.railway.app/toCart`,{
+            const response = await fetch(`https://backend-production-62ff.up.railway.app/toCart`,{
               method:"POST",
               body:JSON.stringify(allDatas),
               headers:{
@@ -82,7 +82,7 @@ useEffect(()=>{
   const cartsRetrived = async() =>{
     try{
 
-      const response = await fetch(`https://backend-production-d6a2.up.railway.app/getCartUser/${user_ID.id}`,{
+      const response = await fetch(`https://backend-production-62ff.up.railway.app/getCartUser/${user_ID.id}`,{
         method:'GET',
         headers:{
           'Content-Type':'application/json'
@@ -115,7 +115,7 @@ const removeItems = async(id) =>{
 
 
   try{
-    const response = await fetch(`https://backend-production-d6a2.up.railway.app/removeItems/${id}`,{
+    const response = await fetch(`https://backend-production-62ff.up.railway.app/removeItems/${id}`,{
       method:"DELETE",
       headers:{
         'Content-Type':'application/json'
@@ -140,7 +140,7 @@ const removeItems = async(id) =>{
         console.log("LOGIN FIRSTTT")
       }else{
         try{
-          const response = await fetch(`https://backend-production-d6a2.up.railway.app/Total/${user_ID.id}`,{
+          const response = await fetch(`https://backend-production-62ff.up.railway.app/Total/${user_ID.id}`,{
             method:"GET",
             headers:{
               'Content-Type':'application/json'

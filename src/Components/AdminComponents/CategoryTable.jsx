@@ -17,7 +17,7 @@ const CategoryTable = () => {
 
       e.preventDefault();
     try{
-      const response = await fetch(`https://backend-production-d6a2.up.railway.app/CategoryEdit/${id}`,{
+      const response = await fetch(`https://backend-production-62ff.up.railway.app/CategoryEdit/${id}`,{
         method:"put",
         headers:{
             'Content-Type':'application/json'
@@ -43,7 +43,7 @@ const CategoryTable = () => {
     e.preventDefault();
    console.log(category)
   try{
-   const response = await fetch(`https://backend-production-d6a2.up.railway.app/CategoryDelete/${id}`,{
+   const response = await fetch(`https://backend-production-62ff.up.railway.app/CategoryDelete/${id}`,{
     method:"delete",
     headers:{
         'Content-Type':'application/json'

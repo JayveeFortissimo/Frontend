@@ -25,7 +25,7 @@ const History = ({ user_ID }) => {
     });
 
     useEffect(() => {
-        const socket = io('https://backend-production-d6a2.up.railway.app');
+        const socket = io('https://backend-production-62ff.up.railway.app');
 
         socket.on('pickup-status-updated', (data) => {
             setAllDatas((prevDatas) => {
@@ -92,7 +92,7 @@ const History = ({ user_ID }) => {
                                 >
                                     <div className="relative">
                                         <img
-                                            src={`https://backend-production-d6a2.up.railway.app/uploads/${pro.picture}`}
+                                            src={`https://backend-production-62ff.up.railway.app/uploads/${pro.picture}`}
                                             className="w-full h-48 object-cover"
                                             alt={pro.product_Name}
                                         />

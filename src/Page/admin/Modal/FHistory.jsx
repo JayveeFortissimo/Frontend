@@ -21,7 +21,7 @@ const HistoryItem = ({ pro }) => {
         {/* Image with reflection effect */}
         <div className="w-full sm:w-48 h-48 flex-shrink-0 relative group overflow-hidden rounded-lg">
           <img
-            src={`https://backend-production-d6a2.up.railway.app/uploads/${pro.picture}`}
+            src={`https://backend-production-62ff.up.railway.app/uploads/${pro.picture}`}
             alt={pro.product_Name}
             className="w-full h-full object-cover rounded-lg transform group-hover:scale-110 transition-transform duration-500"
           />

@@ -263,7 +263,7 @@ const TotalReservations = ({ setTotalReserve, DashInfo }) => {
                         </div>
 
                         <div className='mt-3'>
-                       <img src={`https://backend-production-d6a2.up.railway.app/uploads/${reservation.picture}`} className='h-[8rem]' />
+                       <img src={`https://backend-production-62ff.up.railway.app/uploads/${reservation.picture}`} className='h-[8rem]' />
                       </div>
                         
                         <div className="space-y-1 text-xs">

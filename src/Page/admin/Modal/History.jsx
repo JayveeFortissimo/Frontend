@@ -43,7 +43,7 @@ const History = () => {
   });
 
   useEffect(() => {
-    const socket = io('https://backend-production-d6a2.up.railway.app');
+    const socket = io('https://backend-production-62ff.up.railway.app');
 
     socket.on('pickup-status-updated', (data) => {
       setAllDatas((prevDatas) => prevDatas.map((item) => {
@@ -223,7 +223,7 @@ const History = () => {
                 <div className="flex gap-6 flex-col sm:flex-row">
                   <div className="flex-shrink-0">
                     <img
-                      src={`https://backend-production-d6a2.up.railway.app/uploads/${pro.picture}`}
+                      src={`https://backend-production-62ff.up.railway.app/uploads/${pro.picture}`}
                       alt={pro.product_Name}
                       className="w-32 h-40 object-cover rounded-lg border border-gray-700/50 shadow-lg"
                     />

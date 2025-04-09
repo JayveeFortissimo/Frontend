@@ -45,7 +45,7 @@ const EditProfileUser = () => {
         if (!ID || !ID.id) return toast.error("User ID is not available");
 
         try {
-            const response = await fetch(`https://backend-production-d6a2.up.railway.app/user_can_Edit/${ID.id}`, {
+            const response = await fetch(`https://backend-production-62ff.up.railway.app/user_can_Edit/${ID.id}`, {
                 method: "PUT",
                 body: JSON.stringify(userPro),
                 headers: {

@@ -16,7 +16,7 @@ const Appointment = () =>{
     async function appointment(){
 
         try{
-            const response =  await fetch(`https://backend-production-d6a2.up.railway.app/appoinmentID/${ID.id}`,{
+            const response =  await fetch(`https://backend-production-62ff.up.railway.app/appoinmentID/${ID.id}`,{
                 method:'get',
                 headers:{
                     'Content-Type':'application/json'
@@ -42,12 +42,12 @@ const Appointment = () =>{
    useEffect(()=>{
 
 
-     const socket = io.connect('https://backend-production-d6a2.up.railway.app'); 
+     const socket = io.connect('https://backend-production-62ff.up.railway.app'); 
 
     async function ALLappointment(){
 
         try{
-            const response =  await fetch(`https://backend-production-d6a2.up.railway.app/allAppointments`,{
+            const response =  await fetch(`https://backend-production-62ff.up.railway.app/allAppointments`,{
                 method:'get',
                 headers:{
                     'Content-Type':'application/json'

@@ -79,7 +79,7 @@ const Cart = () => {
                   <div className="flex flex-col md:flex-row gap-6 p-6">
                     <div className="w-full md:w-48 h-48">
                       <img 
-                        src={`https://backend-production-d6a2.up.railway.app/uploads/${item.picture}`}
+                        src={`https://backend-production-62ff.up.railway.app/uploads/${item.picture}`}
                         alt={item.product_Name}
                         className="w-full h-full object-cover rounded-xl"
                       />

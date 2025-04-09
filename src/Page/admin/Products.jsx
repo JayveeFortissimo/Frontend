@@ -35,7 +35,7 @@ const Products = () => {
 
   useEffect(() => {
     const array = [];
-    fetch(`https://backend-production-d6a2.up.railway.app/allCategorys`)
+    fetch(`https://backend-production-62ff.up.railway.app/allCategorys`)
       .then(response => response.json())
       .then(data => {
         data.data.forEach(element => {
@@ -181,7 +181,7 @@ const Products = () => {
               hover:border-blue-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10">
               <div className="relative aspect-square overflow-hidden rounded-t-xl">
                 <img 
-                  src={`https://backend-production-d6a2.up.railway.app/uploads/${pro.image}`}
+                  src={`https://backend-production-62ff.up.railway.app/uploads/${pro.image}`}
                   alt={pro.product_Name}
                   className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
                 />
@@ -251,7 +251,7 @@ export default Products;
 // Loader function remains unchanged
 export const itemsProduct = async () => {
   try {
-    const response = await fetch(`https://backend-production-d6a2.up.railway.app/Items`, {
+    const response = await fetch(`https://backend-production-62ff.up.railway.app/Items`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

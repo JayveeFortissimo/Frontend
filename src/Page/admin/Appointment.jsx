@@ -12,7 +12,7 @@ const Appointment = () => {
   const handleStatusChange = async (e, appointmentId, newStatus, id, AID) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://backend-production-d6a2.up.railway.app/APPOINTMENTSTATUS/${id}`, {
+      const response = await fetch(`https://backend-production-62ff.up.railway.app/APPOINTMENTSTATUS/${id}`, {
         method: "put",
         headers: {
           'Content-Type': 'application/json'

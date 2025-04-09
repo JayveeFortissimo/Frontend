@@ -32,23 +32,23 @@ const EditItems = (id) => {
 
   useEffect(() => {
     // Fetch categories
-    fetch('https://backend-production-d6a2.up.railway.app/allCategorys')
+    fetch('https://backend-production-62ff.up.railway.app/allCategorys')
       .then(response => response.json())
       .then(data => setCategorys(data.data))
       .catch(err => console.error('Error fetching categories:', err));
 
-      fetch('https://backend-production-d6a2.up.railway.app/allColors')
+      fetch('https://backend-production-62ff.up.railway.app/allColors')
       .then(response => response.json())
       .then(data => setColor(data.data))
       .catch(err => console.error('Error fetching categories:', err));
 
-      fetch('https://backend-production-d6a2.up.railway.app/allMaterials')
+      fetch('https://backend-production-62ff.up.railway.app/allMaterials')
       .then(response => response.json())
       .then(data => setMaterials(data.data))
       .catch(err => console.error('Error fetching categories:', err));
 
     // Fetch item details
-    fetch(`https://backend-production-d6a2.up.railway.app/getItemsByID/${id}`)
+    fetch(`https://backend-production-62ff.up.railway.app/getItemsByID/${id}`)
       .then(res => res.json())
       .then(data => setItemDetails(data))
       .catch(err => console.error('Error fetching item details:', err));
@@ -96,7 +96,7 @@ const EditItems = (id) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`https://backend-production-d6a2.up.railway.app/updateItem`, {
+      const response = await fetch(`https://backend-production-62ff.up.railway.app/updateItem`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

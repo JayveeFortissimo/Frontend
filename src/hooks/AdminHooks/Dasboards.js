@@ -14,7 +14,7 @@ const [PieChart,setPieChart] = useState([]);
 useEffect(() =>{
 async function TodaysRented() {
   try{
-    const response = await fetch(`https://backend-production-d6a2.up.railway.app/Today`,{
+    const response = await fetch(`https://backend-production-62ff.up.railway.app/Today`,{
         method:'GET',
         headers:{
             'Content-Type':'application/json'
@@ -40,7 +40,7 @@ useEffect(() =>{
   async function TotalRented() {
       
     try{
-      const response = await fetch(`https://backend-production-d6a2.up.railway.app/totalReserves`,{
+      const response = await fetch(`https://backend-production-62ff.up.railway.app/totalReserves`,{
           method:'GET',
           headers:{
               'Content-Type':'application/json'
@@ -65,7 +65,7 @@ useEffect(() =>{
     async function Cancellation() {
         
       try{
-        const response = await fetch(`https://backend-production-d6a2.up.railway.app/AllCancelled`,{
+        const response = await fetch(`https://backend-production-62ff.up.railway.app/AllCancelled`,{
             method:'GET',
             headers:{
                 'Content-Type':'application/json'
@@ -90,7 +90,7 @@ useEffect(() =>{
       async function Graph() {
           
         try{
-          const response = await fetch(`https://backend-production-d6a2.up.railway.app/AllTrends`,{
+          const response = await fetch(`https://backend-production-62ff.up.railway.app/AllTrends`,{
               method:'GET',
               headers:{
                   'Content-Type':'application/json'
@@ -114,7 +114,7 @@ useEffect(() =>{
         async function AllHistory() {
             
           try{
-            const response = await fetch(`https://backend-production-d6a2.up.railway.app/DashboardHistory`,{
+            const response = await fetch(`https://backend-production-62ff.up.railway.app/DashboardHistory`,{
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json'
@@ -139,7 +139,7 @@ useEffect(() =>{
           async function AllDress() {
               
             try{
-              const response = await fetch(`https://backend-production-d6a2.up.railway.app/numberOfItems`,{
+              const response = await fetch(`https://backend-production-62ff.up.railway.app/numberOfItems`,{
                   method:'GET',
                   headers:{
                       'Content-Type':'application/json'
@@ -163,7 +163,7 @@ useEffect(() =>{
             async function AllIncome() {
                 
               try{
-                const response = await fetch(`https://backend-production-d6a2.up.railway.app/TotalIncome`,{
+                const response = await fetch(`https://backend-production-62ff.up.railway.app/TotalIncome`,{
                     method:'GET',
                     headers:{
                         'Content-Type':'application/json'
@@ -187,7 +187,7 @@ useEffect(() =>{
               async function SalesTrack() {
                   
                 try{
-                  const response = await fetch(`https://backend-production-d6a2.up.railway.app/PieChart`,{
+                  const response = await fetch(`https://backend-production-62ff.up.railway.app/PieChart`,{
                       method:'GET',
                       headers:{
                           'Content-Type':'application/json'

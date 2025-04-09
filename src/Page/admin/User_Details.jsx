@@ -176,8 +176,8 @@ export const userFullDetails = async ({ params }) => {
   const user_ID = params.userDetails;
   try {
     const [userResponse, ordersResponse] = await Promise.all([
-      fetch(`https://backend-production-d6a2.up.railway.app/allusers/${user_ID}`),
-      fetch(`https://backend-production-d6a2.up.railway.app/orders/${user_ID}`)
+      fetch(`https://backend-production-62ff.up.railway.app/allusers/${user_ID}`),
+      fetch(`https://backend-production-62ff.up.railway.app/orders/${user_ID}`)
     ]);
 
     if (!userResponse.ok || !ordersResponse.ok) {

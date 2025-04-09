@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
 
-const socket = io("https://backend-production-d6a2.up.railway.app");
+const socket = io("https://backend-production-62ff.up.railway.app");
 
 const Answered = () => {
   const [clickedM, setClickedM] = useState(0);
@@ -34,7 +34,7 @@ const Answered = () => {
   useEffect(() => {
     async function AllInquiries() {
       try {
-        const response = await fetch(`https://backend-production-d6a2.up.railway.app/alluser`, {
+        const response = await fetch(`https://backend-production-62ff.up.railway.app/alluser`, {
           method: 'get',
           headers: {
             'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ const Answered = () => {
   useEffect(() => {
     const allMessage = async () => {
       try {
-        const response = await fetch(`https://backend-production-d6a2.up.railway.app/allmessage/${clickedM}`, {
+        const response = await fetch(`https://backend-production-62ff.up.railway.app/allmessage/${clickedM}`, {
           method: 'get',
           headers: {
             'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ const Answered = () => {
       console.log("User not selected");
     } else {
       try {
-        const response = await fetch(`https://backend-production-d6a2.up.railway.app/messageUser`, {
+        const response = await fetch(`https://backend-production-62ff.up.railway.app/messageUser`, {
           method: 'post',
           body: JSON.stringify(message),
           headers: {

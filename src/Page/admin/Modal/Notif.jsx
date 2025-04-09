@@ -24,7 +24,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await fetch(`https://backend-production-d6a2.up.railway.app/AdminNotif`, {
+        const response = await fetch(`https://backend-production-62ff.up.railway.app/AdminNotif`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }
         });
@@ -37,7 +37,7 @@ const Notif = ({ setTotalReserve, setNotifications }) => {
 
     fetchNotifications();
 
-    const socket = io('https://backend-production-d6a2.up.railway.app');
+    const socket = io('https://backend-production-62ff.up.railway.app');
     socket.on('connect', () => {
       console.log('Connected to Socket.IO server');
     });

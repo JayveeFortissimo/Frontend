@@ -14,7 +14,7 @@ export const allUsers = async() =>{
 
 try{
 
-  const response = await fetch(`https://backend-production-d6a2.up.railway.app/alluser`,{
+  const response = await fetch(`https://backend-production-62ff.up.railway.app/alluser`,{
    method:"GET",
    headers:{
     'Content-Type':'application'

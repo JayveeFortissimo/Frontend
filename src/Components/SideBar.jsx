@@ -20,9 +20,9 @@ const SideBar = () => {
 
     const allFetched = async() =>{
       try {
-        const Category = await fetch(`https://backend-production-d6a2.up.railway.app/allCategorys`);
-        const Colors = await fetch(`https://backend-production-d6a2.up.railway.app/allColors`);
-        const Materials = await fetch(`https://backend-production-d6a2.up.railway.app/allMaterials`);
+        const Category = await fetch(`https://backend-production-62ff.up.railway.app/allCategorys`);
+        const Colors = await fetch(`https://backend-production-62ff.up.railway.app/allColors`);
+        const Materials = await fetch(`https://backend-production-62ff.up.railway.app/allMaterials`);
    
         const data1 = await Category.json();
         const data2 = await Colors.json();
